@@ -47,7 +47,7 @@ const TextInput = ({
 
   const labelTop = labelIsOnTop.interpolate({
     inputRange: [0, 1],
-    outputRange: [15, -10],
+    outputRange: [9, -10],
   });
 
   const labelLeft = labelIsOnTop.interpolate({
@@ -57,7 +57,7 @@ const TextInput = ({
 
   const borderColor = isFocused.interpolate({
     inputRange: [0, 1, 2],
-    outputRange: ['#1fb7c8', '#bdbdbd', '#d50000'],
+    outputRange: ['#57d491', '#1FB7C8', '#d50000'],
   });
 
   const scale = labelIsOnTop.interpolate({
@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingHorizontal: 30,
+    paddingVertical: 5,
   },
   text: {
     flexShrink: 1,

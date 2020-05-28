@@ -1,58 +1,165 @@
-import React, {useRef} from 'react';
-import {View} from 'react-native';
-import {ScreenWrapper, RoudedButton, Text} from '../../library/components';
+import React, {useRef, useState, useMemo, useEffect} from 'react';
+import {View, Animated, Image, ScrollView} from 'react-native';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
 import LinearGradient from 'react-native-linear-gradient';
+import {Checkbox, TouchableRipple} from 'react-native-paper';
+import {useDimensions} from '@react-native-community/hooks';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import TextInput from './UnformInput';
 import useValidateField from '../../library/hooks/useValidateField';
+import {ScreenWrapper, RoudedButton, Text} from '../../library/components';
+import {
+  GEAR,
+  PERSON_SEATED,
+  GRAPH,
+  CHECKED,
+  PIZZA_GRAPH,
+} from '../../assets/images';
 
 import styles from './styles';
 
 const RegisterForm = () => {
   const formRef = useRef<FormHandles>(null);
   const validateField = useValidateField(formRef);
+  const [privacyPolicyIsChecked, setPrivacyPolicyIsChecked] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
+
+  const width = useDimensions().window.width;
+  const backgroundWidth = useMemo(() => new Animated.Value(width + 80), [
+    width,
+  ]);
+
+  const confirmButtonWidth = useMemo(() => new Animated.Value(200), []);
+  const avanceButtonRight = useMemo(() => new Animated.Value(-100), []);
+
+  const AnimatedLinearGradient = useMemo(
+    () => Animated.createAnimatedComponent(LinearGradient),
+    [],
+  );
+
+  useEffect(() => {
+    Animated.timing(backgroundWidth, {
+      toValue: 0,
+      useNativeDriver: false,
+      duration: 350,
+      delay: 350,
+    }).start();
+  }, [backgroundWidth]);
+
+  useEffect(() => {
+    if (isConfirmed) {
+      Animated.timing(confirmButtonWidth, {
+        toValue: 33,
+        useNativeDriver: false,
+        duration: 350,
+      }).start(() =>
+        Animated.spring(avanceButtonRight, {
+          toValue: 40,
+          useNativeDriver: false,
+          bounciness: 14,
+        }).start(),
+      );
+    }
+  }, [isConfirmed, confirmButtonWidth, avanceButtonRight]);
 
   return (
     <ScreenWrapper>
-      <LinearGradient style={styles.background} colors={['#66F6A9', '#1FB7C8']}>
-        <View style={styles.container}>
-          <View style={styles.content}>
-            <Text type="title" style={styles.title}>
-              Crie Sua Conta de Usuário
-            </Text>
-            <View style={{marginTop: 15, paddingTop: 10}}>
-              <Form
-                ref={formRef}
-                onSubmit={(form) => {
-                  console.log('form', form);
-                }}>
-                <TextInput
-                  label="Nome"
-                  name="name"
-                  validateField={validateField}
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <AnimatedLinearGradient
+          style={[styles.background, {right: backgroundWidth}]}
+          colors={['#66F6A9', '#1FB7C8']}>
+          <View style={[styles.container]}>
+            <Image
+              source={PERSON_SEATED}
+              style={{alignSelf: 'center', zIndex: 4}}
+            />
+            <Image source={CHECKED} style={styles.checkedImage} />
+            <Image source={PIZZA_GRAPH} style={styles.pizzaGraphImage} />
+
+            <View style={styles.content}>
+              <Text type="title" style={styles.title}>
+                Crie Sua Conta de Usuário
+              </Text>
+              <View style={styles.formWrapper}>
+                <Form
+                  ref={formRef}
+                  onSubmit={(form) => {
+                    console.log('form', form);
+                  }}>
+                  <TextInput
+                    label="Nome"
+                    name="name"
+                    validateField={validateField}
+                  />
+                  <TextInput
+                    label="Email"
+                    name="email"
+                    validateField={validateField}
+                  />
+                  <TextInput
+                    label="Senha"
+                    name="newPassword"
+                    validateField={validateField}
+                  />
+                  <TextInput
+                    label="Confirmar Senha"
+                    name="confirmPassword"
+                    validateField={validateField}
+                  />
+                </Form>
+              </View>
+              <View style={styles.checkBoxItem}>
+                <Checkbox
+                  status={privacyPolicyIsChecked ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setPrivacyPolicyIsChecked(!privacyPolicyIsChecked);
+                  }}
                 />
-                <TextInput
-                  label="Email"
-                  name="email"
-                  validateField={validateField}
-                />
-                <TextInput
-                  label="Senha"
-                  name="newPassword"
-                  validateField={validateField}
-                />
-                <TextInput
-                  label="Confirmar Senha"
-                  name="confirmPassword"
-                  validateField={validateField}
-                />
-              </Form>
+                <Text style={styles.checkBoxText}>
+                  Li e concordo com a política de privacidade
+                </Text>
+              </View>
+              <View style={styles.footer}>
+                <Animated.View style={{width: confirmButtonWidth}}>
+                  <RoudedButton
+                    style={{width: '100%'}}
+                    text={isConfirmed ? '' : 'CONFIRMAR'}
+                    inverted
+                    icon={isConfirmed ? 'check' : ''}
+                    onPress={() => setIsConfirmed(true)}
+                  />
+                </Animated.View>
+                <Text style={styles.alreadyHaveAccountText}>
+                  Já possui uma conta? Conecte-se aqui.
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
-      </LinearGradient>
+          <Image source={GEAR} style={styles.gearImage} />
+          <Image source={GRAPH} style={styles.graphImage} />
+          <Animated.View
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              right: avanceButtonRight,
+              backgroundColor: '#FFF',
+            }}>
+            <TouchableRipple onPress={() => {}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  width: 180,
+                }}>
+                <Text type="title-big">AVANÇAR</Text>
+                <MaterialIcon name="keyboard-arrow-right" size={40} />
+              </View>
+            </TouchableRipple>
+          </Animated.View>
+        </AnimatedLinearGradient>
+      </ScrollView>
     </ScreenWrapper>
   );
 };

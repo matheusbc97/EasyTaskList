@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
+import {CardStyleInterpolators} from '@react-navigation/stack';
 
 import {
   UnauthenticatedStackParams,
@@ -77,6 +78,7 @@ const App = () => {
           <UnauthenticatedStack.Screen
             options={{
               headerShown: false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
             name="RegisterForm"
             component={RegisterForm}
