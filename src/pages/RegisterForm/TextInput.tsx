@@ -1,4 +1,11 @@
-import React, {useMemo, useCallback, useState, useRef, forwardRef} from 'react';
+import React, {
+  useMemo,
+  useCallback,
+  useState,
+  useRef,
+  forwardRef,
+  useEffect,
+} from 'react';
 import {
   TextInput as RNTextInput,
   StyleSheet,
@@ -12,6 +19,7 @@ interface TextInputProps extends RNTextInputProps {
   label: string;
   inputRef?: any;
   inputStyle?: StyleProp<TextStyle>;
+  error: boolean;
 }
 
 const TextInput = ({
@@ -22,6 +30,7 @@ const TextInput = ({
   inputRef,
   style,
   defaultValue,
+  error,
   ...rest
 }: TextInputProps) => {
   const [labelLeftOffset, setLabelLeftOffset] = useState(0);
@@ -29,7 +38,12 @@ const TextInput = ({
   const labelIsOnTop = useMemo(() => new Animated.Value(defaultValue ? 1 : 0), [
     defaultValue,
   ]);
-  const textRef = useRef<{isValueNotEmpty: boolean}>({isValueNotEmpty: false});
+
+  const isFocused = useMemo(() => new Animated.Value(1), []);
+
+  const textRef = useRef<{isValueNotEmpty: boolean}>({
+    isValueNotEmpty: Boolean(defaultValue),
+  });
 
   const labelTop = labelIsOnTop.interpolate({
     inputRange: [0, 1],
@@ -41,9 +55,9 @@ const TextInput = ({
     outputRange: [0, -labelLeftOffset],
   });
 
-  const borderColor = labelIsOnTop.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['#bdbdbd', '#03a9f4'],
+  const borderColor = isFocused.interpolate({
+    inputRange: [0, 1, 2],
+    outputRange: ['#1fb7c8', '#bdbdbd', '#d50000'],
   });
 
   const scale = labelIsOnTop.interpolate({
@@ -60,6 +74,23 @@ const TextInput = ({
       }).start(),
     [labelIsOnTop],
   );
+
+  const borderColorAnimation = useCallback(
+    (toValue: number) =>
+      Animated.timing(isFocused, {
+        toValue,
+        duration: 120,
+        useNativeDriver: false,
+      }).start(),
+    [isFocused],
+  );
+
+  useEffect(() => {
+    if (labelLeftOffset !== 0) {
+      error ? borderColorAnimation(2) : borderColorAnimation(0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error, borderColorAnimation]);
 
   return (
     <Animated.View style={[styles.container, {borderColor: borderColor}]}>
@@ -82,6 +113,7 @@ const TextInput = ({
             styles.text,
             {
               transform: [{scale}],
+              color: borderColor,
             },
           ]}>
           {label}
@@ -95,13 +127,14 @@ const TextInput = ({
           if (!textRef.current.isValueNotEmpty) {
             animation(true);
           }
+          !error && borderColorAnimation(0);
 
           onFocus && onFocus(e);
         }}
         onBlur={(e) => {
-          if (!textRef.current.isValueNotEmpty) {
-            animation(false);
-          }
+          !textRef.current.isValueNotEmpty && animation(false);
+
+          !error && borderColorAnimation(1);
 
           onBlur && onBlur(e);
         }}
@@ -122,7 +155,7 @@ export default forwardRef(TextInput);
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1.5,
-    marginVertical: 10,
+    marginVertical: 0,
     marginHorizontal: 5,
     borderRadius: 25,
   },

@@ -78,11 +78,11 @@ const FloatingLabelIpnput = ({
   }, [validateField, fieldName]);
 
   return (
-    <View style={[containerStyle]}>
+    <View style={[styles.container, containerStyle]}>
       <TextInput
         inputRef={inputRef}
         label={label}
-        //error={Boolean(error)}
+        error={Boolean(error)}
         ref={inputRef}
         defaultValue={defaultValue}
         onChangeText={(text: string) => {
@@ -106,26 +106,8 @@ const FloatingLabelIpnput = ({
 export default FloatingLabelIpnput;
 
 const styles = StyleSheet.create({
-  label: {
-    position: 'absolute',
-    left: 5,
-    fontSize: 16,
-  },
-  input: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 4,
-    paddingBottom: 0,
-    fontSize: 16,
-    marginVertical: 10,
-  },
-  inputWithLabel: {
-    height: 56,
-  },
-  inputWithNoLabel: {
-    height: 50,
-  },
   container: {
-    marginHorizontal: 15,
+    marginVertical: 3,
   },
   errorWrapper: {
     height: 23,
@@ -133,7 +115,6 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     alignSelf: 'flex-end',
-    marginTop: 5,
-    marginRight: 4,
+    marginRight: 26,
   },
 });
