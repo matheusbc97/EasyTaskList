@@ -2,6 +2,9 @@ import React, {forwardRef} from 'react';
 import {StyleSheet, TextStyle, ViewStyle, View} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {useSelector} from 'react-redux';
+
+import {selectAppTheme} from '../../store/configs';
 
 import Text from './Text';
 
@@ -10,7 +13,7 @@ interface Props {
   onPress?(): void;
   style?: ViewStyle;
   textStyle?: TextStyle;
-  inverted: boolean;
+  inverted?: boolean;
   icon?: string | null;
 }
 
@@ -22,11 +25,18 @@ const RoudedButton = ({
   inverted,
   icon,
 }: Props) => {
+  const appTheme = useSelector(selectAppTheme);
+
   return (
     <TouchableRipple
       style={[
         styles.container,
-        inverted ? styles.invertedContainer : styles.normalContainer,
+        inverted
+          ? {...styles.invertedContainer, borderColor: appTheme.secondaryColor}
+          : {
+              ...styles.normalContainer,
+              backgroundColor: appTheme.secondaryColor,
+            },
         style,
       ]}
       onPress={onPress}>
@@ -64,13 +74,11 @@ const styles = StyleSheet.create({
   },
   invertedContainer: {
     backgroundColor: '#FFF',
-    borderColor: '#2dc4c2',
     borderWidth: 1,
     width: 198,
     height: 33,
   },
   normalContainer: {
-    backgroundColor: '#2dc4c2',
     width: 200,
     height: 35,
   },

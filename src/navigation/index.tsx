@@ -16,9 +16,9 @@ import Login from '../pages/account/Login';
 import Home from '../pages/Home';
 import Welcome from '../pages/Welcome';
 import RegisterForm from '../pages/RegisterForm';
+import ChooseUserConfigurations from '../pages/ChooseUserConfigurations';
 
 const UnauthenticatedStack = createStackNavigator<UnauthenticatedStackParams>();
-const RootStack = createStackNavigator<RootStackParams>();
 const HomeStack = createStackNavigator<HomeStackParams>();
 
 const headerStyle = {
@@ -82,6 +82,14 @@ const App = () => {
             }}
             name="RegisterForm"
             component={RegisterForm}
+          />
+          <UnauthenticatedStack.Screen
+            options={{
+              headerShown: false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+            name="ChooseUserConfigurations"
+            component={ChooseUserConfigurations}
           />
         </UnauthenticatedStack.Navigator>
       )}

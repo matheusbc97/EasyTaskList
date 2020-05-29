@@ -37,6 +37,7 @@ export type UnauthenticatedStackParams = {
   Login: undefined;
   RegisterForm: undefined;
   Welcome: undefined;
+  ChooseUserConfigurations: undefined;
 };
 
 export type SubcategoryStackParams = {

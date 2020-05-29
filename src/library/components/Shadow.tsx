@@ -1,28 +1,19 @@
-import React, {PropsWithChildren} from 'react';
+import React, {PropsWithChildren, forwardRef} from 'react';
 import {TouchableOpacityProps, StyleSheet, ViewStyle, View} from 'react-native';
-import {TouchableRipple} from 'react-native-paper';
 
 interface Props extends PropsWithChildren<any>, TouchableOpacityProps {
-  style?: ViewStyle;
-  contentContainerStyle?: ViewStyle;
+  style?: ViewStyle | ViewStyle[];
 }
 
-const Shadow = ({
-  children,
-  style = {},
-  contentContainerStyle = {},
-  ...rest
-}: Props) => {
+const Shadow = ({children, style = {}, ...rest}: Props) => {
   return (
-    <TouchableRipple style={[styles.shadow, style]} {...rest}>
-      <View style={[styles.contentContainer, contentContainerStyle]}>
-        {children}
-      </View>
-    </TouchableRipple>
+    <View style={[styles.shadow, style]} {...rest}>
+      {children}
+    </View>
   );
 };
 
-export default Shadow;
+export default forwardRef(Shadow);
 
 const styles = StyleSheet.create({
   shadow: {
@@ -33,8 +24,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 1.5,
     borderRadius: 2,
-  },
-  contentContainer: {
-    flex: 1,
+    zIndex: 3,
   },
 });

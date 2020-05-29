@@ -1,11 +1,12 @@
 import React, {useRef, useState, useMemo, useEffect} from 'react';
-import {View, Animated, Image, ScrollView} from 'react-native';
+import {View, Animated, Image, ScrollView, ImageBackground} from 'react-native';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
 import LinearGradient from 'react-native-linear-gradient';
 import {Checkbox, TouchableRipple} from 'react-native-paper';
 import {useDimensions} from '@react-native-community/hooks';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 import TextInput from './UnformInput';
 import useValidateField from '../../library/hooks/useValidateField';
@@ -16,11 +17,22 @@ import {
   GRAPH,
   CHECKED,
   PIZZA_GRAPH,
+  ADVANCE_BTN,
 } from '../../assets/images';
+import {UnauthenticatedStackParams} from '../../navigation/types';
 
 import styles from './styles';
 
-const RegisterForm = () => {
+type ChooseUserConfigurationsNavigationProp = StackNavigationProp<
+  UnauthenticatedStackParams,
+  'ChooseUserConfigurations'
+>;
+
+interface Props {
+  navigation: ChooseUserConfigurationsNavigationProp;
+}
+
+const RegisterForm: React.FC<Props> = ({navigation}) => {
   const formRef = useRef<FormHandles>(null);
   const validateField = useValidateField(formRef);
   const [privacyPolicyIsChecked, setPrivacyPolicyIsChecked] = useState(false);
@@ -142,20 +154,29 @@ const RegisterForm = () => {
           <Animated.View
             style={{
               position: 'absolute',
-              bottom: 0,
+              bottom: -20,
               right: avanceButtonRight,
-              backgroundColor: '#FFF',
             }}>
-            <TouchableRipple onPress={() => {}}>
-              <View
+            <TouchableRipple
+              onPress={() => navigation.navigate('ChooseUserConfigurations')}>
+              <ImageBackground
+                source={ADVANCE_BTN}
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  width: 180,
+                  width: 150,
+                  height: 150,
+                  paddingTop: 52,
                 }}>
-                <Text type="title-big">AVANÇAR</Text>
-                <MaterialIcon name="keyboard-arrow-right" size={40} />
-              </View>
+                <Text type="title" style={{paddingLeft: 20, color: '#1fb7c8'}}>
+                  AVANÇAR
+                </Text>
+                <MaterialIcon
+                  name="keyboard-arrow-right"
+                  size={40}
+                  style={{marginLeft: -8, color: '#1fb7c8'}}
+                />
+              </ImageBackground>
             </TouchableRipple>
           </Animated.View>
         </AnimatedLinearGradient>
