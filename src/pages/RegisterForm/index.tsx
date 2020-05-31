@@ -7,8 +7,9 @@ import {Checkbox, TouchableRipple} from 'react-native-paper';
 import {useDimensions} from '@react-native-community/hooks';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {useDispatch} from 'react-redux';
 
-import TextInput from './UnformInput';
+import {UnformInput as TextInput} from '../../library/components';
 import useValidateField from '../../library/hooks/useValidateField';
 import {ScreenWrapper, RoudedButton, Text} from '../../library/components';
 import {
@@ -20,6 +21,7 @@ import {
   ADVANCE_BTN,
 } from '../../assets/images';
 import {UnauthenticatedStackParams} from '../../navigation/types';
+import {registerUser} from '../../store/account/user';
 
 import styles from './styles';
 
@@ -33,6 +35,7 @@ interface Props {
 }
 
 const RegisterForm: React.FC<Props> = ({navigation}) => {
+  const dispatch = useDispatch();
   const formRef = useRef<FormHandles>(null);
   const validateField = useValidateField(formRef);
   const [privacyPolicyIsChecked, setPrivacyPolicyIsChecked] = useState(false);
@@ -78,15 +81,12 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
 
   return (
     <ScreenWrapper>
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView contentContainerStyle={styles.scroll}>
         <AnimatedLinearGradient
           style={[styles.background, {right: backgroundWidth}]}
           colors={['#66F6A9', '#1FB7C8']}>
           <View style={[styles.container]}>
-            <Image
-              source={PERSON_SEATED}
-              style={{alignSelf: 'center', zIndex: 4}}
-            />
+            <Image source={PERSON_SEATED} style={styles.personSeatedImage} />
             <Image source={CHECKED} style={styles.checkedImage} />
             <Image source={PIZZA_GRAPH} style={styles.pizzaGraphImage} />
 
@@ -100,11 +100,6 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                   onSubmit={(form) => {
                     console.log('form', form);
                   }}>
-                  <TextInput
-                    label="Nome"
-                    name="name"
-                    validateField={validateField}
-                  />
                   <TextInput
                     label="Email"
                     name="email"
@@ -137,7 +132,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                 <Animated.View style={{width: confirmButtonWidth}}>
                   <RoudedButton
                     style={{width: '100%'}}
-                    text={isConfirmed ? '' : 'CONFIRMAR'}
+                    text={isConfirmed ? '' : 'Enviar'}
                     inverted
                     icon={isConfirmed ? 'check' : ''}
                     onPress={() => setIsConfirmed(true)}
@@ -152,22 +147,26 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
           <Image source={GEAR} style={styles.gearImage} />
           <Image source={GRAPH} style={styles.graphImage} />
           <Animated.View
-            style={{
-              position: 'absolute',
-              bottom: -20,
-              right: avanceButtonRight,
-            }}>
+            style={[
+              styles.advanceButtonContainer,
+              {
+                right: avanceButtonRight,
+              },
+            ]}>
             <TouchableRipple
-              onPress={() => navigation.navigate('ChooseUserConfigurations')}>
+              onPress={async () => {
+                await dispatch(
+                  registerUser({
+                    email: 'email@teste.com',
+                    password: '123456',
+                  }),
+                );
+
+                navigation.navigate('ChooseUserConfigurations');
+              }}>
               <ImageBackground
                 source={ADVANCE_BTN}
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  width: 150,
-                  height: 150,
-                  paddingTop: 52,
-                }}>
+                style={styles.advanceButton}>
                 <Text type="title" style={{paddingLeft: 20, color: '#1fb7c8'}}>
                   AVANÇAR
                 </Text>

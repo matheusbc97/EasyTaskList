@@ -16,7 +16,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 1.5,
     zIndex: 3,
-    height: 350,
+    overflow: 'hidden',
   },
   imageMarkedList: {
     position: 'absolute',

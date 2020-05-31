@@ -41,6 +41,7 @@
     "@types/react-native-vector-icons": "^6.4.5",
     "@types/react-redux": "^7.1.9",
     "@types/react-test-renderer": "16.9.2",
+    "@types/redux-logger": "^3.0.8",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "babel-jest": "^24.9.0",
@@ -50,6 +51,7 @@
     "prettier": "^2.0.4",
     "react-test-renderer": "16.11.0",
     "reactotron-react-native": "^5.0.0",
+    "redux-logger": "^3.0.6",
     "typescript": "^3.8.3"
   },
   "jest": {

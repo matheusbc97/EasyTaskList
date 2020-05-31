@@ -14,6 +14,8 @@ import {
   TextStyle,
   StyleProp,
 } from 'react-native';
+import {useSelector} from 'react-redux';
+import {selectAppTheme} from '../../store/configs';
 
 interface TextInputProps extends RNTextInputProps {
   label: string;
@@ -33,6 +35,7 @@ const TextInput = ({
   error,
   ...rest
 }: TextInputProps) => {
+  const appTheme = useSelector(selectAppTheme);
   const [labelLeftOffset, setLabelLeftOffset] = useState(0);
 
   const labelIsOnTop = useMemo(() => new Animated.Value(defaultValue ? 1 : 0), [
@@ -57,7 +60,7 @@ const TextInput = ({
 
   const borderColor = isFocused.interpolate({
     inputRange: [0, 1, 2],
-    outputRange: ['#57d491', '#1FB7C8', '#d50000'],
+    outputRange: ['#57d491', appTheme.primaryColor, '#d50000'],
   });
 
   const scale = labelIsOnTop.interpolate({
@@ -114,6 +117,7 @@ const TextInput = ({
             {
               transform: [{scale}],
               color: borderColor,
+              backgroundColor: appTheme.aboveBackground,
             },
           ]}>
           {label}

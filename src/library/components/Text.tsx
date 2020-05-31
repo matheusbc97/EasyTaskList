@@ -14,38 +14,44 @@ type TextTypes =
 
 interface Props extends TextProps, PropsWithChildren<Text> {
   type?: TextTypes;
+  primaryColor?: boolean;
 }
 
-const Text = ({children, style, type = 'body'}: Props) => {
+const Text = ({
+  children,
+  style,
+  type = 'body',
+  primaryColor = false,
+}: Props) => {
   const theme = useSelector(selectAppTheme);
 
   const getStyle = useCallback(() => {
     switch (type) {
       case 'title':
         return {
-          color: theme.textColor,
+          color: primaryColor ? theme.primaryColor : theme.textColor,
           fontWeight: 'bold',
         };
       case 'title-medium':
         return {
-          color: theme.textColor,
+          color: primaryColor ? theme.primaryColor : theme.textColor,
           fontWeight: 'bold',
           fontSize: 18,
         };
       case 'title-big':
         return {
-          color: theme.textColor,
+          color: primaryColor ? theme.primaryColor : theme.textColor,
           fontWeight: 'bold',
           fontSize: 21,
         };
       case 'title-grey':
         return {
-          color: theme.secondaryTextColor,
+          color: primaryColor ? theme.primaryColor : theme.secondaryTextColor,
           fontWeight: 'bold',
         };
       case 'subtitle':
         return {
-          color: theme.secondaryTextColor,
+          color: primaryColor ? theme.primaryColor : theme.secondaryTextColor,
           fontSize: 16,
         };
       case 'body': {
@@ -58,7 +64,7 @@ const Text = ({children, style, type = 'body'}: Props) => {
           color: theme.textColor,
         };
     }
-  }, [theme]);
+  }, [theme, type, primaryColor]);
 
   return <RNText style={[getStyle(), style]}>{children}</RNText>;
 };

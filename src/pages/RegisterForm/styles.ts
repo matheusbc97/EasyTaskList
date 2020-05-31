@@ -79,4 +79,17 @@ export default StyleSheet.create({
     right: 90,
     width: 150,
   },
+  advanceButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: 150,
+    height: 150,
+    paddingTop: 52,
+  },
+  advanceButtonContainer: {
+    position: 'absolute',
+    bottom: -20,
+  },
+  personSeatedImage: {alignSelf: 'center', zIndex: 4},
+  scroll: {flexGrow: 1},
 });

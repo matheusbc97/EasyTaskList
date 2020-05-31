@@ -22,3 +22,20 @@ export const authenticateUser = createAsyncThunk(
     }
   },
 );
+
+export const registerUser = createAsyncThunk(
+  'account/user/register',
+  async ({email}: {email: string; password: string}, {dispatch}) => {
+    try {
+      loaderHandler.showLoader();
+      const response = await AccountService.register(email);
+      const id = tokenIterceptor(response.data.token);
+      dispatch(setTokenInterceptorId(id));
+      loaderHandler.hideLoader();
+      return response.data;
+    } catch (error) {
+      handleErrorMessage(error);
+      throw error.data;
+    }
+  },
+);

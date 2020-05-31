@@ -1,12 +1,12 @@
 import React, {useEffect, useCallback, useRef} from 'react';
 import {View, TextInputProps, StyleSheet, ViewStyle} from 'react-native';
 import {useField} from '@unform/core';
-import {TextInput} from 'react-native-paper';
+import TextInput from './TextInput';
 
-import Text from '../Text';
-import useOnChangeText from '../../hooks/useOnChangeText';
-import {ValidateField} from '../../models/ValidateField';
-import useMaskedOnChangeText from '../../hooks/useMaskedOnChangeText';
+import {Text} from '.';
+import useOnChangeText from '../hooks/useOnChangeText';
+import {ValidateField} from '../models/ValidateField';
+import useMaskedOnChangeText from '../hooks/useMaskedOnChangeText';
 
 interface Props extends TextInputProps {
   label?: string;
@@ -19,14 +19,13 @@ interface Props extends TextInputProps {
 }
 
 const FloatingLabelIpnput = ({
-  label,
+  label = '',
   containerStyle,
   style,
   name,
   validateField,
   onChangeText,
   mask,
-  mode = 'outlined',
   ...rest
 }: Props) => {
   const inputRef = useRef<any>(null);
@@ -81,28 +80,21 @@ const FloatingLabelIpnput = ({
   return (
     <View style={[styles.container, containerStyle]}>
       <TextInput
-        mode={mode}
-        theme={{
-          colors: {
-            placeholder: '#21B9C7',
-            error: 'red',
-          },
-        }}
+        inputRef={inputRef}
         label={label}
         error={Boolean(error)}
         ref={inputRef}
         defaultValue={defaultValue}
         onChangeText={(text: string) => {
+          if (inputRef.current) {
+            inputRef.current.value = text;
+          }
           mask ? _maskedOnChangeText(text) : _onChangeText(text);
           onChangeText && onChangeText(text);
         }}
         onBlur={handleBlur}
         {...rest}
-        style={[
-          styles.input,
-          label ? styles.inputWithLabel : styles.inputWithNoLabel,
-          style,
-        ]}
+        style={style}
       />
       <View style={styles.errorWrapper}>
         {Boolean(error) && <Text style={styles.error}>{error}</Text>}
@@ -114,26 +106,8 @@ const FloatingLabelIpnput = ({
 export default FloatingLabelIpnput;
 
 const styles = StyleSheet.create({
-  label: {
-    position: 'absolute',
-    left: 5,
-    fontSize: 16,
-  },
-  input: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 4,
-    paddingBottom: 0,
-    fontSize: 16,
-    marginVertical: 10,
-  },
-  inputWithLabel: {
-    height: 56,
-  },
-  inputWithNoLabel: {
-    height: 50,
-  },
   container: {
-    marginHorizontal: 15,
+    marginVertical: 3,
   },
   errorWrapper: {
     height: 23,
@@ -141,7 +115,6 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     alignSelf: 'flex-end',
-    marginTop: 5,
-    marginRight: 4,
+    marginRight: 26,
   },
 });

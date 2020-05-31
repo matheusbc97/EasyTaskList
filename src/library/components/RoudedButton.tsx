@@ -54,7 +54,12 @@ const RoudedButton = ({
         )}
         {Boolean(text) && (
           <Text
-            style={[inverted ? styles.invertedText : styles.text, textStyle]}>
+            style={[
+              inverted
+                ? {...styles.invertedText, color: appTheme.secondaryColor}
+                : styles.text,
+              textStyle,
+            ]}>
             {text}
           </Text>
         )}
@@ -87,7 +92,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   invertedText: {
-    color: '#2dc4c2',
     fontSize: 16,
   },
 });

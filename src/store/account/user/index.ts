@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {User} from '../../../library/models/User';
-import {authenticateUser} from './thunkActions';
-import {selectUser} from './selectors';
+import {authenticateUser, registerUser} from './thunkActions';
+import {selectUser, selectUserName} from './selectors';
 
 type State = User | null;
 
@@ -12,6 +12,16 @@ const user = createSlice({
   reducers: {
     resetUser: () => {
       return null;
+    },
+    setUserName: (state, action: PayloadAction<string>) => {
+      if (state) {
+        state.name = action.payload;
+      }
+    },
+    setUserAvatar: (state, action: PayloadAction<number>) => {
+      if (state) {
+        state.avatar = action.payload;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -25,11 +35,18 @@ const user = createSlice({
     builder.addCase(authenticateUser.rejected, () => {
       //console.log('error', action.error);
     });
+
+    builder.addCase(
+      registerUser.fulfilled,
+      (state, action: PayloadAction<{user: User; token: string}>) => {
+        return action.payload.user;
+      },
+    );
   },
 });
 
 export default user.reducer;
 
-const {resetUser} = user.actions;
+export const {resetUser, setUserName, setUserAvatar} = user.actions;
 
-export {resetUser, authenticateUser, selectUser};
+export {authenticateUser, selectUser, registerUser, selectUserName};

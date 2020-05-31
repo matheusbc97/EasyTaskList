@@ -24,6 +24,28 @@ class AccountService {
       );
     });
   }
+
+  register(
+    email: string,
+  ): Promise<{
+    data: {
+      user: User;
+      token: string;
+    };
+  }> {
+    return new Promise((resolve) => {
+      setTimeout(
+        () =>
+          resolve({
+            data: {
+              user: {id: 123, email},
+              token: '15ds1516sdf1',
+            },
+          }),
+        700,
+      );
+    });
+  }
   /*login(login: string, password: string): AxiosPromise {
     return Api.post('api/auth', {
       login,

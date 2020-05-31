@@ -1,87 +1,34 @@
 import React from 'react';
-import {View, Image} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
-import {Text} from '../../library/components';
-import {
-  AVATAR,
-  AVATAR_2,
-  AVATAR_3,
-  AVATAR_4,
-  AVATAR_5,
-  AVATAR_6,
-  AVATAR_7,
-  AVATAR_8,
-} from '../../assets/images';
+import {Text, Avatar} from '../../library/components';
 
-const avatarSources = [
-  AVATAR,
-  AVATAR_2,
-  AVATAR_3,
-  AVATAR_4,
-  AVATAR_5,
-  AVATAR_6,
-  AVATAR_7,
-  AVATAR_8,
-];
+import ChosseScreenBackButton from './ChosseScreenBackButton';
 
-const ImageAvatar = ({avatarNumber = 7}) => {
-  const size = 60;
+interface Props {
+  onBackPress(): void;
+  onAvatarPress(arg0: number): void;
+}
+
+const ChoosePhotoOrAvatar: React.FC<Props> = ({onBackPress, onAvatarPress}) => {
   return (
-    <View
-      style={{
-        width: size,
-        height: size,
-        borderRadius: size / 2,
-        borderWidth: 2,
-        borderColor: '#707070',
-        justifyContent: 'center',
-        alignItems: 'center',
-        overflow: 'hidden',
-        backgroundColor: '#e4e0e0',
-      }}>
-      <Image
-        source={avatarSources[avatarNumber]}
-        resizeMode="contain"
-        style={{width: size, height: size, marginTop: 4}}
-      />
-    </View>
-  );
-};
-
-const ChoosePhotoOrAvatar = () => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        margin: 15,
-      }}>
+    <View style={styles.container}>
+      <ChosseScreenBackButton onPress={onBackPress} />
       <Text type="title-medium" style={{textAlign: 'center'}}>
         Você também pode escolher um dos nossos avatares!
       </Text>
-      <View style={{width: '100%', paddingHorizontal: 20}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingVertical: 10,
-          }}>
-          <ImageAvatar avatarNumber={0} />
-          <ImageAvatar avatarNumber={1} />
-          <ImageAvatar avatarNumber={2} />
-          <ImageAvatar avatarNumber={3} />
+      <View style={styles.content}>
+        <View style={styles.row}>
+          <Avatar avatarNumber={0} onPress={() => onAvatarPress(0)} />
+          <Avatar avatarNumber={1} onPress={() => onAvatarPress(1)} />
+          <Avatar avatarNumber={2} onPress={() => onAvatarPress(2)} />
+          <Avatar avatarNumber={3} onPress={() => onAvatarPress(3)} />
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingVertical: 10,
-          }}>
-          <ImageAvatar avatarNumber={4} />
-          <ImageAvatar avatarNumber={5} />
-          <ImageAvatar avatarNumber={6} />
-          <ImageAvatar avatarNumber={7} />
+        <View style={styles.row}>
+          <Avatar avatarNumber={4} onPress={() => onAvatarPress(4)} />
+          <Avatar avatarNumber={5} onPress={() => onAvatarPress(5)} />
+          <Avatar avatarNumber={6} onPress={() => onAvatarPress(6)} />
+          <Avatar avatarNumber={7} onPress={() => onAvatarPress(7)} />
         </View>
       </View>
       <Text type="title-medium" style={{textAlign: 'center'}}>
@@ -92,3 +39,27 @@ const ChoosePhotoOrAvatar = () => {
 };
 
 export default ChoosePhotoOrAvatar;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 15,
+  },
+  content: {width: '100%', paddingHorizontal: 20},
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+  },
+  avatarContainer: {
+    borderWidth: 2,
+    borderColor: '#707070',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    backgroundColor: '#e4e0e0',
+  },
+  avatarImage: {marginTop: 4},
+});

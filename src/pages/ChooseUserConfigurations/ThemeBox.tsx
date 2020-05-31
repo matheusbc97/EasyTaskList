@@ -7,7 +7,7 @@ import {AppTheme} from '../../library/models/AppTheme';
 interface ThemeBoxProps {
   theme: AppTheme;
   selected?: boolean;
-  onPress(): void;
+  onPress?(): void;
 }
 
 const ThemeBox: React.FC<ThemeBoxProps> = ({theme, onPress}) => (

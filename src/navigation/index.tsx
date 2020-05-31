@@ -45,54 +45,41 @@ const HomeStackScreen = () => {
 
 const App = () => {
   const user = useSelector(selectUser);
-
+  console.log('yser', user);
   return (
     <NavigationContainer>
-      {user ? (
-        <HomeStack.Navigator>
-          <HomeStack.Screen
-            options={{
-              ...headerStyle,
-              title: 'Início',
-            }}
-            component={Home}
-            name="Home"
-          />
-        </HomeStack.Navigator>
-      ) : (
-        <UnauthenticatedStack.Navigator>
-          <UnauthenticatedStack.Screen
-            options={{
-              headerShown: false,
-            }}
-            name="Welcome"
-            component={Welcome}
-          />
-          <UnauthenticatedStack.Screen
-            options={{
-              headerShown: false,
-            }}
-            name="Login"
-            component={Login}
-          />
-          <UnauthenticatedStack.Screen
-            options={{
-              headerShown: false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="RegisterForm"
-            component={RegisterForm}
-          />
-          <UnauthenticatedStack.Screen
-            options={{
-              headerShown: false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="ChooseUserConfigurations"
-            component={ChooseUserConfigurations}
-          />
-        </UnauthenticatedStack.Navigator>
-      )}
+      <UnauthenticatedStack.Navigator>
+        <UnauthenticatedStack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Welcome"
+          component={Welcome}
+        />
+        <UnauthenticatedStack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Login"
+          component={Login}
+        />
+        <UnauthenticatedStack.Screen
+          options={{
+            headerShown: false,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          }}
+          name="RegisterForm"
+          component={RegisterForm}
+        />
+        <UnauthenticatedStack.Screen
+          options={{
+            headerShown: false,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          }}
+          name="ChooseUserConfigurations"
+          component={ChooseUserConfigurations}
+        />
+      </UnauthenticatedStack.Navigator>
     </NavigationContainer>
   );
 };
