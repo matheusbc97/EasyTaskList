@@ -22,6 +22,8 @@ import {
 } from '../../assets/images';
 import {UnauthenticatedStackParams} from '../../navigation/types';
 import {registerUser} from '../../store/account/user';
+import {validateAll} from '../../library/utils/validations';
+import {showToast} from '../../library/components/Toast';
 
 import styles from './styles';
 
@@ -29,6 +31,13 @@ type ChooseUserConfigurationsNavigationProp = StackNavigationProp<
   UnauthenticatedStackParams,
   'ChooseUserConfigurations'
 >;
+
+interface FormDetails {
+  name: string;
+  email: string;
+  newPassword: string;
+  confirmPassword: string;
+}
 
 interface Props {
   navigation: ChooseUserConfigurationsNavigationProp;
@@ -53,6 +62,25 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
     () => Animated.createAnimatedComponent(LinearGradient),
     [],
   );
+
+  const handleSubmit = (form: FormDetails) => {
+    const [formErrors, isValid] = validateAll(form);
+
+    formRef.current?.setErrors(formErrors);
+
+    if (!privacyPolicyIsChecked) {
+      showToast({
+        text: 'É necessário aceitar os termos de privacidade',
+        type: 'danger',
+        remain: true,
+      });
+      return;
+    }
+
+    if (isValid) {
+      setIsConfirmed(true);
+    }
+  };
 
   useEffect(() => {
     Animated.timing(backgroundWidth, {
@@ -95,25 +123,32 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                 Crie Sua Conta de Usuário
               </Text>
               <View style={styles.formWrapper}>
-                <Form
-                  ref={formRef}
-                  onSubmit={(form) => {
-                    console.log('form', form);
-                  }}>
+                <Form ref={formRef} onSubmit={handleSubmit}>
                   <TextInput
                     label="Email"
                     name="email"
+                    textContentType="emailAddress"
                     validateField={validateField}
+                    onSubmitEditing={() =>
+                      formRef.current?.getFieldRef('newPassword').focus()
+                    }
                   />
                   <TextInput
                     label="Senha"
                     name="newPassword"
                     validateField={validateField}
+                    onSubmitEditing={() =>
+                      formRef.current?.getFieldRef('confirmPassword').focus()
+                    }
+                    secureTextEntry
+                    textContentType="newPassword"
                   />
                   <TextInput
                     label="Confirmar Senha"
                     name="confirmPassword"
                     validateField={validateField}
+                    secureTextEntry
+                    textContentType="newPassword"
                   />
                 </Form>
               </View>
@@ -135,7 +170,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                     text={isConfirmed ? '' : 'Enviar'}
                     inverted
                     icon={isConfirmed ? 'check' : ''}
-                    onPress={() => setIsConfirmed(true)}
+                    onPress={() => formRef.current?.submitForm()}
                   />
                 </Animated.View>
                 <Text style={styles.alreadyHaveAccountText}>

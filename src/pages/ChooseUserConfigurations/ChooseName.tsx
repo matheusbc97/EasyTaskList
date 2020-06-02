@@ -18,13 +18,18 @@ import ChosseScreenBackButton from './ChosseScreenBackButton';
 interface Props {
   onAdvancePress(name: string): void;
   onBackPress(): void;
+  showBackButton: boolean;
 }
 
 type FormDetails = {
   name: string;
 };
 
-const ChooseName: React.FC<Props> = ({onAdvancePress, onBackPress}) => {
+const ChooseName: React.FC<Props> = ({
+  onAdvancePress,
+  onBackPress,
+  showBackButton = true,
+}) => {
   const userName = useSelector(selectUserName);
   const formRef = useRef<FormHandles>(null);
   const validateField = useValidateField(formRef);
@@ -40,13 +45,15 @@ const ChooseName: React.FC<Props> = ({onAdvancePress, onBackPress}) => {
 
   return (
     <View style={styles.container}>
-      <ChosseScreenBackButton onPress={onBackPress} />
+      {showBackButton && <ChosseScreenBackButton onPress={onBackPress} />}
       <Text type="title-big" style={styles.text}>
         Nos diga como deseja ser chamado
       </Text>
-      <Form ref={formRef} onSubmit={handleSubmit}>
+      <Form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        initialData={{name: userName}}>
         <TextInput
-          defaultValue={userName}
           label="Nome"
           name="name"
           validateField={validateField}

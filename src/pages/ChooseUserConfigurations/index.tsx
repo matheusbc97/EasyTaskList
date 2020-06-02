@@ -67,19 +67,23 @@ const ChooseUserConfigurations: React.FC = () => {
   };
 
   const advanceForNextScreen = (back = false) => {
-    Animated.timing(rotationAnimatedValue, {
-      toValue:
-        (back ? -piDividedBy2 : piDividedBy2) +
-        screenShownState.index * 2 * Math.PI,
-      duration: 300,
-      useNativeDriver: false,
-    }).start(() =>
-      setScreenShownState({
-        index: screenShownState.index + (back ? -1 : 1),
-        back,
-        heightAnimation: false,
-      }),
-    );
+    if (screenShownState.heightAnimation) {
+      heightAnimation();
+    } else {
+      Animated.timing(rotationAnimatedValue, {
+        toValue:
+          (back ? -piDividedBy2 : piDividedBy2) +
+          screenShownState.index * 2 * Math.PI,
+        duration: 300,
+        useNativeDriver: false,
+      }).start(() =>
+        setScreenShownState({
+          index: screenShownState.index + (back ? -1 : 1),
+          back,
+          heightAnimation: false,
+        }),
+      );
+    }
   };
 
   const getSubScreen = () => {
@@ -94,6 +98,7 @@ const ChooseUserConfigurations: React.FC = () => {
               advanceForNextScreen();
               dispatch(setUserName(name));
             }}
+            showBackButton={!screenShownState.heightAnimation}
           />
         );
       case 'ChoosePhotoOrAvatar':
@@ -104,6 +109,7 @@ const ChooseUserConfigurations: React.FC = () => {
               heightAnimation();
             }}
             onBackPress={() => advanceForNextScreen(true)}
+            showBackButton={!screenShownState.heightAnimation}
           />
         );
       case 'SaveUserConfiguration':

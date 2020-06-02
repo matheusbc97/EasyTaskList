@@ -12,7 +12,10 @@ interface ToastOptions {
   idTimeout: number | null;
 }
 
-type showToastOptions = Omit<ToastOptions, 'isVisible' | 'idTimeout'>;
+interface showToastOptions
+  extends Omit<ToastOptions, 'isVisible' | 'idTimeout'> {
+  remain?: boolean;
+}
 
 export const showToast = (toastOptions: showToastOptions) =>
   DeviceEventEmitter.emit('show-toast', toastOptions);
@@ -44,10 +47,9 @@ const Toast = () => {
     const emitter = DeviceEventEmitter.addListener(
       'show-toast',
       (data: showToastOptions) => {
-        const idTimeout = setTimeout(
-          () => setToastOptions(initialState),
-          10000,
-        );
+        const idTimeout = data.remain
+          ? null
+          : setTimeout(() => setToastOptions(initialState), 4000);
 
         setToastOptions({
           ...data,

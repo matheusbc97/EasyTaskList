@@ -8,12 +8,17 @@ import ChosseScreenBackButton from './ChosseScreenBackButton';
 interface Props {
   onBackPress(): void;
   onAvatarPress(arg0: number): void;
+  showBackButton: boolean;
 }
 
-const ChoosePhotoOrAvatar: React.FC<Props> = ({onBackPress, onAvatarPress}) => {
+const ChoosePhotoOrAvatar: React.FC<Props> = ({
+  onBackPress,
+  onAvatarPress,
+  showBackButton = true,
+}) => {
   return (
     <View style={styles.container}>
-      <ChosseScreenBackButton onPress={onBackPress} />
+      {showBackButton && <ChosseScreenBackButton onPress={onBackPress} />}
       <Text type="title-medium" style={{textAlign: 'center'}}>
         Você também pode escolher um dos nossos avatares!
       </Text>
