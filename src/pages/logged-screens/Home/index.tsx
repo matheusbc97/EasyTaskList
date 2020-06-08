@@ -1,9 +1,9 @@
 import React from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {Text} from '../../library/components';
-import {RootStackParams} from '../../navigation/types';
-import {ScreenWrapper} from '../../library/components';
+import {Text} from '../../../library/components';
+import {RootStackParams} from '../../../navigation/types';
+import {ScreenWrapper} from '../../../library/components';
 
 type HomeNavigationProp = StackNavigationProp<RootStackParams, 'DrawerStack'>;
 

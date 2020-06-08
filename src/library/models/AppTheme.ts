@@ -5,4 +5,5 @@ export type AppTheme = {
   secondaryTextColor: string;
   background: string;
   aboveBackground: string;
+  dark: boolean;
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import {selectUser} from '../../store/account/user';
-import {selectAppTheme} from '../../store/configs';
+import {selectAppTheme, setIsLogged} from '../../store/configs';
 import {Avatar, Text, RoudedButton} from '../../library/components';
 
 import ThemeBox from './ThemeBox';
@@ -14,6 +14,7 @@ interface Props {
 
 const SaveUserConfiguration: React.FC<Props> = ({onChagePress}) => {
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   const appTheme = useSelector(selectAppTheme);
 
@@ -52,6 +53,7 @@ const SaveUserConfiguration: React.FC<Props> = ({onChagePress}) => {
       <RoudedButton
         text="Finalizar Cadastro"
         style={styles.finalizeRegisterBtn}
+        onPress={() => dispatch(setIsLogged(true))}
       />
     </View>
   );

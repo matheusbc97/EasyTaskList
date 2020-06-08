@@ -46,6 +46,7 @@ interface Props {
 const RegisterForm: React.FC<Props> = ({navigation}) => {
   const dispatch = useDispatch();
   const formRef = useRef<FormHandles>(null);
+  const scrollViewRef = useRef<ScrollView>(null);
   const validateField = useValidateField(formRef);
   const [privacyPolicyIsChecked, setPrivacyPolicyIsChecked] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
@@ -79,6 +80,8 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
 
     if (isValid) {
       setIsConfirmed(true);
+
+      scrollViewRef.current?.scrollToEnd({animated: true});
     }
   };
 
@@ -109,7 +112,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
 
   return (
     <ScreenWrapper>
-      <ScrollView contentContainerStyle={styles.scroll}>
+      <ScrollView contentContainerStyle={styles.scroll} ref={scrollViewRef}>
         <AnimatedLinearGradient
           style={[styles.background, {right: backgroundWidth}]}
           colors={['#66F6A9', '#1FB7C8']}>

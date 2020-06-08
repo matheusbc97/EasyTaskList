@@ -7,6 +7,7 @@ export const BLUE_GREEN: AppTheme = {
   secondaryTextColor: '#bdbdbd',
   background: '#fffafa',
   aboveBackground: '#FFF',
+  dark: false,
 };
 
 export const BLUE_RED: AppTheme = {
@@ -16,6 +17,7 @@ export const BLUE_RED: AppTheme = {
   secondaryTextColor: '#bdbdbd',
   background: '#fffafa',
   aboveBackground: '#FFF',
+  dark: false,
 };
 
 export const DARK: AppTheme = {
@@ -25,4 +27,5 @@ export const DARK: AppTheme = {
   secondaryTextColor: '#bdbdbd',
   background: '#757575',
   aboveBackground: '#828282',
+  dark: true,
 };
