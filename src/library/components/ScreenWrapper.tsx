@@ -1,10 +1,12 @@
 import React, {PropsWithChildren} from 'react';
-import {View, ViewProps, StyleSheet} from 'react-native';
+import {ViewProps, StyleSheet, SafeAreaView} from 'react-native';
 
 interface Props extends ViewProps, PropsWithChildren<any> {}
 
 const ScreenWrapper = ({children, style}: Props) => {
-  return <View style={[styles.container, style]}>{children}</View>;
+  return (
+    <SafeAreaView style={[styles.container, style]}>{children}</SafeAreaView>
+  );
 };
 export default ScreenWrapper;
 

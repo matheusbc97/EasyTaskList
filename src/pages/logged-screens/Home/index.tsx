@@ -1,20 +1,107 @@
 import React from 'react';
-import {StackNavigationProp} from '@react-navigation/stack';
+//import {StackNavigationProp} from '@react-navigation/stack';
+import {View, FlatList} from 'react-native';
 
-import {Text} from '../../../library/components';
-import {RootStackParams} from '../../../navigation/types';
-import {ScreenWrapper} from '../../../library/components';
+import {
+  ScreenWrapper,
+  Avatar,
+  TwoDimensionalTaskList,
+  Text,
+} from '../../../library/components';
 
-type HomeNavigationProp = StackNavigationProp<RootStackParams, 'DrawerStack'>;
+import styles from './styles';
+import CategoryListItem from './CategoryListItem';
+
+//type HomeNavigationProp = StackNavigationProp<RootStackParams, 'DrawerStack'>;
 
 interface Props {
-  navigation: HomeNavigationProp;
+  //navigation: HomeNavigationProp;
 }
 
 const Home = ({}: Props) => {
+  const tasks = [
+    {
+      title: 'HOJE',
+      data: [8, 2, 1, 3],
+    },
+    {
+      title: 'Amanhã',
+      data: [1, 5, 8, 2, 1, 3],
+    },
+    {
+      title: '14/06',
+      data: [1, 5, 8, 2],
+    },
+    {
+      title: '15/06',
+      data: [1, 5, 1, 3],
+    },
+  ];
+
   return (
     <ScreenWrapper>
-      <Text>Home</Text>
+      <FlatList
+        data={[1, 2, 3]}
+        keyExtractor={(item) => item.toString()}
+        renderItem={({item}) => {
+          if (item === 1) {
+            return (
+              <View style={styles.header}>
+                <Avatar avatarNumber={1} size={50} />
+                <View style={styles.headerContent}>
+                  <Text type="title-medium">Olá, João</Text>
+                  <Text>06 de Abril, 2020</Text>
+                </View>
+              </View>
+            );
+          }
+
+          if (item === 2) {
+            return (
+              <View>
+                <Text type="title-medium" style={styles.title}>
+                  Categorias
+                </Text>
+                <View style={styles.contentWrapper}>
+                  <FlatList
+                    showsHorizontalScrollIndicator={false}
+                    horizontal
+                    data={[1, 5, 8, 2, 1, 3]}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({item}) => (
+                      <CategoryListItem colorIndex={item} />
+                    )}
+                  />
+                </View>
+              </View>
+            );
+          }
+
+          return (
+            <View>
+              <Text type="title-medium" style={styles.title}>
+                Próximas Tarefas
+              </Text>
+              <View style={[styles.contentWrapper]}>
+                <View style={{flexDirection: 'row', marginHorizontal: 10}}>
+                  {tasks.map((item) => (
+                    <Text
+                      style={{
+                        borderBottomWidth: 2,
+                        marginHorizontal: 5,
+                        borderColor: '#4ADDB5',
+                        color: '#bdbdbd',
+                      }}>
+                      {item.title.toUpperCase()}
+                    </Text>
+                  ))}
+                </View>
+                <TwoDimensionalTaskList tasks={tasks} offset={30} />
+              </View>
+            </View>
+          );
+        }}
+      />
     </ScreenWrapper>
   );
 };

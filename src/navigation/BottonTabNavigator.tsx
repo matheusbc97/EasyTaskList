@@ -42,6 +42,7 @@ export default function BottonTabNavigator({
 
         return (
           <TouchableRipple
+            key={`botton-button-${index}`}
             style={[styles.button]}
             onPress={() => navigation.navigate(routeName)}>
             <View
@@ -72,7 +73,7 @@ export default function BottonTabNavigator({
 const styles = StyleSheet.create({
   container: {
     height: 60,
-    width: '100%',
+
     flexDirection: 'row',
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,

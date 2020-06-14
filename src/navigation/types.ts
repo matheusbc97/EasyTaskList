@@ -16,3 +16,9 @@ export type BottomNavigatorStackParams = {
   Statistics: undefined;
   Calendar: undefined;
 };
+
+export type TasksTopBarNavigatorStackParams = {
+  AllTasks: undefined;
+  TasksInProgress: undefined;
+  TasksCompleted: undefined;
+};

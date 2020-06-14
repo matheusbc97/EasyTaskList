@@ -1,0 +1,17 @@
+export default [
+  {color1: '#6aff88', color2: '#54cc94'},
+  {color1: '#6affba', color2: '#54ccbc'},
+  {color1: '#6affeb', color2: '#54b4cc'},
+  {color1: '#6ae1ff', color2: '#548ccc'},
+  {color1: '#6aafff', color2: '#5464cc'},
+  {color1: '#6a7eff', color2: '#6c54cc'},
+  {color1: '#886aff', color2: '#9454cc'},
+  {color1: '#ba6aff', color2: '#bc54cc'},
+  {color1: '#eb6aff', color2: '#cc54b4'},
+  {color1: '#ff6ae1', color2: '#cc548c'},
+  {color1: '#ff6aaf', color2: '#cc5464'},
+  {color1: '#e1ff6a', color2: '#8ccc54'},
+  {color1: '#afff6a', color2: '#64cc54'},
+  {color1: '#7eff6a', color2: '#54cc6c'},
+  {color1: '#6aff88', color2: '#54cc94'},
+] as const;

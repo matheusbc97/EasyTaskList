@@ -9,6 +9,9 @@ import FlatListWithFetchIndicator from './FlatListWithFetchIndicator';
 import LoadingIndicator from './LoadingIndicator';
 import ErrorMessage from './ErrorMessage';
 import Avatar from './Avatar';
+import TaskListItem from './TaskListItem';
+import TwoDimensionalTaskList from './TwoDimensionalTaskList';
+import Header from './Header';
 
 export {
   Avatar,
@@ -22,4 +25,7 @@ export {
   LoadingIndicator,
   ErrorMessage,
   UnformInput,
+  TaskListItem,
+  TwoDimensionalTaskList,
+  Header,
 };
