@@ -1,12 +1,13 @@
-export type HomeStackParams = {
-  Home: undefined;
-};
-
 export type UnauthenticatedStackParams = {
   Login: undefined;
   RegisterForm: undefined;
   Welcome: undefined;
   ChooseUserConfigurations: undefined;
+};
+
+export type AuthenticatedStackParams = {
+  BottomNavigation: undefined;
+  TaskForm: undefined;
 };
 
 export type BottomNavigatorStackParams = {

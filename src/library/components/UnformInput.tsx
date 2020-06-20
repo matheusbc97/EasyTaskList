@@ -16,6 +16,8 @@ interface Props extends TextInputProps {
   mask?(value: string, oldValue: string): string;
   disabled?: boolean;
   mode?: 'flat' | 'outlined';
+  button?: boolean;
+  onPress?(): void;
 }
 
 const FloatingLabelIpnput = ({
@@ -26,6 +28,8 @@ const FloatingLabelIpnput = ({
   validateField,
   onChangeText,
   mask,
+  button = false,
+  onPress,
   ...rest
 }: Props) => {
   const inputRef = useRef<any>(null);
@@ -80,6 +84,8 @@ const FloatingLabelIpnput = ({
   return (
     <View style={[styles.container, containerStyle]}>
       <TextInput
+        onPress={onPress}
+        button={button}
         inputRef={inputRef}
         label={label}
         error={Boolean(error)}

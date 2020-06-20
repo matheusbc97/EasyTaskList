@@ -7,7 +7,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import {lighten, shade} from 'polished';
 
-import {UnauthenticatedStackParams, BottomNavigatorStackParams} from './types';
+import {
+  UnauthenticatedStackParams,
+  BottomNavigatorStackParams,
+  AuthenticatedStackParams,
+} from './types';
 import {selectIsLogged, selectAppTheme} from '../store/configs';
 
 import Login from '../pages/account/Login';
@@ -21,6 +25,7 @@ import Statistics from '../pages/logged-screens/Statistics';
 import Calendar from '../pages/logged-screens/Calendar';
 
 import BottonTabNavigator from './BottonTabNavigator';
+import TaskForm from '../pages/logged-screens/TaskForm';
 
 const Tab = createBottomTabNavigator<BottomNavigatorStackParams>();
 
@@ -93,14 +98,21 @@ function MyTabs() {
 }
 
 const UnauthenticatedStack = createStackNavigator<UnauthenticatedStackParams>();
+const AuthenticatedStack = createStackNavigator<AuthenticatedStackParams>();
 
 const App = () => {
   const isLogged = useSelector(selectIsLogged);
 
   return (
     <NavigationContainer>
-      {isLogged ? (
-        <MyTabs />
+      {!isLogged ? (
+        <AuthenticatedStack.Navigator headerMode="none">
+          <AuthenticatedStack.Screen
+            name="BottomNavigation"
+            component={MyTabs}
+          />
+          <AuthenticatedStack.Screen name="TaskForm" component={TaskForm} />
+        </AuthenticatedStack.Navigator>
       ) : (
         <UnauthenticatedStack.Navigator>
           <UnauthenticatedStack.Screen

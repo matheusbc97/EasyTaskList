@@ -12,6 +12,7 @@ import Avatar from './Avatar';
 import TaskListItem from './TaskListItem';
 import TwoDimensionalTaskList from './TwoDimensionalTaskList';
 import Header from './Header';
+import OutlineButton from './OutlineButton'
 
 export {
   Avatar,
@@ -28,4 +29,5 @@ export {
   TaskListItem,
   TwoDimensionalTaskList,
   Header,
+  OutlineButton,
 };

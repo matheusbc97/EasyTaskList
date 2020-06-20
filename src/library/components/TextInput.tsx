@@ -13,15 +13,25 @@ import {
   Animated,
   TextStyle,
   StyleProp,
+  View,
 } from 'react-native';
 import {useSelector} from 'react-redux';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+
 import {selectAppTheme} from '../../store/configs';
+import {TouchableRipple} from 'react-native-paper';
+
+const AnimatedFontAwesomeIcon = Animated.createAnimatedComponent(
+  FontAwesomeIcon,
+);
 
 interface TextInputProps extends RNTextInputProps {
   label: string;
   inputRef?: any;
   inputStyle?: StyleProp<TextStyle>;
   error: boolean;
+  button?: boolean;
+  onPress?(): void;
 }
 
 const TextInput = ({
@@ -33,6 +43,8 @@ const TextInput = ({
   style,
   defaultValue,
   error,
+  button = false,
+  onPress,
   ...rest
 }: TextInputProps) => {
   const appTheme = useSelector(selectAppTheme);
@@ -96,61 +108,73 @@ const TextInput = ({
   }, [error, borderColorAnimation]);
 
   return (
-    <Animated.View style={[styles.container, {borderColor: borderColor}]}>
-      <Animated.View
-        style={[
-          styles.textContainer,
-          {
-            top: labelTop,
-            left: labelLeft,
-          },
-        ]}>
-        <Animated.Text
-          onLayout={(event: any) => {
-            var {width} = event.nativeEvent.layout;
-            if (labelLeftOffset === 0) {
-              setLabelLeftOffset(width * 0.1);
-            }
-          }}
+    <TouchableRipple disabled={!button} onPress={onPress}>
+      <Animated.View style={[styles.container, {borderColor: borderColor}]}>
+        <Animated.View
           style={[
-            styles.text,
+            styles.textContainer,
             {
-              transform: [{scale}],
-              color: borderColor,
-              backgroundColor: appTheme.aboveBackground,
+              top: labelTop,
+              left: labelLeft,
             },
           ]}>
-          {label}
-        </Animated.Text>
+          <Animated.Text
+            onLayout={(event: any) => {
+              var {width} = event.nativeEvent.layout;
+              if (labelLeftOffset === 0) {
+                setLabelLeftOffset(width * 0.1);
+              }
+            }}
+            style={[
+              styles.text,
+              {
+                transform: [{scale}],
+                color: borderColor,
+                backgroundColor: appTheme.aboveBackground,
+              },
+            ]}>
+            {label}
+          </Animated.Text>
+        </Animated.View>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <RNTextInput
+            editable={!button}
+            defaultValue={defaultValue}
+            ref={inputRef}
+            style={[styles.input, style]}
+            onFocus={(e) => {
+              if (!textRef.current.isValueNotEmpty) {
+                animation(true);
+              }
+              !error && borderColorAnimation(0);
+
+              onFocus && onFocus(e);
+            }}
+            onBlur={(e) => {
+              !textRef.current.isValueNotEmpty && animation(false);
+
+              !error && borderColorAnimation(1);
+
+              onBlur && onBlur(e);
+            }}
+            onChangeText={(text) => {
+              if ((!text || text.length === 1) && textRef.current) {
+                textRef.current.isValueNotEmpty = Boolean(text);
+              }
+              onChangeText && onChangeText(text);
+            }}
+            {...rest}
+          />
+          {button && (
+            <AnimatedFontAwesomeIcon
+              name="search"
+              size={20}
+              style={{paddingHorizontal: 15, color: borderColor}}
+            />
+          )}
+        </View>
       </Animated.View>
-      <RNTextInput
-        defaultValue={defaultValue}
-        ref={inputRef}
-        style={[styles.input, style]}
-        onFocus={(e) => {
-          if (!textRef.current.isValueNotEmpty) {
-            animation(true);
-          }
-          !error && borderColorAnimation(0);
-
-          onFocus && onFocus(e);
-        }}
-        onBlur={(e) => {
-          !textRef.current.isValueNotEmpty && animation(false);
-
-          !error && borderColorAnimation(1);
-
-          onBlur && onBlur(e);
-        }}
-        onChangeText={(text) => {
-          if ((!text || text.length === 1) && textRef.current) {
-            textRef.current.isValueNotEmpty = Boolean(text);
-          }
-          onChangeText && onChangeText(text);
-        }}
-        {...rest}
-      />
-    </Animated.View>
+    </TouchableRipple>
   );
 };
 
@@ -166,6 +190,7 @@ const styles = StyleSheet.create({
   input: {
     paddingHorizontal: 30,
     paddingVertical: 5,
+    flexGrow: 1,
   },
   text: {
     flexShrink: 1,

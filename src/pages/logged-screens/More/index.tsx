@@ -29,6 +29,7 @@ const Option: React.FC<OptionsProps> = ({title, iconName}) => {
         borderRadius: 10,
       }}>
       <FontAwesomeIcon
+        color={appTheme.textColor}
         name={iconName}
         size={18}
         style={{paddingHorizontal: 5}}

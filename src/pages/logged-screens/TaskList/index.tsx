@@ -1,17 +1,24 @@
 import React from 'react';
 import {View} from 'react-native';
 import {useSelector} from 'react-redux';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 import {
   Text,
   ScreenWrapper,
   TwoDimensionalTaskList,
   TaskListItem,
+  OutlineButton
 } from '../../../library/components';
 import {selectAppTheme} from '../../../store/configs';
+import {AuthenticatedStackParams} from '../../../navigation/types';
 
 import styles from './styles';
+
+type TaskListNavigationProp = StackNavigationProp<
+  AuthenticatedStackParams,
+  'BottomNavigation'
+>;
 
 const VerticalSeparator = ({color = ''}) => (
   <View
@@ -24,7 +31,11 @@ const VerticalSeparator = ({color = ''}) => (
   />
 );
 
-const TaskList: React.FC = () => {
+interface Props {
+  navigation: TaskListNavigationProp;
+}
+
+const TaskList: React.FC<Props> = ({navigation}) => {
   const appTheme = useSelector(selectAppTheme);
 
   const tasks = [
@@ -90,7 +101,7 @@ const TaskList: React.FC = () => {
           style={{
             height: 1,
             width: '100%',
-            backgroundColor: 'black',
+            backgroundColor: '#e0e0e0',
           }}
         />
       </View>
@@ -114,7 +125,11 @@ const TaskList: React.FC = () => {
         </View>
       </View>*/}
       <View style={{paddingHorizontal: 20, paddingVertical: 5}}>
-        <TaskListItem name="Criar Nova Tarefa" onPress={() => {}} />
+        <OutlineButton
+          iconName="plus"
+          text="Criar Nova Tarefa"
+          onPress={() => navigation.navigate('TaskForm')}
+        />
       </View>
     </ScreenWrapper>
   );

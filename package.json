@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^2.4.2",
     "@react-native-community/hooks": "2.5.1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^5.5.1",
@@ -28,6 +29,7 @@
     "react-native-calendars": "^1.296.0",
     "react-native-gesture-handler": "1.6.1",
     "react-native-linear-gradient": "2.5.6",
+    "react-native-modal-datetime-picker": "^8.7.1",
     "react-native-paper": "3.10.1",
     "react-native-reanimated": "1.9.0",
     "react-native-safe-area-context": "2.0.3",
