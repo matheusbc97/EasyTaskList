@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.easytasklist">
+  package="br.com.devaneio.easytasklist">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

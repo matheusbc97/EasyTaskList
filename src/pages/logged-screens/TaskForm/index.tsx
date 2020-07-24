@@ -3,54 +3,55 @@ import {View} from 'react-native';
 import {Form} from '@unform/mobile';
 import {useSelector} from 'react-redux';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {StackNavigationProp} from '@react-navigation/stack';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import {selectAppTheme} from '../../../store/configs';
+import {AuthenticatedStackParams} from '../../../navigation/types';
 
 import {
   ScreenWrapper,
   UnformInput as TextInput,
-  Header,
   RoudedButton,
+  AnimatedBackground,
+  Text,
 } from '../../../library/components';
 
-export default function TaskForm() {
+import styles from './styles';
+
+interface Props {
+  navigation: StackNavigationProp<AuthenticatedStackParams, 'TaskForm'>;
+}
+
+const TaskForm: React.FC<Props> = ({navigation}) => {
   const appTheme = useSelector(selectAppTheme);
   const [datePickerIsVisible, setDatePickerIsVisible] = useState(false);
   const [timePickerIsVisible, setTimePickerIsVisible] = useState(false);
 
   return (
-    <ScreenWrapper style={{backgroundColor: 'transparent'}}>
-      <View style={{flex: 1}}>
-        <View style={{flex: 1, backgroundColor: appTheme.secondaryColor}} />
-        <View style={{flex: 1, backgroundColor: appTheme.primaryColor}} />
-      </View>
-      <View
-        style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-        }}>
-        <Header
-          title="Criar Tarefa"
-          textStyle={
-            {
-              //color: appTheme.primaryColor,
-            }
-          }
-          style={{
-            marginHorizontal: 5,
-          }}
-        />
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          <View
-            style={{
-              paddingVertical: 15,
-              backgroundColor: '#FFF',
-              marginHorizontal: 10,
-              paddingHorizontal: 10,
-              borderRadius: 30,
-              elevation: 3,
-            }}>
+    <ScreenWrapper>
+      <AnimatedBackground>
+        <View style={styles.container}>
+          <View style={styles.content}>
+            <View style={styles.header}>
+              <MaterialIcon
+                name="arrow-back"
+                size={30}
+                color={appTheme.primaryColor}
+              />
+              <View style={styles.titleWrapper}>
+                <Text
+                  type="title-big"
+                  style={[
+                    {
+                      color: appTheme.primaryColor,
+                    },
+                    styles.title,
+                  ]}>
+                  Criar Tarefa
+                </Text>
+              </View>
+            </View>
             <Form onSubmit={() => {}}>
               <TextInput name="name" label="Nome" />
               <TextInput name="name" label="Descrição" />
@@ -73,10 +74,18 @@ export default function TaskForm() {
                 onPress={() => {}}
               />
             </Form>
-            <RoudedButton text="Salvar" style={{alignSelf: 'center'}} />
+            <View style={styles.footer}>
+              <RoudedButton
+                text="Voltar"
+                inverted
+                style={styles.backButton}
+                onPress={() => navigation.pop()}
+              />
+              <RoudedButton text="Salvar" style={styles.saveButton} />
+            </View>
           </View>
         </View>
-      </View>
+      </AnimatedBackground>
       <DateTimePickerModal
         isVisible={datePickerIsVisible}
         mode="date"
@@ -97,4 +106,6 @@ export default function TaskForm() {
       />
     </ScreenWrapper>
   );
-}
+};
+
+export default TaskForm;

@@ -1,4 +1,4 @@
-package com.easytasklist;
+package br.com.devaneio.easytasklist;
 
 import com.facebook.react.ReactActivity;
 

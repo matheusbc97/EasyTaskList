@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "423789432949",
+    "firebase_url": "https://easytasklist-68cbf.firebaseio.com",
+    "project_id": "easytasklist-68cbf",
+    "storage_bucket": "easytasklist-68cbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423789432949:android:a297d4c01a8ed26485e83c",
+        "android_client_info": {
+          "package_name": "br.com.devaneio.easytasklist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423789432949-chf84d5lm7eu7lrp66435dlgi9r6vdl3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw1YhRA5UolOcoOGck5AEErnwLKMclKXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423789432949-chf84d5lm7eu7lrp66435dlgi9r6vdl3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

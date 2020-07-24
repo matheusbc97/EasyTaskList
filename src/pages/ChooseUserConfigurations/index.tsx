@@ -1,24 +1,16 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {View, Animated, Image} from 'react-native';
-import {useDimensions} from '@react-native-community/hooks';
+import {Animated} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {ScreenWrapper} from '../../library/components';
 import {selectAppTheme} from '../../store/configs';
 import {setUserName, setUserAvatar} from '../../store/account/user';
-import {
-  MARKED_LIST,
-  CALENDAR,
-  ROCKET,
-  LEFT_STRIPES,
-  GRAPH_2,
-  BOTTOM_RIGHT_DOT,
-} from '../../assets/images';
 
 import ChooseTheme from './ChooseTheme';
 import ChoosePhotoOrAvatar from './ChoosePhotoOrAvatar';
 import ChooseName from './ChooseName';
 import SaveUserConfiguration from './SaveUserConfiguration';
+import {AnimatedBackground} from '../../library/components';
 
 import styles from './styles';
 
@@ -30,7 +22,6 @@ const subScreems = [
 ] as const;
 
 const ChooseUserConfigurations: React.FC = () => {
-  const firstAnimationValue = useMemo(() => new Animated.Value(0), []);
   const rotationAnimatedValue = useMemo(() => new Animated.Value(0), []);
   const animatedHeight = useMemo(() => new Animated.Value(350), []);
 
@@ -153,62 +144,16 @@ const ChooseUserConfigurations: React.FC = () => {
     }
   }, [screenShownState, rotationAnimatedValue, piDividedBy2, animatedHeight]);
 
-  const screenHeight = useDimensions().window.height;
-  const screenHeightDividedBy2 = useMemo(() => screenHeight / 2, [
-    screenHeight,
-  ]);
-
-  const animatedBackgroundOffset = firstAnimationValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [-screenHeightDividedBy2, 0],
-  });
-
   const appTheme = useSelector(selectAppTheme);
-
-  useEffect(() => {
-    Animated.timing(firstAnimationValue, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: false,
-    }).start();
-  }, [firstAnimationValue]);
 
   return (
     <ScreenWrapper>
-      <Animated.View
-        style={[
-          {
-            height: screenHeightDividedBy2,
-            top: animatedBackgroundOffset,
-            backgroundColor: appTheme.secondaryColor,
-          },
-        ]}>
-        <Image source={MARKED_LIST} style={styles.imageMarkedList} />
-        <Image source={CALENDAR} style={styles.imageCalendar} />
-      </Animated.View>
-      <Animated.View
-        style={{
-          height: screenHeightDividedBy2,
-          bottom: animatedBackgroundOffset,
-          backgroundColor: appTheme.primaryColor,
-        }}>
-        <View style={styles.footerImagesContainer}>
-          <Image source={LEFT_STRIPES} style={styles.imageLeftStripes} />
-          <Image source={GRAPH_2} style={styles.imageGraph2} />
-          <Image source={ROCKET} style={styles.imageRocket} />
-          <Image
-            source={BOTTOM_RIGHT_DOT}
-            style={styles.imageBottomRightDots}
-          />
-        </View>
-      </Animated.View>
-      <View style={styles.container}>
+      <AnimatedBackground>
         <Animated.View
           style={[
             styles.content,
             {
               height: animatedHeight,
-              opacity: firstAnimationValue,
               backgroundColor: appTheme.aboveBackground,
               transform: [
                 {
@@ -219,7 +164,7 @@ const ChooseUserConfigurations: React.FC = () => {
           ]}>
           {getSubScreen()}
         </Animated.View>
-      </View>
+      </AnimatedBackground>
     </ScreenWrapper>
   );
 };

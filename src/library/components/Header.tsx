@@ -7,8 +7,8 @@ import {Text} from '../../library/components';
 
 interface Props {
   title: string;
-  style: ViewStyle;
-  textStyle: TextStyle;
+  style?: ViewStyle;
+  textStyle?: TextStyle;
 }
 
 const Header: React.FC<Props> = ({title, style, textStyle}) => {
