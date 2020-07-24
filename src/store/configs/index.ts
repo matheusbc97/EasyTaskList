@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '../index';
-import {AppTheme} from '../../library/models/AppTheme';
-import {BLUE_RED} from '../../assets/themes';
+import {AppTheme} from '@shared/models';
+import {BLUE_RED} from '@assets/themes';
 
 type TokenInterceptorId = null | number;
 

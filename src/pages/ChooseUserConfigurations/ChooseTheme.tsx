@@ -2,9 +2,9 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useDispatch} from 'react-redux';
 
-import {setAppTheme} from '../../store/configs';
-import {Text, RoudedButton} from '../../library/components';
-import {DARK, BLUE_GREEN, BLUE_RED} from '../../assets/themes';
+import {setAppTheme} from '@store/configs';
+import {Text, RoudedButton} from '@shared/components';
+import {DARK, BLUE_GREEN, BLUE_RED} from '@assets/themes';
 
 import ThemeBox from './ThemeBox';
 

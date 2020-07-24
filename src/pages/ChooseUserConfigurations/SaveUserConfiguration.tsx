@@ -2,9 +2,9 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 
-import {selectUser} from '../../store/account/user';
-import {selectAppTheme, setIsLogged} from '../../store/configs';
-import {Avatar, Text, RoudedButton} from '../../library/components';
+import {selectUser} from '@store/account/user';
+import {selectAppTheme, setIsLogged} from '@store/configs';
+import {Avatar, Text, RoudedButton} from '@shared/components';
 
 import ThemeBox from './ThemeBox';
 

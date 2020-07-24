@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 
-import {AppTheme} from '../../library/models/AppTheme';
+import {AppTheme} from '@shared/models';
 
 interface ThemeBoxProps {
   theme: AppTheme;

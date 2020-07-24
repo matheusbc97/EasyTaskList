@@ -2,9 +2,9 @@ import React, {useRef, useEffect} from 'react';
 import {Text, TextInput, View, TextInputProps, StyleSheet} from 'react-native';
 import {useField} from '@unform/core';
 
-import useOnChangeText from '../../../library/hooks/useOnChangeText';
-import {ValidateField} from '../../../library/models/ValidateField';
-import useMaskedOnChangeText from '../../../library/hooks/useMaskedOnChangeText';
+import useOnChangeText from '@shared/hooks/useOnChangeText';
+import {ValidateField} from '@shared/models';
+import useMaskedOnChangeText from '@shared/hooks/useMaskedOnChangeText';
 
 interface Props extends TextInputProps {
   name: string;

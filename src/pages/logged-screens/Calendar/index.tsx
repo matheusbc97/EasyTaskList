@@ -3,8 +3,8 @@ import {View} from 'react-native';
 import {Calendar as RNCalendar} from 'react-native-calendars';
 import {useSelector} from 'react-redux';
 
-import {Text, ScreenWrapper} from '../../../library/components';
-import {selectAppTheme} from '../../../store/configs';
+import {Text, ScreenWrapper} from '@shared/components';
+import {selectAppTheme} from '@store/configs';
 
 export default function Calendar() {
   const appTheme = useSelector(selectAppTheme);

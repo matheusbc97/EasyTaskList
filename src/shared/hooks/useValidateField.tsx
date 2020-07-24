@@ -2,10 +2,9 @@ import {useCallback} from 'react';
 import {RefObject} from 'react';
 import {FormHandles} from '@unform/core';
 import {validateField} from '../utils/validations';
+import {ValidateField} from '@shared/models';
 
-const useValidateField = (
-  formRef: RefObject<FormHandles>,
-): ((fieldName: string, value?: string, previousErrorText?: string) => void) =>
+const useValidateField = (formRef: RefObject<FormHandles>): ValidateField =>
   useCallback(
     (fieldName, value, previousErrorText) => {
       const _value =

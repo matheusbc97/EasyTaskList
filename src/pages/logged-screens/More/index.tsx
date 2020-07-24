@@ -4,8 +4,8 @@ import {useSelector} from 'react-redux';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-import {ScreenWrapper, Text} from '../../../library/components';
-import {selectAppTheme} from '../../../store/configs';
+import {ScreenWrapper, Text} from '@shared/components';
+import {selectAppTheme} from '@store/configs';
 
 interface OptionsProps {
   title: string;

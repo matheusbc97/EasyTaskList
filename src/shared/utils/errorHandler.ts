@@ -1,7 +1,7 @@
 //import {Toast} from 'native-base';
 
-import {loaderHandler} from '../../library/components/LoadingHandler';
-import {showToast} from '../../library/components/Toast';
+import {loaderHandler} from '@shared/components/LoadingHandler';
+import {showToast} from '@shared/components/Toast';
 
 const getClientErrorMessage = (error: any) => {
   if (error.message) {

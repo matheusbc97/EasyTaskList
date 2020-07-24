@@ -5,16 +5,12 @@ import {useDispatch} from 'react-redux';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
 
-import {authenticateUser} from '../../../store/account/user';
-import {validateAll} from '../../../library/utils/validations';
-import {useValidateField} from '../../../library/hooks';
+import {authenticateUser} from '@store/account/user';
+import {validateAll} from '@shared/utils/validations';
+import {useValidateField} from '@shared/hooks';
 import {Props, FormDetails} from './types';
-import {
-  RoudedButton,
-  ScreenWrapper,
-  Text,
-  TextInput,
-} from '../../../library/components';
+import {RoudedButton, ScreenWrapper, Text} from '@shared/components';
+import TextInput from './Input';
 
 import styles from './styles';
 

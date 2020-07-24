@@ -2,15 +2,15 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {Animated} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 
-import {ScreenWrapper} from '../../library/components';
-import {selectAppTheme} from '../../store/configs';
-import {setUserName, setUserAvatar} from '../../store/account/user';
+import {ScreenWrapper} from '@shared/components';
+import {selectAppTheme} from '@store/configs';
+import {setUserName, setUserAvatar} from '@store/account/user';
 
 import ChooseTheme from './ChooseTheme';
 import ChoosePhotoOrAvatar from './ChoosePhotoOrAvatar';
 import ChooseName from './ChooseName';
 import SaveUserConfiguration from './SaveUserConfiguration';
-import {AnimatedBackground} from '../../library/components';
+import {AnimatedBackground} from '@shared/components';
 
 import styles from './styles';
 

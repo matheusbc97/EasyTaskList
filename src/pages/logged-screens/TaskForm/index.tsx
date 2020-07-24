@@ -6,8 +6,8 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {StackNavigationProp} from '@react-navigation/stack';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-import {selectAppTheme} from '../../../store/configs';
-import {AuthenticatedStackParams} from '../../../navigation/types';
+import {selectAppTheme} from '@store/configs';
+import {AuthenticatedStackParams} from '@navigation/types';
 
 import {
   ScreenWrapper,
@@ -15,7 +15,7 @@ import {
   RoudedButton,
   AnimatedBackground,
   Text,
-} from '../../../library/components';
+} from '@shared/components';
 
 import styles from './styles';
 

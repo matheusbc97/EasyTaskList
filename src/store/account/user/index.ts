@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {User} from '../../../library/models/User';
+import {User} from '@shared/models';
 import {authenticateUser, registerUser} from './thunkActions';
 import {selectUser, selectUserName} from './selectors';
 

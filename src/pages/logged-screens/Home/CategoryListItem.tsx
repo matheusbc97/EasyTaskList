@@ -2,8 +2,8 @@ import React, {memo} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
-import categoryColors from '../../../assets/categoryColors';
-import {Text} from '../../../library/components';
+import categoryColors from '@assets/categoryColors';
+import {Text} from '@shared/components';
 
 import styles from './styles';
 

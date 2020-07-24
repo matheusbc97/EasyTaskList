@@ -20,18 +20,21 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import {selectAppTheme} from '../../store/configs';
 import {TouchableRipple} from 'react-native-paper';
+import {ValidateField} from '@shared/models';
 
 const AnimatedFontAwesomeIcon = Animated.createAnimatedComponent(
   FontAwesomeIcon,
 );
 
 interface TextInputProps extends RNTextInputProps {
+  name: string;
   label: string;
   inputRef?: any;
   inputStyle?: StyleProp<TextStyle>;
   error: boolean;
   button?: boolean;
   onPress?(): void;
+  validateField: ValidateField;
 }
 
 const TextInput = ({

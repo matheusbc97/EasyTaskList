@@ -12,8 +12,10 @@ import Avatar from './Avatar';
 import TaskListItem from './TaskListItem';
 import TwoDimensionalTaskList from './TwoDimensionalTaskList';
 import Header from './Header';
-import OutlineButton from './OutlineButton'
-import AnimatedBackground from './AnimatedBackground'
+import OutlineButton from './OutlineButton';
+import AnimatedBackground from './AnimatedBackground';
+import Toast from './Toast';
+import LoadingHandler from './LoadingHandler';
 
 export {
   Avatar,
@@ -32,4 +34,6 @@ export {
   Header,
   OutlineButton,
   AnimatedBackground,
+  Toast,
+  LoadingHandler,
 };

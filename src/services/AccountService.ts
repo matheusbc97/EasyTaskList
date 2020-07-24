@@ -1,6 +1,6 @@
 //import Api from '../library/api';
 //import {AxiosPromise} from 'axios';
-import {User} from '../library/models/User';
+import {User} from '@shared/models';
 
 class AccountService {
   login(

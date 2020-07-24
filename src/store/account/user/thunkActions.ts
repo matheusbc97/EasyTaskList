@@ -1,9 +1,9 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
-import AccountService from '../../../services/AccountService';
-import {tokenIterceptor} from '../../../library/api/interceptors';
-import {loaderHandler} from '../../../library/components/LoadingHandler';
-import {handleErrorMessage} from '../../../library/utils/errorHandler';
+import AccountService from '@services/AccountService';
+import {tokenIterceptor} from '@shared/api/interceptors';
+import {loaderHandler} from '@shared/components/LoadingHandler';
+import {handleErrorMessage} from '@shared/utils/errorHandler';
 import {setTokenInterceptorId} from '../../configs';
 
 export const authenticateUser = createAsyncThunk(

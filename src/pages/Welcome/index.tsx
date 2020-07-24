@@ -2,9 +2,9 @@ import React from 'react';
 import {View, ImageBackground} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {Text, ScreenWrapper, RoudedButton} from '../../library/components';
-import {welcomeBackground} from '../../assets/images';
-import {UnauthenticatedStackParams} from '../../navigation/types';
+import {Text, ScreenWrapper, RoudedButton} from '@shared/components';
+import {welcomeBackground} from '@assets/images';
+import {UnauthenticatedStackParams} from '@navigation/types';
 
 import styles from './styles';
 

@@ -4,14 +4,10 @@ import {FormHandles} from '@unform/core';
 import {Form} from '@unform/mobile';
 import {useSelector} from 'react-redux';
 
-import {
-  UnformInput as TextInput,
-  RoudedButton,
-  Text,
-} from '../../library/components';
-import useValidateField from '../../library/hooks/useValidateField';
-import {validateAll} from '../../library/utils/validations';
-import {selectUserName} from '../../store/account/user';
+import {UnformInput as TextInput, RoudedButton, Text} from '@shared/components';
+import useValidateField from '@shared/hooks/useValidateField';
+import {validateAll} from '@shared/utils/validations';
+import {selectUserName} from '@store/account/user';
 
 import ChosseScreenBackButton from './ChosseScreenBackButton';
 

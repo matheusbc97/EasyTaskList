@@ -105,7 +105,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      {isLogged ? (
+      {!isLogged ? (
         <AuthenticatedStack.Navigator headerMode="none">
           <AuthenticatedStack.Screen
             name="BottomNavigation"

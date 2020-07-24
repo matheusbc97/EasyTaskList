@@ -4,8 +4,8 @@ import {TouchableRipple} from 'react-native-paper';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {useSelector} from 'react-redux';
 
-import {Text} from '../../library/components';
-import {selectAppTheme} from '../../store/configs';
+import {Text} from '@shared/components';
+import {selectAppTheme} from '@store/configs';
 
 interface Props {
   onPress(): void;

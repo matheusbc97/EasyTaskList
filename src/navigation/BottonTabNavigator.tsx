@@ -4,7 +4,7 @@ import {TouchableRipple} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {selectAppTheme} from '../store/configs';
+import {selectAppTheme} from '@store/configs';
 
 interface Props extends BottomTabBarProps {}
 
@@ -14,7 +14,6 @@ export default function BottonTabNavigator({
   activeTintColor,
   inactiveTintColor,
   descriptors,
-  ...rest
 }: Props) {
   const appTheme = useSelector(selectAppTheme);
   const TabsDescriptorsKeys = Object.keys(descriptors);

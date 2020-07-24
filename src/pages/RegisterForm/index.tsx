@@ -9,9 +9,13 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useDispatch} from 'react-redux';
 
-import {UnformInput as TextInput} from '../../library/components';
-import useValidateField from '../../library/hooks/useValidateField';
-import {ScreenWrapper, RoudedButton, Text} from '../../library/components';
+import useValidateField from '@shared/hooks/useValidateField';
+import {
+  ScreenWrapper,
+  RoudedButton,
+  Text,
+  UnformInput as TextInput,
+} from '@shared/components';
 import {
   GEAR,
   PERSON_SEATED,
@@ -19,11 +23,11 @@ import {
   CHECKED,
   PIZZA_GRAPH,
   ADVANCE_BTN,
-} from '../../assets/images';
-import {UnauthenticatedStackParams} from '../../navigation/types';
-import {registerUser} from '../../store/account/user';
-import {validateAll} from '../../library/utils/validations';
-import {showToast} from '../../library/components/Toast';
+} from '@assets/images';
+import {UnauthenticatedStackParams} from '@navigation/types';
+import {registerUser} from '@store/account/user';
+import {validateAll} from '@shared/utils/validations';
+import {showToast} from '@shared/components/Toast';
 
 import styles from './styles';
 

@@ -2,9 +2,8 @@ import React, {useEffect} from 'react';
 import AppNavigator from './navigation';
 import {Provider} from 'react-redux';
 import store from './store';
-import LoadingHandler from './library/components/LoadingHandler';
-import Toast from './library/components/Toast';
-import {createUserProfileDocument} from './library/firebase';
+import {LoadingHandler, Toast} from './shared/components';
+import {createUserProfileDocument} from './shared/firebase';
 
 const App = () => {
   useEffect(() => {

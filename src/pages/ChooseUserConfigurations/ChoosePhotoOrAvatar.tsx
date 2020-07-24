@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import {Text, Avatar} from '../../library/components';
+import {Text, Avatar} from '@shared/components';
 
 import ChosseScreenBackButton from './ChosseScreenBackButton';
 

@@ -1,8 +1,8 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AccountStackParams} from '../../../navigation/types';
+import {UnauthenticatedStackParams} from '@navigation/types';
 
 type LoginScreenNavigationProp = StackNavigationProp<
-  AccountStackParams,
+  UnauthenticatedStackParams,
   'Login'
 >;
 

@@ -7,7 +7,7 @@ import {
   Avatar,
   TwoDimensionalTaskList,
   Text,
-} from '../../../library/components';
+} from '@shared/components';
 
 import styles from './styles';
 import CategoryListItem from './CategoryListItem';

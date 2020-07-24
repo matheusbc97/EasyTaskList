@@ -3,7 +3,7 @@ import {View, ViewStyle, TextStyle} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import {selectAppTheme} from '../../store/configs';
-import {Text} from '../../library/components';
+import {Text} from '@shared/components';
 
 interface Props {
   title: string;

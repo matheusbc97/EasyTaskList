@@ -8,10 +8,10 @@ import {
   ScreenWrapper,
   TwoDimensionalTaskList,
   TaskListItem,
-  OutlineButton
-} from '../../../library/components';
-import {selectAppTheme} from '../../../store/configs';
-import {AuthenticatedStackParams} from '../../../navigation/types';
+  OutlineButton,
+} from '@shared/components';
+import {selectAppTheme} from '@store/configs';
+import {AuthenticatedStackParams} from '@navigation/types';
 
 import styles from './styles';
 
