@@ -4,11 +4,11 @@ import {Provider} from 'react-redux';
 import store from './store';
 import LoadingHandler from './library/components/LoadingHandler';
 import Toast from './library/components/Toast';
-import auth from '@react-native-firebase/auth';
+import {createUserProfileDocument} from './library/firebase';
 
 const App = () => {
   useEffect(() => {
-    auth().createUserWithEmailAndPassword('matheus@teste.com', '123456');
+    createUserProfileDocument();
   }, []);
 
   return (
