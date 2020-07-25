@@ -197,12 +197,14 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
             ]}>
             <TouchableRipple
               onPress={async () => {
-                await dispatch(
+                dispatch(
                   registerUser({
                     email: 'email@teste.com',
                     password: '123456',
                   }),
-                );
+                ).then((a) => {
+                  a.payload;
+                });
 
                 navigation.navigate('ChooseUserConfigurations');
               }}>
