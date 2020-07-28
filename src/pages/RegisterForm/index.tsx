@@ -1,4 +1,4 @@
-import React, {useRef, useState, useMemo, useEffect} from 'react';
+import React, {useRef, useState, useMemo, useEffect, useCallback} from 'react';
 import {View, Animated, Image, ScrollView, ImageBackground} from 'react-native';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
@@ -68,26 +68,39 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
     [],
   );
 
-  const handleSubmit = (form: FormDetails) => {
-    const [formErrors, isValid] = validateAll(form);
+  const handleSubmit = useCallback(
+    async (form: FormDetails) => {
+      const [formErrors, isValid] = validateAll(form);
 
-    formRef.current?.setErrors(formErrors);
+      formRef.current?.setErrors(formErrors);
 
-    if (!privacyPolicyIsChecked) {
-      showToast({
-        text: 'É necessário aceitar os termos de privacidade',
-        type: 'danger',
-        remain: true,
-      });
-      return;
-    }
+      if (!privacyPolicyIsChecked) {
+        showToast({
+          text: 'É necessário aceitar os termos de privacidade',
+          type: 'danger',
+          remain: true,
+        });
+        return;
+      }
 
-    if (isValid) {
-      setIsConfirmed(true);
+      if (isValid) {
+        const {email, newPassword: password} = form;
+        const action = await dispatch(
+          registerUser({
+            email,
+            password,
+          }),
+        );
 
-      scrollViewRef.current?.scrollToEnd({animated: true});
-    }
-  };
+        if (action.payload) {
+          setIsConfirmed(true);
+
+          scrollViewRef.current?.scrollToEnd({animated: true});
+        }
+      }
+    },
+    [dispatch, privacyPolicyIsChecked],
+  );
 
   useEffect(() => {
     Animated.timing(backgroundWidth, {
@@ -196,18 +209,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
               },
             ]}>
             <TouchableRipple
-              onPress={async () => {
-                dispatch(
-                  registerUser({
-                    email: 'email@teste.com',
-                    password: '123456',
-                  }),
-                ).then((a) => {
-                  a.payload;
-                });
-
-                navigation.navigate('ChooseUserConfigurations');
-              }}>
+              onPress={() => navigation.navigate('ChooseUserConfigurations')}>
               <ImageBackground
                 source={ADVANCE_BTN}
                 style={styles.advanceButton}>

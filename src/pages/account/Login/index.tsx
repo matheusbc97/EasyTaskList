@@ -21,16 +21,20 @@ const Login = ({navigation}: Props) => {
   const validateField = useValidateField(formRef);
 
   const handleSubmit = useCallback(
-    (form: FormDetails) => {
+    async (form: FormDetails) => {
       const [formErrors, isValid] = validateAll(form);
 
-      isValid
-        ? dispatch(
-            authenticateUser({
-              email: form.email,
-            }),
-          )
-        : formRef.current?.setErrors(formErrors);
+      if (!isValid) {
+        formRef.current?.setErrors(formErrors);
+        return;
+      }
+
+      await dispatch(
+        authenticateUser({
+          email: form.email,
+          password: form.password,
+        }),
+      );
     },
     [dispatch, formRef],
   );

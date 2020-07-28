@@ -35,6 +35,7 @@ const Welcome = ({navigation}: Props) => {
         </View>
         <View style={styles.actionsContainer}>
           <RoudedButton
+            onPress={() => navigation.navigate('Login')}
             text="ENTRAR"
             style={styles.button}
             textStyle={styles.buttonText}

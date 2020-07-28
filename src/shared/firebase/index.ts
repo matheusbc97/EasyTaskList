@@ -1,37 +1,69 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import {User} from '@shared/models';
 
-export const createUserProfileDocument = async () => {
-  const email = 'matheus4@teste.com';
+export const createUserProfileDocument = async (
+  email: string,
+  password: string,
+): Promise<User> => {
+  try {
+    const {user} = await auth().createUserWithEmailAndPassword(email, password);
 
-  const {user} = await auth().signInWithEmailAndPassword(email, '123456');
-  //console.log('users', user);
-  //const {user} = await auth().createUserWithEmailAndPassword(email, '123456');
+    if (!user) {
+      throw new Error('Usuário já criado');
+    }
 
-  if (!user) {
-    return;
-  }
+    const userRef = firestore().doc(`users/${user.uid}`);
 
-  const userRef = firestore().doc(`users/${user.uid}`);
-  //console.log('userRef', user);
+    const snapshot = await userRef.get();
 
-  const snapshot = await userRef.get();
+    if (!snapshot.exists) {
+      // const createdAt = new Date();
 
-  console.log('snapshot', snapshot.exists);
-
-  if (!snapshot.exists) {
-    const createdAt = new Date();
-    console.log('kkk', createdAt);
-
-    try {
       await userRef.set({
         email,
-        createdAt,
+        //createdAt,
       });
-    } catch (error) {
-      console.log('error creating user', error.message);
     }
-  }
 
-  return true;
+    return {
+      email,
+      uid: user.uid,
+    };
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const signInWithEmailAndPassword = async (
+  email: string,
+  password: string,
+): Promise<User> => {
+  try {
+    const {user: authUser} = await auth().signInWithEmailAndPassword(
+      email,
+      password,
+    );
+
+    const userRef = firestore().doc(`users/${authUser.uid}`);
+
+    const response = await userRef.get();
+
+    let user: User = {
+      uid: authUser.uid,
+      email,
+    };
+
+    const userData = response.data() as Omit<User, 'uid'> | undefined;
+
+    Object.assign(user, {
+      avatar: userData?.avatar,
+      image: userData?.image,
+      name: userData?.name,
+    });
+
+    return user;
+  } catch (error) {
+    throw new Error(error);
+  }
 };

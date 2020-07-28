@@ -30,6 +30,19 @@ const getClientErrorMessage = (error: any) => {
  */
 export function handleErrorMessage(error: any) {
   loaderHandler.hideLoader();
+
+  let message = 'Ocorreu um erro Inesperado';
+
+  if (error.message) {
+    message = error.message;
+  } else if (typeof error === 'string') {
+    message = error;
+  }
+
+  showToast({
+    text: message,
+  });
+  /*
   let message = '';
   if (error.message === 'Network Error') {
     message = 'sem conexão com a internet';
@@ -67,5 +80,5 @@ export function handleErrorMessage(error: any) {
 
   showToast({
     text: message,
-  });
+  });*/
 }

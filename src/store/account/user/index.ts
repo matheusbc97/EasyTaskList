@@ -27,19 +27,15 @@ const user = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       authenticateUser.fulfilled,
-      (state, action: PayloadAction<{user: User; token: string}>) => {
-        return action.payload.user;
+      (state, action: PayloadAction<User>) => {
+        return action.payload;
       },
     );
 
-    builder.addCase(authenticateUser.rejected, () => {
-      //console.log('error', action.error);
-    });
-
     builder.addCase(
       registerUser.fulfilled,
-      (state, action: PayloadAction<{user: User; token: string}>) => {
-        return action.payload.user;
+      (state, action: PayloadAction<User>) => {
+        return action.payload;
       },
     );
   },

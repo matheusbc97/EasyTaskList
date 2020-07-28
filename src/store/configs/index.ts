@@ -10,7 +10,7 @@ const initialTheme = BLUE_RED;
 const initialState = {
   tokenInterceptorId: null as TokenInterceptorId,
   theme: initialTheme,
-  isLogged: true,
+  isLogged: false,
 };
 
 const configs = createSlice({
