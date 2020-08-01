@@ -1,4 +1,4 @@
-import {AppTheme} from '../library/models/AppTheme';
+import {AppTheme} from '@shared/models';
 
 export const BLUE_GREEN: AppTheme = {
   primaryColor: '#21B9C7',

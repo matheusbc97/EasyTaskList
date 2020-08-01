@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {User} from '@shared/models';
+import {User, AppThemeName} from '@shared/models';
 import {authenticateUser, registerUser} from './thunkActions';
 import {selectUser, selectUserName} from './selectors';
 
@@ -23,26 +23,30 @@ const user = createSlice({
         state.avatar = action.payload;
       }
     },
+    setUserTheme: (state, action: PayloadAction<AppThemeName>) => {
+      if (state) {
+        state.theme = action.payload;
+      }
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(
-      authenticateUser.fulfilled,
-      (state, action: PayloadAction<User>) => {
-        return action.payload;
-      },
-    );
+    builder.addCase(authenticateUser.fulfilled, (state, action) => {
+      return action.payload.user as User;
+    });
 
-    builder.addCase(
-      registerUser.fulfilled,
-      (state, action: PayloadAction<User>) => {
-        return action.payload;
-      },
-    );
+    builder.addCase(registerUser.fulfilled, (state, action) => {
+      return action.payload as User;
+    });
   },
 });
 
 export default user.reducer;
 
-export const {resetUser, setUserName, setUserAvatar} = user.actions;
+export const {
+  resetUser,
+  setUserName,
+  setUserAvatar,
+  setUserTheme,
+} = user.actions;
 
 export {authenticateUser, selectUser, registerUser, selectUserName};

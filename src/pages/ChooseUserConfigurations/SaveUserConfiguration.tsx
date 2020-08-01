@@ -3,10 +3,11 @@ import {View, StyleSheet} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {selectUser} from '@store/account/user';
-import {selectAppTheme, setIsLogged} from '@store/configs';
+import {setIsLogged} from '@store/configs';
 import {Avatar, Text, RoudedButton} from '@shared/components';
 
 import ThemeBox from './ThemeBox';
+import {updateUser} from '@store/account/user/thunkActions';
 
 interface Props {
   onChagePress(index: number): void;
@@ -15,8 +16,6 @@ interface Props {
 const SaveUserConfiguration: React.FC<Props> = ({onChagePress}) => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-
-  const appTheme = useSelector(selectAppTheme);
 
   return (
     <View style={styles.container}>
@@ -27,7 +26,7 @@ const SaveUserConfiguration: React.FC<Props> = ({onChagePress}) => {
         </Text>
       </View>
       <View style={{flex: 1, justifyContent: 'center', marginTop: 15}}>
-        <ThemeBox theme={appTheme} />
+        <ThemeBox theme={user?.theme ? user?.theme : 'BLUE_GREEN'} />
       </View>
       <View style={styles.row}>
         <RoudedButton
@@ -53,7 +52,19 @@ const SaveUserConfiguration: React.FC<Props> = ({onChagePress}) => {
       <RoudedButton
         text="Finalizar Cadastro"
         style={styles.finalizeRegisterBtn}
-        onPress={() => dispatch(setIsLogged(true))}
+        onPress={async () => {
+          const payloadAction = await dispatch(
+            updateUser({
+              name: user?.name,
+              avatar: user?.avatar,
+              theme: user?.theme,
+            }),
+          );
+
+          if (payloadAction.payload) {
+            dispatch(setIsLogged(true));
+          }
+        }}
       />
     </View>
   );

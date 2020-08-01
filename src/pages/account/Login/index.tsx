@@ -29,14 +29,20 @@ const Login = ({navigation}: Props) => {
         return;
       }
 
-      await dispatch(
+      const response = await dispatch(
         authenticateUser({
           email: form.email,
           password: form.password,
         }),
       );
+
+      const payload = response.payload as any;
+
+      if (!payload.isLogged) {
+        navigation.navigate('ChooseUserConfigurations');
+      }
     },
-    [dispatch, formRef],
+    [dispatch, formRef, navigation],
   );
 
   return (

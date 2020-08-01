@@ -1,11 +1,33 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {User} from '@shared/models';
+import {UserBeforeIsLoggedDTO} from '@shared/models/UserBeforeIsLoggedDTO';
+
+interface Data {
+  [key: string]: any;
+}
+
+export async function updateData(path: string, data: Data) {
+  try {
+    const docRef = firestore().doc(path);
+
+    const snapshot = await docRef.get();
+
+    if (!snapshot.exists) {
+      throw new Error('O usuário não existe');
+    }
+
+    await docRef.update(data);
+
+    return;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
 
 export const createUserProfileDocument = async (
   email: string,
   password: string,
-): Promise<User> => {
+): Promise<UserBeforeIsLoggedDTO> => {
   try {
     const {user} = await auth().createUserWithEmailAndPassword(email, password);
 
@@ -38,7 +60,7 @@ export const createUserProfileDocument = async (
 export const signInWithEmailAndPassword = async (
   email: string,
   password: string,
-): Promise<User> => {
+): Promise<UserBeforeIsLoggedDTO> => {
   try {
     const {user: authUser} = await auth().signInWithEmailAndPassword(
       email,
@@ -49,17 +71,20 @@ export const signInWithEmailAndPassword = async (
 
     const response = await userRef.get();
 
-    let user: User = {
+    let user: UserBeforeIsLoggedDTO = {
       uid: authUser.uid,
       email,
     };
 
-    const userData = response.data() as Omit<User, 'uid'> | undefined;
+    const userData = response.data() as
+      | Omit<UserBeforeIsLoggedDTO, 'uid'>
+      | undefined;
 
     Object.assign(user, {
       avatar: userData?.avatar,
       image: userData?.image,
       name: userData?.name,
+      theme: userData?.theme,
     });
 
     return user;

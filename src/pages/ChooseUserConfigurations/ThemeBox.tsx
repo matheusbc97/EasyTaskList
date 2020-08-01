@@ -2,19 +2,25 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 
-import {AppTheme} from '@shared/models';
+import {AppThemeName} from '@shared/models';
+
+import * as themes from '@assets/themes';
 
 interface ThemeBoxProps {
-  theme: AppTheme;
+  theme: AppThemeName;
   selected?: boolean;
-  onPress?(): void;
+  onPress?(arg0: AppThemeName): void;
 }
 
 const ThemeBox: React.FC<ThemeBoxProps> = ({theme, onPress}) => (
-  <TouchableRipple onPress={onPress}>
+  <TouchableRipple onPress={() => onPress && onPress(theme)}>
     <View style={styles.container}>
-      <View style={[styles.half, {backgroundColor: theme.primaryColor}]} />
-      <View style={[styles.half, {backgroundColor: theme.secondaryColor}]} />
+      <View
+        style={[styles.half, {backgroundColor: themes[theme].primaryColor}]}
+      />
+      <View
+        style={[styles.half, {backgroundColor: themes[theme].secondaryColor}]}
+      />
     </View>
   </TouchableRipple>
 );
