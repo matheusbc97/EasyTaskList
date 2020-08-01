@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback, useRef} from 'react';
 import {View} from 'react-native';
 import {Form} from '@unform/mobile';
+import {FormHandles} from '@unform/core';
 import {useSelector} from 'react-redux';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -19,14 +20,27 @@ import {
 
 import styles from './styles';
 
+interface FormData {
+  title: string;
+  description: string;
+  date: string;
+  category: string;
+}
+
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'TaskForm'>;
 }
 
 const TaskForm: React.FC<Props> = ({navigation}) => {
+  const formRef = useRef<FormHandles>(null);
+
   const appTheme = useSelector(selectAppTheme);
   const [datePickerIsVisible, setDatePickerIsVisible] = useState(false);
   const [timePickerIsVisible, setTimePickerIsVisible] = useState(false);
+
+  const handleFormSubmit = useCallback((form: FormData) => {
+    console.log('form', form);
+  }, []);
 
   return (
     <ScreenWrapper>
@@ -52,11 +66,11 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
                 </Text>
               </View>
             </View>
-            <Form onSubmit={() => {}}>
-              <TextInput name="name" label="Nome" />
+            <Form onSubmit={handleFormSubmit} ref={formRef}>
+              <TextInput name="name" label="Título" />
               <TextInput name="name" label="Descrição" />
               <TextInput
-                name="date"
+                name="description"
                 label="Data"
                 button
                 onPress={() => setDatePickerIsVisible(true)}
@@ -81,7 +95,11 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
                 style={styles.backButton}
                 onPress={() => navigation.pop()}
               />
-              <RoudedButton text="Salvar" style={styles.saveButton} />
+              <RoudedButton
+                text="Salvar"
+                style={styles.saveButton}
+                onPress={() => formRef.current?.submitForm()}
+              />
             </View>
           </View>
         </View>
@@ -90,7 +108,7 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
         isVisible={datePickerIsVisible}
         mode="date"
         onConfirm={(date) => {
-          console.log('selected date', date);
+          formRef.current?.setFieldValue('date', date);
           setDatePickerIsVisible(false);
         }}
         onCancel={() => setDatePickerIsVisible(false)}
@@ -99,7 +117,8 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
         isVisible={timePickerIsVisible}
         mode="time"
         onConfirm={(time) => {
-          console.log('selected time', time);
+          console.log('time', time);
+          formRef.current?.setFieldValue('hour', String(time));
           setTimePickerIsVisible(false);
         }}
         onCancel={() => setTimePickerIsVisible(false)}

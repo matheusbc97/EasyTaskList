@@ -16,10 +16,10 @@ import {selectIsLogged, selectAppTheme} from '../store/configs';
 
 import Login from '../pages/account/Login';
 import Home from '../pages/logged-screens/Home';
-import Welcome from '../pages/Welcome';
-import RegisterForm from '../pages/RegisterForm';
+import Welcome from '../pages/account/Welcome';
+import RegisterForm from '../pages/account/RegisterForm';
 import TaskList from '../pages/logged-screens/TaskList';
-import ChooseUserConfigurations from '../pages/ChooseUserConfigurations';
+import ChooseUserConfigurations from '../pages/account/ChooseUserConfigurations';
 import More from '../pages/logged-screens/More';
 import Statistics from '../pages/logged-screens/Statistics';
 import Calendar from '../pages/logged-screens/Calendar';
