@@ -33,6 +33,8 @@ interface Props {
 
 const TaskForm: React.FC<Props> = ({navigation}) => {
   const formRef = useRef<FormHandles>(null);
+  const datePickerRef = useRef<any>(null)
+  const timePickerRef = useRef<any>(null)
 
   const appTheme = useSelector(selectAppTheme);
   const [datePickerIsVisible, setDatePickerIsVisible] = useState(false);
@@ -70,12 +72,14 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
               <TextInput name="name" label="Título" />
               <TextInput name="name" label="Descrição" />
               <TextInput
+                ref={datePickerRef}
                 name="description"
                 label="Data"
                 button
                 onPress={() => setDatePickerIsVisible(true)}
               />
               <TextInput
+                ref={timePickerRef}
                 name="hour"
                 label="Horário"
                 button
@@ -108,7 +112,7 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
         isVisible={datePickerIsVisible}
         mode="date"
         onConfirm={(date) => {
-          formRef.current?.setFieldValue('date', date);
+          datePickerRef.current?.setValue(String(date));
           setDatePickerIsVisible(false);
         }}
         onCancel={() => setDatePickerIsVisible(false)}
@@ -117,8 +121,7 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
         isVisible={timePickerIsVisible}
         mode="time"
         onConfirm={(time) => {
-          console.log('time', time);
-          formRef.current?.setFieldValue('hour', String(time));
+          timePickerRef.current?.setValue(String(time));
           setTimePickerIsVisible(false);
         }}
         onCancel={() => setTimePickerIsVisible(false)}

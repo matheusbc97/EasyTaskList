@@ -5,6 +5,7 @@ import React, {
   useRef,
   forwardRef,
   useEffect,
+  useImperativeHandle,
 } from 'react';
 import {
   TextInput as RNTextInput,
@@ -27,14 +28,12 @@ const AnimatedFontAwesomeIcon = Animated.createAnimatedComponent(
 );
 
 interface TextInputProps extends RNTextInputProps {
-  name: string;
   label: string;
-  inputRef?: any;
   inputStyle?: StyleProp<TextStyle>;
   error: boolean;
   button?: boolean;
   onPress?(): void;
-  validateField: ValidateField;
+  inputRef?: any;
 }
 
 const TextInput = ({
@@ -42,14 +41,14 @@ const TextInput = ({
   onChangeText,
   onBlur,
   onFocus,
-  inputRef,
   style,
   defaultValue,
   error,
   button = false,
   onPress,
+  inputRef,
   ...rest
-}: TextInputProps) => {
+}: TextInputProps, ref: any) => {
   const appTheme = useSelector(selectAppTheme);
   const [labelLeftOffset, setLabelLeftOffset] = useState(0);
 
@@ -92,6 +91,13 @@ const TextInput = ({
       }).start(),
     [labelIsOnTop],
   );
+
+  useImperativeHandle(ref, () => ({
+    setNativeProps(props: any) {
+      animation(true)
+      inputRef?.current && inputRef.current.setNativeProps(props);
+    },
+  }));
 
   const borderColorAnimation = useCallback(
     (toValue: number) =>

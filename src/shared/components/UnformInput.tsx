@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback, useRef} from 'react';
+import React, {useEffect, useCallback, useRef, useImperativeHandle, forwardRef} from 'react';
 import {View, TextInputProps, StyleSheet, ViewStyle} from 'react-native';
 import {useField} from '@unform/core';
 import TextInput from './TextInput';
@@ -7,6 +7,10 @@ import {Text} from '.';
 import useOnChangeText from '../hooks/useOnChangeText';
 import {ValidateField} from '../models/ValidateField';
 import useMaskedOnChangeText from '../hooks/useMaskedOnChangeText';
+
+interface InputValueReference {
+  value: string;
+}
 
 interface Props extends TextInputProps {
   label?: string;
@@ -31,26 +35,43 @@ const FloatingLabelIpnput = ({
   button = false,
   onPress,
   ...rest
-}: Props) => {
-  const inputRef = useRef<any>(null);
+}: Props, ref: any) => {
+  const inputElementRef = useRef<any>(null);
+  const customTextInputRef = useRef<any>(null)
+
   const {fieldName, registerField, defaultValue = '', error} = useField(name);
 
+  const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
+
   useEffect(() => {
-    inputRef.current.value = defaultValue;
+    inputValueRef.current.value = defaultValue;
   }, [defaultValue]);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      focus() {
+        inputElementRef.current.focus();
+      },
+      setValue(value: string) {
+        customTextInputRef.current.setNativeProps({text: value});
+      }
+    }),
+    [],
+  );
 
   useEffect(() => {
     const registerFieldObject: any = {
       name: fieldName,
-      ref: inputRef.current,
+      ref: inputValueRef.current,
       path: 'value',
       clearValue(ref: any) {
-        ref.value = '';
-        ref.clear();
+        inputValueRef.current.value = '';
+        inputElementRef.current.clear();
       },
       setValue(ref: any, value: string) {
-        ref.setNativeProps({text: value});
-        inputRef.current.value = value;
+        inputElementRef.current.setNativeProps({text: value});
+        inputValueRef.current.value = value;
       },
       getValue(ref: any) {
         return ref.value;
@@ -61,7 +82,7 @@ const FloatingLabelIpnput = ({
   }, [fieldName, registerField]);
 
   const _onChangeText = useOnChangeText(
-    inputRef,
+    inputElementRef,
     fieldName,
     error,
     validateField,
@@ -69,7 +90,7 @@ const FloatingLabelIpnput = ({
 
   const _maskedOnChangeText = useMaskedOnChangeText(
     mask!,
-    inputRef,
+    inputElementRef,
     _onChangeText,
   );
 
@@ -86,21 +107,25 @@ const FloatingLabelIpnput = ({
       <TextInput
         onPress={onPress}
         button={button}
-        inputRef={inputRef}
         label={label}
         error={Boolean(error)}
-        ref={inputRef}
+        ref={customTextInputRef}
+        inputRef={inputElementRef}
         defaultValue={defaultValue}
         onChangeText={(text: string) => {
-          if (inputRef.current) {
-            inputRef.current.value = text;
+          if (inputValueRef.current) {
+            inputValueRef.current.value = text;
           }
           mask ? _maskedOnChangeText(text) : _onChangeText(text);
           onChangeText && onChangeText(text);
         }}
         onBlur={handleBlur}
         {...rest}
-        style={style}
+        style={
+          [{
+            flex: 1,
+          }, style
+        ]}
       />
       <View style={styles.errorWrapper}>
         {Boolean(error) && <Text style={styles.error}>{error}</Text>}
@@ -109,7 +134,7 @@ const FloatingLabelIpnput = ({
   );
 };
 
-export default FloatingLabelIpnput;
+export default forwardRef(FloatingLabelIpnput);
 
 const styles = StyleSheet.create({
   container: {
