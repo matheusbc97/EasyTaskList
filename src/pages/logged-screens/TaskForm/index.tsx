@@ -89,7 +89,7 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
                 name="category"
                 label="Categoria"
                 button
-                onPress={() => {}}
+                onPress={() => navigation.push('CategorySearch')}
               />
             </Form>
             <View style={styles.footer}>

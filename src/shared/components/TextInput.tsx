@@ -30,7 +30,7 @@ const AnimatedFontAwesomeIcon = Animated.createAnimatedComponent(
 interface TextInputProps extends RNTextInputProps {
   label: string;
   inputStyle?: StyleProp<TextStyle>;
-  error: boolean;
+  error?: boolean;
   button?: boolean;
   onPress?(): void;
   inputRef?: any;

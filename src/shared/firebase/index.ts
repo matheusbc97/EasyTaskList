@@ -1,6 +1,8 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {UserBeforeIsLoggedDTO} from '@shared/models/UserBeforeIsLoggedDTO';
+import { Category } from '@shared/models';
+import { Item } from 'react-native-paper/lib/typescript/src/components/List/List';
 
 interface Data {
   [key: string]: any;
@@ -92,3 +94,22 @@ export const signInWithEmailAndPassword = async (
     throw new Error(error);
   }
 };
+
+
+export async function getUserCategories(){
+  const authUser = auth().currentUser
+
+  if(!authUser){
+    throw new Error('O usuário precisa estar autenticado')
+  }
+
+  const querySnapshot = await firestore().collection(`users/${authUser.uid}/categories`).get();
+
+  console.log('querySnapshot.docs', querySnapshot.docs[0].data())
+  const categories = querySnapshot.docs.map(item => ({
+    id: item.id,
+    ...item.data()
+  })) as Category[]
+
+  return categories
+}

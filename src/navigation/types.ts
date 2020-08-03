@@ -8,6 +8,7 @@ export type UnauthenticatedStackParams = {
 export type AuthenticatedStackParams = {
   BottomNavigation: undefined;
   TaskForm: undefined;
+  CategorySearch: undefined;
 };
 
 export type BottomNavigatorStackParams = {

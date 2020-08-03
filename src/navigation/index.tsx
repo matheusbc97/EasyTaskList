@@ -23,6 +23,7 @@ import ChooseUserConfigurations from '../pages/account/ChooseUserConfigurations'
 import More from '../pages/logged-screens/More';
 import Statistics from '../pages/logged-screens/Statistics';
 import Calendar from '../pages/logged-screens/Calendar';
+import CategorySearch from '../pages/logged-screens/CategorySearch'
 
 import BottonTabNavigator from './BottonTabNavigator';
 import TaskForm from '../pages/logged-screens/TaskForm';
@@ -112,6 +113,7 @@ const App = () => {
             component={MyTabs}
           />
           <AuthenticatedStack.Screen name="TaskForm" component={TaskForm} />
+          <AuthenticatedStack.Screen name="CategorySearch" component={CategorySearch} />
         </AuthenticatedStack.Navigator>
       ) : (
         <UnauthenticatedStack.Navigator>
