@@ -3,7 +3,6 @@ import {TextInput, FlatList} from 'react-native';
 
 import {useDispatch, useSelector} from 'react-redux';
 
-import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import {AuthenticatedStackParams} from '@navigation/types';
@@ -18,17 +17,14 @@ import {Category} from '@shared/models';
 import CategoryListItem from './CategoryListItem';
 
 interface Props {
-  route: RouteProp<AuthenticatedStackParams, 'CategorySearch'>;
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategorySearch'>;
 }
 
-const CategorySearch: React.FC<Props> = ({route, navigation}) => {
+const CategorySearch: React.FC<Props> = ({navigation}) => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
   const fetchState = useSelector(selectCategoriesFetchState);
   const categories = useSelector(categoryListSelectors.selectAll);
-
-  const {onChosenCategory} = route.params;
 
   useEffect(() => {
     dispatch(getUserCategories());
@@ -36,10 +32,9 @@ const CategorySearch: React.FC<Props> = ({route, navigation}) => {
 
   const handleChosenCategory = useCallback(
     (chosenCategory: Category) => {
-      onChosenCategory(chosenCategory);
-      navigation.pop();
+      navigation.navigate('TaskForm', {chosenCategory});
     },
-    [onChosenCategory, navigation],
+    [navigation],
   );
 
   if (fetchState.isLoading) {

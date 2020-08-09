@@ -9,10 +9,10 @@ export type UnauthenticatedStackParams = {
 
 export type AuthenticatedStackParams = {
   BottomNavigation: undefined;
-  TaskForm: undefined;
-  CategorySearch: {
-    onChosenCategory(category: Category): void;
+  TaskForm: {
+    chosenCategory: Category | undefined;
   };
+  CategorySearch: undefined;
 };
 
 export type BottomNavigatorStackParams = {

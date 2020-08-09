@@ -1,147 +1,17 @@
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import {UserBeforeIsLoggedDTO} from '@shared/models/UserBeforeIsLoggedDTO';
-import {Category, User} from '@shared/models';
+import {createUserProfileDocument} from './createUserProfileDocument';
+import {createUserTask} from './createUserTask';
+import {getCurrentUser} from './getCurrentUser';
+import {getFirestoreUser} from './getFirestoreUser';
+import {getUserCategories} from './getUserCategories';
+import {signInWithEmailAndPassword} from './signInWithEmailAndPassword';
+import {updateUserData} from './updateUserData';
 
-interface Data {
-  [key: string]: any;
-}
-
-export async function updateData(path: string, data: Data) {
-  try {
-    const docRef = firestore().doc(path);
-
-    const snapshot = await docRef.get();
-
-    if (!snapshot.exists) {
-      throw new Error('O usuário não existe');
-    }
-
-    await docRef.update(data);
-
-    return;
-  } catch (error) {
-    throw new Error(error);
-  }
-}
-
-export const createUserProfileDocument = async (
-  email: string,
-  password: string,
-): Promise<UserBeforeIsLoggedDTO> => {
-  try {
-    const {user} = await auth().createUserWithEmailAndPassword(email, password);
-
-    if (!user) {
-      throw new Error('Usuário já criado');
-    }
-
-    const userRef = firestore().doc(`users/${user.uid}`);
-
-    const snapshot = await userRef.get();
-
-    if (!snapshot.exists) {
-      // const createdAt = new Date();
-
-      await userRef.set({
-        email,
-        //createdAt,
-      });
-    }
-
-    return {
-      email,
-      uid: user.uid,
-    };
-  } catch (error) {
-    throw new Error(error);
-  }
+export {
+  createUserProfileDocument,
+  createUserTask,
+  getCurrentUser,
+  getFirestoreUser,
+  getUserCategories,
+  signInWithEmailAndPassword,
+  updateUserData,
 };
-
-async function getFirestoreUser(
-  uid: string,
-  email: string,
-): Promise<
-  | {user: UserBeforeIsLoggedDTO; isOnFirestore: false}
-  | {user: User; isOnFirestore: true}
-> {
-  try {
-    const userRef = firestore().doc(`users/${uid}`);
-
-    const response = await userRef.get();
-
-    let user: UserBeforeIsLoggedDTO = {
-      uid,
-      email,
-    };
-
-    const userData = response.data();
-
-    Object.assign(user, {
-      avatar: userData?.avatar,
-      image: userData?.image,
-      name: userData?.name,
-      theme: userData?.theme,
-    });
-
-    if ((!user.avatar && !user.image) || !user.name || !user.theme) {
-      return {
-        user: user as UserBeforeIsLoggedDTO,
-        isOnFirestore: false,
-      };
-    }
-
-    return {
-      user: user as User,
-      isOnFirestore: true,
-    };
-  } catch (error) {
-    throw new Error(error);
-  }
-}
-
-export const signInWithEmailAndPassword = async (
-  email: string,
-  password: string,
-) => {
-  try {
-    const {user: authUser} = await auth().signInWithEmailAndPassword(
-      email,
-      password,
-    );
-
-    return await getFirestoreUser(authUser.uid, email);
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-export async function getUserCategories() {
-  const authUser = auth().currentUser;
-
-  if (!authUser) {
-    throw new Error('O usuário precisa estar autenticado');
-  }
-
-  const querySnapshot = await firestore()
-    .collection(`users/${authUser.uid}/categories`)
-    .get();
-
-  console.log('querySnapshot.docs', querySnapshot.docs[0].data());
-  const categories = querySnapshot.docs.map((item) => ({
-    id: item.id,
-    ...item.data(),
-  })) as Category[];
-
-  return categories;
-}
-
-export async function getCurrentUser() {
-  const authUser = auth().currentUser;
-
-  if (!authUser || !authUser?.email) {
-    return null;
-  }
-
-  return await getFirestoreUser(authUser.uid, authUser.email);
-}

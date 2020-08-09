@@ -1,8 +1,8 @@
-import React, {useState, useCallback, useRef} from 'react';
+import React, {useState, useCallback, useRef, useEffect} from 'react';
 import {View} from 'react-native';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {StackNavigationProp} from '@react-navigation/stack';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -19,7 +19,9 @@ import {
 } from '@shared/components';
 
 import styles from './styles';
-import {Category} from '@shared/models';
+import {RouteProp} from '@react-navigation/native';
+import {Task} from '@shared/models';
+import {createTask} from '@store/tasks';
 
 interface FormData {
   title: string;
@@ -29,26 +31,48 @@ interface FormData {
 }
 
 interface Props {
+  route: RouteProp<AuthenticatedStackParams, 'TaskForm'>;
   navigation: StackNavigationProp<AuthenticatedStackParams, 'TaskForm'>;
 }
 
-const TaskForm: React.FC<Props> = ({navigation}) => {
+const TaskForm: React.FC<Props> = ({navigation, route}) => {
+  const {chosenCategory} = route.params;
   const formRef = useRef<FormHandles>(null);
   const datePickerRef = useRef<any>(null);
   const timePickerRef = useRef<any>(null);
   const categorySearchPickerRef = useRef<any>(null);
 
+  const dispatch = useDispatch();
+
   const appTheme = useSelector(selectAppTheme);
   const [datePickerIsVisible, setDatePickerIsVisible] = useState(false);
   const [timePickerIsVisible, setTimePickerIsVisible] = useState(false);
 
-  const handleFormSubmit = useCallback((form: FormData) => {
-    console.log('form', form);
-  }, []);
+  const handleFormSubmit = useCallback(
+    (form: FormData) => {
+      if (!chosenCategory) {
+        return;
+      }
 
-  const handleChosenCategory = useCallback((chosenCategory: Category) => {
-    categorySearchPickerRef.current?.setValue(chosenCategory.name);
-  }, []);
+      const newTask: Task = {
+        title: form.title,
+        category: chosenCategory,
+        date: form.date,
+        description: form.description,
+      };
+
+      dispatch(createTask(newTask));
+
+      //createUserTask()
+    },
+    [chosenCategory, dispatch],
+  );
+
+  useEffect(() => {
+    if (chosenCategory) {
+      categorySearchPickerRef.current?.setValue(chosenCategory.name);
+    }
+  }, [chosenCategory]);
 
   return (
     <ScreenWrapper>
@@ -75,11 +99,11 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
               </View>
             </View>
             <Form onSubmit={handleFormSubmit} ref={formRef}>
-              <TextInput name="name" label="Título" />
-              <TextInput name="name" label="Descrição" />
+              <TextInput name="title" label="Título" />
+              <TextInput name="description" label="Descrição" />
               <TextInput
                 ref={datePickerRef}
-                name="description"
+                name="date"
                 label="Data"
                 button
                 onPress={() => setDatePickerIsVisible(true)}
@@ -96,11 +120,7 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
                 name="category"
                 label="Categoria"
                 button
-                onPress={() =>
-                  navigation.push('CategorySearch', {
-                    onChosenCategory: handleChosenCategory,
-                  })
-                }
+                onPress={() => navigation.navigate('CategorySearch')}
               />
             </Form>
             <View style={styles.footer}>

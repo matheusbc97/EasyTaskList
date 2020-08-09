@@ -126,7 +126,11 @@ const App = () => {
             name="BottomNavigation"
             component={MyTabs}
           />
-          <AuthenticatedStack.Screen name="TaskForm" component={TaskForm} />
+          <AuthenticatedStack.Screen
+            name="TaskForm"
+            component={TaskForm}
+            initialParams={{}}
+          />
           <AuthenticatedStack.Screen
             name="CategorySearch"
             component={CategorySearch}

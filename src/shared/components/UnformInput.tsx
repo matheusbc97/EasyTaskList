@@ -1,4 +1,10 @@
-import React, {useEffect, useCallback, useRef, useImperativeHandle, forwardRef} from 'react';
+import React, {
+  useEffect,
+  useCallback,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+} from 'react';
 import {View, TextInputProps, StyleSheet, ViewStyle} from 'react-native';
 import {useField} from '@unform/core';
 import TextInput from './TextInput';
@@ -24,24 +30,27 @@ interface Props extends TextInputProps {
   onPress?(): void;
 }
 
-const FloatingLabelIpnput = ({
-  label = '',
-  containerStyle,
-  style,
-  name,
-  validateField,
-  onChangeText,
-  mask,
-  button = false,
-  onPress,
-  ...rest
-}: Props, ref: any) => {
+const FloatingLabelIpnput = (
+  {
+    label = '',
+    containerStyle,
+    style,
+    name,
+    validateField,
+    onChangeText,
+    mask,
+    button = false,
+    onPress,
+    ...rest
+  }: Props,
+  ref: any,
+) => {
   const inputElementRef = useRef<any>(null);
-  const customTextInputRef = useRef<any>(null)
+  const customTextInputRef = useRef<any>(null);
 
   const {fieldName, registerField, defaultValue = '', error} = useField(name);
 
-  const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
+  const inputValueRef = useRef<InputValueReference>({value: defaultValue});
 
   useEffect(() => {
     inputValueRef.current.value = defaultValue;
@@ -55,7 +64,8 @@ const FloatingLabelIpnput = ({
       },
       setValue(value: string) {
         customTextInputRef.current.setNativeProps({text: value});
-      }
+        inputValueRef.current.value = value;
+      },
     }),
     [],
   );
@@ -65,16 +75,13 @@ const FloatingLabelIpnput = ({
       name: fieldName,
       ref: inputValueRef.current,
       path: 'value',
-      clearValue(ref: any) {
+      clearValue() {
         inputValueRef.current.value = '';
         inputElementRef.current.clear();
       },
-      setValue(ref: any, value: string) {
+      setValue(_: any, value: string) {
         inputElementRef.current.setNativeProps({text: value});
         inputValueRef.current.value = value;
-      },
-      getValue(ref: any) {
-        return ref.value;
       },
     };
 
@@ -121,10 +128,12 @@ const FloatingLabelIpnput = ({
         }}
         onBlur={handleBlur}
         {...rest}
-        style={
-          [{
+        style={[
+          {
             flex: 1,
-          }, style
+          },
+          style,
+          ,
         ]}
       />
       <View style={styles.errorWrapper}>
