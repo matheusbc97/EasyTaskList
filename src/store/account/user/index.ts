@@ -1,7 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {User, AppThemeName} from '@shared/models';
-import {authenticateUser, registerUser} from './thunkActions';
+import {
+  authenticateUser,
+  registerUser,
+  verifyIfUserIsLogged,
+} from './thunkActions';
 import {selectUser, selectUserName} from './selectors';
 
 type State = User | null;
@@ -35,6 +39,10 @@ const user = createSlice({
     });
 
     builder.addCase(registerUser.fulfilled, (state, action) => {
+      return action.payload as User;
+    });
+
+    builder.addCase(verifyIfUserIsLogged.fulfilled, (state, action) => {
       return action.payload as User;
     });
   },

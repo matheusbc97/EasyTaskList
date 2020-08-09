@@ -7,6 +7,7 @@ import {
   createUserProfileDocument,
   signInWithEmailAndPassword,
   updateData,
+  getCurrentUser,
 } from '@shared/firebase';
 import {UserBeforeIsLoggedDTO} from '@shared/models/UserBeforeIsLoggedDTO';
 import {selectUser} from './selectors';
@@ -28,12 +29,15 @@ export const authenticateUser = createAsyncThunk(
   ): Promise<{user: UserBeforeIsLoggedDTO; isLogged: boolean}> => {
     try {
       loaderHandler.showLoader();
-      const user = await signInWithEmailAndPassword(email, password);
+      const {user, isOnFirestore} = await signInWithEmailAndPassword(
+        email,
+        password,
+      );
 
-      if ((!user.avatar && !user.image) || !user.name || !user.theme) {
+      if (!isOnFirestore) {
         loaderHandler.hideLoader();
         return {
-          user,
+          user: user as UserBeforeIsLoggedDTO,
           isLogged: false,
         };
       }
@@ -85,6 +89,34 @@ export const updateUser = createAsyncThunk(
     } catch (error) {
       handleErrorMessage(error);
       throw new Error(error.data);
+    }
+  },
+);
+
+export const verifyIfUserIsLogged = createAsyncThunk(
+  'account/user/verifyIfUserIsLogged',
+  async (_, {dispatch}) => {
+    try {
+      loaderHandler.showLoader();
+      const response = await getCurrentUser();
+
+      if (!response) {
+        return null;
+      }
+
+      const {user, isOnFirestore} = response;
+
+      if (!isOnFirestore) {
+        loaderHandler.hideLoader();
+        return user as UserBeforeIsLoggedDTO;
+      }
+
+      dispatch(setIsLogged(true));
+      loaderHandler.hideLoader();
+      return user as User;
+    } catch (error) {
+      handleErrorMessage(error);
+      throw new Error(error);
     }
   },
 );

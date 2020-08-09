@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {CardStyleInterpolators} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import {lighten, shade} from 'polished';
 
+import {LoadingIndicator} from '@shared/components';
 import {
   UnauthenticatedStackParams,
   BottomNavigatorStackParams,
@@ -27,6 +28,7 @@ import CategorySearch from '../pages/logged-screens/CategorySearch';
 
 import BottonTabNavigator from './BottonTabNavigator';
 import TaskForm from '../pages/logged-screens/TaskForm';
+import {verifyIfUserIsLogged} from '@store/account/user/thunkActions';
 
 const Tab = createBottomTabNavigator<BottomNavigatorStackParams>();
 
@@ -102,7 +104,19 @@ const UnauthenticatedStack = createStackNavigator<UnauthenticatedStackParams>();
 const AuthenticatedStack = createStackNavigator<AuthenticatedStackParams>();
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const dispatch = useDispatch();
+
   const isLogged = useSelector(selectIsLogged);
+
+  useEffect(() => {
+    dispatch(verifyIfUserIsLogged()).then(() => setIsLoading(false));
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <LoadingIndicator />;
+  }
 
   return (
     <NavigationContainer>

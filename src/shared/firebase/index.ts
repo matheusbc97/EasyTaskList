@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {UserBeforeIsLoggedDTO} from '@shared/models/UserBeforeIsLoggedDTO';
-import {Category} from '@shared/models';
+import {Category, User} from '@shared/models';
 
 interface Data {
   [key: string]: any;
@@ -58,28 +58,24 @@ export const createUserProfileDocument = async (
   }
 };
 
-export const signInWithEmailAndPassword = async (
+async function getFirestoreUser(
+  uid: string,
   email: string,
-  password: string,
-): Promise<UserBeforeIsLoggedDTO> => {
+): Promise<
+  | {user: UserBeforeIsLoggedDTO; isOnFirestore: false}
+  | {user: User; isOnFirestore: true}
+> {
   try {
-    const {user: authUser} = await auth().signInWithEmailAndPassword(
-      email,
-      password,
-    );
-
-    const userRef = firestore().doc(`users/${authUser.uid}`);
+    const userRef = firestore().doc(`users/${uid}`);
 
     const response = await userRef.get();
 
     let user: UserBeforeIsLoggedDTO = {
-      uid: authUser.uid,
+      uid,
       email,
     };
 
-    const userData = response.data() as
-      | Omit<UserBeforeIsLoggedDTO, 'uid'>
-      | undefined;
+    const userData = response.data();
 
     Object.assign(user, {
       avatar: userData?.avatar,
@@ -88,7 +84,33 @@ export const signInWithEmailAndPassword = async (
       theme: userData?.theme,
     });
 
-    return user;
+    if ((!user.avatar && !user.image) || !user.name || !user.theme) {
+      return {
+        user: user as UserBeforeIsLoggedDTO,
+        isOnFirestore: false,
+      };
+    }
+
+    return {
+      user: user as User,
+      isOnFirestore: true,
+    };
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export const signInWithEmailAndPassword = async (
+  email: string,
+  password: string,
+) => {
+  try {
+    const {user: authUser} = await auth().signInWithEmailAndPassword(
+      email,
+      password,
+    );
+
+    return await getFirestoreUser(authUser.uid, email);
   } catch (error) {
     throw new Error(error);
   }
@@ -112,4 +134,14 @@ export async function getUserCategories() {
   })) as Category[];
 
   return categories;
+}
+
+export async function getCurrentUser() {
+  const authUser = auth().currentUser;
+
+  if (!authUser || !authUser?.email) {
+    return null;
+  }
+
+  return await getFirestoreUser(authUser.uid, authUser.email);
 }
