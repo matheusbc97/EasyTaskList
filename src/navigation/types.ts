@@ -1,3 +1,5 @@
+import {Category} from '@shared/models';
+
 export type UnauthenticatedStackParams = {
   Login: undefined;
   RegisterForm: undefined;
@@ -8,7 +10,9 @@ export type UnauthenticatedStackParams = {
 export type AuthenticatedStackParams = {
   BottomNavigation: undefined;
   TaskForm: undefined;
-  CategorySearch: undefined;
+  CategorySearch: {
+    onChosenCategory(category: Category): void;
+  };
 };
 
 export type BottomNavigatorStackParams = {

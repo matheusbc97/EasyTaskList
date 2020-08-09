@@ -1,43 +1,69 @@
-import React, { useState, useEffect } from 'react'
-import { TextInput, FlatList, View } from 'react-native'
+import React, {useState, useEffect, useCallback} from 'react';
+import {TextInput, FlatList} from 'react-native';
 
-import {Text, ScreenWrapper} from '@shared/components';
-import { getUserCategories } from '@shared/firebase';
-import { Category } from '@shared/models';
+import {useDispatch, useSelector} from 'react-redux';
 
-const CategorySearch = () => {
-  const [search, setSearch] = useState('')
-  const [categories, setCategories] = useState<Category[]>([])
+import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+
+import {AuthenticatedStackParams} from '@navigation/types';
+import {ScreenWrapper, LoadingIndicator} from '@shared/components';
+import {
+  selectCategoriesFetchState,
+  getUserCategories,
+  categoryListSelectors,
+} from '@store/categories';
+import {Category} from '@shared/models';
+
+import CategoryListItem from './CategoryListItem';
+
+interface Props {
+  route: RouteProp<AuthenticatedStackParams, 'CategorySearch'>;
+  navigation: StackNavigationProp<AuthenticatedStackParams, 'CategorySearch'>;
+}
+
+const CategorySearch: React.FC<Props> = ({route, navigation}) => {
+  const [search, setSearch] = useState('');
+  const dispatch = useDispatch();
+  const fetchState = useSelector(selectCategoriesFetchState);
+  const categories = useSelector(categoryListSelectors.selectAll);
+
+  const {onChosenCategory} = route.params;
 
   useEffect(() => {
-    async function getCategories(){
-      setCategories(await getUserCategories())
-    }
+    dispatch(getUserCategories());
+  }, [dispatch]);
 
-    getCategories()
-  }, [])
+  const handleChosenCategory = useCallback(
+    (chosenCategory: Category) => {
+      onChosenCategory(chosenCategory);
+      navigation.pop();
+    },
+    [onChosenCategory, navigation],
+  );
 
-  return(
+  if (fetchState.isLoading) {
+    return <LoadingIndicator />;
+  }
+
+  return (
     <ScreenWrapper>
       <TextInput
         value={search}
         onChangeText={setSearch}
         style={{
           borderBottomColor: 'red',
-          borderBottomWidth: 1
+          borderBottomWidth: 1,
         }}
       />
       <FlatList
         data={categories}
-        renderItem={({ item }) => {
-          return (
-            <View>
-              <Text>{item.name}</Text>
-            </View>
-          )
-        }}
+        renderItem={({item}) => (
+          <CategoryListItem category={item} onPress={handleChosenCategory} />
+        )}
       />
     </ScreenWrapper>
-  )
-}
+  );
+};
+
 export default CategorySearch;

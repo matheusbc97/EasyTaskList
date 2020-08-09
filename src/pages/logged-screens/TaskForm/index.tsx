@@ -19,6 +19,7 @@ import {
 } from '@shared/components';
 
 import styles from './styles';
+import {Category} from '@shared/models';
 
 interface FormData {
   title: string;
@@ -33,8 +34,9 @@ interface Props {
 
 const TaskForm: React.FC<Props> = ({navigation}) => {
   const formRef = useRef<FormHandles>(null);
-  const datePickerRef = useRef<any>(null)
-  const timePickerRef = useRef<any>(null)
+  const datePickerRef = useRef<any>(null);
+  const timePickerRef = useRef<any>(null);
+  const categorySearchPickerRef = useRef<any>(null);
 
   const appTheme = useSelector(selectAppTheme);
   const [datePickerIsVisible, setDatePickerIsVisible] = useState(false);
@@ -42,6 +44,10 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
 
   const handleFormSubmit = useCallback((form: FormData) => {
     console.log('form', form);
+  }, []);
+
+  const handleChosenCategory = useCallback((chosenCategory: Category) => {
+    categorySearchPickerRef.current?.setValue(chosenCategory.name);
   }, []);
 
   return (
@@ -86,10 +92,15 @@ const TaskForm: React.FC<Props> = ({navigation}) => {
                 onPress={() => setTimePickerIsVisible(true)}
               />
               <TextInput
+                ref={categorySearchPickerRef}
                 name="category"
                 label="Categoria"
                 button
-                onPress={() => navigation.push('CategorySearch')}
+                onPress={() =>
+                  navigation.push('CategorySearch', {
+                    onChosenCategory: handleChosenCategory,
+                  })
+                }
               />
             </Form>
             <View style={styles.footer}>

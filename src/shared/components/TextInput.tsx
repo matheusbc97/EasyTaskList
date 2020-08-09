@@ -21,7 +21,6 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import {selectAppTheme} from '../../store/configs';
 import {TouchableRipple} from 'react-native-paper';
-import {ValidateField} from '@shared/models';
 
 const AnimatedFontAwesomeIcon = Animated.createAnimatedComponent(
   FontAwesomeIcon,
@@ -36,19 +35,22 @@ interface TextInputProps extends RNTextInputProps {
   inputRef?: any;
 }
 
-const TextInput = ({
-  label,
-  onChangeText,
-  onBlur,
-  onFocus,
-  style,
-  defaultValue,
-  error,
-  button = false,
-  onPress,
-  inputRef,
-  ...rest
-}: TextInputProps, ref: any) => {
+const TextInput = (
+  {
+    label,
+    onChangeText,
+    onBlur,
+    onFocus,
+    style,
+    defaultValue,
+    error,
+    button = false,
+    onPress,
+    inputRef,
+    ...rest
+  }: TextInputProps,
+  ref: any,
+) => {
   const appTheme = useSelector(selectAppTheme);
   const [labelLeftOffset, setLabelLeftOffset] = useState(0);
 
@@ -94,7 +96,7 @@ const TextInput = ({
 
   useImperativeHandle(ref, () => ({
     setNativeProps(props: any) {
-      animation(true)
+      animation(true);
       inputRef?.current && inputRef.current.setNativeProps(props);
     },
   }));
