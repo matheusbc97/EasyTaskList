@@ -7,29 +7,24 @@ import {
   Text,
   ScreenWrapper,
   TwoDimensionalTaskList,
-  TaskListItem,
   OutlineButton,
 } from '@shared/components';
 import {selectAppTheme} from '@store/configs';
 import {AuthenticatedStackParams} from '@navigation/types';
 
-import styles from './styles';
+import {
+  Header,
+  HeaderContent,
+  Body,
+  FooterSeparator,
+  Footer,
+  VerticalSeparator,
+} from './styles';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
   'BottomNavigation'
 >;
-
-const VerticalSeparator = ({color = ''}) => (
-  <View
-    style={{
-      width: 2,
-      height: '100%',
-      backgroundColor: color,
-      marginHorizontal: 5,
-    }}
-  />
-);
 
 interface Props {
   navigation: TaskListNavigationProp;
@@ -59,78 +54,29 @@ const TaskList: React.FC<Props> = ({navigation}) => {
 
   return (
     <ScreenWrapper>
-      <View
-        style={{
-          backgroundColor: appTheme.aboveBackground,
-          elevation: 3,
-          paddingTop: 10,
-          paddingBottom: 10,
-          borderBottomStartRadius: 40,
-          borderBottomEndRadius: 40,
-          paddingHorizontal: 20,
-          marginHorizontal: 5,
-        }}>
+      <Header backgroundColor={appTheme.aboveBackground}>
         <Text type="title-big"> Minhas tarefas</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginHorizontal: 6,
-            marginVertical: 5,
-          }}>
+        <HeaderContent>
           <Text>Todas</Text>
           <VerticalSeparator color={appTheme.textColor} />
           <Text>Em Andamento</Text>
           <VerticalSeparator color={appTheme.textColor} />
           <Text>Concluídas</Text>
-        </View>
-      </View>
-      <View
-        style={{
-          backgroundColor: appTheme.aboveBackground,
-          elevation: 2,
-          marginHorizontal: 10,
-          paddingHorizontal: 5,
-          marginVertical: 10,
-          borderRadius: 10,
-          flex: 1,
-        }}>
+        </HeaderContent>
+      </Header>
+      <Body backgroundColor={appTheme.aboveBackground}>
         <TwoDimensionalTaskList tasks={tasks} offset={30} />
-      </View>
+      </Body>
       <View style={{marginHorizontal: 20}}>
-        <View
-          style={{
-            height: 1,
-            width: '100%',
-            backgroundColor: '#e0e0e0',
-          }}
-        />
+        <FooterSeparator />
       </View>
-      {/*<View
-        style={{
-          backgroundColor: appTheme.aboveBackground,
-          elevation: 2,
-          marginHorizontal: 10,
-          paddingHorizontal: 10,
-          marginVertical: 10,
-          borderRadius: 10,
-          paddingVertical: 10,
-        }}>
-        <Text type="title-medium">Correr 3 Km</Text>
-        <Text>
-          Acordar cedo e correr em volta do quarteirão de casa por cerca de 3km
-        </Text>
-        <Text type="subtitle">08h até 8:30h</Text>
-        <View style={{alignItems: 'center', marginTop: 2}}>
-          <Text>VER MAIS / EDITAR</Text>
-        </View>
-      </View>*/}
-      <View style={{paddingHorizontal: 20, paddingVertical: 5}}>
+      <Footer>
         <OutlineButton
           iconName="plus"
           text="Criar Nova Tarefa"
           onPress={() => navigation.navigate('TaskForm')}
         />
-      </View>
+      </Footer>
     </ScreenWrapper>
   );
 };

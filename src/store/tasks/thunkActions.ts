@@ -12,9 +12,12 @@ export const createTask = createAsyncThunk(
     try {
       const user = selectUser(getState() as RootState);
 
-      await createUserTask(user!.uid, task);
+      const taskId = await createUserTask(user!.uid, task);
 
-      return task;
+      return {
+        id: taskId,
+        ...task,
+      };
     } catch (error) {
       handleErrorMessage(error);
       throw new Error(error);

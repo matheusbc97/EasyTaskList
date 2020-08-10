@@ -24,7 +24,7 @@ const categories = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(createTask.fulfilled, (state, action) => {
-      tasksAdapter.upsertOne(state, action.payload);
+      tasksAdapter.addOne(state, action.payload);
     });
   },
 });

@@ -1,11 +1,16 @@
 import firestore from '@react-native-firebase/firestore';
 import {Task} from '@shared/models';
 
-export const createUserTask = async (userUid: string, category: Task) => {
+export const createUserTask = async (
+  userUid: string,
+  category: Omit<Task, 'id'>,
+) => {
   try {
-    await firestore().collection(`users/${userUid}/tasks`).add(category);
+    const response = await firestore()
+      .collection(`users/${userUid}/tasks`)
+      .add(category);
 
-    return;
+    return response.id;
   } catch (error) {
     throw new Error(error);
   }
