@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -20,6 +20,7 @@ import {
   Footer,
   VerticalSeparator,
 } from './styles';
+import {getUserTasks} from '@shared/firebase';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -31,6 +32,14 @@ interface Props {
 }
 
 const TaskList: React.FC<Props> = ({navigation}) => {
+  useEffect(() => {
+    async function getTaks() {
+      console.log('task', await getUserTasks());
+    }
+
+    getTaks();
+  }, []);
+
   const appTheme = useSelector(selectAppTheme);
 
   const tasks = [

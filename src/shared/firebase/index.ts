@@ -5,6 +5,7 @@ import {getFirestoreUser} from './getFirestoreUser';
 import {getUserCategories} from './getUserCategories';
 import {signInWithEmailAndPassword} from './signInWithEmailAndPassword';
 import {updateUserData} from './updateUserData';
+import {getUserTasks} from './getUserTasks';
 
 export {
   createUserProfileDocument,
@@ -14,4 +15,5 @@ export {
   getUserCategories,
   signInWithEmailAndPassword,
   updateUserData,
+  getUserTasks,
 };
