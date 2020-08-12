@@ -3,6 +3,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {getUserCategories} from './thunkActions';
 import {selectCategoriesFetchState, categoryListSelectors} from './selectors';
 import {categoryAdapter} from './adapters';
+import {Category} from '@shared/models';
 
 const initialState = categoryAdapter.getInitialState({
   fetchState: {
@@ -20,6 +21,9 @@ const categories = createSlice({
     },
     setCategoriesLoading: (state, action: PayloadAction<boolean>) => {
       state.fetchState.isLoading = action.payload;
+    },
+    setCategories: (state, action: PayloadAction<Category[]>) => {
+      categoryAdapter.setAll(state, action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -42,6 +46,6 @@ const categories = createSlice({
 
 export default categories.reducer;
 
-export const {resetCategories} = categories.actions;
+export const {resetCategories, setCategories} = categories.actions;
 
 export {getUserCategories, selectCategoriesFetchState, categoryListSelectors};

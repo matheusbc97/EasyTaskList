@@ -20,7 +20,6 @@ import {
 
 import styles from './styles';
 import {RouteProp} from '@react-navigation/native';
-import {Task} from '@shared/models';
 import {createTask} from '@store/tasks';
 
 interface FormData {
@@ -54,18 +53,20 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
         return;
       }
 
-      const newTask: Task = {
+      const newTask = {
         title: form.title,
         category: chosenCategory,
         date: form.date,
         description: form.description,
       };
 
-      dispatch(createTask(newTask));
-
-      //createUserTask()
+      dispatch(createTask(newTask)).then((action) => {
+        if (action.payload) {
+          navigation.pop();
+        }
+      });
     },
-    [chosenCategory, dispatch],
+    [chosenCategory, dispatch, navigation],
   );
 
   useEffect(() => {
@@ -99,7 +100,13 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
               </View>
             </View>
             <Form onSubmit={handleFormSubmit} ref={formRef}>
-              <TextInput name="title" label="Título" />
+              <TextInput
+                name="title"
+                label="Título"
+                onSubmitEditing={() =>
+                  formRef.current?.getFieldRef('description').focus()
+                }
+              />
               <TextInput name="description" label="Descrição" />
               <TextInput
                 ref={datePickerRef}

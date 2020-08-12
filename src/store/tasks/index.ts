@@ -1,7 +1,7 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
-import {createTask} from './thunkActions';
-import {tasksListSelectors} from './selectors';
+import {createTask, getTasks} from './thunkActions';
+import {tasksListSelectors, selectTasksFetchState} from './selectors';
 import {tasksAdapter} from './adapters';
 
 const initialState = tasksAdapter.getInitialState({
@@ -11,26 +11,39 @@ const initialState = tasksAdapter.getInitialState({
   },
 });
 
-const categories = createSlice({
+const tasks = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    resetCategories: () => {
+    resetTasks: () => {
       return initialState;
-    },
-    setCategoriesLoading: (state, action: PayloadAction<boolean>) => {
-      state.fetchState.isLoading = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(createTask.fulfilled, (state, action) => {
       tasksAdapter.addOne(state, action.payload);
     });
+
+    builder.addCase(getTasks.pending, (state) => {
+      state.fetchState.isLoading = true;
+      state.fetchState.hasError = false;
+    });
+
+    builder.addCase(getTasks.fulfilled, (state, action) => {
+      tasksAdapter.setAll(state, action.payload);
+      state.fetchState.isLoading = false;
+      state.fetchState.hasError = false;
+    });
+
+    builder.addCase(getTasks.rejected, (state) => {
+      state.fetchState.isLoading = false;
+      state.fetchState.hasError = true;
+    });
   },
 });
 
-export default categories.reducer;
+export default tasks.reducer;
 
-export const {resetCategories} = categories.actions;
+export const {resetTasks} = tasks.actions;
 
-export {tasksListSelectors, createTask};
+export {tasksListSelectors, createTask, selectTasksFetchState, getTasks};

@@ -3,6 +3,7 @@ import {View, FlatList} from 'react-native';
 import {useDimensions} from '@react-native-community/hooks';
 
 import TaskListItem from './TaskListItem';
+import {Task} from '@shared/models';
 
 interface Props {
   tasks: any[];
@@ -23,11 +24,11 @@ const TwoDimensionalTaskList: React.FC<Props> = ({tasks, offset = 0}) => {
       data={tasks}
       renderItem={({item}) => (
         <View style={{width: width - offset, height: 300}}>
-          <FlatList
+          <FlatList<Task>
             nestedScrollEnabled={tasksScrollEnabled}
             data={item.data}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => <TaskListItem colorIndex={item} />}
+            keyExtractor={(task) => task.id}
+            renderItem={({item: task}) => <TaskListItem task={task} />}
           />
         </View>
       )}

@@ -36,5 +36,6 @@ export const Body = styled.View<BodyProps>`
   border-color: ${(props) => props.borderColor};
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-  padding: 0 5px;
+  padding: 0 10px;
+  justify-content: center;
 `;

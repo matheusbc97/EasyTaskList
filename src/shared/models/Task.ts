@@ -5,5 +5,5 @@ export interface Task {
   title: string;
   description: string;
   date: string;
-  category: Category;
+  category: Category | undefined;
 }

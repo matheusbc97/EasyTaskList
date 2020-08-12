@@ -22,19 +22,19 @@ const Home = ({}: Props) => {
   const tasks = [
     {
       title: 'HOJE',
-      data: [8, 2, 1, 3],
+      data: [],
     },
     {
       title: 'Amanhã',
-      data: [1, 5, 8, 2, 1, 3],
+      data: [],
     },
     {
       title: '14/06',
-      data: [1, 5, 8, 2],
+      data: [],
     },
     {
       title: '15/06',
-      data: [1, 5, 1, 3],
+      data: [],
     },
   ];
 

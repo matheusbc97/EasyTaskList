@@ -1,8 +1,15 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import {Task} from '@shared/models';
 
-export async function getUserTasks(): Promise<Task[]> {
+export interface FirebaseTaskDTO {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  categoryId: string;
+}
+
+export async function getUserTasks(): Promise<FirebaseTaskDTO[]> {
   try {
     const authUser = auth().currentUser;
 
@@ -14,7 +21,17 @@ export async function getUserTasks(): Promise<Task[]> {
       .collection(`users/${authUser.uid}/tasks`)
       .get();
 
-    return tasksCollection.docs.map((taskDoc) => taskDoc.data() as Task);
+    const tasks = tasksCollection.docs.map((taskDoc) => {
+      const {categoryRef, ...rest} = taskDoc.data();
+
+      return {
+        id: taskDoc.id,
+        categoryId: categoryRef.id,
+        ...rest,
+      } as FirebaseTaskDTO;
+    });
+
+    return tasks;
   } catch (error) {
     throw new Error(error);
   }

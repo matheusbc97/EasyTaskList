@@ -1,9 +1,15 @@
 import firestore from '@react-native-firebase/firestore';
-import {Task} from '@shared/models';
+
+interface CreateCategoryOnFirebaseDTO {
+  title: string;
+  description: string;
+  date: string;
+  categoryRef: string;
+}
 
 export const createUserTask = async (
   userUid: string,
-  category: Omit<Task, 'id'>,
+  category: CreateCategoryOnFirebaseDTO,
 ) => {
   try {
     const response = await firestore()

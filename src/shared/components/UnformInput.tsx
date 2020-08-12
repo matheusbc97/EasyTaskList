@@ -14,10 +14,6 @@ import useOnChangeText from '../hooks/useOnChangeText';
 import {ValidateField} from '../models/ValidateField';
 import useMaskedOnChangeText from '../hooks/useMaskedOnChangeText';
 
-interface InputValueReference {
-  value: string;
-}
-
 interface Props extends TextInputProps {
   label?: string;
   containerStyle?: ViewStyle;
@@ -45,15 +41,13 @@ const FloatingLabelIpnput = (
   }: Props,
   ref: any,
 ) => {
-  const inputElementRef = useRef<any>(null);
   const customTextInputRef = useRef<any>(null);
 
   const {fieldName, registerField, defaultValue = '', error} = useField(name);
-
-  const inputValueRef = useRef<InputValueReference>({value: defaultValue});
+  const inputElementRef = useRef<any>({value: defaultValue});
 
   useEffect(() => {
-    inputValueRef.current.value = defaultValue;
+    inputElementRef.current.value = defaultValue;
   }, [defaultValue]);
 
   useImperativeHandle(
@@ -64,7 +58,7 @@ const FloatingLabelIpnput = (
       },
       setValue(value: string) {
         customTextInputRef.current.setNativeProps({text: value});
-        inputValueRef.current.value = value;
+        inputElementRef.current.value = value;
       },
     }),
     [],
@@ -73,15 +67,15 @@ const FloatingLabelIpnput = (
   useEffect(() => {
     const registerFieldObject: any = {
       name: fieldName,
-      ref: inputValueRef.current,
+      ref: inputElementRef.current,
       path: 'value',
       clearValue() {
-        inputValueRef.current.value = '';
+        inputElementRef.current.value = '';
         inputElementRef.current.clear();
       },
       setValue(_: any, value: string) {
         inputElementRef.current.setNativeProps({text: value});
-        inputValueRef.current.value = value;
+        inputElementRef.current.value = value;
       },
     };
 
@@ -120,8 +114,8 @@ const FloatingLabelIpnput = (
         inputRef={inputElementRef}
         defaultValue={defaultValue}
         onChangeText={(text: string) => {
-          if (inputValueRef.current) {
-            inputValueRef.current.value = text;
+          if (inputElementRef.current) {
+            inputElementRef.current.value = text;
           }
           mask ? _maskedOnChangeText(text) : _onChangeText(text);
           onChangeText && onChangeText(text);

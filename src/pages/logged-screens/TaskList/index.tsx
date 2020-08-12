@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {View} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import {
@@ -21,6 +21,7 @@ import {
   VerticalSeparator,
 } from './styles';
 import {getUserTasks} from '@shared/firebase';
+import {getTasks, tasksListSelectors} from '@store/tasks';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -32,32 +33,23 @@ interface Props {
 }
 
 const TaskList: React.FC<Props> = ({navigation}) => {
-  useEffect(() => {
-    async function getTaks() {
-      console.log('task', await getUserTasks());
-    }
+  const dispatch = useDispatch();
 
-    getTaks();
-  }, []);
+  useEffect(() => {
+    dispatch(getTasks());
+  }, [dispatch]);
 
   const appTheme = useSelector(selectAppTheme);
+  const tasks = useSelector(tasksListSelectors.selectAll);
 
-  const tasks = [
+  const tasksSections = [
     {
       title: 'HOJE',
-      data: [8, 2, 1, 3],
+      data: tasks,
     },
     {
       title: 'Amanhã',
-      data: [1, 5, 8, 2, 1, 3],
-    },
-    {
-      title: '14/06',
-      data: [1, 5, 8, 2],
-    },
-    {
-      title: '15/06',
-      data: [1, 5, 1, 3],
+      data: tasks,
     },
   ];
 
@@ -74,7 +66,7 @@ const TaskList: React.FC<Props> = ({navigation}) => {
         </HeaderContent>
       </Header>
       <Body backgroundColor={appTheme.aboveBackground}>
-        <TwoDimensionalTaskList tasks={tasks} offset={30} />
+        <TwoDimensionalTaskList tasks={tasksSections} offset={30} />
       </Body>
       <View style={{marginHorizontal: 20}}>
         <FooterSeparator />

@@ -6,11 +6,13 @@ import {setIsLogged, setAppTheme} from '../../configs';
 import {
   createUserProfileDocument,
   signInWithEmailAndPassword,
-  updateData,
+  updateUserData,
   getCurrentUser,
+  getUserCategories,
 } from '@shared/firebase';
 import {UserBeforeIsLoggedDTO} from '@shared/models/UserBeforeIsLoggedDTO';
 import {selectUser} from './selectors';
+import {setCategories} from '../../categories';
 import {RootState} from '@store/index';
 import {Dictionary, User} from '@shared/models';
 
@@ -82,7 +84,7 @@ export const updateUser = createAsyncThunk(
 
       const uid = selectUser(getState() as RootState)?.uid;
 
-      await updateData(`users/${uid}`, updates);
+      await updateUserData(`users/${uid}`, updates);
 
       loaderHandler.hideLoader();
       return true;
@@ -111,6 +113,9 @@ export const verifyIfUserIsLogged = createAsyncThunk(
         return user as UserBeforeIsLoggedDTO;
       }
 
+      const categories = await getUserCategories();
+
+      dispatch(setCategories(categories));
       dispatch(setIsLogged(true));
       loaderHandler.hideLoader();
       return user as User;
