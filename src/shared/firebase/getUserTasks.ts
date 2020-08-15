@@ -7,6 +7,7 @@ export interface FirebaseTaskDTO {
   description: string;
   date: string;
   categoryId: string;
+  done: boolean;
 }
 
 export async function getUserTasks(): Promise<FirebaseTaskDTO[]> {

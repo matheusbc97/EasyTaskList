@@ -1,11 +1,21 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
 import Text from '../Text';
-import categoryColors from '../../../assets/categoryColors';
+import useCategoryColor from '@shared/hooks/useCategoryColor';
 
-import {ContainerButton, IconContainer, Body} from './styles';
+import {
+  ContainerButton,
+  IconContainer,
+  Body,
+  Separator,
+  TaskStatusContainer,
+  DateAndMonthText,
+  BodyBottom,
+} from './styles';
 import {Task} from '@shared/models';
+import formatDate from '@shared/utils/fomatDate';
+import {View} from 'react-native';
 
 interface Props {
   task: Task;
@@ -13,13 +23,7 @@ interface Props {
 }
 
 const TaskListItem: React.FC<Props> = ({task, onPress}) => {
-  const color = useMemo(
-    () =>
-      task.category?.colorIndex
-        ? categoryColors[task.category?.colorIndex].color1
-        : categoryColors[0].color1,
-    [task.category],
-  );
+  const color = useCategoryColor(task.category);
 
   return (
     <ContainerButton onPress={onPress}>
@@ -33,8 +37,21 @@ const TaskListItem: React.FC<Props> = ({task, onPress}) => {
       </IconContainer>
 
       <Body borderColor={color}>
-        <Text type="title">{task.title}</Text>
-        <Text>{task.description}</Text>
+        <View style={{flex: 1}}>
+          <Text type="title">{task.title}</Text>
+          <BodyBottom>
+            <Text style={{flex: 1}}>{formatDate(task.date, "HH:mm'h'")}</Text>
+            <TaskStatusContainer>
+              <Text type="title-inverse" style={{fontSize: 12.5}}>
+                Andamento
+              </Text>
+            </TaskStatusContainer>
+          </BodyBottom>
+        </View>
+
+        <Separator color={color} />
+
+        <DateAndMonthText>HOJE</DateAndMonthText>
       </Body>
     </ContainerButton>
   );

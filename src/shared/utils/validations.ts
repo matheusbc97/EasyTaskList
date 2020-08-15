@@ -132,11 +132,6 @@ function validateEmail(email: string) {
   return re.test(String(email).toLowerCase());
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function isEmpty(value: string) {
-  return value.length === 0;
-}
-
 function emptyText(value = '') {
   return `Campo ${value} obrigatório`;
 }

@@ -1,8 +1,9 @@
-import React, {useState, useCallback, useRef, useEffect} from 'react';
+import React, {useState, useCallback, useRef, useEffect, useMemo} from 'react';
 import {View} from 'react-native';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
 import {useSelector, useDispatch} from 'react-redux';
+
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {StackNavigationProp} from '@react-navigation/stack';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -21,11 +22,14 @@ import {
 import styles from './styles';
 import {RouteProp} from '@react-navigation/native';
 import {createTask} from '@store/tasks';
+import {useFormatDate} from '@shared/hooks';
+import {updateTask} from '@store/tasks/thunkActions';
 
 interface FormData {
   title: string;
   description: string;
   date: string;
+  time: string;
   category: string;
 }
 
@@ -35,7 +39,24 @@ interface Props {
 }
 
 const TaskForm: React.FC<Props> = ({navigation, route}) => {
-  const {chosenCategory} = route.params;
+  const {chosenCategory, task} = route.params;
+
+  const initialData = useMemo<undefined | FormData>(() => {
+    if (!task) {
+      return undefined;
+    }
+
+    const _initialData: FormData = {
+      title: task.title,
+      category: task.category!.name,
+      date: task.date,
+      time: task.date,
+      description: task.description,
+    };
+
+    return _initialData;
+  }, [task]);
+
   const formRef = useRef<FormHandles>(null);
   const datePickerRef = useRef<any>(null);
   const timePickerRef = useRef<any>(null);
@@ -47,26 +68,48 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
   const [datePickerIsVisible, setDatePickerIsVisible] = useState(false);
   const [timePickerIsVisible, setTimePickerIsVisible] = useState(false);
 
+  const formatDate = useFormatDate();
+
   const handleFormSubmit = useCallback(
     (form: FormData) => {
-      if (!chosenCategory) {
+      if (!task) {
+        if (!chosenCategory) {
+          return;
+        }
+
+        const newTask = {
+          title: form.title,
+          category: chosenCategory,
+          date: form.date,
+          description: form.description,
+        };
+
+        dispatch(createTask(newTask)).then((action) => {
+          if (action.payload) {
+            navigation.pop();
+          }
+        });
+
         return;
       }
 
-      const newTask = {
+      const updatedTask = {
+        id: task.id,
         title: form.title,
-        category: chosenCategory,
-        date: form.date,
         description: form.description,
+        category: chosenCategory ? chosenCategory : task.category!,
+        date: form.date,
       };
 
-      dispatch(createTask(newTask)).then((action) => {
+      dispatch(updateTask(updatedTask)).then((action) => {
         if (action.payload) {
           navigation.pop();
         }
       });
+
+      return;
     },
-    [chosenCategory, dispatch, navigation],
+    [chosenCategory, dispatch, navigation, task],
   );
 
   useEffect(() => {
@@ -95,11 +138,14 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
                     },
                     styles.title,
                   ]}>
-                  Criar Tarefa
+                  {!task ? 'Criar Tarefa' : 'Editar Tarefa'}
                 </Text>
               </View>
             </View>
-            <Form onSubmit={handleFormSubmit} ref={formRef}>
+            <Form
+              onSubmit={handleFormSubmit}
+              ref={formRef}
+              initialData={initialData}>
               <TextInput
                 name="title"
                 label="Título"
@@ -110,6 +156,7 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
               <TextInput name="description" label="Descrição" />
               <TextInput
                 ref={datePickerRef}
+                mask={(value) => formatDate(value)}
                 name="date"
                 label="Data"
                 button
@@ -117,8 +164,9 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
               />
               <TextInput
                 ref={timePickerRef}
-                name="hour"
+                name="time"
                 label="Horário"
+                mask={(value) => formatDate(value, 'time')}
                 button
                 onPress={() => setTimePickerIsVisible(true)}
               />
@@ -162,6 +210,7 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
           timePickerRef.current?.setValue(String(time));
           setTimePickerIsVisible(false);
         }}
+        is24Hour
         onCancel={() => setTimePickerIsVisible(false)}
       />
     </ScreenWrapper>

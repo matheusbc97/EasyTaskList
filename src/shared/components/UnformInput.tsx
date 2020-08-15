@@ -47,8 +47,33 @@ const FloatingLabelIpnput = (
   const inputElementRef = useRef<any>({value: defaultValue});
 
   useEffect(() => {
-    inputElementRef.current.value = defaultValue;
-  }, [defaultValue]);
+    if (defaultValue) {
+      const nativeProps: any = {};
+
+      if (mask) {
+        nativeProps.text = mask(defaultValue, '');
+      } else {
+        nativeProps.text = defaultValue;
+      }
+
+      customTextInputRef.current.setNativeProps(nativeProps);
+
+      inputElementRef.current.value = defaultValue;
+    }
+  }, [defaultValue, mask]);
+
+  const _onChangeText = useOnChangeText(
+    inputElementRef,
+    fieldName,
+    error,
+    validateField,
+  );
+
+  const _maskedOnChangeText = useMaskedOnChangeText(
+    mask!,
+    inputElementRef,
+    _onChangeText,
+  );
 
   useImperativeHandle(
     ref,
@@ -57,11 +82,20 @@ const FloatingLabelIpnput = (
         inputElementRef.current.focus();
       },
       setValue(value: string) {
-        customTextInputRef.current.setNativeProps({text: value});
+        const nativeProps: any = {};
+
+        if (mask) {
+          nativeProps.text = mask(value, inputElementRef.current.value);
+        } else {
+          nativeProps.text = value;
+        }
+
+        customTextInputRef.current.setNativeProps(nativeProps);
+
         inputElementRef.current.value = value;
       },
     }),
-    [],
+    [mask],
   );
 
   useEffect(() => {
@@ -81,19 +115,6 @@ const FloatingLabelIpnput = (
 
     registerField(registerFieldObject);
   }, [fieldName, registerField]);
-
-  const _onChangeText = useOnChangeText(
-    inputElementRef,
-    fieldName,
-    error,
-    validateField,
-  );
-
-  const _maskedOnChangeText = useMaskedOnChangeText(
-    mask!,
-    inputElementRef,
-    _onChangeText,
-  );
 
   const handleBlur = useCallback(() => {
     if (validateField) {

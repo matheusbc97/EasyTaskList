@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-import {createTask, getTasks} from './thunkActions';
+import {createTask, getTasks, updateTask} from './thunkActions';
 import {tasksListSelectors, selectTasksFetchState} from './selectors';
 import {tasksAdapter} from './adapters';
 
@@ -24,6 +24,13 @@ const tasks = createSlice({
       tasksAdapter.addOne(state, action.payload);
     });
 
+    builder.addCase(
+      updateTask.fulfilled,
+      (state, {payload: {id, ...changes}}) => {
+        tasksAdapter.updateOne(state, {id, changes});
+      },
+    );
+
     builder.addCase(getTasks.pending, (state) => {
       state.fetchState.isLoading = true;
       state.fetchState.hasError = false;
@@ -46,4 +53,10 @@ export default tasks.reducer;
 
 export const {resetTasks} = tasks.actions;
 
-export {tasksListSelectors, createTask, selectTasksFetchState, getTasks};
+export {
+  tasksListSelectors,
+  createTask,
+  selectTasksFetchState,
+  getTasks,
+  updateTask,
+};

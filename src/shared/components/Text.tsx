@@ -1,5 +1,5 @@
 import React, {PropsWithChildren, useCallback} from 'react';
-import {Text as RNText, TextProps, TextStyle} from 'react-native';
+import {Text as RNText, TextProps} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import {selectAppTheme} from '../../store/configs';
@@ -10,7 +10,8 @@ type TextTypes =
   | 'subtitle'
   | 'title-grey'
   | 'body'
-  | 'title-medium';
+  | 'title-medium'
+  | 'title-inverse';
 
 interface Props extends TextProps, PropsWithChildren<Text> {
   type?: TextTypes;
@@ -49,6 +50,11 @@ const Text = ({
           color: primaryColor ? theme.primaryColor : theme.secondaryTextColor,
           fontWeight: 'bold',
         };
+      case 'title-inverse':
+        return {
+          color: theme.aboveBackground,
+          fontWeight: 'bold',
+        };
       case 'subtitle':
         return {
           color: primaryColor ? theme.primaryColor : theme.secondaryTextColor,
@@ -56,7 +62,7 @@ const Text = ({
         };
       case 'body': {
         return {
-          color: theme.textColor,
+          color: primaryColor ? theme.primaryColor : theme.textColor,
         };
       }
       default:

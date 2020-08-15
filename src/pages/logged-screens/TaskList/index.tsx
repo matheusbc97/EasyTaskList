@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -20,8 +20,10 @@ import {
   Footer,
   VerticalSeparator,
 } from './styles';
-import {getUserTasks} from '@shared/firebase';
 import {getTasks, tasksListSelectors} from '@store/tasks';
+
+import TaskDetailsModal from '../../../shared/modals/TaskDetailsModal';
+import {Task} from '@shared/models';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -42,6 +44,8 @@ const TaskList: React.FC<Props> = ({navigation}) => {
   const appTheme = useSelector(selectAppTheme);
   const tasks = useSelector(tasksListSelectors.selectAll);
 
+  const [taskSelected, setTaskSelected] = useState<Task | null>(null);
+
   const tasksSections = [
     {
       title: 'HOJE',
@@ -52,6 +56,17 @@ const TaskList: React.FC<Props> = ({navigation}) => {
       data: tasks,
     },
   ];
+
+  const handleTaskDetaisModalEditButtonPress = useCallback(() => {
+    if (taskSelected) {
+      const selectedTask = {
+        ...taskSelected,
+      };
+
+      setTaskSelected(null);
+      navigation.navigate('TaskForm', {task: selectedTask});
+    }
+  }, [navigation, taskSelected]);
 
   return (
     <ScreenWrapper>
@@ -66,7 +81,11 @@ const TaskList: React.FC<Props> = ({navigation}) => {
         </HeaderContent>
       </Header>
       <Body backgroundColor={appTheme.aboveBackground}>
-        <TwoDimensionalTaskList tasks={tasksSections} offset={30} />
+        <TwoDimensionalTaskList
+          tasks={tasksSections}
+          offset={30}
+          onItemPress={setTaskSelected}
+        />
       </Body>
       <View style={{marginHorizontal: 20}}>
         <FooterSeparator />
@@ -78,6 +97,11 @@ const TaskList: React.FC<Props> = ({navigation}) => {
           onPress={() => navigation.navigate('TaskForm')}
         />
       </Footer>
+      <TaskDetailsModal
+        onEditButtonPress={handleTaskDetaisModalEditButtonPress}
+        task={taskSelected}
+        onBackButtonPress={() => setTaskSelected(null)}
+      />
     </ScreenWrapper>
   );
 };

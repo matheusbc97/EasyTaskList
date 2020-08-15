@@ -8,9 +8,14 @@ import {Task} from '@shared/models';
 interface Props {
   tasks: any[];
   offset?: number;
+  onItemPress(task: Task): void;
 }
 
-const TwoDimensionalTaskList: React.FC<Props> = ({tasks, offset = 0}) => {
+const TwoDimensionalTaskList: React.FC<Props> = ({
+  tasks,
+  offset = 0,
+  onItemPress,
+}) => {
   const [tasksScrollEnabled, setTasksScrollEnabled] = useState(false);
   const width = useDimensions().window.width;
 
@@ -23,12 +28,14 @@ const TwoDimensionalTaskList: React.FC<Props> = ({tasks, offset = 0}) => {
       horizontal
       data={tasks}
       renderItem={({item}) => (
-        <View style={{width: width - offset, height: 300}}>
+        <View style={{width: width - offset}}>
           <FlatList<Task>
             nestedScrollEnabled={tasksScrollEnabled}
             data={item.data}
             keyExtractor={(task) => task.id}
-            renderItem={({item: task}) => <TaskListItem task={task} />}
+            renderItem={({item: task}) => (
+              <TaskListItem task={task} onPress={() => onItemPress(task)} />
+            )}
           />
         </View>
       )}

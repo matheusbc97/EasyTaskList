@@ -1,4 +1,4 @@
-import {Category} from '@shared/models';
+import {Category, Task} from '@shared/models';
 
 export type UnauthenticatedStackParams = {
   Login: undefined;
@@ -10,7 +10,8 @@ export type UnauthenticatedStackParams = {
 export type AuthenticatedStackParams = {
   BottomNavigation: undefined;
   TaskForm: {
-    chosenCategory: Category | undefined;
+    chosenCategory?: Category;
+    task?: Task;
   };
   CategorySearch: undefined;
 };

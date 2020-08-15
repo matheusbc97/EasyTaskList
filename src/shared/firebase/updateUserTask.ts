@@ -1,6 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 
-interface CreateTaskOnFirebaseDTO {
+interface UpdateTaskOnFirebaseDTO {
+  id: string;
   title: string;
   description: string;
   date: string;
@@ -8,16 +9,14 @@ interface CreateTaskOnFirebaseDTO {
   done: boolean;
 }
 
-export const createUserTask = async (
+export const updateUserTask = async (
   userUid: string,
-  category: CreateTaskOnFirebaseDTO,
+  {id, ...rest}: UpdateTaskOnFirebaseDTO,
 ) => {
   try {
-    const response = await firestore()
-      .collection(`users/${userUid}/tasks`)
-      .add(category);
+    await firestore().doc(`users/${userUid}/tasks/${id}`).update(rest);
 
-    return response.id;
+    return;
   } catch (error) {
     throw new Error(error);
   }
