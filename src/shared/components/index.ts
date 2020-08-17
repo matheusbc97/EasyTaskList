@@ -16,6 +16,8 @@ import OutlineButton from './OutlineButton';
 import AnimatedBackground from './AnimatedBackground';
 import Toast from './Toast';
 import LoadingHandler from './LoadingHandler';
+import CategoryListItem from './CategoryListItem';
+import FloatingActionButton from './FloatingActionButton';
 
 export {
   Avatar,
@@ -36,4 +38,6 @@ export {
   AnimatedBackground,
   Toast,
   LoadingHandler,
+  CategoryListItem,
+  FloatingActionButton,
 };

@@ -14,7 +14,7 @@ import {
 } from '@store/categories';
 import {Category} from '@shared/models';
 
-import CategoryListItem from './CategoryListItem';
+import CategorySearchListItem from './CategorySearchListItem';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategorySearch'>;
@@ -54,7 +54,10 @@ const CategorySearch: React.FC<Props> = ({navigation}) => {
       <FlatList
         data={categories}
         renderItem={({item}) => (
-          <CategoryListItem category={item} onPress={handleChosenCategory} />
+          <CategorySearchListItem
+            category={item}
+            onPress={handleChosenCategory}
+          />
         )}
       />
     </ScreenWrapper>

@@ -7,6 +7,7 @@ import {signInWithEmailAndPassword} from './signInWithEmailAndPassword';
 import {updateUserData} from './updateUserData';
 import {getUserTasks} from './getUserTasks';
 import {updateUserTask} from './updateUserTask';
+import {createUserCategory} from './creatUserCategory';
 
 export {
   createUserProfileDocument,
@@ -18,4 +19,5 @@ export {
   updateUserData,
   getUserTasks,
   updateUserTask,
+  createUserCategory,
 };

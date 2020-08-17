@@ -23,14 +23,4 @@ export default StyleSheet.create({
     elevation: 2,
   },
   title: {marginHorizontal: 20, marginTop: 30},
-  cartegoryListItem: {
-    height: 120,
-    width: 120,
-    //backgroundColor: '#34cbb6',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 5,
-    marginVertical: 10,
-    borderRadius: 10,
-  },
 });

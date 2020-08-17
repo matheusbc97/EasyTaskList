@@ -7,10 +7,15 @@ import {
   Avatar,
   TwoDimensionalTaskList,
   Text,
+  CategoryListItem,
 } from '@shared/components';
 
+import {useSelector} from 'react-redux';
+import {selectUser} from '@store/account/user';
+import {useFormatDate} from '@shared/hooks';
+import {categoryListSelectors} from '@store/categories';
+
 import styles from './styles';
-import CategoryListItem from './CategoryListItem';
 
 //type HomeNavigationProp = StackNavigationProp<RootStackParams, 'DrawerStack'>;
 
@@ -19,6 +24,10 @@ interface Props {
 }
 
 const Home = ({}: Props) => {
+  const user = useSelector(selectUser);
+  const lsCategories = useSelector(categoryListSelectors.selectAll);
+  const formatDate = useFormatDate();
+
   const tasks = [
     {
       title: 'HOJE',
@@ -47,10 +56,10 @@ const Home = ({}: Props) => {
           if (item === 1) {
             return (
               <View style={styles.header}>
-                <Avatar avatarNumber={1} size={50} />
+                <Avatar avatarNumber={user?.avatar} size={50} />
                 <View style={styles.headerContent}>
-                  <Text type="title-medium">Olá, João</Text>
-                  <Text>06 de Abril, 2020</Text>
+                  <Text type="title-medium">Olá, {user?.name}</Text>
+                  <Text>{formatDate(new Date(), 'dateOfMotnhAndYear')}</Text>
                 </View>
               </View>
             );
@@ -66,10 +75,10 @@ const Home = ({}: Props) => {
                   <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal
-                    data={[1, 5, 8, 2, 1, 3]}
+                    data={lsCategories}
                     keyExtractor={(item, index) => index.toString()}
-                    renderItem={({item}) => (
-                      <CategoryListItem colorIndex={item} />
+                    renderItem={({item: category}) => (
+                      <CategoryListItem category={category} />
                     )}
                   />
                 </View>
@@ -96,7 +105,11 @@ const Home = ({}: Props) => {
                     </Text>
                   ))}
                 </View>
-                <TwoDimensionalTaskList tasks={tasks} offset={30} />
+                <TwoDimensionalTaskList
+                  tasks={tasks}
+                  offset={30}
+                  onItemPress={() => {}}
+                />
               </View>
             </View>
           );

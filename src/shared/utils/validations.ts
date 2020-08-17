@@ -8,7 +8,7 @@ export function validateField(
 ) {
   switch (fieldName) {
     case 'name':
-      if (value === '') {
+      if (!value) {
         return emptyText('nome');
       }
 

@@ -15,19 +15,21 @@ import {
 } from './types';
 import {selectIsLogged, selectAppTheme} from '../store/configs';
 
-import Login from '../pages/account/Login';
-import Home from '../pages/logged-screens/Home';
-import Welcome from '../pages/account/Welcome';
-import RegisterForm from '../pages/account/RegisterForm';
-import TaskList from '../pages/logged-screens/TaskList';
-import ChooseUserConfigurations from '../pages/account/ChooseUserConfigurations';
-import More from '../pages/logged-screens/More';
-import Statistics from '../pages/logged-screens/Statistics';
-import Calendar from '../pages/logged-screens/Calendar';
-import CategorySearch from '../pages/logged-screens/CategorySearch';
+import Login from '@pages/account/Login';
+import Home from '@pages/logged-screens/Home';
+import Welcome from '@pages/account/Welcome';
+import RegisterForm from '@pages/account/RegisterForm';
+import TaskList from '@pages/logged-screens/TaskList';
+import ChooseUserConfigurations from '@pages/account/ChooseUserConfigurations';
+import More from '@pages/logged-screens/More';
+//import Statistics from '@pages/logged-screens/Statistics';
+import Calendar from '@pages/logged-screens/Calendar';
+import CategorySearch from '@pages/logged-screens/CategorySearch';
+import CategoryList from '@pages/logged-screens/CategoryList';
+import CategoryForm from '@pages/logged-screens/CategoryForm';
 
 import BottonTabNavigator from './BottonTabNavigator';
-import TaskForm from '../pages/logged-screens/TaskForm';
+import TaskForm from '@pages/logged-screens/TaskForm';
 import {verifyIfUserIsLogged} from '@store/account/user/thunkActions';
 
 const Tab = createBottomTabNavigator<BottomNavigatorStackParams>();
@@ -66,7 +68,7 @@ function MyTabs() {
           ),
         }}
       />
-      <Tab.Screen
+      {/*<Tab.Screen
         name="Calendar"
         component={Calendar}
         options={{
@@ -75,14 +77,14 @@ function MyTabs() {
             <FontAwesomeIcon name="calendar" size={22} color={color} />
           ),
         }}
-      />
+      />*/}
       <Tab.Screen
-        name="Statistics"
-        component={Statistics}
+        name="CategoryList"
+        component={CategoryList}
         options={{
-          title: 'Estatísticas',
+          title: 'Categorias',
           tabBarIcon: ({color}) => (
-            <FontAwesomeIcon name="chart-bar" size={22} color={color} />
+            <FontAwesomeIcon name="folder" size={22} color={color} />
           ),
         }}
       />
@@ -134,6 +136,10 @@ const App = () => {
           <AuthenticatedStack.Screen
             name="CategorySearch"
             component={CategorySearch}
+          />
+          <AuthenticatedStack.Screen
+            name="CategoryForm"
+            component={CategoryForm}
           />
         </AuthenticatedStack.Navigator>
       ) : (

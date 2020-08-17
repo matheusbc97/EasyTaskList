@@ -70,6 +70,19 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
 
   const formatDate = useFormatDate();
 
+  const getDateByDateAndTime = useCallback((date: string, time: string) => {
+    const formTime = new Date(time);
+    const formDate = new Date(date);
+
+    return new Date(
+      formDate.getFullYear(),
+      formDate.getMonth(),
+      formDate.getDate(),
+      formTime.getHours(),
+      formTime.getMinutes(),
+    ).toString();
+  }, []);
+
   const handleFormSubmit = useCallback(
     (form: FormData) => {
       if (!task) {
@@ -80,7 +93,7 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
         const newTask = {
           title: form.title,
           category: chosenCategory,
-          date: form.date,
+          date: getDateByDateAndTime(form.date, form.time),
           description: form.description,
         };
 
@@ -98,7 +111,7 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
         title: form.title,
         description: form.description,
         category: chosenCategory ? chosenCategory : task.category!,
-        date: form.date,
+        date: getDateByDateAndTime(form.date, form.time),
       };
 
       dispatch(updateTask(updatedTask)).then((action) => {
@@ -109,7 +122,7 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
 
       return;
     },
-    [chosenCategory, dispatch, navigation, task],
+    [chosenCategory, dispatch, navigation, task, getDateByDateAndTime],
   );
 
   useEffect(() => {

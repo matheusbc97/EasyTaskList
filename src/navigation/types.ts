@@ -14,13 +14,14 @@ export type AuthenticatedStackParams = {
     task?: Task;
   };
   CategorySearch: undefined;
+  CategoryForm: undefined;
 };
 
 export type BottomNavigatorStackParams = {
   Home: undefined;
   TaskList: undefined;
   More: undefined;
-  Statistics: undefined;
+  CategoryList: undefined;
   Calendar: undefined;
 };
 
