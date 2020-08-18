@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useRef, useState, useMemo} from 'react';
 
 import {
   Text,
@@ -36,23 +36,28 @@ import {validateAll} from '@shared/utils/validations';
 import {showToast} from '@shared/components/Toast';
 import {useValidateField} from '@shared/hooks';
 import {Category} from '@shared/models';
-import {createCategory} from '@store/categories';
+import {createCategory, updateCategory} from '@store/categories';
+import {RouteProp} from '@react-navigation/native';
 
 interface Props {
-  navigation: StackNavigationProp<AuthenticatedStackParams, 'TaskForm'>;
+  navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryForm'>;
+  route: RouteProp<AuthenticatedStackParams, 'CategoryForm'>;
 }
 
 interface FormData {
   name: string;
 }
 
-const CategoryForm: React.FC<Props> = ({navigation}) => {
+const CategoryForm: React.FC<Props> = ({navigation, route}) => {
+  const {category} = route.params;
+
   const formRef = useRef<FormHandles>(null);
 
   const [
     categoryColorModalIsVisible,
     setCategoryColorModalIsVisible,
   ] = useState(false);
+
   const [categoryIconModalIsVisible, setCategoryIconModalIsVisible] = useState(
     false,
   );
@@ -65,6 +70,21 @@ const CategoryForm: React.FC<Props> = ({navigation}) => {
 
   const [selectedColorIndex, setSelectedColorIndex] = useState(-1);
   const [iconIndex, setIconIndex] = useState(-1);
+
+  const initialData = useMemo<undefined | FormData>(() => {
+    if (!category) {
+      return undefined;
+    }
+
+    const _initialData: FormData = {
+      name: category.name,
+    };
+
+    setIconIndex(category.iconIndex);
+    setSelectedColorIndex(category.colorIndex);
+
+    return _initialData;
+  }, [category]);
 
   const handleFormSubmit = useCallback(
     (form: FormData) => {
@@ -81,6 +101,7 @@ const CategoryForm: React.FC<Props> = ({navigation}) => {
             text: 'Cor Obrigatória',
           }),
         );
+        return;
       }
 
       if (iconIndex === -1) {
@@ -89,21 +110,39 @@ const CategoryForm: React.FC<Props> = ({navigation}) => {
             text: 'Ícone Obrigatório',
           }),
         );
+        return;
       }
 
-      const newCategory: Omit<Category, 'id'> = {
+      if (!category) {
+        const newCategory: Omit<Category, 'id'> = {
+          colorIndex: selectedColorIndex,
+          name: form.name,
+          iconIndex: iconIndex,
+        };
+
+        dispatch(createCategory(newCategory)).then((action) => {
+          if (action.payload) {
+            navigation.pop();
+          }
+        });
+
+        return;
+      }
+
+      const updatedCategory: Category = {
+        id: category.id,
         colorIndex: selectedColorIndex,
         name: form.name,
         iconIndex: iconIndex,
       };
 
-      dispatch(createCategory(newCategory)).then((action) => {
+      dispatch(updateCategory(updatedCategory)).then((action) => {
         if (action.payload) {
           navigation.pop();
         }
       });
     },
-    [dispatch, selectedColorIndex, iconIndex, navigation],
+    [dispatch, selectedColorIndex, iconIndex, navigation, category],
   );
 
   return (
@@ -126,8 +165,7 @@ const CategoryForm: React.FC<Props> = ({navigation}) => {
             <Form
               onSubmit={handleFormSubmit}
               ref={formRef}
-              //initialData={initialData}
-            >
+              initialData={initialData}>
               <TextInput
                 name="name"
                 label="Nome"

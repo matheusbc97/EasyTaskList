@@ -35,7 +35,6 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
           subComponents.push(
             <TouchableOpacity
               onPress={() => {
-                console.log('kk');
                 onColorPress(index + j);
               }}
               style={{elevation: 5}}

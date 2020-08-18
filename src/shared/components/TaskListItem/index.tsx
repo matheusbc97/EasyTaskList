@@ -16,6 +16,7 @@ import {
 import {Task} from '@shared/models';
 import formatDate from '@shared/utils/fomatDate';
 import {View} from 'react-native';
+import categoryIconNames from '@assets/categoryIconNames';
 
 interface Props {
   task: Task;
@@ -29,7 +30,7 @@ const TaskListItem: React.FC<Props> = ({task, onPress}) => {
     <ContainerButton onPress={onPress}>
       <IconContainer backgroundColor={color}>
         <FontAwesomeIcon
-          name="users"
+          name={categoryIconNames[task.category?.iconIndex]}
           size={25}
           color="#FFF"
           style={{marginLeft: 5}}

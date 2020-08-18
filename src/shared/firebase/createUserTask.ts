@@ -4,18 +4,23 @@ interface CreateTaskOnFirebaseDTO {
   title: string;
   description: string;
   date: string;
-  categoryRef: string;
+  categoryId: string;
   done: boolean;
 }
 
 export const createUserTask = async (
   userUid: string,
-  category: CreateTaskOnFirebaseDTO,
+  {categoryId, ...task}: CreateTaskOnFirebaseDTO,
 ) => {
   try {
     const response = await firestore()
       .collection(`users/${userUid}/tasks`)
-      .add(category);
+      .add({
+        categoryRef: firestore().doc(
+          `users/${userUid}/categories/${categoryId}`,
+        ),
+        task,
+      });
 
     return response.id;
   } catch (error) {

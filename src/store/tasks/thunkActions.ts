@@ -45,9 +45,7 @@ export const createTask = createAsyncThunk(
       );
 
       const taskId = await createUserTask(user!.uid, {
-        categoryRef: `/users/73tLB56OgrOjSApFhZUFKyUzJaA3/categories/${
-          category!.id
-        }`,
+        categoryId: category!.id,
         ...rest,
         done: false,
       });

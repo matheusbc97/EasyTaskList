@@ -1,6 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {getUserCategories, createCategory} from './thunkActions';
+import {
+  getUserCategories,
+  createCategory,
+  updateCategory,
+} from './thunkActions';
 import {selectCategoriesFetchState, categoryListSelectors} from './selectors';
 import {categoryAdapter} from './adapters';
 import {Category} from '@shared/models';
@@ -45,6 +49,13 @@ const categories = createSlice({
     builder.addCase(createCategory.fulfilled, (state, action) => {
       categoryAdapter.addOne(state, action.payload);
     });
+
+    builder.addCase(
+      updateCategory.fulfilled,
+      (state, {payload: {id, ...changes}}) => {
+        categoryAdapter.updateOne(state, {id, changes});
+      },
+    );
   },
 });
 
@@ -57,4 +68,5 @@ export {
   selectCategoriesFetchState,
   categoryListSelectors,
   createCategory,
+  updateCategory,
 };

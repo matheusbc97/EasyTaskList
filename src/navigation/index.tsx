@@ -140,6 +140,7 @@ const App = () => {
           <AuthenticatedStack.Screen
             name="CategoryForm"
             component={CategoryForm}
+            initialParams={{}}
           />
         </AuthenticatedStack.Navigator>
       ) : (

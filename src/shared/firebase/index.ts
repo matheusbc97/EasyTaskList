@@ -8,6 +8,7 @@ import {updateUserData} from './updateUserData';
 import {getUserTasks} from './getUserTasks';
 import {updateUserTask} from './updateUserTask';
 import {createUserCategory} from './creatUserCategory';
+import {updateUserCategory} from './updateUserCategory';
 
 export {
   createUserProfileDocument,
@@ -20,4 +21,5 @@ export {
   getUserTasks,
   updateUserTask,
   createUserCategory,
+  updateUserCategory,
 };

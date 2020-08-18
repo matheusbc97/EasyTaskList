@@ -10,14 +10,16 @@ import categoryIconNames from '@assets/categoryIconNames';
 
 interface Props {
   category: Category;
+  onPress(): void;
 }
 
-const CategoryListItem: React.FC<Props> = ({category}) => {
+const CategoryListItem: React.FC<Props> = ({category, onPress}) => {
   return (
     <TouchableOpacity
+      onPress={onPress}
       style={{
-        height: 110,
-        width: 110,
+        height: 90,
+        width: 90,
         marginHorizontal: 5,
         marginVertical: 10,
       }}>
@@ -38,7 +40,7 @@ const CategoryListItem: React.FC<Props> = ({category}) => {
         }}>
         <FontAwesomeIcon
           name={categoryIconNames[category.iconIndex]}
-          size={75}
+          size={62}
           color="#fff"
           style={{opacity: 0.2, marginBottom: 10}}
         />

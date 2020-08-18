@@ -44,3 +44,22 @@ export const createCategory = createAsyncThunk(
     }
   },
 );
+
+export const updateCategory = createAsyncThunk(
+  'categories/updateCategory',
+  async (category: Category, {getState}): Promise<Category> => {
+    try {
+      loaderHandler.showLoader();
+      const user = selectUser(getState() as RootState);
+
+      await createUserCategory(user!.uid, category);
+
+      loaderHandler.hideLoader();
+
+      return category;
+    } catch (error) {
+      handleErrorMessage(error);
+      throw new Error(error);
+    }
+  },
+);

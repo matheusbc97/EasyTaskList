@@ -14,7 +14,9 @@ export type AuthenticatedStackParams = {
     task?: Task;
   };
   CategorySearch: undefined;
-  CategoryForm: undefined;
+  CategoryForm: {
+    category?: Category;
+  };
 };
 
 export type BottomNavigatorStackParams = {
