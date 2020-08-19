@@ -220,6 +220,7 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
       />
 
       <ChooseCategoryIconModal
+        onBackButtonPress={() => setCategoryIconModalIsVisible(false)}
         isVisible={categoryIconModalIsVisible}
         onIconPress={(iconIndex) => {
           setIconIndex(iconIndex);

@@ -9,6 +9,7 @@ import {getUserTasks} from './getUserTasks';
 import {updateUserTask} from './updateUserTask';
 import {createUserCategory} from './creatUserCategory';
 import {updateUserCategory} from './updateUserCategory';
+import {getInitialCategories} from './getInitialCategories';
 
 export {
   createUserProfileDocument,
@@ -22,4 +23,5 @@ export {
   updateUserTask,
   createUserCategory,
   updateUserCategory,
+  getInitialCategories,
 };

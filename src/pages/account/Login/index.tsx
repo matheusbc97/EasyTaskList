@@ -74,7 +74,9 @@ const Login = ({navigation}: Props) => {
             onPress={() => formRef.current?.submitForm()}
           />
         </View>
-        <TouchableOpacity style={styles.registerButton} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.registerButton}
+          onPress={() => navigation.navigate('RegisterForm')}>
           <Text>Não tem cadastro? Cadastre-se</Text>
         </TouchableOpacity>
       </View>

@@ -32,8 +32,11 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
 
       for (let j = 0; j < 5; j++) {
         if (index + j < categoryColors.length) {
+          const color1 = categoryColors[index + j].color1;
+          const color2 = categoryColors[index + j].color2;
           subComponents.push(
             <TouchableOpacity
+              key={`${color1}-${color2}`}
               onPress={() => {
                 onColorPress(index + j);
               }}
@@ -50,10 +53,7 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
                 }}
                 start={{x: 0, y: 0}}
                 end={{x: 1, y: 1}}
-                colors={[
-                  categoryColors[index + j].color1,
-                  categoryColors[index + j].color2,
-                ]}
+                colors={[color1, color2]}
               />
             </TouchableOpacity>,
           );
@@ -62,6 +62,7 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
 
       components.push(
         <View
+          key={`row-category-color-${index}`}
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',

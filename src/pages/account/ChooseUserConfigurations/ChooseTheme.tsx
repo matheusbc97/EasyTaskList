@@ -33,9 +33,9 @@ const ChooseTheme: React.FC<Props> = ({onAdvancePress}) => {
           <ThemeBox theme={'BLUE_GREEN'} onPress={handleThemeChoose} />
           <ThemeBox theme={'BLUE_RED'} onPress={handleThemeChoose} />
         </View>
-        <View style={styles.themRowAlignCenter}>
+        {/*<View style={styles.themRowAlignCenter}>
           <ThemeBox theme={'DARK'} onPress={handleThemeChoose} />
-        </View>
+  </View>*/}
       </View>
       <RoudedButton text="AVANÇAR" onPress={onAdvancePress} />
     </View>

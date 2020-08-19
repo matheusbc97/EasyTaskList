@@ -1,11 +1,13 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {UserBeforeIsLoggedDTO} from '@shared/models/UserBeforeIsLoggedDTO';
+import {getInitialCategories} from './getInitialCategories';
+import {Category} from '@shared/models';
 
 export const createUserProfileDocument = async (
   email: string,
   password: string,
-): Promise<UserBeforeIsLoggedDTO> => {
+): Promise<{user: UserBeforeIsLoggedDTO; categories: Category[]}> => {
   try {
     const {user} = await auth().createUserWithEmailAndPassword(email, password);
 
@@ -17,18 +19,30 @@ export const createUserProfileDocument = async (
 
     const snapshot = await userRef.get();
 
+    let initialCategories: Category[] = [];
+
     if (!snapshot.exists) {
       // const createdAt = new Date();
 
+      initialCategories = await getInitialCategories();
+
       await userRef.set({
         email,
-        //createdAt,
       });
+
+      const promises = initialCategories.map((category) =>
+        firestore().collection(`users/${user.uid}/categories`).add(category),
+      );
+
+      await Promise.all(promises);
     }
 
     return {
-      email,
-      uid: user.uid,
+      user: {
+        email,
+        uid: user.uid,
+      },
+      categories: initialCategories,
     };
   } catch (error) {
     throw new Error(error);

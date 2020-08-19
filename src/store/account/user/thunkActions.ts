@@ -14,7 +14,7 @@ import {UserBeforeIsLoggedDTO} from '@shared/models/UserBeforeIsLoggedDTO';
 import {selectUser} from './selectors';
 import {setCategories} from '../../categories';
 import {RootState} from '@store/index';
-import {Dictionary, User} from '@shared/models';
+import {Dictionary, User, AppThemeName} from '@shared/models';
 
 import * as appThemes from '@assets/themes';
 
@@ -62,10 +62,15 @@ export const authenticateUser = createAsyncThunk(
 
 export const registerUser = createAsyncThunk(
   'account/user/register',
-  async ({email, password}: AuthCredentials) => {
+  async ({email, password}: AuthCredentials, {dispatch}) => {
     try {
       loaderHandler.showLoader();
-      const user = await createUserProfileDocument(email, password);
+      const {user, categories} = await createUserProfileDocument(
+        email,
+        password,
+      );
+
+      dispatch(setCategories(categories));
 
       loaderHandler.hideLoader();
       return user;
@@ -106,7 +111,7 @@ export const verifyIfUserIsLogged = createAsyncThunk(
         return null;
       }
 
-      const {user, isOnFirestore} = response;
+      let {user, isOnFirestore} = response;
 
       if (!isOnFirestore) {
         loaderHandler.hideLoader();
@@ -117,6 +122,10 @@ export const verifyIfUserIsLogged = createAsyncThunk(
 
       dispatch(setCategories(categories));
       dispatch(setIsLogged(true));
+
+      const theme = user!.theme as AppThemeName;
+
+      dispatch(setAppTheme(appThemes[theme]));
       loaderHandler.hideLoader();
       return user as User;
     } catch (error) {

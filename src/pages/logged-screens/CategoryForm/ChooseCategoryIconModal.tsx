@@ -1,16 +1,48 @@
 import React, {useCallback} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 
+import styled from 'styled-components/native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import Modal from 'react-native-modal';
+
 import categoryIconNames from '@assets/categoryIconNames';
+import {Text} from '@shared/components';
+
+const Title = styled(Text)`
+  align-self: center;
+  margin: 10px 0 10px;
+`;
+
+const Container = styled.View`
+  background-color: #fafafa;
+  border-radius: 2px;
+  padding: 5px 5px;
+`;
+
+const IconButton = styled.TouchableOpacity`
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Row = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px 0 5px;
+`;
 
 interface Props {
   isVisible: boolean;
   onIconPress(iconIndex: number): void;
+  onBackButtonPress(): void;
 }
 
-const ChooseCategoryIconModal: React.FC<Props> = ({isVisible, onIconPress}) => {
+const ChooseCategoryIconModal: React.FC<Props> = ({
+  isVisible,
+  onIconPress,
+  onBackButtonPress,
+}) => {
   const getIcons = useCallback(() => {
     const components: any[] = [];
 
@@ -20,44 +52,30 @@ const ChooseCategoryIconModal: React.FC<Props> = ({isVisible, onIconPress}) => {
       for (let j = 0; j < 5; j++) {
         if (index + j < categoryIconNames.length) {
           subComponents.push(
-            <TouchableOpacity
+            <IconButton
               onPress={() => {
                 onIconPress(index + j);
-              }}
-              style={{
-                width: 50,
-                height: 50,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              //key={index}
-            >
+              }}>
               <FontAwesomeIcon name={categoryIconNames[index + j]} size={25} />
-            </TouchableOpacity>,
+            </IconButton>,
           );
         }
       }
 
-      components.push(
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginVertical: 5,
-          }}>
-          {subComponents}
-        </View>,
-      );
+      components.push(<Row>{subComponents}</Row>);
     }
 
     return components;
   }, [onIconPress]);
 
   return (
-    <Modal isVisible={isVisible}>
-      <View style={{backgroundColor: '#fafafa', borderRadius: 2}}>
+    <Modal isVisible={isVisible} onBackButtonPress={onBackButtonPress}>
+      <Container>
+        <Title type="title-big" primaryColor>
+          Selecionar Ícone
+        </Title>
         {getIcons()}
-      </View>
+      </Container>
     </Modal>
   );
 };
