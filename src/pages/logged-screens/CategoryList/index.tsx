@@ -11,7 +11,6 @@ import {
 } from '@shared/components';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthenticatedStackParams} from '@navigation/types';
-import {map} from 'lodash';
 
 type CategoryListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -35,14 +34,18 @@ const CategoryList: React.FC<Props> = ({navigation}) => {
   return (
     <ScreenWrapper>
       <FlatList
+        keyExtractor={(item, index) => index.toString()}
         data={array}
         style={{paddingHorizontal: 5}}
         renderItem={({index: i}) => {
           const lsCategoryListItems = [];
 
           for (let j = 0; j < rows; j++) {
-            if (i * rows + j > lsCategories.length - 1) {
-              lsCategoryListItems.push(<View style={{width: 100}} />);
+            const indice = i * rows + j;
+            if (indice > lsCategories.length - 1) {
+              lsCategoryListItems.push(
+                <View style={{width: 115}} key={indice + 'empty'} />,
+              );
 
               continue;
             }
@@ -51,6 +54,7 @@ const CategoryList: React.FC<Props> = ({navigation}) => {
 
             lsCategoryListItems.push(
               <CategoryListItem
+                key={category.id}
                 category={category}
                 onPress={() => navigation.navigate('CategoryForm', {category})}
               />,

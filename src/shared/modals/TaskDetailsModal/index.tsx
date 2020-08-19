@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 
 import Modal from 'react-native-modal';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {Checkbox} from 'react-native-paper';
+import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import {Text} from '@shared/components';
@@ -19,6 +20,8 @@ import {
   FooterButton,
 } from './styles';
 import {selectAppTheme} from '@store/configs';
+import {updateTaskStatus} from '@store/tasks/thunkActions';
+import categoryIconNames from '@assets/categoryIconNames';
 
 interface Props {
   isVisible?: boolean;
@@ -35,10 +38,9 @@ const TaskDetailsModal: React.FC<Props> = ({
 }) => {
   const color = useCategoryColor(task?.category);
   const {primaryColor} = useSelector(selectAppTheme);
+  const dispatch = useDispatch();
 
   const formatDate = useFormatDate();
-
-  const [isDone, setIsDone] = useState(task?.done ? true : false);
 
   return (
     <Modal
@@ -55,8 +57,8 @@ const TaskDetailsModal: React.FC<Props> = ({
 
         <CategoryContainer>
           <IconContainer backgroundColor={color}>
-            <FontAwesomeIcon
-              name="users"
+            <FontAwesomeIcon5
+              name={categoryIconNames[task?.category?.iconIndex]}
               size={25}
               color="#FFF"
               style={{marginLeft: 5}}
@@ -70,9 +72,13 @@ const TaskDetailsModal: React.FC<Props> = ({
 
         <Text>{task?.description}</Text>
 
-        <DoneCheckButton onPress={() => setIsDone(!isDone)}>
-          <Checkbox status={isDone ? 'checked' : 'unchecked'} />
-          <Text>{isDone ? 'Feito' : 'Não feito'}</Text>
+        <DoneCheckButton
+          onPress={() => {
+            onBackButtonPress();
+            dispatch(updateTaskStatus({id: task!.id, done: !task?.done}));
+          }}>
+          <Checkbox status={task?.done ? 'checked' : 'unchecked'} />
+          <Text>{task?.done ? 'Feito' : 'Não feito'}</Text>
         </DoneCheckButton>
 
         <Footer>

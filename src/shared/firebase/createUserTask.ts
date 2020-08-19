@@ -10,7 +10,7 @@ interface CreateTaskOnFirebaseDTO {
 
 export const createUserTask = async (
   userUid: string,
-  {categoryId, ...task}: CreateTaskOnFirebaseDTO,
+  {categoryId, ...rest}: CreateTaskOnFirebaseDTO,
 ) => {
   try {
     const response = await firestore()
@@ -19,7 +19,7 @@ export const createUserTask = async (
         categoryRef: firestore().doc(
           `users/${userUid}/categories/${categoryId}`,
         ),
-        task,
+        ...rest,
       });
 
     return response.id;

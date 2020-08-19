@@ -68,7 +68,7 @@ export const TaskStatusContainer = styled.View`
   width: 76px;
   height: 18px;
   margin-top: 2px;
-  background-color: #f6c02a;
+  background-color: #00ff80;
   justify-content: center;
   align-items: center;
   border-radius: 5px;

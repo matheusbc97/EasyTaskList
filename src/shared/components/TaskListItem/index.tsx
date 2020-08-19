@@ -14,9 +14,9 @@ import {
   BodyBottom,
 } from './styles';
 import {Task} from '@shared/models';
-import formatDate from '@shared/utils/fomatDate';
 import {View} from 'react-native';
 import categoryIconNames from '@assets/categoryIconNames';
+import {useFormatDate} from '@shared/hooks';
 
 interface Props {
   task: Task;
@@ -25,6 +25,8 @@ interface Props {
 
 const TaskListItem: React.FC<Props> = ({task, onPress}) => {
   const color = useCategoryColor(task.category);
+
+  const formatDate = useFormatDate();
 
   return (
     <ContainerButton onPress={onPress}>
@@ -41,18 +43,22 @@ const TaskListItem: React.FC<Props> = ({task, onPress}) => {
         <View style={{flex: 1}}>
           <Text type="title">{task.title}</Text>
           <BodyBottom>
-            <Text style={{flex: 1}}>{formatDate(task.date, "HH:mm'h'")}</Text>
-            <TaskStatusContainer>
-              <Text type="title-inverse" style={{fontSize: 12.5}}>
-                Andamento
-              </Text>
-            </TaskStatusContainer>
+            <Text style={{flex: 1}}>{formatDate(task.date, 'time')}</Text>
+            {task.done && (
+              <TaskStatusContainer>
+                <Text type="title-inverse" style={{fontSize: 12.5}}>
+                  Feita
+                </Text>
+              </TaskStatusContainer>
+            )}
           </BodyBottom>
         </View>
 
         <Separator color={color} />
 
-        <DateAndMonthText>HOJE</DateAndMonthText>
+        <DateAndMonthText>
+          {formatDate(task.date, 'dateOfMonth').toUpperCase()}
+        </DateAndMonthText>
       </Body>
     </ContainerButton>
   );

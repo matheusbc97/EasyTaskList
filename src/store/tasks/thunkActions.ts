@@ -6,6 +6,8 @@ import {Task, Category} from '@shared/models';
 import {selectUser} from '@store/account/user';
 import {RootState} from '..';
 import {categoryListSelectors} from '@store/categories';
+import {loaderHandler} from '@shared/components/LoadingHandler';
+import {showToast} from '@shared/components/Toast';
 
 export const getTasks = createAsyncThunk(
   'tasks/getTasks',
@@ -39,6 +41,7 @@ export const createTask = createAsyncThunk(
   'tasks/createTask',
   async ({category, ...rest}: CreateTaskDTO, {getState}): Promise<Task> => {
     try {
+      loaderHandler.showLoader();
       const user = selectUser(getState() as RootState);
       const categories = categoryListSelectors.selectAll(
         getState() as RootState,
@@ -49,6 +52,8 @@ export const createTask = createAsyncThunk(
         ...rest,
         done: false,
       });
+
+      loaderHandler.hideLoader();
 
       return {
         id: taskId,
@@ -75,6 +80,7 @@ export const updateTask = createAsyncThunk(
   'tasks/updateTask',
   async ({category, ...rest}: UpdateTaskDTO, {getState}): Promise<Task> => {
     try {
+      loaderHandler.showLoader();
       const user = selectUser(getState() as RootState);
       const categories = categoryListSelectors.selectAll(
         getState() as RootState,
@@ -88,11 +94,45 @@ export const updateTask = createAsyncThunk(
         done: false,
       });
 
+      loaderHandler.hideLoader();
+
       return {
         category: categories.find((item) => item.id === category.id),
         done: false,
         ...rest,
       };
+    } catch (error) {
+      handleErrorMessage(error);
+      throw new Error(error);
+    }
+  },
+);
+
+interface UpdateTaskStatusDTO {
+  id: string;
+  done: boolean;
+}
+
+export const updateTaskStatus = createAsyncThunk(
+  'tasks/updateTaskStatus',
+  async (
+    updates: UpdateTaskStatusDTO,
+    {getState},
+  ): Promise<UpdateTaskStatusDTO> => {
+    try {
+      loaderHandler.showLoader();
+      const user = selectUser(getState() as RootState);
+
+      await updateUserTask(user!.uid, updates);
+
+      loaderHandler.hideLoader();
+      showToast({
+        type: 'success',
+        text: updates.done
+          ? 'Tarefa Marcada como feita!'
+          : 'Tarefa marcada como não feita',
+      });
+      return updates;
     } catch (error) {
       handleErrorMessage(error);
       throw new Error(error);

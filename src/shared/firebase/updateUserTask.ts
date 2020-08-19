@@ -2,11 +2,11 @@ import firestore from '@react-native-firebase/firestore';
 
 interface UpdateTaskOnFirebaseDTO {
   id: string;
-  title: string;
-  description: string;
-  date: string;
-  categoryRef: string;
-  done: boolean;
+  title?: string;
+  description?: string;
+  date?: string;
+  categoryRef?: string;
+  done?: boolean;
 }
 
 export const updateUserTask = async (

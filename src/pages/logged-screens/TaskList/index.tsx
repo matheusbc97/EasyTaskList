@@ -6,8 +6,10 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {
   Text,
   ScreenWrapper,
-  TwoDimensionalTaskList,
+  //TwoDimensionalTaskList,
   OutlineButton,
+  TaskListItem,
+  FlatListWithFetchIndicator,
 } from '@shared/components';
 import {selectAppTheme} from '@store/configs';
 import {AuthenticatedStackParams} from '@navigation/types';
@@ -20,7 +22,11 @@ import {
   Footer,
   VerticalSeparator,
 } from './styles';
-import {getTasks, tasksListSelectors} from '@store/tasks';
+import {
+  getTasks,
+  tasksListSelectors,
+  selectTasksFetchState,
+} from '@store/tasks';
 
 import TaskDetailsModal from '../../../shared/modals/TaskDetailsModal';
 import {Task} from '@shared/models';
@@ -43,10 +49,11 @@ const TaskList: React.FC<Props> = ({navigation}) => {
 
   const appTheme = useSelector(selectAppTheme);
   const tasks = useSelector(tasksListSelectors.selectAll);
+  const fetchState = useSelector(selectTasksFetchState);
 
   const [taskSelected, setTaskSelected] = useState<Task | null>(null);
 
-  const tasksSections = [
+  /*const tasksSections = [
     {
       title: 'HOJE',
       data: tasks,
@@ -55,7 +62,7 @@ const TaskList: React.FC<Props> = ({navigation}) => {
       title: 'Amanhã',
       data: tasks,
     },
-  ];
+  ];*/
 
   const handleTaskDetaisModalEditButtonPress = useCallback(() => {
     if (taskSelected) {
@@ -72,20 +79,34 @@ const TaskList: React.FC<Props> = ({navigation}) => {
     <ScreenWrapper>
       <Header backgroundColor={appTheme.aboveBackground}>
         <Text type="title-big"> Minhas tarefas</Text>
-        <HeaderContent>
-          <Text>Todas</Text>
-          <VerticalSeparator color={appTheme.textColor} />
-          <Text>Em Andamento</Text>
-          <VerticalSeparator color={appTheme.textColor} />
-          <Text>Concluídas</Text>
-        </HeaderContent>
+        {false && (
+          <HeaderContent>
+            <Text>Todas</Text>
+            <VerticalSeparator color={appTheme.textColor} />
+            <Text>Em Andamento</Text>
+            <VerticalSeparator color={appTheme.textColor} />
+            <Text>Concluídas</Text>
+          </HeaderContent>
+        )}
       </Header>
       <Body backgroundColor={appTheme.aboveBackground}>
-        <TwoDimensionalTaskList
+        <FlatListWithFetchIndicator
+          onRefresh={() => dispatch(getTasks())}
+          emptyListText={'Nenhuma Tarefa Encontrada'}
+          hasError={fetchState.hasError}
+          isLoading={fetchState.isLoading}
+          style={{marginVertical: 10}}
+          data={tasks}
+          keyExtractor={(task) => task.id}
+          renderItem={({item: task}) => (
+            <TaskListItem task={task} onPress={() => setTaskSelected(task)} />
+          )}
+        />
+        {/*<TwoDimensionalTaskList
           tasks={tasksSections}
           offset={30}
           onItemPress={setTaskSelected}
-        />
+        />*/}
       </Body>
       <View style={{marginHorizontal: 20}}>
         <FooterSeparator />

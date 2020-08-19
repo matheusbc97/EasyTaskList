@@ -18,8 +18,8 @@ const CategoryListItem: React.FC<Props> = ({category, onPress}) => {
     <TouchableOpacity
       onPress={onPress}
       style={{
-        height: 90,
-        width: 90,
+        height: 105,
+        width: 105,
         marginHorizontal: 5,
         marginVertical: 10,
       }}>

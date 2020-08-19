@@ -1,34 +1,72 @@
-import React from 'react';
-//import {StackNavigationProp} from '@react-navigation/stack';
+import React, {useEffect, useMemo, useCallback, useState} from 'react';
 import {View, FlatList} from 'react-native';
 
 import {
   ScreenWrapper,
   Avatar,
-  TwoDimensionalTaskList,
   Text,
   CategoryListItem,
+  TaskListItem,
 } from '@shared/components';
 
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {selectUser} from '@store/account/user';
 import {useFormatDate} from '@shared/hooks';
 import {categoryListSelectors} from '@store/categories';
 
 import styles from './styles';
+import {
+  tasksListSelectors,
+  selectTasksFetchState,
+  getTasks,
+} from '@store/tasks';
+import FlatListWithFetchControl from '@shared/components/FlatListWithFetchIndicator';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthenticatedStackParams} from '@navigation/types';
+import TaskDetailsModal from '@shared/modals/TaskDetailsModal';
+import {Task} from '@shared/models';
 
-//type HomeNavigationProp = StackNavigationProp<RootStackParams, 'DrawerStack'>;
+type TaskListNavigationProp = StackNavigationProp<
+  AuthenticatedStackParams,
+  'BottomNavigation'
+>;
 
 interface Props {
-  //navigation: HomeNavigationProp;
+  navigation: TaskListNavigationProp;
 }
 
-const Home = ({}: Props) => {
+const Home: React.FC<Props> = ({navigation}) => {
   const user = useSelector(selectUser);
   const lsCategories = useSelector(categoryListSelectors.selectAll);
   const formatDate = useFormatDate();
 
-  const tasks = [
+  const dispatch = useDispatch();
+
+  const tasks = useSelector(tasksListSelectors.selectAll);
+  const tasksFetchState = useSelector(selectTasksFetchState);
+
+  const tasksNotDone = useMemo(() => tasks.filter((task) => !task.done), [
+    tasks,
+  ]);
+
+  useEffect(() => {
+    dispatch(getTasks());
+  }, [dispatch]);
+
+  const [taskSelected, setTaskSelected] = useState<Task | null>(null);
+
+  const handleTaskDetaisModalEditButtonPress = useCallback(() => {
+    if (taskSelected) {
+      const selectedTask = {
+        ...taskSelected,
+      };
+
+      setTaskSelected(null);
+      navigation.navigate('TaskForm', {task: selectedTask});
+    }
+  }, [navigation, taskSelected]);
+
+  /*const tasks = [
     {
       title: 'HOJE',
       data: [],
@@ -45,7 +83,7 @@ const Home = ({}: Props) => {
       title: '15/06',
       data: [],
     },
-  ];
+  ];*/
 
   return (
     <ScreenWrapper>
@@ -76,9 +114,12 @@ const Home = ({}: Props) => {
                     showsHorizontalScrollIndicator={false}
                     horizontal
                     data={lsCategories}
-                    keyExtractor={(item, index) => index.toString()}
+                    keyExtractor={(item) => item.id}
                     renderItem={({item: category}) => (
-                      <CategoryListItem category={category} />
+                      <CategoryListItem
+                        category={category}
+                        onPress={() => {}}
+                      />
                     )}
                   />
                 </View>
@@ -89,10 +130,24 @@ const Home = ({}: Props) => {
           return (
             <View>
               <Text type="title-medium" style={styles.title}>
-                Próximas Tarefas
+                Tarefas Não Feitas
               </Text>
               <View style={[styles.contentWrapper]}>
-                <View style={{flexDirection: 'row', marginHorizontal: 10}}>
+                <FlatListWithFetchControl
+                  data={tasksNotDone}
+                  isLoading={tasksFetchState.isLoading}
+                  hasError={tasksFetchState.hasError}
+                  emptyListText="Nenhuma Tarefa a fazer"
+                  keyExtractor={(task) => task.id}
+                  onRefresh={() => dispatch(getTasks())}
+                  renderItem={({item: task}) => (
+                    <TaskListItem
+                      task={task}
+                      onPress={() => setTaskSelected(task)}
+                    />
+                  )}
+                />
+                {/*<View style={{flexDirection: 'row', marginHorizontal: 10}}>
                   {tasks.map((item) => (
                     <Text
                       style={{
@@ -109,11 +164,16 @@ const Home = ({}: Props) => {
                   tasks={tasks}
                   offset={30}
                   onItemPress={() => {}}
-                />
+                    />*/}
               </View>
             </View>
           );
         }}
+      />
+      <TaskDetailsModal
+        onEditButtonPress={handleTaskDetaisModalEditButtonPress}
+        task={taskSelected}
+        onBackButtonPress={() => setTaskSelected(null)}
       />
     </ScreenWrapper>
   );
