@@ -6,7 +6,8 @@ import {
   ScreenWrapper,
   AnimatedBackground,
 } from '@shared/components';
-import {Form, FormHandles} from '@unform/core';
+import {FormHandles} from '@unform/core';
+import {Form} from '@unform/mobile';
 import {useSelector, useDispatch} from 'react-redux';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
