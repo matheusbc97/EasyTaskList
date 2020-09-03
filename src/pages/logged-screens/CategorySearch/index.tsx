@@ -1,12 +1,10 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import {TextInput, FlatList} from 'react-native';
-
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import {AuthenticatedStackParams} from '@navigation/types';
-import {ScreenWrapper, LoadingIndicator} from '@shared/components';
+import {ScreenWrapper, Header} from '@shared/components';
 import {
   selectCategoriesFetchState,
   getUserCategories,
@@ -16,6 +14,10 @@ import {Category} from '@shared/models';
 
 import CategorySearchListItem from './CategorySearchListItem';
 
+import {SearchInput, SearchList, Container} from './styles';
+import {selectAppTheme} from '@store/configs';
+import {TextInput} from 'react-native';
+
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategorySearch'>;
 }
@@ -23,11 +25,16 @@ interface Props {
 const CategorySearch: React.FC<Props> = ({navigation}) => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
+
   const fetchState = useSelector(selectCategoriesFetchState);
   const categories = useSelector(categoryListSelectors.selectAll);
+  const appTheme = useSelector(selectAppTheme);
+
+  const inputRef = useRef<TextInput>(null);
 
   useEffect(() => {
     dispatch(getUserCategories());
+    setTimeout(() => inputRef.current?.focus());
   }, [dispatch]);
 
   const handleChosenCategory = useCallback(
@@ -37,29 +44,32 @@ const CategorySearch: React.FC<Props> = ({navigation}) => {
     [navigation],
   );
 
-  if (fetchState.isLoading) {
-    return <LoadingIndicator />;
-  }
-
   return (
     <ScreenWrapper>
-      <TextInput
-        value={search}
-        onChangeText={setSearch}
-        style={{
-          borderBottomColor: 'red',
-          borderBottomWidth: 1,
-        }}
-      />
-      <FlatList
-        data={categories}
-        renderItem={({item}) => (
-          <CategorySearchListItem
-            category={item}
-            onPress={handleChosenCategory}
-          />
-        )}
-      />
+      <Header title="Selecionar Categoria" />
+
+      <Container backgroundColor={appTheme.aboveBackground}>
+        <SearchInput
+          ref={inputRef}
+          value={search}
+          onChangeText={setSearch}
+          placeholder="Buscar Categoria..."
+        />
+        <SearchList
+          onRefresh={() => dispatch(getUserCategories())}
+          emptyListText="Nenhuma Categoria Encontrada"
+          hasError={fetchState.hasError}
+          isLoading={fetchState.isLoading}
+          keyExtractor={(category: Category) => category.id}
+          data={categories}
+          renderItem={({item}) => (
+            <CategorySearchListItem
+              category={item as Category}
+              onPress={handleChosenCategory}
+            />
+          )}
+        />
+      </Container>
     </ScreenWrapper>
   );
 };

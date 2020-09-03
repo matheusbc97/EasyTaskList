@@ -51,7 +51,7 @@ function FlatListWithFetchControl<T>({
   }
 
   return (
-    <FlatList
+    <FlatList<T>
       ListEmptyComponent={<EmptyListText text={emptyListText} />}
       ListHeaderComponent={ListHeaderComponent}
       refreshControl={

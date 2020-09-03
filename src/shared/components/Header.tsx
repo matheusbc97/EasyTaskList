@@ -19,7 +19,7 @@ const Header: React.FC<Props> = ({title, style, textStyle}) => {
         {
           backgroundColor: appTheme.aboveBackground,
           elevation: 3,
-          paddingVertical: 10,
+          paddingVertical: 13,
           paddingHorizontal: 20,
           marginHorizontal: 5,
           borderBottomStartRadius: 20,
