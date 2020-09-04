@@ -90,6 +90,6 @@ export default StyleSheet.create({
     position: 'absolute',
     bottom: -20,
   },
-  personSeatedImage: {alignSelf: 'center', zIndex: 4},
+  personSeatedImage: {alignSelf: 'center'},
   scroll: {flexGrow: 1},
 });
