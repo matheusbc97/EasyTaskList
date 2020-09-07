@@ -19,6 +19,7 @@
 		4785E86B2173454EE0D2B250 /* libPods-EasyTaskList.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CD052FABB1791908286962A /* libPods-EasyTaskList.a */; };
 		6AC55DEE995B23638E467504 /* libPods-EasyTaskList-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6928FA4C15DB009E92DA655C /* libPods-EasyTaskList-tvOS.a */; };
 		8BCDE923F8CA2E0A1A6CFA7F /* libPods-EasyTaskList-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED92E2DEA30D5C6A613BF316 /* libPods-EasyTaskList-tvOSTests.a */; };
+		B26663792506C76200C33932 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B26663782506C76200C33932 /* GoogleService-Info.plist */; };
 		D2B2283EAA3F01048ADAFA88 /* libPods-EasyTaskList-EasyTaskListTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E56F26D86884A74DA1CD4996 /* libPods-EasyTaskList-EasyTaskListTests.a */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		6928FA4C15DB009E92DA655C /* libPods-EasyTaskList-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyTaskList-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A13DEEDF39AFBC0EBF21D8C /* Pods-EasyTaskList-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyTaskList-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-EasyTaskList-tvOSTests/Pods-EasyTaskList-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		703A6BB6CA18A53DF6CC3A8F /* Pods-EasyTaskList-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyTaskList-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-EasyTaskList-tvOS/Pods-EasyTaskList-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B26663782506C76200C33932 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E56F26D86884A74DA1CD4996 /* libPods-EasyTaskList-EasyTaskListTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyTaskList-EasyTaskListTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -159,6 +161,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B26663782506C76200C33932 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* EasyTaskList */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* EasyTaskListTests */,
@@ -194,7 +197,6 @@
 				6A13DEEDF39AFBC0EBF21D8C /* Pods-EasyTaskList-tvOSTests.debug.xcconfig */,
 				10AE3D54724421BDF05CB417 /* Pods-EasyTaskList-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -343,6 +345,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				B26663792506C76200C33932 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,7 +758,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.devaneio.easytasklist;
 				PRODUCT_NAME = EasyTaskList;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -777,7 +780,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.devaneio.easytasklist;
 				PRODUCT_NAME = EasyTaskList;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
