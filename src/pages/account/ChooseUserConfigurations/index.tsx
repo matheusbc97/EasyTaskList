@@ -25,6 +25,11 @@ const ChooseUserConfigurations: React.FC = () => {
   const rotationAnimatedValue = useMemo(() => new Animated.Value(0), []);
   const animatedHeight = useMemo(() => new Animated.Value(350), []);
 
+  const rotationAnimatedValueDegrees = rotationAnimatedValue.interpolate({
+    inputRange: [0, 2],
+    outputRange: ['0deg', '720deg'],
+  });
+
   const dispatch = useDispatch();
 
   const piDividedBy2 = useMemo(() => Math.PI / 2, []);
@@ -41,7 +46,7 @@ const ChooseUserConfigurations: React.FC = () => {
 
   const heightAnimation = (back = false, index = 3) => {
     if (back) {
-      rotationAnimatedValue.setValue(index * 2 * Math.PI);
+      rotationAnimatedValue.setValue(index);
     }
 
     Animated.timing(animatedHeight, {
@@ -62,9 +67,9 @@ const ChooseUserConfigurations: React.FC = () => {
       heightAnimation();
     } else {
       Animated.timing(rotationAnimatedValue, {
-        toValue:
-          (back ? -piDividedBy2 : piDividedBy2) +
-          screenShownState.index * 2 * Math.PI,
+        toValue: back
+          ? screenShownState.index - 0.25
+          : screenShownState.index + 0.25,
         duration: 300,
         useNativeDriver: false,
       }).start(() =>
@@ -127,14 +132,14 @@ const ChooseUserConfigurations: React.FC = () => {
       }).start();
     } else {
       const setValue = screenShownState.back
-        ? piDividedBy2 + screenShownState.index * 2 * Math.PI
-        : piDividedBy2 * 3 + (screenShownState.index - 1) * 2 * Math.PI;
+        ? screenShownState.index + 0.25
+        : screenShownState.index - 0.25;
 
       rotationAnimatedValue.setValue(setValue);
 
       const toValue = screenShownState.back
-        ? screenShownState.index * 2 * Math.PI
-        : piDividedBy2 * 4 + (screenShownState.index - 1) * 2 * Math.PI;
+        ? screenShownState.index
+        : screenShownState.index;
 
       Animated.timing(rotationAnimatedValue, {
         toValue,
@@ -157,7 +162,7 @@ const ChooseUserConfigurations: React.FC = () => {
               backgroundColor: appTheme.aboveBackground,
               transform: [
                 {
-                  rotateY: rotationAnimatedValue,
+                  rotateY: rotationAnimatedValueDegrees,
                 },
               ],
             },

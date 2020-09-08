@@ -1,4 +1,4 @@
-import React, {forwardRef} from 'react';
+import React from 'react';
 import {StyleSheet, TextStyle, ViewStyle, View} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -32,7 +32,10 @@ const RoudedButton = ({
       style={[
         styles.container,
         inverted
-          ? {...styles.invertedContainer, borderColor: appTheme.secondaryColor}
+          ? {
+              ...styles.invertedContainer,
+              borderColor: appTheme.primaryColor,
+            }
           : {
               ...styles.normalContainer,
               backgroundColor: appTheme.secondaryColor,
@@ -49,14 +52,18 @@ const RoudedButton = ({
         {Boolean(icon) && (
           <Icon
             name="check"
-            style={inverted ? styles.invertedText : styles.text}
+            style={
+              inverted
+                ? [styles.invertedText, {color: appTheme.primaryColor}]
+                : styles.text
+            }
           />
         )}
         {Boolean(text) && (
           <Text
             style={[
               inverted
-                ? {...styles.invertedText, color: appTheme.secondaryColor}
+                ? {...styles.invertedText, color: appTheme.primaryColor}
                 : styles.text,
               textStyle,
             ]}>
@@ -68,7 +75,7 @@ const RoudedButton = ({
   );
 };
 
-export default forwardRef(RoudedButton);
+export default RoudedButton;
 
 const styles = StyleSheet.create({
   container: {

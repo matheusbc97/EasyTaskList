@@ -1,5 +1,5 @@
 import React, {useRef, useCallback} from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import {useDispatch} from 'react-redux';
 
 import {Form} from '@unform/mobile';
@@ -9,16 +9,20 @@ import {authenticateUser} from '@store/account/user';
 import {validateAll} from '@shared/utils/validations';
 import {useValidateField} from '@shared/hooks';
 import {Props, FormDetails} from './types';
-import {RoudedButton, ScreenWrapper, Text} from '@shared/components';
+import {RoudedButton, ScreenWrapper, TextButton} from '@shared/components';
 import TextInput from './Input';
 
 import styles from './styles';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Login = ({navigation}: Props) => {
   const dispatch = useDispatch();
   const formRef = useRef<FormHandles>(null);
   const validateField = useValidateField(formRef);
+
+  const handleRegisterPress = useCallback(
+    () => navigation.navigate('RegisterForm'),
+    [navigation],
+  );
 
   const handleSubmit = useCallback(
     async (form: FormDetails) => {
@@ -58,6 +62,7 @@ const Login = ({navigation}: Props) => {
             onSubmitEditing={() =>
               formRef.current?.getFieldRef('password').focus()
             }
+            autoCapitalize="none"
           />
           <TextInput
             name="password"
@@ -65,6 +70,7 @@ const Login = ({navigation}: Props) => {
             textContentType="password"
             validateField={validateField} // Valida ao o usuario digitar
             secureTextEntry
+            autoCapitalize="none"
             onSubmitEditing={() => formRef.current?.submitForm()}
           />
         </Form>
@@ -74,11 +80,11 @@ const Login = ({navigation}: Props) => {
             onPress={() => formRef.current?.submitForm()}
           />
         </View>
-        <TouchableOpacity
-          style={styles.registerButton}
-          onPress={() => navigation.navigate('RegisterForm')}>
-          <Text>Não tem cadastro? Cadastre-se</Text>
-        </TouchableOpacity>
+        <TextButton
+          text="Não tem cadastro?"
+          textInEvidence="Cadastre-se"
+          onPress={handleRegisterPress}
+        />
       </View>
     </ScreenWrapper>
   );

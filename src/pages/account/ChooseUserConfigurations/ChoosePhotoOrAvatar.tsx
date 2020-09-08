@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 15,
+    marginVertical: 15,
+    marginHorizontal: 8,
   },
   content: {width: '100%', paddingHorizontal: 20},
   row: {

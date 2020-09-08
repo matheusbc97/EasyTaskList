@@ -16,7 +16,7 @@ export default StyleSheet.create({
   },
   content: {
     backgroundColor: '#FFF',
-    marginHorizontal: 40,
+    marginHorizontal: 20,
     borderRadius: 30,
     paddingBottom: 10,
     elevation: 2,
@@ -32,6 +32,8 @@ export default StyleSheet.create({
   formWrapper: {
     paddingTop: 10,
     paddingHorizontal: 10,
+    flex: 1,
+    backgroundColor: 'red',
   },
   checkBoxItem: {
     flexDirection: 'row',

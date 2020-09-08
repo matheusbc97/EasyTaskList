@@ -18,6 +18,7 @@ import Toast from './Toast';
 import LoadingHandler from './LoadingHandler';
 import CategoryListItem from './CategoryListItem';
 import FloatingActionButton from './FloatingActionButton';
+import TextButton from './TextButton'
 
 export {
   Avatar,
@@ -40,4 +41,5 @@ export {
   LoadingHandler,
   CategoryListItem,
   FloatingActionButton,
+  TextButton,
 };

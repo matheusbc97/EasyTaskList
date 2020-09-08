@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, forwardRef} from 'react';
+import React, {PropsWithChildren} from 'react';
 import {TouchableOpacityProps, StyleSheet, ViewStyle, View} from 'react-native';
 
 interface Props extends PropsWithChildren<any>, TouchableOpacityProps {
@@ -13,7 +13,7 @@ const Shadow = ({children, style = {}, ...rest}: Props) => {
   );
 };
 
-export default forwardRef(Shadow);
+export default Shadow;
 
 const styles = StyleSheet.create({
   shadow: {

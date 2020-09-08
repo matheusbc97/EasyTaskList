@@ -32,7 +32,7 @@ interface ImageAvatarProps {
 
 const ImageAvatar: React.FC<ImageAvatarProps> = ({
   avatarNumber = -1,
-  size = 60,
+  size = 55,
   onPress,
 }) => {
   return (

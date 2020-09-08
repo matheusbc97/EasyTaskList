@@ -12,7 +12,4 @@ export default StyleSheet.create({
   screen: {
     justifyContent: 'center',
   },
-  registerButton: {
-    alignSelf: 'center',
-  },
 });

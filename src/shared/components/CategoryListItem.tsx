@@ -42,11 +42,11 @@ const CategoryListItem: React.FC<Props> = ({category, onPress}) => {
           name={categoryIconNames[category.iconIndex]}
           size={62}
           color="#fff"
-          style={{opacity: 0.2, marginBottom: 10}}
+          style={{opacity: 0.3, marginBottom: 10}}
         />
         <Text
           type="title-medium"
-          style={{padding: 10, color: '#FFF', position: 'absolute', bottom: 0}}>
+          style={{padding: 5, color: '#FFF', position: 'absolute', bottom: 0}}>
           {category.name}
         </Text>
       </LinearGradient>

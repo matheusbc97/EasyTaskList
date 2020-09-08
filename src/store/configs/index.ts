@@ -1,9 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '../index';
 import {AppTheme} from '@shared/models';
-import {BLUE_RED} from '@assets/themes';
+import {BLUE_GREEN} from '@assets/themes';
 
-const initialTheme = BLUE_RED;
+const initialTheme = BLUE_GREEN;
 
 const initialState = {
   theme: initialTheme,

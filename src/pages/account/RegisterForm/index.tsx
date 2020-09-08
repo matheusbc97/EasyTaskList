@@ -15,6 +15,7 @@ import {
   RoudedButton,
   Text,
   UnformInput as TextInput,
+  TextButton,
 } from '@shared/components';
 import {
   GEAR,
@@ -152,6 +153,8 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                     onSubmitEditing={() =>
                       formRef.current?.getFieldRef('newPassword').focus()
                     }
+                    autoCapitalize="none"
+                    autoCompleteType="email"
                   />
                   <TextInput
                     label="Senha"
@@ -162,6 +165,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                     }
                     secureTextEntry
                     textContentType="newPassword"
+                    autoCapitalize="none"
                   />
                   <TextInput
                     label="Confirmar Senha"
@@ -169,6 +173,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                     validateField={validateField}
                     secureTextEntry
                     textContentType="newPassword"
+                    autoCapitalize="none"
                   />
                 </Form>
               </View>
@@ -193,9 +198,12 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                     onPress={() => formRef.current?.submitForm()}
                   />
                 </Animated.View>
-                <Text style={styles.alreadyHaveAccountText}>
-                  Já possui uma conta? Conecte-se aqui.
-                </Text>
+                {/*<TextButton
+                  style={{marginTop: 10, marginBottom: 5}}
+                  onPress={() => navigation.navigate('Login')}
+                  text="Já possui uma conta?"
+                  textInEvidence="Conecte-se aqui."
+                />*/}
               </View>
             </View>
           </View>

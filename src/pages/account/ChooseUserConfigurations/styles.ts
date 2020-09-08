@@ -8,7 +8,7 @@ export default StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.5,
     shadowRadius: 1.5,
-    elevation:3,
+    //elevation:3,
     overflow: 'hidden',
   },
 });

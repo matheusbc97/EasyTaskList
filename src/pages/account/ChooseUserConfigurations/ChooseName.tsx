@@ -46,6 +46,7 @@ const ChooseName: React.FC<Props> = ({
         Nos diga como deseja ser chamado
       </Text>
       <Form
+        style={{width: '100%'}}
         ref={formRef}
         onSubmit={handleSubmit}
         initialData={{name: userName}}>
