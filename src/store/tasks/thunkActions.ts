@@ -111,13 +111,14 @@ export const updateTask = createAsyncThunk(
 interface UpdateTaskStatusDTO {
   id: string;
   done: boolean;
+  recursive?: boolean;
 }
 
 export const updateTaskStatus = createAsyncThunk(
   'tasks/updateTaskStatus',
   async (
     updates: UpdateTaskStatusDTO,
-    {getState},
+    {getState, dispatch},
   ): Promise<UpdateTaskStatusDTO> => {
     try {
       loaderHandler.showLoader();
@@ -126,12 +127,25 @@ export const updateTaskStatus = createAsyncThunk(
       await updateUserTask(user!.uid, updates);
 
       loaderHandler.hideLoader();
-      showToast({
-        type: 'success',
-        text: updates.done
-          ? 'Tarefa Marcada como feita!'
-          : 'Tarefa marcada como não feita',
-      });
+
+      if (!updates.recursive) {
+        showToast({
+          type: 'success',
+          text: updates.done
+            ? 'Tarefa Marcada como feita!'
+            : 'Tarefa marcada como não feita',
+          buttonLabel: 'desfazer',
+          buttonOnPress: () =>
+            dispatch(
+              updateTaskStatus({
+                id: updates.id,
+                done: !updates.done,
+                recursive: true,
+              }),
+            ),
+        });
+      }
+
       return updates;
     } catch (error) {
       handleErrorMessage(error);

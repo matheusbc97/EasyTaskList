@@ -10,11 +10,15 @@ interface ToastOptions {
   text: string;
   isVisible: boolean;
   idTimeout: number | null;
+  buttonLabel?: string;
+  buttonOnPress?(): void;
 }
 
 interface showToastOptions
   extends Omit<ToastOptions, 'isVisible' | 'idTimeout'> {
   remain?: boolean;
+  buttonLabel?: string;
+  buttonOnPress?(): void;
 }
 
 export const showToast = (toastOptions: showToastOptions) =>
@@ -84,12 +88,13 @@ const Toast = () => {
       visible={true}
       onDismiss={() => {}}
       action={{
-        label: 'Fechar',
+        label: toastOptions.buttonLabel || 'Fechar',
         onPress: () => {
           if (toastOptions.idTimeout) {
             clearTimeout(toastOptions.idTimeout);
           }
           setToastOptions(initialState);
+          toastOptions.buttonOnPress && toastOptions.buttonOnPress();
         },
       }}>
       {toastOptions.text}

@@ -1,6 +1,8 @@
 import React, {useRef, useEffect} from 'react';
-import {Text, TextInput, View, TextInputProps, StyleSheet} from 'react-native';
+import {Text, TextInput, TextInputProps, StyleSheet} from 'react-native';
 import {useField} from '@unform/core';
+import styled from 'styled-components/native';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 import useOnChangeText from '@shared/hooks/useOnChangeText';
 import {ValidateField} from '@shared/models';
@@ -10,9 +12,34 @@ interface Props extends TextInputProps {
   name: string;
   validateField?: ValidateField;
   mask?(value: string, oldValue: string): string;
+  iconName: string;
 }
 
-function Input({name = '', validateField, mask, ...rest}: Props) {
+const InputContainer = styled.View`
+  margin: 0 5px;
+  justify-content: center;
+`;
+
+const LoginInput = styled(TextInput)`
+  border-width: 1px;
+  border: #e63a5a;
+  color: #e63a5a;
+  padding: 10px 75px;
+  margin: 5px 0;
+  border-radius: 30px;
+`;
+
+const IconContainer = styled.View`
+  width: 56px;
+  height: 56px;
+  background-color: #e63a5a;
+  position: absolute;
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+`;
+
+function Input({name = '', validateField, mask, iconName, ...rest}: Props) {
   const inputRef = useRef<any>(null);
   const {fieldName, registerField, defaultValue = '', error} = useField(name);
 
@@ -55,30 +82,26 @@ function Input({name = '', validateField, mask, ...rest}: Props) {
   );
 
   return (
-    <View style={styles.container}>
-      <TextInput
+    <InputContainer>
+      <IconContainer>
+        <FontAwesome5Icon name={iconName} size={26} color="#FAFAFA" />
+      </IconContainer>
+
+      <LoginInput
+        placeholderTextColor="#e63a5a"
         ref={inputRef}
         defaultValue={defaultValue}
-        style={styles.input}
         onBlur={() => (validateField ? validateField(fieldName) : null)}
         onChangeText={mask ? _maskedOnChangeText : _onChangeText}
         {...rest}
       />
       {error && <Text style={styles.error}>{error}</Text>}
-    </View>
+    </InputContainer>
   );
 }
 
 export default Input;
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 5,
-  },
-  input: {
-    borderBottomWidth: 1,
-    borderColor: '#bdbdbd',
-    paddingBottom: 7,
-  },
   error: {color: 'red'},
 });

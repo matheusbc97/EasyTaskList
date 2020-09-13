@@ -33,7 +33,6 @@ export default StyleSheet.create({
     paddingTop: 10,
     paddingHorizontal: 10,
     flex: 1,
-    backgroundColor: 'red',
   },
   checkBoxItem: {
     flexDirection: 'row',

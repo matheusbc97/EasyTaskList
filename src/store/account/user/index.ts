@@ -5,6 +5,7 @@ import {
   authenticateUser,
   registerUser,
   verifyIfUserIsLogged,
+  resetUser,
 } from './thunkActions';
 import {selectUser, selectUserName} from './selectors';
 
@@ -14,9 +15,6 @@ const user = createSlice({
   name: 'account/user',
   initialState: null as State,
   reducers: {
-    resetUser: () => {
-      return null;
-    },
     setUserName: (state, action: PayloadAction<string>) => {
       if (state) {
         state.name = action.payload;
@@ -45,16 +43,15 @@ const user = createSlice({
     builder.addCase(verifyIfUserIsLogged.fulfilled, (state, action) => {
       return action.payload as User;
     });
+
+    builder.addCase(resetUser.fulfilled, () => {
+      return null;
+    });
   },
 });
 
 export default user.reducer;
 
-export const {
-  resetUser,
-  setUserName,
-  setUserAvatar,
-  setUserTheme,
-} = user.actions;
+export const {setUserName, setUserAvatar, setUserTheme} = user.actions;
 
-export {authenticateUser, selectUser, registerUser, selectUserName};
+export {authenticateUser, selectUser, registerUser, selectUserName, resetUser};

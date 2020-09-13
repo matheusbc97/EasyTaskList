@@ -54,6 +54,7 @@ const Login = ({navigation}: Props) => {
       <View style={styles.formWrapper}>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <TextInput
+            iconName="user"
             name="email"
             placeholder="Email"
             textContentType="emailAddress"
@@ -65,6 +66,7 @@ const Login = ({navigation}: Props) => {
             autoCapitalize="none"
           />
           <TextInput
+            iconName="lock"
             name="password"
             placeholder="Senha"
             textContentType="password"
@@ -76,13 +78,19 @@ const Login = ({navigation}: Props) => {
         </Form>
         <View style={styles.buttonWrapper}>
           <RoudedButton
+            style={{
+              backgroundColor: '#e63a5a',
+            }}
             text="Entrar"
             onPress={() => formRef.current?.submitForm()}
           />
         </View>
         <TextButton
+          textInEvidenceStyle={{
+            color: '#e63a5a',
+          }}
           text="Não tem cadastro?"
-          textInEvidence="Cadastre-se"
+          textInEvidence="Cadastre-se aqui"
           onPress={handleRegisterPress}
         />
       </View>

@@ -14,6 +14,6 @@ export const signInWithEmailAndPassword = async (
 
     return await getFirestoreUser(authUser.uid, email);
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };

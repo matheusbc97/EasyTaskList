@@ -9,6 +9,7 @@ import {
   updateUserData,
   getCurrentUser,
   getUserCategories,
+  resetAuthUser,
 } from '@shared/firebase';
 import {UserBeforeIsLoggedDTO} from '@shared/models/UserBeforeIsLoggedDTO';
 import {selectUser} from './selectors';
@@ -43,6 +44,10 @@ export const authenticateUser = createAsyncThunk(
           isLogged: false,
         };
       }
+
+      const categories = await getUserCategories();
+
+      dispatch(setCategories(categories));
 
       const userLogged = user as User;
 
@@ -128,6 +133,20 @@ export const verifyIfUserIsLogged = createAsyncThunk(
       dispatch(setAppTheme(appThemes[theme]));
       loaderHandler.hideLoader();
       return user as User;
+    } catch (error) {
+      handleErrorMessage(error);
+      throw new Error(error);
+    }
+  },
+);
+
+export const resetUser = createAsyncThunk(
+  'account/user/resetUser',
+  async (_, {dispatch}) => {
+    try {
+      await resetAuthUser();
+      dispatch(setIsLogged(false));
+      return;
     } catch (error) {
       handleErrorMessage(error);
       throw new Error(error);
