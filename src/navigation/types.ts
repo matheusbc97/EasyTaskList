@@ -17,6 +17,12 @@ export type AuthenticatedStackParams = {
   CategoryForm: {
     category?: Category;
   };
+  CategoryDetails: {
+    category: Category;
+  };
+  ChangeNameForm: undefined;
+  ChangeThemeForm: undefined;
+  ChangeAvatar: undefined;
 };
 
 export type BottomNavigatorStackParams = {

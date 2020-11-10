@@ -1,4 +1,4 @@
-import RoudedButton from './RoudedButton';
+import RoundedButton from './RoundedButton';
 import ScreenWrapper from './ScreenWrapper';
 import Text from './Text';
 import Shadow from './Shadow';
@@ -18,11 +18,11 @@ import Toast from './Toast';
 import LoadingHandler from './LoadingHandler';
 import CategoryListItem from './CategoryListItem';
 import FloatingActionButton from './FloatingActionButton';
-import TextButton from './TextButton'
+import TextButton from './TextButton';
 
 export {
   Avatar,
-  RoudedButton,
+  RoundedButton,
   ScreenWrapper,
   Text,
   Shadow,

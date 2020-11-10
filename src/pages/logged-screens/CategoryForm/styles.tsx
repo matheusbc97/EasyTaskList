@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {RoudedButton, Text} from '@shared/components';
+import {RoundedButton, Text} from '@shared/components';
 import {RectButton} from 'react-native-gesture-handler';
 
 export const Container = styled.View`
@@ -67,12 +67,12 @@ export const Footer = styled.View`
   margin-top: 10px;
 `;
 
-export const BackButton = styled(RoudedButton)`
+export const BackButton = styled(RoundedButton)`
   align-self: center;
   width: 100px;
 `;
 
-export const SaveButton = styled(RoudedButton)`
+export const SaveButton = styled(RoundedButton)`
   align-self: center;
   margin-left: 5px;
   width: 150px;

@@ -9,7 +9,7 @@ import {authenticateUser} from '@store/account/user';
 import {validateAll} from '@shared/utils/validations';
 import {useValidateField} from '@shared/hooks';
 import {Props, FormDetails} from './types';
-import {RoudedButton, ScreenWrapper, TextButton} from '@shared/components';
+import {RoundedButton, ScreenWrapper, TextButton} from '@shared/components';
 import TextInput from './Input';
 
 import styles from './styles';
@@ -77,7 +77,7 @@ const Login = ({navigation}: Props) => {
           />
         </Form>
         <View style={styles.buttonWrapper}>
-          <RoudedButton
+          <RoundedButton
             style={{
               backgroundColor: '#e63a5a',
             }}

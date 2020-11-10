@@ -11,7 +11,7 @@ interface Props {
   textStyle?: TextStyle;
 }
 
-const Header: React.FC<Props> = ({title, style, textStyle}) => {
+const Header: React.FC<Props> = ({title, style, textStyle, children}) => {
   const appTheme = useSelector(selectAppTheme);
   return (
     <View
@@ -24,6 +24,7 @@ const Header: React.FC<Props> = ({title, style, textStyle}) => {
           marginHorizontal: 5,
           borderBottomStartRadius: 20,
           borderBottomEndRadius: 20,
+          flexDirection: 'row',
         },
         style,
       ]}>

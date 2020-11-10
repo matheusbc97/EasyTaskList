@@ -3,12 +3,12 @@ import {View, StyleSheet} from 'react-native';
 
 import {Text, Avatar} from '@shared/components';
 
-import ChosseScreenBackButton from './ChosseScreenBackButton';
+import ChooseScreenBackButton from './ChooseScreenBackButton';
 
 interface Props {
   onBackPress(): void;
   onAvatarPress(arg0: number): void;
-  showBackButton: boolean;
+  showBackButton?: boolean;
 }
 
 const ChoosePhotoOrAvatar: React.FC<Props> = ({
@@ -18,7 +18,7 @@ const ChoosePhotoOrAvatar: React.FC<Props> = ({
 }) => {
   return (
     <View style={styles.container}>
-      {showBackButton && <ChosseScreenBackButton onPress={onBackPress} />}
+      {showBackButton && <ChooseScreenBackButton onPress={onBackPress} />}
       <Text type="title-medium" style={{textAlign: 'center'}}>
         Você também pode escolher um dos nossos avatares!
       </Text>

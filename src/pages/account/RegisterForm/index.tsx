@@ -12,9 +12,10 @@ import {useDispatch} from 'react-redux';
 import useValidateField from '@shared/hooks/useValidateField';
 import {
   ScreenWrapper,
-  RoudedButton,
+  RoundedButton,
   Text,
   UnformInput as TextInput,
+  TextButton,
 } from '@shared/components';
 import {
   GEAR,
@@ -61,7 +62,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
   ]);
 
   const confirmButtonWidth = useMemo(() => new Animated.Value(200), []);
-  const avanceButtonRight = useMemo(() => new Animated.Value(-100), []);
+  const advanceButtonRight = useMemo(() => new Animated.Value(-100), []);
 
   const AnimatedLinearGradient = useMemo(
     () => Animated.createAnimatedComponent(LinearGradient),
@@ -118,14 +119,14 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
         useNativeDriver: false,
         duration: 350,
       }).start(() =>
-        Animated.spring(avanceButtonRight, {
+        Animated.spring(advanceButtonRight, {
           toValue: 40,
           useNativeDriver: false,
           bounciness: 14,
         }).start(),
       );
     }
-  }, [isConfirmed, confirmButtonWidth, avanceButtonRight]);
+  }, [isConfirmed, confirmButtonWidth, advanceButtonRight]);
 
   return (
     <ScreenWrapper>
@@ -189,7 +190,8 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
               </View>
               <View style={styles.footer}>
                 <Animated.View style={{width: confirmButtonWidth}}>
-                  <RoudedButton
+                  <RoundedButton
+                    disabled={isConfirmed}
                     style={{width: '100%'}}
                     text={isConfirmed ? '' : 'Enviar'}
                     inverted
@@ -197,12 +199,12 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                     onPress={() => formRef.current?.submitForm()}
                   />
                 </Animated.View>
-                {/*<TextButton
+                <TextButton
                   style={{marginTop: 10, marginBottom: 5}}
                   onPress={() => navigation.navigate('Login')}
                   text="Já possui uma conta?"
                   textInEvidence="Conecte-se aqui."
-                />*/}
+                />
               </View>
             </View>
           </View>
@@ -212,7 +214,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
             style={[
               styles.advanceButtonContainer,
               {
-                right: avanceButtonRight,
+                right: advanceButtonRight,
               },
             ]}>
             <TouchableRipple

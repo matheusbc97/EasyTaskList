@@ -4,17 +4,22 @@ import {FormHandles} from '@unform/core';
 import {Form} from '@unform/mobile';
 import {useSelector} from 'react-redux';
 
-import {UnformInput as TextInput, RoudedButton, Text} from '@shared/components';
+import {
+  UnformInput as TextInput,
+  RoundedButton,
+  Text,
+} from '@shared/components';
 import useValidateField from '@shared/hooks/useValidateField';
 import {validateAll} from '@shared/utils/validations';
 import {selectUserName} from '@store/account/user';
 
-import ChosseScreenBackButton from './ChosseScreenBackButton';
+import ChooseScreenBackButton from './ChooseScreenBackButton';
 
 interface Props {
   onAdvancePress(name: string): void;
-  onBackPress(): void;
-  showBackButton: boolean;
+  onBackPress?(): void;
+  showBackButton?: boolean;
+  advanceButtonText?: string;
 }
 
 type FormDetails = {
@@ -25,6 +30,7 @@ const ChooseName: React.FC<Props> = ({
   onAdvancePress,
   onBackPress,
   showBackButton = true,
+  advanceButtonText,
 }) => {
   const userName = useSelector(selectUserName);
   const formRef = useRef<FormHandles>(null);
@@ -41,8 +47,10 @@ const ChooseName: React.FC<Props> = ({
 
   return (
     <View style={styles.container}>
-      {showBackButton && <ChosseScreenBackButton onPress={onBackPress} />}
-      <Text type="title-big" style={styles.text}>
+      {showBackButton && <ChooseScreenBackButton onPress={onBackPress} />}
+      <Text
+        type="title-big"
+        style={[styles.text, {marginTop: showBackButton ? 0 : 35}]}>
         Nos diga como deseja ser chamado
       </Text>
       <Form
@@ -57,8 +65,8 @@ const ChooseName: React.FC<Props> = ({
           containerStyle={styles.input}
         />
       </Form>
-      <RoudedButton
-        text="AVANÇAR"
+      <RoundedButton
+        text={advanceButtonText ?? 'AVANÇAR'}
         onPress={() => formRef.current?.submitForm()}
         style={styles.button}
       />

@@ -5,10 +5,18 @@ import {useDispatch} from 'react-redux';
 import {ScreenWrapper, Text} from '@shared/components';
 import {setIsLogged} from '@store/configs';
 import {resetUser} from '@store/account/user';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
+import {AuthenticatedStackParams} from '@navigation/types';
 
 import OptionButton from './OptionButton';
 
-export default function More() {
+interface Props {
+  navigation: StackNavigationProp<AuthenticatedStackParams, 'ChangeNameForm'>;
+  route: RouteProp<AuthenticatedStackParams, 'ChangeNameForm'>;
+}
+
+export default function More({navigation}: Props) {
   const dispatch = useDispatch();
 
   const handleSignOut = useCallback(() => {
@@ -27,12 +35,22 @@ export default function More() {
         type="FontAwesome5"
       />*/}
       {/* <OptionButton title="Notificações" iconName="bell" /> */}
-      <OptionButton title="Alterar foto de perfil" iconName="camera" />
-      <OptionButton title="Alterar Nome" iconName="pencil" />
+      <OptionButton
+        title="Alterar Avatar"
+        iconName="user-tie"
+        type="FontAwesome5"
+        onPress={() => navigation.navigate('ChangeAvatar')}
+      />
+      <OptionButton
+        title="Alterar Nome"
+        iconName="pencil"
+        onPress={() => navigation.navigate('ChangeNameForm')}
+      />
       <OptionButton
         title="Alterar Tema"
         iconName="palette"
         type="FontAwesome5"
+        onPress={() => navigation.navigate('ChangeThemeForm')}
       />
       {/* <OptionButton title="Avalie-nos" iconName="star" />*/}
       {/* <OptionButton title="Sobre" iconName="info-circle" type="FontAwesome5" /> */}

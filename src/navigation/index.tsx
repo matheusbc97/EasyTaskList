@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from '@react-navigation/stack';
 import {useSelector, useDispatch} from 'react-redux';
-import {CardStyleInterpolators} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import {lighten, shade} from 'polished';
@@ -23,10 +25,14 @@ import TaskList from '@pages/logged-screens/TaskList';
 import ChooseUserConfigurations from '@pages/account/ChooseUserConfigurations';
 import More from '@pages/logged-screens/More';
 //import Statistics from '@pages/logged-screens/Statistics';
-import Calendar from '@pages/logged-screens/Calendar';
+//import Calendar from '@pages/logged-screens/Calendar';
 import CategorySearch from '@pages/logged-screens/CategorySearch';
 import CategoryList from '@pages/logged-screens/CategoryList';
 import CategoryForm from '@pages/logged-screens/CategoryForm';
+import CategoryDetails from '@pages/logged-screens/CategoryDetails';
+import ChangeNameForm from '@pages/logged-screens/ChangeNameForm';
+import ChangeThemeForm from '@pages/logged-screens/ChangeThemeForm';
+import ChangeAvatar from '@pages/logged-screens/ChangeAvatar';
 
 import BottonTabNavigator from './BottonTabNavigator';
 import TaskForm from '@pages/logged-screens/TaskForm';
@@ -141,6 +147,22 @@ const App = () => {
             name="CategoryForm"
             component={CategoryForm}
             initialParams={{}}
+          />
+          <AuthenticatedStack.Screen
+            name="CategoryDetails"
+            component={CategoryDetails}
+          />
+          <AuthenticatedStack.Screen
+            name="ChangeNameForm"
+            component={ChangeNameForm}
+          />
+          <AuthenticatedStack.Screen
+            name="ChangeThemeForm"
+            component={ChangeThemeForm}
+          />
+          <AuthenticatedStack.Screen
+            name="ChangeAvatar"
+            component={ChangeAvatar}
           />
         </AuthenticatedStack.Navigator>
       ) : (

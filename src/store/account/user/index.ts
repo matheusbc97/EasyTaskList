@@ -6,6 +6,7 @@ import {
   registerUser,
   verifyIfUserIsLogged,
   resetUser,
+  updateUser,
 } from './thunkActions';
 import {selectUser, selectUserName} from './selectors';
 
@@ -47,6 +48,13 @@ const user = createSlice({
     builder.addCase(resetUser.fulfilled, () => {
       return null;
     });
+
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      return {
+        ...state,
+        ...action.payload,
+      } as State;
+    });
   },
 });
 
@@ -54,4 +62,11 @@ export default user.reducer;
 
 export const {setUserName, setUserAvatar, setUserTheme} = user.actions;
 
-export {authenticateUser, selectUser, registerUser, selectUserName, resetUser};
+export {
+  authenticateUser,
+  selectUser,
+  registerUser,
+  selectUserName,
+  resetUser,
+  updateUser,
+};

@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import {selectUser} from '@store/account/user';
 import {setIsLogged} from '@store/configs';
-import {Avatar, Text, RoudedButton} from '@shared/components';
+import {Avatar, Text, RoundedButton} from '@shared/components';
 
 import ThemeBox from './ThemeBox';
 import {updateUser} from '@store/account/user/thunkActions';
@@ -29,27 +29,27 @@ const SaveUserConfiguration: React.FC<Props> = ({onChagePress}) => {
         <ThemeBox theme={user?.theme ? user?.theme : 'BLUE_GREEN'} />
       </View>
       <View style={styles.row}>
-        <RoudedButton
+        <RoundedButton
           text="Alterar Nome"
           inverted
           style={styles.button}
           onPress={() => onChagePress(1)}
         />
         <View style={styles.betweenButtonsSpace} />
-        <RoudedButton
+        <RoundedButton
           text="Alterar Avatar"
           inverted
           style={styles.button}
           onPress={() => onChagePress(2)}
         />
       </View>
-      <RoudedButton
+      <RoundedButton
         text="Alterar Tema"
         inverted
         style={styles.alterateThemeButton}
         onPress={() => onChagePress(0)}
       />
-      <RoudedButton
+      <RoundedButton
         text="Finalizar Cadastro"
         style={styles.finalizeRegisterBtn}
         onPress={async () => {

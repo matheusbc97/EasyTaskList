@@ -15,20 +15,23 @@ interface Props {
   textStyle?: TextStyle;
   inverted?: boolean;
   icon?: string | null;
+  disabled?: boolean;
 }
 
-const RoudedButton = ({
+const RoundedButton = ({
   text,
   onPress,
   style,
   textStyle,
   inverted,
   icon,
+  disabled = false,
 }: Props) => {
   const appTheme = useSelector(selectAppTheme);
 
   return (
     <TouchableRipple
+      disabled={disabled}
       style={[
         styles.container,
         inverted
@@ -75,7 +78,7 @@ const RoudedButton = ({
   );
 };
 
-export default RoudedButton;
+export default RoundedButton;
 
 const styles = StyleSheet.create({
   container: {

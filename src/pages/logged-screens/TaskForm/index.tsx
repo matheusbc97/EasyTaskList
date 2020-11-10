@@ -14,7 +14,7 @@ import {AuthenticatedStackParams} from '@navigation/types';
 import {
   ScreenWrapper,
   UnformInput as TextInput,
-  RoudedButton,
+  RoundedButton,
   AnimatedBackground,
   Text,
 } from '@shared/components';
@@ -192,13 +192,13 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
               />
             </Form>
             <View style={styles.footer}>
-              <RoudedButton
+              <RoundedButton
                 text="Voltar"
                 inverted
                 style={styles.backButton}
                 onPress={() => navigation.pop()}
               />
-              <RoudedButton
+              <RoundedButton
                 text="Salvar"
                 style={styles.saveButton}
                 onPress={() => formRef.current?.submitForm()}

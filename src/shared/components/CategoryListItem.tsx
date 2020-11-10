@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
@@ -7,22 +7,37 @@ import {Text} from '@shared/components';
 import {Category} from '@shared/models';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import categoryIconNames from '@assets/categoryIconNames';
+import {ViewStyle} from 'react-native';
 
 interface Props {
   category: Category;
   onPress(): void;
+  size?: number;
+  noName?: boolean;
+  style?: ViewStyle;
 }
 
-const CategoryListItem: React.FC<Props> = ({category, onPress}) => {
+const CategoryListItem: React.FC<Props> = ({
+  category,
+  onPress,
+  size = 105,
+  noName = false,
+  style,
+}) => {
+  const iconSize = useMemo(() => size * 0.6, [size]);
+
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={{
-        height: 105,
-        width: 105,
-        marginHorizontal: 5,
-        marginVertical: 10,
-      }}>
+      style={[
+        {
+          height: size,
+          width: size,
+          marginHorizontal: 5,
+          marginVertical: 10,
+        },
+        style,
+      ]}>
       <LinearGradient
         start={{x: 0, y: 0}}
         end={{x: 1, y: 1}}
@@ -40,15 +55,22 @@ const CategoryListItem: React.FC<Props> = ({category, onPress}) => {
         }}>
         <FontAwesomeIcon
           name={categoryIconNames[category.iconIndex]}
-          size={62}
+          size={iconSize}
           color="#fff"
-          style={{opacity: 0.3, marginBottom: 10}}
+          style={{opacity: 0.3, marginBottom: noName ? 0 : 10}}
         />
-        <Text
-          type="title-medium"
-          style={{padding: 5, color: '#FFF', position: 'absolute', bottom: 0}}>
-          {category.name}
-        </Text>
+        {!noName && (
+          <Text
+            type="title-medium"
+            style={{
+              padding: 5,
+              color: '#FFF',
+              position: 'absolute',
+              bottom: 0,
+            }}>
+            {category.name}
+          </Text>
+        )}
       </LinearGradient>
     </TouchableOpacity>
   );

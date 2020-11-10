@@ -56,7 +56,9 @@ const CategoryList: React.FC<Props> = ({navigation}) => {
               <CategoryListItem
                 key={category.id}
                 category={category}
-                onPress={() => navigation.navigate('CategoryForm', {category})}
+                onPress={() =>
+                  navigation.navigate('CategoryDetails', {category})
+                }
               />,
             );
           }

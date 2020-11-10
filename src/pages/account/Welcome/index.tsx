@@ -2,7 +2,7 @@ import React from 'react';
 import {View, ImageBackground} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {Text, ScreenWrapper, RoudedButton} from '@shared/components';
+import {Text, ScreenWrapper, RoundedButton} from '@shared/components';
 import {welcomeBackground} from '@assets/images';
 import {UnauthenticatedStackParams} from '@navigation/types';
 
@@ -34,7 +34,7 @@ const Welcome = ({navigation}: Props) => {
           <View style={styles.separator} />
         </View>
         <View style={styles.actionsContainer}>
-          <RoudedButton
+          <RoundedButton
             onPress={() => navigation.navigate('Login')}
             text="ENTRAR"
             style={styles.button}
@@ -43,7 +43,7 @@ const Welcome = ({navigation}: Props) => {
           <Text style={[styles.textColor, styles.notHaveAccountText]}>
             Não Possui conta? Registre-se abaixo,
           </Text>
-          <RoudedButton
+          <RoundedButton
             onPress={() => navigation.navigate('RegisterForm')}
             text="CRIAR CONTA"
             style={styles.buttonInverted}

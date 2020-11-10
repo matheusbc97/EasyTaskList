@@ -97,7 +97,7 @@ export const updateUser = createAsyncThunk(
       await updateUserData(`users/${uid}`, updates);
 
       loaderHandler.hideLoader();
-      return true;
+      return updates;
     } catch (error) {
       handleErrorMessage(error);
       throw new Error(error.data);
