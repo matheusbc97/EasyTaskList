@@ -11,6 +11,7 @@ import {createUserCategory} from './creatUserCategory';
 import {updateUserCategory} from './updateUserCategory';
 import {getInitialCategories} from './getInitialCategories';
 import {resetAuthUser} from './resetAuthUser';
+import {changeUserPassword} from './changePassword';
 
 export {
   createUserProfileDocument,
@@ -26,4 +27,5 @@ export {
   updateUserCategory,
   getInitialCategories,
   resetAuthUser,
+  changeUserPassword,
 };

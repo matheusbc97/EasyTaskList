@@ -2,6 +2,7 @@ import React, {useRef, useCallback} from 'react';
 
 import {FormHandles} from '@unform/core';
 import {Form} from '@unform/mobile';
+import {changeUserPassword} from '@shared/firebase';
 
 import {
   AnimatedBackground,
@@ -12,8 +13,22 @@ import {
 } from '@shared/components';
 import {useValidateField} from '@shared/hooks';
 import {validateAll} from '@shared/utils/validations';
+import {showToast} from '@shared/components/Toast';
+import {loaderHandler} from '@shared/components/LoadingHandler';
+import {handleErrorMessage} from '@shared/utils/errorHandler';
 
 import {Content} from './styles';
+import {AuthenticatedStackParams} from '@navigation/types';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
+
+interface Props {
+  navigation: StackNavigationProp<
+    AuthenticatedStackParams,
+    'ChangePasswordForm'
+  >;
+  route: RouteProp<AuthenticatedStackParams, 'ChangePasswordForm'>;
+}
 
 interface FormDetails {
   password: string;
@@ -21,24 +36,39 @@ interface FormDetails {
   confirmNewPassword: string;
 }
 
-export default function ChangePasswordForm() {
+function ChangePasswordForm({navigation}: Props) {
   const formRef = useRef<FormHandles>(null);
   const validateField = useValidateField(formRef);
 
-  const handleSubmit = useCallback((form: FormDetails) => {
-    const [formErrors, isValid] = validateAll(form);
+  const handleSubmit = useCallback(
+    async (form: FormDetails) => {
+      const [formErrors, isValid] = validateAll(form);
 
-    formRef.current?.setErrors(formErrors);
+      formRef.current?.setErrors(formErrors);
 
-    if (isValid) {
-      return;
-    }
-  }, []);
+      if (isValid) {
+        try {
+          loaderHandler.showLoader();
+          await changeUserPassword(form.password, form.newPassword);
+          loaderHandler.hideLoader();
+          navigation.pop();
+          showToast({
+            text: 'Senha Alterada Com sucesso',
+            type: 'success',
+          });
+        } catch (error) {
+          handleErrorMessage(error);
+        }
+        return;
+      }
+    },
+    [navigation],
+  );
 
   return (
     <AnimatedBackground>
       <Content>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={() => navigation.pop()} />
         <Text type="title-big" style={{alignSelf: 'center', marginVertical: 5}}>
           Alterar Senha
         </Text>
@@ -85,3 +115,5 @@ export default function ChangePasswordForm() {
     </AnimatedBackground>
   );
 }
+
+export default ChangePasswordForm;

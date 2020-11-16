@@ -12,8 +12,8 @@ import {updateUser} from '@store/account/user';
 import {showToast} from '@shared/components/Toast';
 
 interface Props {
-  navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryDetails'>;
-  route: RouteProp<AuthenticatedStackParams, 'CategoryDetails'>;
+  navigation: StackNavigationProp<AuthenticatedStackParams, 'ChangeNameForm'>;
+  route: RouteProp<AuthenticatedStackParams, 'ChangeNameForm'>;
 }
 
 function ChangeNameForm({navigation}: Props) {
