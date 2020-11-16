@@ -19,6 +19,7 @@ import LoadingHandler from './LoadingHandler';
 import CategoryListItem from './CategoryListItem';
 import FloatingActionButton from './FloatingActionButton';
 import TextButton from './TextButton';
+import BackButton from './BackButton';
 
 export {
   Avatar,
@@ -42,4 +43,5 @@ export {
   CategoryListItem,
   FloatingActionButton,
   TextButton,
+  BackButton,
 };

@@ -23,6 +23,7 @@ export type AuthenticatedStackParams = {
   ChangeNameForm: undefined;
   ChangeThemeForm: undefined;
   ChangeAvatar: undefined;
+  ChangePasswordForm: undefined;
 };
 
 export type BottomNavigatorStackParams = {

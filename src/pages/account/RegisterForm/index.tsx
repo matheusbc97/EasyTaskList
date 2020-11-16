@@ -169,7 +169,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                   />
                   <TextInput
                     label="Confirmar Senha"
-                    name="confirmPassword"
+                    name="confirmNewPassword"
                     validateField={validateField}
                     secureTextEntry
                     textContentType="newPassword"

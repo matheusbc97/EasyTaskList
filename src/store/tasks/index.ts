@@ -6,7 +6,11 @@ import {
   updateTask,
   updateTaskStatus,
 } from './thunkActions';
-import {tasksListSelectors, selectTasksFetchState} from './selectors';
+import {
+  tasksListSelectors,
+  selectTasksFetchState,
+  selectTaskOfCategory,
+} from './selectors';
 import {tasksAdapter} from './adapters';
 
 const initialState = tasksAdapter.getInitialState({
@@ -71,4 +75,5 @@ export {
   selectTasksFetchState,
   getTasks,
   updateTask,
+  selectTaskOfCategory,
 };

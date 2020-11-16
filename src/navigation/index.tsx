@@ -33,6 +33,7 @@ import CategoryDetails from '@pages/logged-screens/CategoryDetails';
 import ChangeNameForm from '@pages/logged-screens/ChangeNameForm';
 import ChangeThemeForm from '@pages/logged-screens/ChangeThemeForm';
 import ChangeAvatar from '@pages/logged-screens/ChangeAvatar';
+import ChangePasswordForm from '@pages/logged-screens/ChangePasswordForm';
 
 import BottonTabNavigator from './BottonTabNavigator';
 import TaskForm from '@pages/logged-screens/TaskForm';
@@ -163,6 +164,10 @@ const App = () => {
           <AuthenticatedStack.Screen
             name="ChangeAvatar"
             component={ChangeAvatar}
+          />
+          <AuthenticatedStack.Screen
+            name="ChangePasswordForm"
+            component={ChangePasswordForm}
           />
         </AuthenticatedStack.Navigator>
       ) : (

@@ -118,7 +118,9 @@ const Home: React.FC<Props> = ({navigation}) => {
                     renderItem={({item: category}) => (
                       <CategoryListItem
                         category={category}
-                        onPress={() => {}}
+                        onPress={() =>
+                          navigation.navigate('CategoryDetails', {category})
+                        }
                       />
                     )}
                   />

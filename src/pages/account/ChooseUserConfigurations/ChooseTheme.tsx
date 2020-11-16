@@ -4,13 +4,11 @@ import {useDispatch} from 'react-redux';
 
 import {setAppTheme} from '@store/configs';
 import {setUserTheme} from '@store/account/user';
-import {Text, RoundedButton} from '@shared/components';
+import {Text, RoundedButton, BackButton} from '@shared/components';
 import * as appThemes from '@assets/themes';
 
 import ThemeBox from './ThemeBox';
-import {AppTheme, AppThemeName} from '@shared/models';
-
-import ChooseScreenBackButton from './ChooseScreenBackButton';
+import {AppThemeName} from '@shared/models';
 
 interface Props {
   onAdvancePress(theme: AppThemeName): void;
@@ -41,7 +39,7 @@ const ChooseTheme: React.FC<Props> = ({
 
   return (
     <View style={styles.container}>
-      {showBackButton && <ChooseScreenBackButton onPress={onBackPress} />}
+      {showBackButton && <BackButton onPress={onBackPress} />}
       <Text type="title-big" style={{marginVertical: showBackButton ? 15 : 0}}>
         Escolha um Tema:
       </Text>

@@ -11,7 +11,7 @@ interface Props {
   onPress(): void;
 }
 
-const ChosseScreenBackButton: React.FC<Props> = ({onPress}) => {
+const ChooseScreenBackButton: React.FC<Props> = ({onPress}) => {
   const appTheme = useSelector(selectAppTheme);
   return (
     <TouchableRipple style={styles.container} onPress={onPress}>
@@ -29,7 +29,7 @@ const ChosseScreenBackButton: React.FC<Props> = ({onPress}) => {
   );
 };
 
-export default ChosseScreenBackButton;
+export default ChooseScreenBackButton;
 
 const styles = StyleSheet.create({
   container: {

@@ -52,6 +52,12 @@ export default function More({navigation}: Props) {
         type="FontAwesome5"
         onPress={() => navigation.navigate('ChangeThemeForm')}
       />
+      <OptionButton
+        title="Alterar Senha"
+        iconName="key"
+        type="FontAwesome5"
+        onPress={() => navigation.navigate('ChangePasswordForm')}
+      />
       {/* <OptionButton title="Avalie-nos" iconName="star" />*/}
       {/* <OptionButton title="Sobre" iconName="info-circle" type="FontAwesome5" /> */}
       <OptionButton title="Sair" iconName="sign-out" onPress={handleSignOut} />

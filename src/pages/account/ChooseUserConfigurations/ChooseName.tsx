@@ -8,12 +8,11 @@ import {
   UnformInput as TextInput,
   RoundedButton,
   Text,
+  BackButton,
 } from '@shared/components';
 import useValidateField from '@shared/hooks/useValidateField';
 import {validateAll} from '@shared/utils/validations';
 import {selectUserName} from '@store/account/user';
-
-import ChooseScreenBackButton from './ChooseScreenBackButton';
 
 interface Props {
   onAdvancePress(name: string): void;
@@ -47,7 +46,7 @@ const ChooseName: React.FC<Props> = ({
 
   return (
     <View style={styles.container}>
-      {showBackButton && <ChooseScreenBackButton onPress={onBackPress} />}
+      {showBackButton && <BackButton onPress={onBackPress} />}
       <Text
         type="title-big"
         style={[styles.text, {marginTop: showBackButton ? 0 : 35}]}>

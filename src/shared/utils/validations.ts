@@ -14,13 +14,13 @@ export function validateField(
 
       return null;
     case 'password':
-      if (value === '') {
+      if (!value) {
         return 'Campo Obrigatório';
       }
 
       return null;
     case 'newPassword':
-      if (value === '') {
+      if (!value) {
         return 'Campo Obrigatório';
       } else {
         if (
@@ -39,8 +39,8 @@ export function validateField(
       }
 
       return null;
-    case 'confirmPassword':
-      if (value === '') {
+    case 'confirmNewPassword':
+      if (!value) {
         return 'Campo Obrigatório';
       } else {
         if (
@@ -60,7 +60,7 @@ export function validateField(
 
       return null;
     case 'email':
-      if (value.length === 0) {
+      if (!value) {
         return 'Campo Email obrigatório.';
       }
 
@@ -70,20 +70,20 @@ export function validateField(
 
       return null;
     case 'date':
-      if (value === '') {
+      if (!value) {
         return 'Campo Obrigatório';
       }
 
       return null;
 
     case 'address.cep':
-      if (value === '') {
+      if (!value) {
         return 'Campo Obrigatório';
       }
 
       return null;
     case 'address.street':
-      if (value === '') {
+      if (!value) {
         return 'Campo Obrigatório';
       }
 

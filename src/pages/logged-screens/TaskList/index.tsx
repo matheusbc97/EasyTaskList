@@ -64,7 +64,7 @@ const TaskList: React.FC<Props> = ({navigation}) => {
     },
   ];*/
 
-  const handleTaskDetaisModalEditButtonPress = useCallback(() => {
+  const handleTaskDetailsModalEditButtonPress = useCallback(() => {
     if (taskSelected) {
       const selectedTask = {
         ...taskSelected,
@@ -119,7 +119,7 @@ const TaskList: React.FC<Props> = ({navigation}) => {
         />
       </Footer>
       <TaskDetailsModal
-        onEditButtonPress={handleTaskDetaisModalEditButtonPress}
+        onEditButtonPress={handleTaskDetailsModalEditButtonPress}
         task={taskSelected}
         onBackButtonPress={() => setTaskSelected(null)}
       />
