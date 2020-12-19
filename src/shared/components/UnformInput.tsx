@@ -5,7 +5,7 @@ import React, {
   useImperativeHandle,
   forwardRef,
 } from 'react';
-import {View, TextInputProps, StyleSheet, ViewStyle} from 'react-native';
+import {View, TextInputProps, StyleSheet, ViewStyle, Platform} from 'react-native';
 import {useField} from '@unform/core';
 import TextInput from './TextInput';
 
@@ -26,7 +26,7 @@ interface Props extends TextInputProps {
   onPress?(): void;
 }
 
-const FloatingLabelIpnput = (
+const FloatingLabelInput = (
   {
     label = '',
     containerStyle,
@@ -158,11 +158,12 @@ const FloatingLabelIpnput = (
   );
 };
 
-export default forwardRef(FloatingLabelIpnput);
+export default forwardRef(FloatingLabelInput);
 
 const styles = StyleSheet.create({
   container: {
     marginVertical: 3,
+    paddingVertical: 20
   },
   errorWrapper: {
     height: 23,

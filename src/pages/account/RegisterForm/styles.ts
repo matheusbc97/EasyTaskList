@@ -90,6 +90,7 @@ export default StyleSheet.create({
   advanceButtonContainer: {
     position: 'absolute',
     bottom: -20,
+    zIndex: 3,
   },
   personSeatedImage: {alignSelf: 'center'},
   scroll: {flexGrow: 1},

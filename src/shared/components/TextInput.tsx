@@ -15,6 +15,7 @@ import {
   TextStyle,
   StyleProp,
   View,
+  Platform
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -200,7 +201,7 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingHorizontal: 30,
-    paddingVertical: 5,
+    paddingVertical: Platform.OS === 'ios' ? 10 : 5,
     flexGrow: 1,
   },
   text: {
