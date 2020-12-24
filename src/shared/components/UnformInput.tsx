@@ -5,7 +5,13 @@ import React, {
   useImperativeHandle,
   forwardRef,
 } from 'react';
-import {View, TextInputProps, StyleSheet, ViewStyle, Platform} from 'react-native';
+import {
+  View,
+  TextInputProps,
+  StyleSheet,
+  ViewStyle,
+  Platform,
+} from 'react-native';
 import {useField} from '@unform/core';
 import TextInput from './TextInput';
 
@@ -143,13 +149,7 @@ const FloatingLabelInput = (
         }}
         onBlur={handleBlur}
         {...rest}
-        style={[
-          {
-            flex: 1,
-          },
-          style,
-          ,
-        ]}
+        style={[style]}
       />
       <View style={styles.errorWrapper}>
         {Boolean(error) && <Text style={styles.error}>{error}</Text>}
@@ -162,8 +162,7 @@ export default forwardRef(FloatingLabelInput);
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 3,
-    paddingVertical: 20
+    marginVertical: 2,
   },
   errorWrapper: {
     height: 23,

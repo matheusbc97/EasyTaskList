@@ -37,7 +37,7 @@ import {registerUser} from '@store/account/user';
 import {validateAll} from '@shared/utils/validations';
 import {showToast} from '@shared/components/Toast';
 
-import styles from './styles';
+import styles, {Shadow} from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 type ChooseUserConfigurationsNavigationProp = StackNavigationProp<
@@ -259,17 +259,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                 </ImageBackground>
               </TouchableRipple>
             </Animated.View>
-            {isConfirmed && (
-              <View
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: '#000',
-                  opacity: 0.2,
-                  position: 'absolute',
-                }}
-              />
-            )}
+            {isConfirmed && <Shadow />}
           </AnimatedLinearGradient>
         </ScrollView>
       </ScreenWrapper>
