@@ -73,7 +73,7 @@ const Toast = () => {
     return () => {
       emitter.remove();
     };
-  }, []);
+  }, [clearTimeoutIfExists]);
 
   if (!toastOptions.isVisible) {
     return null;

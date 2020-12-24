@@ -7,6 +7,7 @@ import {
   Text,
   CategoryListItem,
   TaskListItem,
+  OutlineButton,
 } from '@shared/components';
 
 import {useSelector, useDispatch} from 'react-redux';
@@ -171,6 +172,11 @@ const Home: React.FC<Props> = ({navigation}) => {
             </View>
           );
         }}
+      />
+      <OutlineButton
+        iconName="plus"
+        text="Criar Nova Tarefa"
+        onPress={() => navigation.navigate('TaskForm')}
       />
       <TaskDetailsModal
         onEditButtonPress={handleTaskDetaisModalEditButtonPress}

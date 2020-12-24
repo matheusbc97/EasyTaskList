@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {createSelector} from '@reduxjs/toolkit';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
@@ -10,6 +9,7 @@ import {
   Header,
   FlatListWithFetchIndicator,
   TaskListItem,
+  OutlineButton,
 } from '@shared/components';
 import {AuthenticatedStackParams} from '@navigation/types';
 import {
@@ -75,6 +75,11 @@ const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
             )}
           />
         </Content>
+        <OutlineButton
+          iconName="pen"
+          text="Editar Categoria"
+          onPress={() => navigation.navigate('CategoryForm', {category})}
+        />
       </ScreenWrapper>
       <TaskDetailsModal
         onEditButtonPress={handleTaskDetaisModalEditButtonPress}

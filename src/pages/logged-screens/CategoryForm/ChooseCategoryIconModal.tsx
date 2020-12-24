@@ -7,6 +7,7 @@ import Modal from 'react-native-modal';
 
 import categoryIconNames from '@assets/categoryIconNames';
 import {Text} from '@shared/components';
+import {RectButton} from 'react-native-gesture-handler';
 
 const Title = styled(Text)`
   align-self: center;
@@ -75,6 +76,14 @@ const ChooseCategoryIconModal: React.FC<Props> = ({
           Selecionar Ícone
         </Title>
         {getIcons()}
+        <RectButton onPress={onBackButtonPress}>
+          <Text
+            type="title-big"
+            secondaryColor
+            style={{alignSelf: 'center', paddingVertical: 10}}>
+            Cancelar
+          </Text>
+        </RectButton>
       </Container>
     </Modal>
   );

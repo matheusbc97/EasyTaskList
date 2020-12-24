@@ -6,6 +6,7 @@ import Modal from 'react-native-modal';
 import categoryColors from '@assets/categoryColors';
 import {Text} from '@shared/components';
 import LinearGradient from 'react-native-linear-gradient';
+import {RectButton} from 'react-native-gesture-handler';
 
 interface Props {
   isVisible: boolean;
@@ -86,6 +87,14 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
           Selecionar Cor
         </Text>
         {getColors()}
+        <RectButton onPress={onBackButtonPress}>
+          <Text
+            type="title-big"
+            secondaryColor
+            style={{alignSelf: 'center', marginTop: 5, paddingVertical: 10}}>
+            Cancelar
+          </Text>
+        </RectButton>
       </Container>
     </Modal>
   );
