@@ -39,7 +39,10 @@ interface Props {
 }
 
 const TaskForm: React.FC<Props> = ({navigation, route}) => {
-  const {chosenCategory, task} = route.params;
+  const {chosenCategory, task} = useMemo(
+    () => route.params ?? {chosenCategory: null, task: null},
+    [route.params],
+  );
 
   const initialData = useMemo<undefined | FormData>(() => {
     if (!task) {

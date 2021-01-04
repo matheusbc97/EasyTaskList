@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {DeviceEventEmitter} from 'react-native';
 
 import {Snackbar} from 'react-native-paper';
@@ -9,7 +9,6 @@ interface ToastOptions {
   type?: ToastType;
   text: string;
   isVisible: boolean;
-  idTimeout: number | null;
   buttonLabel?: string;
   buttonOnPress?(): void;
 }
@@ -41,24 +40,32 @@ const initialState: ToastOptions = {
   isVisible: false,
   text: '',
   type: 'normal',
-  idTimeout: null,
 };
 
 const Toast = () => {
   const [toastOptions, setToastOptions] = useState<ToastOptions>(initialState);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const clearTimeoutIfExists = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }, []);
 
   useEffect(() => {
     const emitter = DeviceEventEmitter.addListener(
       'show-toast',
       (data: showToastOptions) => {
-        const idTimeout = data.remain
+        clearTimeoutIfExists();
+
+        const timeout = data.remain
           ? null
           : setTimeout(() => setToastOptions(initialState), 4000);
 
+        timeoutRef.current = timeout;
         setToastOptions({
           ...data,
           isVisible: true,
-          idTimeout,
         });
       },
     );
@@ -66,7 +73,7 @@ const Toast = () => {
     return () => {
       emitter.remove();
     };
-  }, []);
+  }, [clearTimeoutIfExists]);
 
   if (!toastOptions.isVisible) {
     return null;
@@ -90,9 +97,7 @@ const Toast = () => {
       action={{
         label: toastOptions.buttonLabel || 'Fechar',
         onPress: () => {
-          if (toastOptions.idTimeout) {
-            clearTimeout(toastOptions.idTimeout);
-          }
+          clearTimeoutIfExists();
           setToastOptions(initialState);
           toastOptions.buttonOnPress && toastOptions.buttonOnPress();
         },

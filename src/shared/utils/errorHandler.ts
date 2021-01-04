@@ -21,8 +21,10 @@ const getErrorMessage = (code: string) => {
       return 'A requisição demorou tempo demais, tente novamente';
     case 'storage/invalid-url':
       return 'Recurson não encontrado';
+    case 'auth/weak-password':
+      return 'A senha deve conter pelo menos 6 caracteres';
     default:
-      return 'Ocorreu um erro inesperado';
+      return '';
   }
 };
 
@@ -41,6 +43,19 @@ export function handleErrorMessage(error: any) {
   console.log('stack', error.stack);
 
   let message = getErrorMessage(error.code);
+
+  if (!message) {
+    let errorMessage = error.message.replace(/[[\]']+/g, '');
+    errorMessage = errorMessage.split(' ')[1];
+
+    if (errorMessage) {
+      message = getErrorMessage(errorMessage);
+    }
+  }
+
+  if (!message) {
+    message = 'Ocorreu um erro inesperado';
+  }
 
   showToast({
     text: message,

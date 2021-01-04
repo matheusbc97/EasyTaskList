@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import styled from 'styled-components/native';
 
 const width = Dimensions.get('window').width;
 
@@ -90,7 +91,19 @@ export default StyleSheet.create({
   advanceButtonContainer: {
     position: 'absolute',
     bottom: -20,
+    zIndex: 3,
+    elevation: 3,
   },
   personSeatedImage: {alignSelf: 'center'},
   scroll: {flexGrow: 1},
 });
+
+export const Shadow = styled.View`
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.2;
+  position: absolute;
+  z-index: 2;
+  elevation: 2;
+`;
