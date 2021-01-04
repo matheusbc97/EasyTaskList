@@ -20,6 +20,7 @@ import CategoryListItem from './CategoryListItem';
 import FloatingActionButton from './FloatingActionButton';
 import TextButton from './TextButton';
 import BackButton from './BackButton';
+import AnimatedBackgroundContent from './AnimatedBackgroundContent';
 
 export {
   Avatar,
@@ -44,4 +45,5 @@ export {
   FloatingActionButton,
   TextButton,
   BackButton,
+  AnimatedBackgroundContent,
 };

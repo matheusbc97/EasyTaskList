@@ -34,6 +34,7 @@ import ChangeNameForm from '@pages/logged-screens/ChangeNameForm';
 import ChangeThemeForm from '@pages/logged-screens/ChangeThemeForm';
 import ChangeAvatar from '@pages/logged-screens/ChangeAvatar';
 import ChangePasswordForm from '@pages/logged-screens/ChangePasswordForm';
+import ForgotPasswordForm from '@pages/account/ForgotPasswordForm';
 
 import BottonTabNavigator from './BottonTabNavigator';
 import TaskForm from '@pages/logged-screens/TaskForm';
@@ -171,24 +172,11 @@ const App = () => {
           />
         </AuthenticatedStack.Navigator>
       ) : (
-        <UnauthenticatedStack.Navigator>
+        <UnauthenticatedStack.Navigator headerMode="none">
+          <UnauthenticatedStack.Screen name="Welcome" component={Welcome} />
+          <UnauthenticatedStack.Screen name="Login" component={Login} />
           <UnauthenticatedStack.Screen
             options={{
-              headerShown: false,
-            }}
-            name="Welcome"
-            component={Welcome}
-          />
-          <UnauthenticatedStack.Screen
-            options={{
-              headerShown: false,
-            }}
-            name="Login"
-            component={Login}
-          />
-          <UnauthenticatedStack.Screen
-            options={{
-              headerShown: false,
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
             name="RegisterForm"
@@ -196,11 +184,14 @@ const App = () => {
           />
           <UnauthenticatedStack.Screen
             options={{
-              headerShown: false,
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
             name="ChooseUserConfigurations"
             component={ChooseUserConfigurations}
+          />
+          <UnauthenticatedStack.Screen
+            name="ForgotPasswordForm"
+            component={ForgotPasswordForm}
           />
         </UnauthenticatedStack.Navigator>
       )}

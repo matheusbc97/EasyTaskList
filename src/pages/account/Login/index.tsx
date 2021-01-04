@@ -93,6 +93,14 @@ const Login = ({navigation}: Props) => {
           textInEvidence="Cadastre-se aqui"
           onPress={handleRegisterPress}
         />
+        <TextButton
+          textInEvidenceStyle={{
+            color: '#e63a5a',
+          }}
+          text="Esqueceu sua senha?"
+          textInEvidence="Recupere-a aqui"
+          onPress={() => navigation.navigate('ForgotPasswordForm')}
+        />
       </View>
     </ScreenWrapper>
   );

@@ -5,6 +5,7 @@ export type UnauthenticatedStackParams = {
   RegisterForm: undefined;
   Welcome: undefined;
   ChooseUserConfigurations: undefined;
+  ForgotPasswordForm: undefined;
 };
 
 export type AuthenticatedStackParams = {

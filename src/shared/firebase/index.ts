@@ -12,6 +12,7 @@ import {updateUserCategory} from './updateUserCategory';
 import {getInitialCategories} from './getInitialCategories';
 import {resetAuthUser} from './resetAuthUser';
 import {changeUserPassword} from './changePassword';
+import {sendResetPasswordToken} from './sendResetPasswordToken';
 
 export {
   createUserProfileDocument,
@@ -28,4 +29,5 @@ export {
   getInitialCategories,
   resetAuthUser,
   changeUserPassword,
+  sendResetPasswordToken,
 };
