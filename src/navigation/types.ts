@@ -19,7 +19,7 @@ export type AuthenticatedStackParams = {
   CategorySearch: undefined;
   CategoryForm: {
     category?: Category;
-  };
+  } | undefined;
   CategoryDetails: {
     category: Category;
   };

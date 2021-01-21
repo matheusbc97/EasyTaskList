@@ -52,18 +52,20 @@ const ChooseCategoryIconModal: React.FC<Props> = ({
 
       for (let j = 0; j < 5; j++) {
         if (index + j < categoryIconNames.length) {
+          const categoryName = categoryIconNames[index + j];
           subComponents.push(
             <IconButton
+              key={categoryName}
               onPress={() => {
                 onIconPress(index + j);
               }}>
-              <FontAwesomeIcon name={categoryIconNames[index + j]} size={25} />
+              <FontAwesomeIcon name={categoryName} size={25} />
             </IconButton>,
           );
         }
       }
 
-      components.push(<Row>{subComponents}</Row>);
+      components.push(<Row key={`icon-row-${index}`}>{subComponents}</Row>);
     }
 
     return components;

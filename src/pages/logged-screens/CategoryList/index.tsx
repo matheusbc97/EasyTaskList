@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useCallback} from 'react';
 import {FlatList, View} from 'react-native';
 
 import {useSelector} from 'react-redux';
@@ -31,45 +31,47 @@ const CategoryList: React.FC<Props> = ({navigation}) => {
     [lsCategories],
   );
 
+  const getCategoriesBoard = useCallback(
+    ({index: i}) => {
+      const lsCategoryListItems = [];
+
+      for (let j = 0; j < rows; j++) {
+        const indice = i * rows + j;
+        if (indice > lsCategories.length - 1) {
+          lsCategoryListItems.push(
+            <View style={{width: 115}} key={indice + 'empty'} />,
+          );
+
+          continue;
+        }
+
+        const category = lsCategories[i * 3 + j];
+
+        lsCategoryListItems.push(
+          <CategoryListItem
+            key={category.id}
+            category={category}
+            onPress={() => navigation.navigate('CategoryDetails', {category})}
+          />,
+        );
+      }
+
+      return (
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          {lsCategoryListItems}
+        </View>
+      );
+    },
+    [lsCategories, navigation],
+  );
+
   return (
     <ScreenWrapper>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         data={array}
         style={{paddingHorizontal: 5}}
-        renderItem={({index: i}) => {
-          const lsCategoryListItems = [];
-
-          for (let j = 0; j < rows; j++) {
-            const indice = i * rows + j;
-            if (indice > lsCategories.length - 1) {
-              lsCategoryListItems.push(
-                <View style={{width: 115}} key={indice + 'empty'} />,
-              );
-
-              continue;
-            }
-
-            const category = lsCategories[i * 3 + j];
-
-            lsCategoryListItems.push(
-              <CategoryListItem
-                key={category.id}
-                category={category}
-                onPress={() =>
-                  navigation.navigate('CategoryDetails', {category})
-                }
-              />,
-            );
-          }
-
-          return (
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              {lsCategoryListItems}
-            </View>
-          );
-        }}
+        renderItem={getCategoriesBoard}
       />
       <FloatingActionButton
         onPress={() => navigation.navigate('CategoryForm')}

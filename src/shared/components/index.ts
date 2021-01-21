@@ -21,6 +21,7 @@ import FloatingActionButton from './FloatingActionButton';
 import TextButton from './TextButton';
 import BackButton from './BackButton';
 import AnimatedBackgroundContent from './AnimatedBackgroundContent';
+import AvatarList from './AvatarList';
 
 export {
   Avatar,
@@ -46,4 +47,5 @@ export {
   TextButton,
   BackButton,
   AnimatedBackgroundContent,
+  AvatarList,
 };

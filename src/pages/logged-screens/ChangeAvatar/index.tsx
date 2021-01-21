@@ -1,15 +1,15 @@
 import React, {useCallback} from 'react';
+
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthenticatedStackParams} from '@navigation/types';
 import {RouteProp} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
 
-import {AnimatedBackground} from '@shared/components';
-
-import ChoosePhotoOrAvatar from '../../account/ChooseUserConfigurations/ChoosePhotoOrAvatar';
-import {Content} from './styles';
-import {useDispatch} from 'react-redux';
-import {updateUser} from '@store/account/user';
+import {AnimatedBackground, Avatar, AvatarList, Text} from '@shared/components';
+import {selectUser, updateUser} from '@store/account/user';
 import {showToast} from '@shared/components/Toast';
+
+import {Content, Header, AvatarListContainer} from './styles';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryDetails'>;
@@ -18,6 +18,8 @@ interface Props {
 
 function ChangeAvatar({navigation}: Props) {
   const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
 
   const handleSaveAvatar = useCallback(
     async (avatarIndex: number) => {
@@ -41,12 +43,15 @@ function ChangeAvatar({navigation}: Props) {
   return (
     <AnimatedBackground>
       <Content>
-        <ChoosePhotoOrAvatar
-          //onAdvancePress={() => {}}
-          //advanceButtonText="SALVAR"
-          onBackPress={() => navigation.pop()}
-          onAvatarPress={handleSaveAvatar}
-        />
+        <Header>
+          <Avatar avatarNumber={user?.avatar} size={80} />
+        </Header>
+        <Text type="title-medium" style={{textAlign: 'center'}}>
+          Escolha um avartar para alterar!
+        </Text>
+        <AvatarListContainer>
+          <AvatarList onAvatarPress={handleSaveAvatar} />
+        </AvatarListContainer>
       </Content>
     </AnimatedBackground>
   );

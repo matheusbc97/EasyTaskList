@@ -18,7 +18,7 @@ import {
   selectTaskOfCategory,
 } from '@store/tasks';
 
-import {Content} from './styles';
+import {Content, Footer} from './styles';
 import TaskDetailsModal from '@shared/modals/TaskDetailsModal';
 import {Task} from '@shared/models';
 
@@ -44,7 +44,7 @@ const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
 
   const [taskSelected, setTaskSelected] = useState<Task | null>(null);
 
-  const handleTaskDetaisModalEditButtonPress = useCallback(() => {
+  const handleTaskDetailsModalEditButtonPress = useCallback(() => {
     if (taskSelected) {
       const selectedTask = {
         ...taskSelected,
@@ -75,14 +75,16 @@ const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
             )}
           />
         </Content>
-        <OutlineButton
-          iconName="pen"
-          text="Editar Categoria"
-          onPress={() => navigation.navigate('CategoryForm', {category})}
-        />
+        <Footer>
+          <OutlineButton
+            iconName="pen"
+            text="Editar Categoria"
+            onPress={() => navigation.navigate('CategoryForm', {category})}
+          />
+        </Footer>
       </ScreenWrapper>
       <TaskDetailsModal
-        onEditButtonPress={handleTaskDetaisModalEditButtonPress}
+        onEditButtonPress={handleTaskDetailsModalEditButtonPress}
         task={taskSelected}
         onBackButtonPress={() => setTaskSelected(null)}
       />

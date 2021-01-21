@@ -9,8 +9,17 @@ export const Content = styled.View`
     height: 2;
   }
   shadow-opacity: 0.5;
-  shadow-radius: 1.5px;
+  shadow-radius: 1.5;
   overflow: hidden;
   height: 320px;
   background-color: #fff;
+`;
+
+export const Header = styled.View`
+  align-items: center;
+  padding: 20px 0;
+`;
+
+export const AvatarListContainer = styled.View`
+  padding: 5px 10px 0 10px;
 `;

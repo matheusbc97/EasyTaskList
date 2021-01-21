@@ -8,3 +8,7 @@ export const Content = styled.View`
   elevation: 2;
   flex: 1;
 `;
+
+export const Footer = styled.View`
+  padding: 10px 15px;
+`;
