@@ -13,6 +13,10 @@ const getErrorMessage = (code: string) => {
       return 'email inválido';
     case 'auth/invalid-password':
       return 'Senha inválida';
+    case 'auth/wrong-password':
+      return 'Senha Incorreta';
+    case 'auth/too-many-requests':
+      return 'Muitas tentativas, tente novamente mais tarde';
     case 'storage/object-not-found':
       return 'Recurson não encontrado';
     case 'storage/unauthenticated':

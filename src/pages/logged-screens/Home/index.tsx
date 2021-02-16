@@ -56,7 +56,7 @@ const Home: React.FC<Props> = ({navigation}) => {
 
   const [taskSelected, setTaskSelected] = useState<Task | null>(null);
 
-  const handleTaskDetaisModalEditButtonPress = useCallback(() => {
+  const handleTaskDetailsModalEditButtonPress = useCallback(() => {
     if (taskSelected) {
       const selectedTask = {
         ...taskSelected,
@@ -173,13 +173,15 @@ const Home: React.FC<Props> = ({navigation}) => {
           );
         }}
       />
-      <OutlineButton
-        iconName="plus"
-        text="Criar Nova Tarefa"
-        onPress={() => navigation.navigate('TaskForm')}
-      />
+      <View style={{paddingVertical: 5, paddingHorizontal: 20}}>
+        <OutlineButton
+          iconName="plus"
+          text="Criar Nova Tarefa"
+          onPress={() => navigation.navigate('TaskForm')}
+        />
+      </View>
       <TaskDetailsModal
-        onEditButtonPress={handleTaskDetaisModalEditButtonPress}
+        onEditButtonPress={handleTaskDetailsModalEditButtonPress}
         task={taskSelected}
         onBackButtonPress={() => setTaskSelected(null)}
       />

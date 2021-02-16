@@ -16,7 +16,7 @@ interface Props extends TextInputProps {
 }
 
 const InputContainer = styled.View`
-  margin: 0 5px;
+  margin: 5px 5px;
   justify-content: center;
 `;
 
@@ -24,19 +24,20 @@ const LoginInput = styled(TextInput)`
   border-width: 1px;
   border: #e63a5a;
   color: #e63a5a;
-  padding: 10px 75px;
+  padding: 5px 25px 5px 55px;
   margin: 5px 0;
   border-radius: 30px;
 `;
 
 const IconContainer = styled.View`
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   background-color: #e63a5a;
   position: absolute;
   border-radius: 30px;
   justify-content: center;
   align-items: center;
+  top: 2px;
 `;
 
 function Input({name = '', validateField, mask, iconName, ...rest}: Props) {
@@ -84,7 +85,7 @@ function Input({name = '', validateField, mask, iconName, ...rest}: Props) {
   return (
     <InputContainer>
       <IconContainer>
-        <FontAwesome5Icon name={iconName} size={26} color="#FAFAFA" />
+        <FontAwesome5Icon name={iconName} size={22} color="#FAFAFA" />
       </IconContainer>
 
       <LoginInput
@@ -103,5 +104,5 @@ function Input({name = '', validateField, mask, iconName, ...rest}: Props) {
 export default Input;
 
 const styles = StyleSheet.create({
-  error: {color: 'red'},
+  error: {color: 'red', marginLeft: 30},
 });

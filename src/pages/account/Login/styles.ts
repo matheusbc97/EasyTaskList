@@ -8,8 +8,8 @@ export default StyleSheet.create({
   },
   formWrapper: {
     padding: 20,
-  },
-  screen: {
-    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fafafa',
+    marginTop: -50,
   },
 });

@@ -28,7 +28,7 @@ export const IconContainer = styled.View<IconContainerProps>`
 export const DoneCheckButton = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
-  margin: 5px 0;
+  margin: 5px -10px;
 `;
 
 export const Footer = styled.View`

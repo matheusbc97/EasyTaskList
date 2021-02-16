@@ -48,9 +48,6 @@ const ChooseTheme: React.FC<Props> = ({
           <ThemeBox theme={'BLUE_GREEN'} onPress={handleThemeChoose} />
           <ThemeBox theme={'BLUE_RED'} onPress={handleThemeChoose} />
         </View>
-        {/*<View style={styles.themRowAlignCenter}>
-          <ThemeBox theme={'DARK'} onPress={handleThemeChoose} />
-  </View>*/}
       </View>
       <RoundedButton
         text={advanceButtonText ?? 'AVANÇAR'}

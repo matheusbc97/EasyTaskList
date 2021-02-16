@@ -140,7 +140,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
       );
     }
   }, [isConfirmed, confirmButtonWidth, advanceButtonRight]);
-  console.log('isCon', isConfirmed);
+
   return (
     <>
       <ScreenWrapper>
@@ -193,9 +193,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                     />
                   </Form>
                 </View>
-                <TouchableOpacity
-                  style={styles.checkBoxItem}
-                  onPress={handlePrivacyPolicyCheckChange}>
+                <View style={styles.checkBoxItem}>
                   {Platform.OS === 'ios' ? (
                     <Switch
                       style={{marginHorizontal: 10}}
@@ -211,7 +209,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                   <Text style={styles.checkBoxText}>
                     Li e concordo com a política de privacidade
                   </Text>
-                </TouchableOpacity>
+                </View>
                 <View style={styles.footer}>
                   <Animated.View style={{width: confirmButtonWidth}}>
                     <RoundedButton

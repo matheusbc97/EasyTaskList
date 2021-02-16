@@ -23,7 +23,7 @@ const subScreems = [
 
 const ChooseUserConfigurations: React.FC = () => {
   const rotationAnimatedValue = useMemo(() => new Animated.Value(0), []);
-  const animatedHeight = useMemo(() => new Animated.Value(350), []);
+  const animatedHeight = useMemo(() => new Animated.Value(310), []);
 
   const rotationAnimatedValueDegrees = rotationAnimatedValue.interpolate({
     inputRange: [0, 2],
@@ -85,7 +85,12 @@ const ChooseUserConfigurations: React.FC = () => {
   const getSubScreen = () => {
     switch (subScreems[screenShownState.index]) {
       case 'ChooseTheme':
-        return <ChooseTheme onAdvancePress={() => advanceForNextScreen()} />;
+        return (
+          <ChooseTheme
+            onAdvancePress={() => advanceForNextScreen()}
+            showBackButton={false}
+          />
+        );
       case 'ChooseName':
         return (
           <ChooseName
@@ -126,7 +131,7 @@ const ChooseUserConfigurations: React.FC = () => {
       }).start();
     } else if (screenShownState.heightAnimation) {
       Animated.timing(animatedHeight, {
-        toValue: 350,
+        toValue: 310,
         duration: 300,
         useNativeDriver: false,
       }).start();

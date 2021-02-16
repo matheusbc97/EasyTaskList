@@ -17,7 +17,7 @@ export const Content = styled.View`
 
 export const Header = styled.View`
   align-items: center;
-  padding: 20px 0;
+  padding: 15px 0;
 `;
 
 export const AvatarListContainer = styled.View`

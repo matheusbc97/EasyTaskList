@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {View} from 'react-native';
 
 import Modal from 'react-native-modal';
@@ -42,6 +42,11 @@ const TaskDetailsModal: React.FC<Props> = ({
 
   const formatDate = useFormatDate();
 
+  const handleMarkAsDonePress = useCallback(() => {
+    onBackButtonPress();
+    dispatch(updateTaskStatus({id: task!.id, done: !task?.done}));
+  }, [dispatch, onBackButtonPress, task]);
+
   return (
     <Modal
       isVisible={isVisible && !!task}
@@ -72,11 +77,7 @@ const TaskDetailsModal: React.FC<Props> = ({
 
         <Text>{task?.description}</Text>
 
-        <DoneCheckButton
-          onPress={() => {
-            onBackButtonPress();
-            dispatch(updateTaskStatus({id: task!.id, done: !task?.done}));
-          }}>
+        <DoneCheckButton onPress={handleMarkAsDonePress}>
           <Checkbox status={task?.done ? 'checked' : 'unchecked'} />
           <Text>{task?.done ? 'Feito' : 'Não feito'}</Text>
         </DoneCheckButton>

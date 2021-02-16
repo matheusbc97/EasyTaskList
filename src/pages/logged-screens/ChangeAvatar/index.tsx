@@ -5,7 +5,13 @@ import {AuthenticatedStackParams} from '@navigation/types';
 import {RouteProp} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {AnimatedBackground, Avatar, AvatarList, Text} from '@shared/components';
+import {
+  AnimatedBackground,
+  Avatar,
+  AvatarList,
+  BackButton,
+  Text,
+} from '@shared/components';
 import {selectUser, updateUser} from '@store/account/user';
 import {showToast} from '@shared/components/Toast';
 
@@ -44,6 +50,7 @@ function ChangeAvatar({navigation}: Props) {
     <AnimatedBackground>
       <Content>
         <Header>
+          <BackButton onPress={() => navigation.navigate('BottomNavigation')} />
           <Avatar avatarNumber={user?.avatar} size={80} />
         </Header>
         <Text type="title-medium" style={{textAlign: 'center'}}>

@@ -1,5 +1,5 @@
 import React, {useRef, useCallback} from 'react';
-import {View} from 'react-native';
+import {View, Image, ImageBackground} from 'react-native';
 import {useDispatch} from 'react-redux';
 
 import {Form} from '@unform/mobile';
@@ -9,7 +9,12 @@ import {authenticateUser} from '@store/account/user';
 import {validateAll} from '@shared/utils/validations';
 import {useValidateField} from '@shared/hooks';
 import {Props, FormDetails} from './types';
-import {RoundedButton, ScreenWrapper, TextButton} from '@shared/components';
+import {
+  RoundedButton,
+  ScreenWrapper,
+  TextButton,
+  Text,
+} from '@shared/components';
 import TextInput from './Input';
 
 import styles from './styles';
@@ -40,6 +45,11 @@ const Login = ({navigation}: Props) => {
         }),
       );
 
+      if (!response.payload) {
+        //Some error happened
+        return;
+      }
+
       const payload = response.payload as any;
 
       if (!payload.isLogged) {
@@ -50,9 +60,24 @@ const Login = ({navigation}: Props) => {
   );
 
   return (
-    <ScreenWrapper style={styles.screen}>
+    <ScreenWrapper>
+      <ImageBackground
+        style={{
+          width: '100%',
+          paddingVertical: 40,
+          alignItems: 'center',
+        }}
+        source={require('../../../assets/images/triangulo_play.png')}>
+        <Image source={require('../../../assets/images/imagem_login.png')} />
+      </ImageBackground>
       <View style={styles.formWrapper}>
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <Text style={{color: '#E63A5A', fontSize: 24, fontWeight: 'bold'}}>
+          Digite seu e-mail
+        </Text>
+        <Form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          style={{width: '100%', marginTop: 10}}>
           <TextInput
             iconName="user"
             name="email"
@@ -81,7 +106,7 @@ const Login = ({navigation}: Props) => {
             style={{
               backgroundColor: '#e63a5a',
             }}
-            text="Entrar"
+            text="ENTRAR"
             onPress={() => formRef.current?.submitForm()}
           />
         </View>

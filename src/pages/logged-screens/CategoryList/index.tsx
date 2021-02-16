@@ -71,6 +71,7 @@ const CategoryList: React.FC<Props> = ({navigation}) => {
         keyExtractor={(item, index) => index.toString()}
         data={array}
         style={{paddingHorizontal: 5}}
+        contentContainerStyle={{paddingBottom: 80}}
         renderItem={getCategoriesBoard}
       />
       <FloatingActionButton

@@ -8,7 +8,7 @@ import {Text} from '@shared/components';
 import {selectAppTheme} from '@store/configs';
 
 interface Props {
-  onPress(): void;
+  onPress: (() => void) | undefined;
 }
 
 const ChooseScreenBackButton: React.FC<Props> = ({onPress}) => {
