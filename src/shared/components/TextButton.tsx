@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text} from '@shared/components';
 import {RectButton, RectButtonProperties} from 'react-native-gesture-handler';
-import {TextStyle} from 'react-native';
+import {TextStyle, View} from 'react-native';
 
 interface Props extends RectButtonProperties {
   text: string;
@@ -17,22 +17,14 @@ const TextButton: React.FC<Props> = ({
   style,
   ...rest
 }) => (
-  <RectButton
-    style={[
-      {
-        alignSelf: 'center',
-      },
-      style,
-    ]}
-    onPress={onPress}
-    {...rest}>
-    <Text>
-      {text}{' '}
+  <View style={[{flexDirection: 'row', alignItems: 'center'}, style]}>
+    <Text>{text}</Text>
+    <RectButton style={{marginLeft: 5}} onPress={onPress} {...rest}>
       <Text primaryColor style={textInEvidenceStyle}>
         {textInEvidence}
       </Text>
-    </Text>
-  </RectButton>
+    </RectButton>
+  </View>
 );
 
 export default TextButton;

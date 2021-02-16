@@ -35,6 +35,7 @@ import ChangeThemeForm from '@pages/logged-screens/ChangeThemeForm';
 import ChangeAvatar from '@pages/logged-screens/ChangeAvatar';
 import ChangePasswordForm from '@pages/logged-screens/ChangePasswordForm';
 import ForgotPasswordForm from '@pages/account/ForgotPasswordForm';
+import PrivacyPolicy from '@pages/account/PrivacyPolicy';
 
 import BottonTabNavigator from './BottonTabNavigator';
 import TaskForm from '@pages/logged-screens/TaskForm';
@@ -175,6 +176,10 @@ const App = () => {
         <UnauthenticatedStack.Navigator headerMode="none">
           <UnauthenticatedStack.Screen name="Welcome" component={Welcome} />
           <UnauthenticatedStack.Screen name="Login" component={Login} />
+          <UnauthenticatedStack.Screen
+            name="PrivacyPolicy"
+            component={PrivacyPolicy}
+          />
           <UnauthenticatedStack.Screen
             options={{
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

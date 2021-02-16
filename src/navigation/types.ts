@@ -6,6 +6,7 @@ export type UnauthenticatedStackParams = {
   Welcome: undefined;
   ChooseUserConfigurations: undefined;
   ForgotPasswordForm: undefined;
+  PrivacyPolicy: undefined;
 };
 
 export type AuthenticatedStackParams = {
@@ -17,9 +18,11 @@ export type AuthenticatedStackParams = {
         task?: Task;
       };
   CategorySearch: undefined;
-  CategoryForm: {
-    category?: Category;
-  } | undefined;
+  CategoryForm:
+    | {
+        category?: Category;
+      }
+    | undefined;
   CategoryDetails: {
     category: Category;
   };

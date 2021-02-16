@@ -13,6 +13,7 @@ import {getInitialCategories} from './getInitialCategories';
 import {resetAuthUser} from './resetAuthUser';
 import {changeUserPassword} from './changePassword';
 import {sendResetPasswordToken} from './sendResetPasswordToken';
+import {getPrivacyPolicy} from './getPrivacyPolicy';
 
 export {
   createUserProfileDocument,
@@ -30,4 +31,5 @@ export {
   resetAuthUser,
   changeUserPassword,
   sendResetPasswordToken,
+  getPrivacyPolicy,
 };

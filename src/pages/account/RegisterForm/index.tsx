@@ -38,7 +38,6 @@ import {validateAll} from '@shared/utils/validations';
 import {showToast} from '@shared/components/Toast';
 
 import styles, {Shadow} from './styles';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
 type ChooseUserConfigurationsNavigationProp = StackNavigationProp<
   UnauthenticatedStackParams,
@@ -206,9 +205,13 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                       onPress={handlePrivacyPolicyCheckChange}
                     />
                   )}
-                  <Text style={styles.checkBoxText}>
-                    Li e concordo com a política de privacidade
-                  </Text>
+
+                  <TextButton
+                    style={{marginTop: 10, marginBottom: 5}}
+                    onPress={() => navigation.navigate('PrivacyPolicy')}
+                    text="Li e concordo com a"
+                    textInEvidence="política de privacidade"
+                  />
                 </View>
                 <View style={styles.footer}>
                   <Animated.View style={{width: confirmButtonWidth}}>
