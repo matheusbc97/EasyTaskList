@@ -15,7 +15,7 @@ import {
   TextStyle,
   StyleProp,
   View,
-  Platform
+  Platform,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -98,6 +98,7 @@ const TextInput = (
   useImperativeHandle(ref, () => ({
     setNativeProps(props: any) {
       animation(true);
+      console.log('nativeProps', props);
       inputRef?.current && inputRef.current.setNativeProps(props);
     },
   }));

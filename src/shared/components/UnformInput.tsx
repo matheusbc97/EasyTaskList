@@ -5,13 +5,7 @@ import React, {
   useImperativeHandle,
   forwardRef,
 } from 'react';
-import {
-  View,
-  TextInputProps,
-  StyleSheet,
-  ViewStyle,
-  Platform,
-} from 'react-native';
+import {View, TextInputProps, StyleSheet, ViewStyle} from 'react-native';
 import {useField} from '@unform/core';
 import TextInput from './TextInput';
 
@@ -61,6 +55,8 @@ const FloatingLabelInput = (
       } else {
         nativeProps.text = defaultValue;
       }
+
+      console.log('kkk', defaultValue);
 
       customTextInputRef.current.setNativeProps(nativeProps);
 

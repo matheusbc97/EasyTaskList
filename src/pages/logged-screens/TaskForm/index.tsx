@@ -7,6 +7,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {StackNavigationProp} from '@react-navigation/stack';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import formatDate from '@shared/utils/fomatDate';
 
 import {selectAppTheme} from '@store/configs';
 import {AuthenticatedStackParams} from '@navigation/types';
@@ -72,7 +73,15 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
   const [datePickerIsVisible, setDatePickerIsVisible] = useState(false);
   const [timePickerIsVisible, setTimePickerIsVisible] = useState(false);
 
-  const formatDate = useFormatDate();
+  const formatDatePickerDate = useCallback(
+    (value: string) => formatDate(value, 'time'),
+    [],
+  );
+
+  const formatTime = useCallback(
+    (value: string) => formatDate(value, 'time'),
+    [],
+  );
 
   const getDateByDateAndTime = useCallback((date: string, time: string) => {
     const formTime = new Date(time);
@@ -175,7 +184,7 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
               <TextInput name="description" label="Descrição" />
               <TextInput
                 ref={datePickerRef}
-                mask={(value) => formatDate(value)}
+                mask={formatDatePickerDate}
                 name="date"
                 label="Data"
                 button
@@ -185,7 +194,7 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
                 ref={timePickerRef}
                 name="time"
                 label="Horário"
-                mask={(value) => formatDate(value, 'time')}
+                mask={formatTime}
                 button
                 onPress={() => setTimePickerIsVisible(true)}
               />

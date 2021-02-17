@@ -27,7 +27,7 @@
     "lodash": "4.17.20",
     "polished": "3.6.6",
     "react": "16.13.1",
-    "react-native": "0.63.2",
+    "react-native": "0.63.4",
     "react-native-calendars": "1.343.0",
     "react-native-gesture-handler": "1.7.0",
     "react-native-linear-gradient": "2.5.6",
