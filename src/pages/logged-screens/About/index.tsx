@@ -17,6 +17,7 @@ import {
 } from '@store/about';
 
 import AboutListItem from './AboutListItem';
+import {Content} from './styles';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'About'>;
@@ -44,17 +45,19 @@ const About: React.FC<Props> = ({navigation}) => {
         title="Sobre"
         onBackPress={() => navigation.navigate('BottomNavigation')}
       />
-      <FlatListWithFetchIndicator
-        keyExtractor={(item) => item.id}
-        onRefresh={getAboutList}
-        data={aboutItems}
-        isLoading={fetchState.isLoading}
-        hasError={fetchState.hasError}
-        emptyListText="Nenhum Item Encontrado"
-        renderItem={({item, index}) => (
-          <AboutListItem item={item} index={index} />
-        )}
-      />
+      <Content>
+        <FlatListWithFetchIndicator
+          keyExtractor={(item) => item.id}
+          onRefresh={getAboutList}
+          data={aboutItems}
+          isLoading={fetchState.isLoading}
+          hasError={fetchState.hasError}
+          emptyListText="Nenhum Item Encontrado"
+          renderItem={({item, index}) => (
+            <AboutListItem item={item} index={index} />
+          )}
+        />
+      </Content>
     </ScreenWrapper>
   );
 };

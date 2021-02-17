@@ -5,7 +5,7 @@ import {Text} from '@shared/components';
 import {AboutItem} from '@shared/models';
 
 const Container = styled.View`
-  padding: 20px;
+  padding: 10px;
   flex-direction: row;
 `;
 
