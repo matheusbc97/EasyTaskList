@@ -127,8 +127,6 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
         date: getDateByDateAndTime(form.date, form.time),
       };
 
-      console.log('updatedTask', updatedTask);
-
       dispatch(updateTask(updatedTask)).then((action) => {
         if (action.payload) {
           navigation.pop();

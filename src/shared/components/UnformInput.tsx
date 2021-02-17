@@ -56,8 +56,6 @@ const FloatingLabelInput = (
         nativeProps.text = defaultValue;
       }
 
-      console.log('kkk', defaultValue);
-
       customTextInputRef.current.setNativeProps(nativeProps);
 
       inputElementRef.current.value = defaultValue;
