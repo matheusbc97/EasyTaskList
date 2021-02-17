@@ -23,3 +23,17 @@ The framework that has been used is react native
 ## Backend
 In this project was used firebase to work as backend.  
 *Tradução - Neste projeto foi utilizado o firebase para funcionar como back-end.*
+
+## Features
+- [x] Crud of tasks
+- [x] Register/Authentication
+- [x] Categories of Tasks
+- [x] Portuguese Translation
+- [x] User Avatar
+- [x] Themes
+- [ ] Dark Mode
+- [ ] English Translation
+- [ ] Spanish Translation
+- [ ] PWA
+- [ ] Optimized for Tablets
+- [ ] User picture
