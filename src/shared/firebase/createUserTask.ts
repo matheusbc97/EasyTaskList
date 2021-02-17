@@ -3,7 +3,7 @@ import firestore from '@react-native-firebase/firestore';
 interface CreateTaskOnFirebaseDTO {
   title: string;
   description: string;
-  date: string;
+  date: Date;
   categoryId: string;
   done: boolean;
 }

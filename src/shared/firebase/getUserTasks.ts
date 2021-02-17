@@ -5,7 +5,7 @@ export interface FirebaseTaskDTO {
   id: string;
   title: string;
   description: string;
-  date: string;
+  date: number;
   categoryId: string;
   done: boolean;
 }
@@ -20,14 +20,16 @@ export async function getUserTasks(): Promise<FirebaseTaskDTO[]> {
 
     const tasksCollection = await firestore()
       .collection(`users/${authUser.uid}/tasks`)
+      .orderBy('date')
       .get();
 
     const tasks = tasksCollection.docs.map((taskDoc) => {
-      const {categoryRef, ...rest} = taskDoc.data();
+      const {categoryRef, date, ...rest} = taskDoc.data();
 
       return {
         id: taskDoc.id,
         categoryId: categoryRef.id,
+        date: date.toMillis(),
         ...rest,
       } as FirebaseTaskDTO;
     });

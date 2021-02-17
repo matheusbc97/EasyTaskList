@@ -4,7 +4,7 @@ interface UpdateTaskOnFirebaseDTO {
   id: string;
   title?: string;
   description?: string;
-  date?: string;
+  date?: Date;
   categoryRef?: string;
   done?: boolean;
 }

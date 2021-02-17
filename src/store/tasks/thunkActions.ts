@@ -1,4 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
+import {getTime} from 'date-fns';
 
 import {handleErrorMessage} from '@shared/utils/errorHandler';
 import {createUserTask, getUserTasks, updateUserTask} from '@shared/firebase';
@@ -33,13 +34,16 @@ export const getTasks = createAsyncThunk(
 interface CreateTaskDTO {
   title: string;
   description: string;
-  date: string;
+  date: Date;
   category: Category;
 }
 
 export const createTask = createAsyncThunk(
   'tasks/createTask',
-  async ({category, ...rest}: CreateTaskDTO, {getState}): Promise<Task> => {
+  async (
+    {category, date, ...rest}: CreateTaskDTO,
+    {getState},
+  ): Promise<Task> => {
     try {
       loaderHandler.showLoader();
       const user = selectUser(getState() as RootState);
@@ -49,6 +53,7 @@ export const createTask = createAsyncThunk(
 
       const taskId = await createUserTask(user!.uid, {
         categoryId: category!.id,
+        date,
         ...rest,
         done: false,
       });
@@ -59,6 +64,7 @@ export const createTask = createAsyncThunk(
         id: taskId,
         category: categories.find((item) => item.id === category.id),
         done: false,
+        date: getTime(date),
         ...rest,
       };
     } catch (error) {
@@ -72,13 +78,16 @@ interface UpdateTaskDTO {
   id: string;
   title: string;
   description: string;
-  date: string;
+  date: Date;
   category: Category;
 }
 
 export const updateTask = createAsyncThunk(
   'tasks/updateTask',
-  async ({category, ...rest}: UpdateTaskDTO, {getState}): Promise<Task> => {
+  async (
+    {category, date, ...rest}: UpdateTaskDTO,
+    {getState},
+  ): Promise<Task> => {
     try {
       loaderHandler.showLoader();
       const user = selectUser(getState() as RootState);
@@ -91,6 +100,7 @@ export const updateTask = createAsyncThunk(
           category!.id
         }`,
         ...rest,
+        date,
         done: false,
       });
 
@@ -99,6 +109,7 @@ export const updateTask = createAsyncThunk(
       return {
         category: categories.find((item) => item.id === category.id),
         done: false,
+        date: getTime(date),
         ...rest,
       };
     } catch (error) {

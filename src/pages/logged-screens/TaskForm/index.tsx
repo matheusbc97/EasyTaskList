@@ -11,6 +11,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {selectAppTheme} from '@store/configs';
 import {AuthenticatedStackParams} from '@navigation/types';
 
+import convertMillisecondsToDate from '@shared/utils/convertMillisecondsToDate';
 import {
   ScreenWrapper,
   UnformInput as TextInput,
@@ -52,8 +53,8 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
     const _initialData: FormData = {
       title: task.title,
       category: task.category!.name,
-      date: task.date,
-      time: task.date,
+      date: convertMillisecondsToDate(task.date).toString(),
+      time: convertMillisecondsToDate(task.date).toString(),
       description: task.description,
     };
 
@@ -83,7 +84,7 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
       formDate.getDate(),
       formTime.getHours(),
       formTime.getMinutes(),
-    ).toString();
+    );
   }, []);
 
   const handleFormSubmit = useCallback(
@@ -116,6 +117,8 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
         category: chosenCategory ? chosenCategory : task.category!,
         date: getDateByDateAndTime(form.date, form.time),
       };
+
+      console.log('updatedTask', updatedTask);
 
       dispatch(updateTask(updatedTask)).then((action) => {
         if (action.payload) {
