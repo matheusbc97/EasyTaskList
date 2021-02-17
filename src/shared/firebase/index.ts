@@ -14,6 +14,7 @@ import {resetAuthUser} from './resetAuthUser';
 import {changeUserPassword} from './changePassword';
 import {sendResetPasswordToken} from './sendResetPasswordToken';
 import {getPrivacyPolicy} from './getPrivacyPolicy';
+import {getAboutItemsFromDatabase} from './getAboutItemsFromDatabase';
 
 export {
   createUserProfileDocument,
@@ -32,4 +33,5 @@ export {
   changeUserPassword,
   sendResetPasswordToken,
   getPrivacyPolicy,
+  getAboutItemsFromDatabase,
 };

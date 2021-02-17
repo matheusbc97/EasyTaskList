@@ -5,6 +5,7 @@ import {Dictionary} from './Dictionary';
 import {AppThemeName} from './AppThemeName';
 import {Task} from './Task';
 import {Category} from './Category';
+import {AboutItem} from './AboutItem';
 
 export type {
   AppTheme,
@@ -14,4 +15,5 @@ export type {
   AppThemeName,
   Task,
   Category,
+  AboutItem,
 };

@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
-
+//import {Switch} from 'react-native-paper';
 import {authenticateUser} from '@store/account/user';
 import {validateAll} from '@shared/utils/validations';
 import {useValidateField} from '@shared/hooks';
@@ -23,6 +23,8 @@ const Login = ({navigation}: Props) => {
   const dispatch = useDispatch();
   const formRef = useRef<FormHandles>(null);
   const validateField = useValidateField(formRef);
+
+  //const [rememberUser, changeRememberUser] = useSwitchState();
 
   const handleRegisterPress = useCallback(
     () => navigation.navigate('RegisterForm'),
@@ -100,6 +102,21 @@ const Login = ({navigation}: Props) => {
             autoCapitalize="none"
             onSubmitEditing={() => formRef.current?.submitForm()}
           />
+          {/*<View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'flex-end',
+            }}>
+            <Text type="title" style={{color: '#E63A5A'}}>
+              Lembrar usuário
+            </Text>
+            <Switch
+              value={rememberUser}
+              onValueChange={changeRememberUser}
+              color="#E63A5A"
+            />
+          </View>*/}
         </Form>
         <View style={styles.buttonWrapper}>
           <RoundedButton

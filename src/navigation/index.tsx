@@ -36,6 +36,7 @@ import ChangeAvatar from '@pages/logged-screens/ChangeAvatar';
 import ChangePasswordForm from '@pages/logged-screens/ChangePasswordForm';
 import ForgotPasswordForm from '@pages/account/ForgotPasswordForm';
 import PrivacyPolicy from '@pages/account/PrivacyPolicy';
+import About from '@pages/logged-screens/About';
 
 import BottonTabNavigator from './BottonTabNavigator';
 import TaskForm from '@pages/logged-screens/TaskForm';
@@ -146,6 +147,7 @@ const App = () => {
             name="CategorySearch"
             component={CategorySearch}
           />
+          <AuthenticatedStack.Screen name="About" component={About} />
           <AuthenticatedStack.Screen
             name="CategoryForm"
             component={CategoryForm}

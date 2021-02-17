@@ -18,23 +18,31 @@ export function validateField(
         return 'Campo Obrigatório';
       }
 
+      if (value.length < 6) {
+        return 'A senha deve conter ao menos 6 caracteres';
+      }
+
       return null;
     case 'newPassword':
       if (!value) {
         return 'Campo Obrigatório';
+      }
+
+      if (value.length < 6) {
+        return 'A senha deve conter ao menos 6 caracteres';
+      }
+
+      if (
+        formRef?.current?.getFieldValue('confirmPassword') &&
+        formRef.current.getFieldValue('confirmPassword') !== value
+      ) {
+        return 'As senhas não coincidem';
       } else {
         if (
-          formRef?.current?.getFieldValue('confirmPassword') &&
-          formRef.current.getFieldValue('confirmPassword') !== value
+          formRef?.current?.getFieldError('confirmPassword') ===
+          'As senhas não coincidem'
         ) {
-          return 'As senhas não coincidem';
-        } else {
-          if (
-            formRef?.current?.getFieldError('confirmPassword') ===
-            'As senhas não coincidem'
-          ) {
-            formRef?.current?.setFieldError('confirmPassword', '');
-          }
+          formRef?.current?.setFieldError('confirmPassword', '');
         }
       }
 
@@ -42,19 +50,23 @@ export function validateField(
     case 'confirmNewPassword':
       if (!value) {
         return 'Campo Obrigatório';
+      }
+
+      if (value.length < 6) {
+        return 'A senha deve conter ao menos 6 caracteres';
+      }
+
+      if (
+        formRef?.current?.getFieldValue('newPassword') &&
+        formRef.current?.getFieldValue('newPassword') !== value
+      ) {
+        return 'As senhas não coincidem';
       } else {
         if (
-          formRef?.current?.getFieldValue('newPassword') &&
-          formRef.current?.getFieldValue('newPassword') !== value
+          formRef?.current?.getFieldError('newPassword') ===
+          'As senhas não coincidem'
         ) {
-          return 'As senhas não coincidem';
-        } else {
-          if (
-            formRef?.current?.getFieldError('newPassword') ===
-            'As senhas não coincidem'
-          ) {
-            formRef?.current?.setFieldError('newPassword', '');
-          }
+          formRef?.current?.setFieldError('newPassword', '');
         }
       }
 
