@@ -6,7 +6,6 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {StackNavigationProp} from '@react-navigation/stack';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import formatDate from '@shared/utils/fomatDate';
 
 import {selectAppTheme} from '@store/configs';
@@ -24,7 +23,6 @@ import {
 import styles from './styles';
 import {RouteProp} from '@react-navigation/native';
 import {createTask} from '@store/tasks';
-import {useFormatDate} from '@shared/hooks';
 import {updateTask} from '@store/tasks/thunkActions';
 
 interface FormData {
