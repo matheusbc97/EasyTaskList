@@ -31,6 +31,7 @@ In this project was used firebase to work as backend.
 - [x] Portuguese Translation
 - [x] User Avatar
 - [x] Themes
+- [ ] Automated testing
 - [ ] Dark Mode
 - [ ] English Translation
 - [ ] Spanish Translation
