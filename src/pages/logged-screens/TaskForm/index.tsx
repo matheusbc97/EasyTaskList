@@ -152,11 +152,6 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
         <View style={styles.container}>
           <View style={styles.content}>
             <View style={styles.header}>
-              <MaterialIcon
-                name="arrow-back"
-                size={30}
-                color={appTheme.primaryColor}
-              />
               <View style={styles.titleWrapper}>
                 <Text
                   type="title-big"

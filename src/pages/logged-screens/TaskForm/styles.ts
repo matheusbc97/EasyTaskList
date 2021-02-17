@@ -24,9 +24,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  title: {
-    marginLeft: -38,
-  },
+  title: {},
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
