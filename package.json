@@ -33,7 +33,7 @@
     "react-native-linear-gradient": "2.5.6",
     "react-native-modal": "11.5.6",
     "react-native-modal-datetime-picker": "8.9.3",
-    "react-native-paper": "4.5.0",
+    "react-native-paper": "4.7.1",
     "react-native-reanimated": "1.13.0",
     "react-native-safe-area-context": "3.1.7",
     "react-native-screens": "2.10.1",
@@ -41,21 +41,20 @@
     "react-native-vector-icons": "7.1.0",
     "react-redux": "7.2.1",
     "redux": "4.0.5",
-    "styled-components": "5.1.1"
+    "styled-components": "5.2.1"
   },
   "devDependencies": {
     "@babel/core": "7.8.4",
     "@babel/runtime": "7.8.4",
     "@react-native-community/eslint-config": "1.1.0",
     "@types/jest": "24.0.24",
-    "@types/lodash": "4.14.161",
+    "@types/lodash": "4.14.168",
     "@types/react-native": "0.63.13",
     "@types/react-native-calendars": "1.20.10",
     "@types/react-native-vector-icons": "6.4.6",
     "@types/react-redux": "7.1.9",
     "@types/react-test-renderer": "16.9.3",
-    "@types/redux-logger": "3.0.8",
-    "@types/styled-components": "5.1.3",
+    "@types/styled-components": "5.1.7",
     "@typescript-eslint/eslint-plugin": "2.27.0",
     "@typescript-eslint/parser": "2.27.0",
     "babel-jest": "25.1.0",
@@ -67,7 +66,6 @@
     "prettier": "2.0.4",
     "react-test-renderer": "16.13.1",
     "reactotron-react-native": "5.0.0",
-    "redux-logger": "3.0.6",
     "typescript": "3.8.3"
   },
   "jest": {
