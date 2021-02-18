@@ -3,10 +3,11 @@ EasyTaskList is an app easy to use, created mainly to work as portfolio
 *Tradução - EasyTaskList é um aplicativo de lista de tarefas de fácil uso, feito principalmente para funcionar de portifólio*
 
 ## Framework
-The framework that has been used is react native  
-*Tradução - O framework utilizado foi o react native*
+The framework that has been used is react native an powerfull mobile framework create by facebook team that builds android's and iPhone's aplications  
+*Tradução - O framework que foi usado é o React Native, um poderoso framework móvel criado pela equipe do Facebook que constrói tanto aplicativos para Android e iPhone*
 
 ## Libraries Used (Bibliotecas Utilizadas)
+- @react-navigation
 - @reduxjs/toolkit
 - react-native-paper
 - styled-components
