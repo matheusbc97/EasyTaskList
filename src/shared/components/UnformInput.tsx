@@ -143,7 +143,7 @@ const FloatingLabelInput = (
         }}
         onBlur={handleBlur}
         {...rest}
-        style={[style]}
+        style={style}
       />
       <View style={styles.errorWrapper}>
         {Boolean(error) && <Text style={styles.error}>{error}</Text>}

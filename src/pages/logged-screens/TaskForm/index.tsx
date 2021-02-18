@@ -72,7 +72,7 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
   const [timePickerIsVisible, setTimePickerIsVisible] = useState(false);
 
   const formatDatePickerDate = useCallback(
-    (value: string) => formatDate(value, 'time'),
+    (value: string) => formatDate(value),
     [],
   );
 

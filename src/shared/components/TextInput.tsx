@@ -203,6 +203,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: Platform.OS === 'ios' ? 10 : 5,
     flexGrow: 1,
+    color: '#303030',
   },
   text: {
     flexShrink: 1,

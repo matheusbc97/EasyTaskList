@@ -42,7 +42,7 @@ const CategorySearchListItem: React.FC<Props> = ({category, onPress}) => {
           name={categoryIconNames[category.iconIndex]}
           size={35}
           color="#fff"
-          style={{opacity: 0.2}}
+          style={{opacity: 0.5}}
         />
       </IconBackground>
       <Text type="title-big" style={{marginLeft: 15}}>

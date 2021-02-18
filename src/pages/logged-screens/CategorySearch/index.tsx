@@ -57,9 +57,11 @@ const CategorySearch: React.FC<Props> = ({navigation}) => {
     dispatch,
   ]);
 
+  const handleBackPress = useCallback(() => navigation.pop(), [navigation]);
+
   return (
     <ScreenWrapper>
-      <Header title="Selecionar Categoria" />
+      <Header title="Selecionar Categoria" onBackPress={handleBackPress} />
 
       <Container backgroundColor={appTheme.aboveBackground}>
         <SearchInput
