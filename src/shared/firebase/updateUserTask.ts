@@ -5,16 +5,23 @@ interface UpdateTaskOnFirebaseDTO {
   title?: string;
   description?: string;
   date?: Date;
-  categoryRef?: string;
+  categoryId?: string;
   done?: boolean;
 }
 
 export const updateUserTask = async (
   userUid: string,
-  {id, ...rest}: UpdateTaskOnFirebaseDTO,
+  {id, categoryId, ...rest}: UpdateTaskOnFirebaseDTO,
 ) => {
   try {
-    await firestore().doc(`users/${userUid}/tasks/${id}`).update(rest);
+    await firestore()
+      .doc(`users/${userUid}/tasks/${id}`)
+      .update({
+        categoryRef: firestore().doc(
+          `users/${userUid}/categories/${categoryId}`,
+        ),
+        ...rest,
+      });
 
     return;
   } catch (error) {

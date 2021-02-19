@@ -96,9 +96,7 @@ export const updateTask = createAsyncThunk(
       );
 
       await updateUserTask(user!.uid, {
-        categoryRef: `/users/73tLB56OgrOjSApFhZUFKyUzJaA3/categories/${
-          category!.id
-        }`,
+        categoryId: category!.id,
         ...rest,
         date,
         done: false,
