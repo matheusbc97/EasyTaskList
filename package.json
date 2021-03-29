@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android:build": "cd android/ && ./gradlew assembleRelease",
+    "android:clean": "cd android/ && ./gradlew clean",
+    "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
