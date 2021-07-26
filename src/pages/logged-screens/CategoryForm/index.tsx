@@ -50,7 +50,7 @@ interface FormData {
 }
 
 const CategoryForm: React.FC<Props> = ({navigation, route}) => {
-  const {category} = route.params;
+  const category = route.params?.category;
 
   const formRef = useRef<FormHandles>(null);
 
