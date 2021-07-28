@@ -1,11 +1,9 @@
-import React, {useRef, useCallback} from 'react';
+import React, {useRef} from 'react';
 import {View, Image, ImageBackground} from 'react-native';
-import {useDispatch} from 'react-redux';
+import useLogIn from '../../../hooks/useLogIn';
 
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
-//import {Switch} from 'react-native-paper';
-import {authenticateUser} from '@store/account/user';
 import {validateAll} from '@shared/utils/validations';
 import {useValidateField} from '@shared/hooks';
 import {Props, FormDetails} from './types';
@@ -20,46 +18,31 @@ import TextInput from './Input';
 import styles from './styles';
 
 const Login = ({navigation}: Props) => {
-  const dispatch = useDispatch();
+  const {logIn} = useLogIn();
+
   const formRef = useRef<FormHandles>(null);
   const validateField = useValidateField(formRef);
 
   //const [rememberUser, changeRememberUser] = useSwitchState();
 
-  const handleRegisterPress = useCallback(
-    () => navigation.navigate('RegisterForm'),
-    [navigation],
-  );
+  const handleRegisterPress = () => navigation.navigate('RegisterForm');
 
-  const handleSubmit = useCallback(
-    async (form: FormDetails) => {
-      const [formErrors, isValid] = validateAll(form);
+  const handleSubmit = async (form: FormDetails) => {
+    const [formErrors, isValid] = validateAll(form);
 
-      if (!isValid) {
-        formRef.current?.setErrors(formErrors);
-        return;
-      }
+    if (!isValid) {
+      formRef.current?.setErrors(formErrors);
+      return;
+    }
 
-      const response = await dispatch(
-        authenticateUser({
-          email: form.email,
-          password: form.password,
-        }),
-      );
+    try {
+      const isLogged = await logIn(form.email, form.password);
 
-      if (!response.payload) {
-        //Some error happened
-        return;
-      }
-
-      const payload = response.payload as any;
-
-      if (!payload.isLogged) {
+      if (!isLogged) {
         navigation.navigate('ChooseUserConfigurations');
       }
-    },
-    [dispatch, formRef, navigation],
-  );
+    } catch (error) {}
+  };
 
   return (
     <ScreenWrapper>
