@@ -1,21 +1,21 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import useGetUser from '@hooks/useGetUser';
+import useUpdateUser from '@hooks/useUpdateUser';
+import useSetUserLogged from '@hooks/useSetUserLogged';
 
-import {selectUser} from '@store/account/user';
-import {setIsLogged} from '@store/configs';
 import {Avatar, Text, RoundedButton} from '@shared/components';
 
 import ThemeBox from './ThemeBox';
-import {updateUser} from '@store/account/user/thunkActions';
 
 interface Props {
-  onChagePress(index: number): void;
+  onChangePress(index: number): void;
 }
 
-const SaveUserConfiguration: React.FC<Props> = ({onChagePress}) => {
-  const user = useSelector(selectUser);
-  const dispatch = useDispatch();
+const SaveUserConfiguration: React.FC<Props> = ({onChangePress}) => {
+  const user = useGetUser();
+  const updateUser = useUpdateUser();
+  const setUserLogged = useSetUserLogged();
 
   return (
     <View style={styles.container}>
@@ -33,37 +33,35 @@ const SaveUserConfiguration: React.FC<Props> = ({onChagePress}) => {
           text="Alterar Nome"
           inverted
           style={styles.button}
-          onPress={() => onChagePress(1)}
+          onPress={() => onChangePress(1)}
         />
         <View style={styles.betweenButtonsSpace} />
         <RoundedButton
           text="Alterar Avatar"
           inverted
           style={styles.button}
-          onPress={() => onChagePress(2)}
+          onPress={() => onChangePress(2)}
         />
       </View>
       <RoundedButton
         text="Alterar Tema"
         inverted
         style={styles.alterateThemeButton}
-        onPress={() => onChagePress(0)}
+        onPress={() => onChangePress(0)}
       />
       <RoundedButton
         text="Finalizar Cadastro"
         style={styles.finalizeRegisterBtn}
         onPress={async () => {
-          const payloadAction = await dispatch(
-            updateUser({
+          try {
+            await updateUser({
               name: user?.name,
               avatar: user?.avatar,
               theme: user?.theme,
-            }),
-          );
+            });
 
-          if (payloadAction.payload) {
-            dispatch(setIsLogged(true));
-          }
+            setUserLogged(true);
+          } catch (error) {}
         }}
       />
     </View>

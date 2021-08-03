@@ -47,7 +47,7 @@ const About: React.FC<Props> = ({navigation}) => {
       />
       <Content>
         <FlatListWithFetchIndicator
-          keyExtractor={(item) => item.id}
+          keyExtractor={item => item.id}
           onRefresh={getAboutList}
           data={aboutItems}
           isLoading={fetchState.isLoading}

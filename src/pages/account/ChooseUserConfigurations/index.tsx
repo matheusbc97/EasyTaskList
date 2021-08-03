@@ -95,7 +95,7 @@ const ChooseUserConfigurations: React.FC = () => {
         return (
           <ChooseName
             onBackPress={() => advanceForNextScreen(true)}
-            onAdvancePress={(name) => {
+            onAdvancePress={name => {
               advanceForNextScreen();
               dispatch(setUserName(name));
             }}
@@ -105,7 +105,7 @@ const ChooseUserConfigurations: React.FC = () => {
       case 'ChoosePhotoOrAvatar':
         return (
           <ChoosePhotoOrAvatar
-            onAvatarPress={(avatar) => {
+            onAvatarPress={avatar => {
               dispatch(setUserAvatar(avatar));
               heightAnimation();
             }}
@@ -116,7 +116,7 @@ const ChooseUserConfigurations: React.FC = () => {
       case 'SaveUserConfiguration':
         return (
           <SaveUserConfiguration
-            onChagePress={(index) => heightAnimation(true, index)}
+            onChangePress={index => heightAnimation(true, index)}
           />
         );
     }
