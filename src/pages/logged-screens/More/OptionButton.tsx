@@ -38,6 +38,13 @@ const OptionButton: React.FC<OptionButtonProps> = ({
         alignItems: 'center',
         paddingHorizontal: 15,
         borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
       }}>
       {type === 'FontAwesome' ? (
         <FontAwesomeIcon
