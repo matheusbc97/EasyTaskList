@@ -105,33 +105,35 @@ export function validateField(
   }
 }
 
+type FormErrors = Record<string, string>;
+
 export function validateAll(
   form: any,
   notValidate = [],
   _recursiveKey?: string | null | undefined,
-): [object, boolean] {
-  let formErrors: any = {};
+): [FormErrors, boolean] {
+  let formErrors: FormErrors = {};
   let formIsValid = true;
 
-  Object.keys(form).map((key) => {
+  Object.keys(form).map(key => {
     if (typeof form[key] === 'object') {
       let recursiveKey = _recursiveKey ? `${key}.${_recursiveKey}` : key;
 
       formErrors = {
         ...formErrors,
-        ...validateAll(form[key], notValidate, recursiveKey),
+        ...validateAll(form[key], notValidate, recursiveKey)[0],
       };
     } else {
       const newKey = _recursiveKey ? `${_recursiveKey}.${key}` : key;
 
-      if (!notValidate.find((fieldName) => fieldName === newKey)) {
+      if (!notValidate.find(fieldName => fieldName === newKey)) {
         const error = validateField(newKey, form[key]);
 
         if (formIsValid && error) {
           formIsValid = false;
         }
 
-        formErrors[newKey] = error;
+        formErrors[newKey] = error ?? '';
       }
     }
   });

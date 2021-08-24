@@ -1,132 +1,92 @@
 import React, {useRef} from 'react';
-import {View, Image, ImageBackground} from 'react-native';
-import useLogIn from '../../../hooks/useLogIn';
-
-import {Form} from '@unform/mobile';
+import {Image} from 'react-native';
 import {FormHandles} from '@unform/core';
-import {validateAll} from '@shared/utils/validations';
-import {useValidateField} from '@shared/hooks';
-import {Props, FormDetails} from './types';
-import {
-  RoundedButton,
-  ScreenWrapper,
-  TextButton,
-  Text,
-} from '@shared/components';
-import TextInput from './Input';
 
-import styles from './styles';
+import {useValidateField} from '@shared/hooks';
+import {ScreenWrapper} from '@shared/components';
+
+import TextInput from './components/Input';
+import {Props} from './types';
+import {
+  ImageBackground,
+  LoginTextButton,
+  LoginButton,
+  TopText,
+  FormContainer,
+  ButtonContainer,
+  LoginForm,
+} from './styles';
+import useHandleSubmit from './hooks/useHandleSubmit';
 
 const Login = ({navigation}: Props) => {
-  const {logIn} = useLogIn();
-
   const formRef = useRef<FormHandles>(null);
   const validateField = useValidateField(formRef);
 
-  //const [rememberUser, changeRememberUser] = useSwitchState();
-
   const handleRegisterPress = () => navigation.navigate('RegisterForm');
 
-  const handleSubmit = async (form: FormDetails) => {
-    const [formErrors, isValid] = validateAll(form);
+  const handleForgotPasswordPress = () =>
+    navigation.navigate('ForgotPasswordForm');
 
-    if (!isValid) {
-      formRef.current?.setErrors(formErrors);
-      return;
-    }
+  const userWhithoutConfigurationsCallback = () =>
+    navigation.navigate('ChooseUserConfigurations');
 
-    try {
-      const isLogged = await logIn(form.email, form.password);
-
-      if (!isLogged) {
-        navigation.navigate('ChooseUserConfigurations');
-      }
-    } catch (error) {}
-  };
+  const handleSubmit = useHandleSubmit(
+    formRef,
+    userWhithoutConfigurationsCallback,
+  );
 
   return (
     <ScreenWrapper>
       <ImageBackground
-        style={{
-          width: '100%',
-          paddingVertical: 40,
-          alignItems: 'center',
-        }}
         source={require('../../../assets/images/triangulo_play.png')}>
         <Image source={require('../../../assets/images/imagem_login.png')} />
       </ImageBackground>
-      <View style={styles.formWrapper}>
-        <Text style={{color: '#E63A5A', fontSize: 24, fontWeight: 'bold'}}>
-          Digite seu e-mail
-        </Text>
-        <Form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          style={{width: '100%', marginTop: 10}}>
+      <FormContainer>
+        <TopText>Digite seu e-mail e senha</TopText>
+        <LoginForm ref={formRef} onSubmit={handleSubmit}>
           <TextInput
             iconName="user"
             name="email"
             placeholder="Email"
             textContentType="emailAddress"
             autoCompleteType="email"
-            validateField={validateField} // Valida ao o usuario digitar
+            validateField={validateField}
             onSubmitEditing={() =>
               formRef.current?.getFieldRef('password').focus()
             }
             autoCapitalize="none"
+            returnKeyType="next"
           />
           <TextInput
             iconName="lock"
             name="password"
             placeholder="Senha"
             textContentType="password"
-            validateField={validateField} // Valida ao o usuario digitar
+            validateField={validateField}
             secureTextEntry
             autoCapitalize="none"
             onSubmitEditing={() => formRef.current?.submitForm()}
+            returnKeyType="send"
           />
-          {/*<View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              alignSelf: 'flex-end',
-            }}>
-            <Text type="title" style={{color: '#E63A5A'}}>
-              Lembrar usuário
-            </Text>
-            <Switch
-              value={rememberUser}
-              onValueChange={changeRememberUser}
-              color="#E63A5A"
+          <ButtonContainer>
+            <LoginButton
+              text="ENTRAR"
+              onPress={() => formRef.current?.submitForm()}
             />
-          </View>*/}
-        </Form>
-        <View style={styles.buttonWrapper}>
-          <RoundedButton
-            style={{
-              backgroundColor: '#e63a5a',
-            }}
-            text="ENTRAR"
-            onPress={() => formRef.current?.submitForm()}
-          />
-        </View>
-        <TextButton
-          textInEvidenceStyle={{
-            color: '#e63a5a',
-          }}
+          </ButtonContainer>
+        </LoginForm>
+
+        <LoginTextButton
           text="Não tem cadastro?"
           textInEvidence="Cadastre-se aqui"
           onPress={handleRegisterPress}
         />
-        <TextButton
-          textInEvidenceStyle={{
-            color: '#e63a5a',
-          }}
+        <LoginTextButton
           text="Esqueceu sua senha?"
           textInEvidence="Recupere-a aqui"
-          onPress={() => navigation.navigate('ForgotPasswordForm')}
+          onPress={handleForgotPasswordPress}
         />
-      </View>
+      </FormContainer>
     </ScreenWrapper>
   );
 };

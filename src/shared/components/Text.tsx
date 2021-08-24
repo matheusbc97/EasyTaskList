@@ -1,5 +1,5 @@
 import React, {PropsWithChildren, useCallback} from 'react';
-import {Text as RNText, TextProps} from 'react-native';
+import {Text as RNText, TextProps as RNTextProps} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import {selectAppTheme} from '../../store/configs';
@@ -13,7 +13,7 @@ type TextTypes =
   | 'title-medium'
   | 'title-inverse';
 
-interface Props extends TextProps, PropsWithChildren<Text> {
+export interface TextProps extends RNTextProps, PropsWithChildren<Text> {
   type?: TextTypes;
   primaryColor?: boolean;
   secondaryColor?: boolean;
@@ -25,11 +25,11 @@ const Text = ({
   type = 'body',
   primaryColor = false,
   secondaryColor = false,
-}: Props) => {
+}: TextProps) => {
   const theme = useSelector(selectAppTheme);
 
   const getColor = useCallback(
-    (defaultColor) => {
+    defaultColor => {
       if (primaryColor) {
         return theme.primaryColor;
       }

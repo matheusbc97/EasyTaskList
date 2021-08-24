@@ -1,6 +1,6 @@
 import RoundedButton from './RoundedButton';
 import ScreenWrapper from './ScreenWrapper';
-import Text from './Text';
+import Text, {TextProps} from './Text';
 import Shadow from './Shadow';
 import TextInput from './TextInput';
 import UnformInput from './UnformInput';
@@ -18,7 +18,7 @@ import Toast from './Toast';
 import LoadingHandler from './LoadingHandler';
 import CategoryListItem from './CategoryListItem';
 import FloatingActionButton from './FloatingActionButton';
-import TextButton from './TextButton';
+import TextButton, {TextButtonProps} from './TextButton';
 import BackButton from './BackButton';
 import AnimatedBackgroundContent from './AnimatedBackgroundContent';
 import AvatarList from './AvatarList';
@@ -48,4 +48,7 @@ export {
   BackButton,
   AnimatedBackgroundContent,
   AvatarList,
+  TextProps,
 };
+
+export type {TextButtonProps};

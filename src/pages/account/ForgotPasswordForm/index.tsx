@@ -1,7 +1,4 @@
-import React, {useCallback, useRef} from 'react';
-
-import {StackNavigationProp} from '@react-navigation/stack';
-import {UnauthenticatedStackParams} from '@navigation/types';
+import React, {useRef} from 'react';
 
 import {
   Text,
@@ -13,87 +10,56 @@ import {
   RoundedButton,
 } from '@shared/components';
 import {Form} from '@unform/mobile';
-import {handleErrorMessage} from '@shared/utils/errorHandler';
 import {FormHandles} from '@unform/core';
 import {useValidateField} from '@shared/hooks';
-import {validateAll} from '@shared/utils/validations';
-import {sendResetPasswordToken} from '@shared/firebase';
-import {loaderHandler} from '@shared/components/LoadingHandler';
-import {showToast} from '@shared/components/Toast';
+import styled from 'styled-components/native';
+import useHandleSubmit from './hooks/useHandleSubmit';
 
-interface Props {
-  navigation: StackNavigationProp<
-    UnauthenticatedStackParams,
-    'ForgotPasswordForm'
-  >;
-}
+const RecoverPasswordText = styled(Text)`
+  align-self: center;
+  margin: 5px 0;
+`;
 
-interface FormDetails {
-  email: string;
-}
+const SendButton = styled(RoundedButton)`
+  align-self: center;
+  margin: 5px 0;
+`;
 
-function ForgotPasswordForm({navigation}: Props) {
+const ForgotPasswordForm = styled(Form)`
+  margin-top: 5px;
+`;
+
+function ForgotPasswordFormPage() {
   const formRef = useRef<FormHandles>(null);
+
   const validateField = useValidateField(formRef);
-
-  const handleSubmit = useCallback(
-    async (form: FormDetails) => {
-      const [formErrors, isValid] = validateAll(form);
-
-      formRef.current?.setErrors(formErrors);
-
-      if (isValid) {
-        try {
-          loaderHandler.showLoader();
-          await sendResetPasswordToken(form.email);
-          loaderHandler.hideLoader();
-          showToast({
-            text: 'Email enviado com sucesso',
-            type: 'success',
-            buttonLabel: 'Voltar ao login',
-            buttonOnPress: () => navigation.navigate('Login'),
-            remain: true,
-          });
-        } catch (error) {
-          loaderHandler.hideLoader();
-          handleErrorMessage(error);
-        }
-        return;
-      }
-    },
-    [navigation],
-  );
+  const handleSubmit = useHandleSubmit(formRef);
+  const submitForm = () => formRef.current?.submitForm();
 
   return (
     <ScreenWrapper>
       <AnimatedBackground>
         <AnimatedBackgroundContent>
-          <BackButton onPress={() => navigation.pop()} />
-          <Text
-            type="title-big"
-            style={{alignSelf: 'center', marginVertical: 5}}>
+          <BackButton />
+          <RecoverPasswordText type="title-big">
             Recuperar Senha
-          </Text>
-          <Form ref={formRef} onSubmit={handleSubmit} style={{marginTop: 5}}>
+          </RecoverPasswordText>
+          <ForgotPasswordForm ref={formRef} onSubmit={handleSubmit}>
             <TextInput
               label="Email"
               name="email"
               validateField={validateField}
-              onSubmitEditing={() => formRef.current?.submitForm()}
+              onSubmitEditing={submitForm}
               textContentType="emailAddress"
               autoCapitalize="none"
               returnKeyType="send"
             />
-          </Form>
-          <RoundedButton
-            text="Enviar"
-            style={{alignSelf: 'center'}}
-            onPress={() => formRef.current?.submitForm()}
-          />
+          </ForgotPasswordForm>
+          <SendButton text="Enviar" onPress={submitForm} />
         </AnimatedBackgroundContent>
       </AnimatedBackground>
     </ScreenWrapper>
   );
 }
 
-export default ForgotPasswordForm;
+export default ForgotPasswordFormPage;

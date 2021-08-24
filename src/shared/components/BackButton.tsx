@@ -3,18 +3,22 @@ import {View, StyleSheet} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
 import {Text} from '@shared/components';
 import {selectAppTheme} from '@store/configs';
 
 interface Props {
-  onPress: (() => void) | undefined;
+  onPress?: (() => void) | undefined;
 }
 
 const ChooseScreenBackButton: React.FC<Props> = ({onPress}) => {
+  const navigation = useNavigation();
   const appTheme = useSelector(selectAppTheme);
   return (
-    <TouchableRipple style={styles.container} onPress={onPress}>
+    <TouchableRipple
+      style={styles.container}
+      onPress={onPress ?? navigation.goBack}>
       <View style={styles.content}>
         <MaterialIcon
           name="arrow-back"

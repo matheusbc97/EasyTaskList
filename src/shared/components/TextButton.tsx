@@ -3,13 +3,13 @@ import {Text} from '@shared/components';
 import {RectButton, RectButtonProperties} from 'react-native-gesture-handler';
 import {TextStyle, View} from 'react-native';
 
-interface Props extends RectButtonProperties {
+export interface TextButtonProps extends RectButtonProperties {
   text: string;
   textInEvidence: string;
   textInEvidenceStyle?: TextStyle;
 }
 
-const TextButton: React.FC<Props> = ({
+const TextButton: React.FC<TextButtonProps> = ({
   onPress,
   text,
   textInEvidence,
