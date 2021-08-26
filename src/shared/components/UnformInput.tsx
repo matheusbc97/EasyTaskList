@@ -14,16 +14,20 @@ import useOnChangeText from '../hooks/useOnChangeText';
 import {ValidateField} from '../models/ValidateField';
 import useMaskedOnChangeText from '../hooks/useMaskedOnChangeText';
 
-interface Props extends TextInputProps {
+export interface AppTextInputProps extends TextInputProps {
   label?: string;
   containerStyle?: ViewStyle;
   validateField?: ValidateField;
-  name: string;
   mask?(value: string, oldValue: string): string;
   disabled?: boolean;
   mode?: 'flat' | 'outlined';
   button?: boolean;
   onPress?(): void;
+  name?: string;
+}
+
+export interface UnformInputProps extends AppTextInputProps {
+  name: string;
 }
 
 const FloatingLabelInput = (
@@ -38,7 +42,7 @@ const FloatingLabelInput = (
     button = false,
     onPress,
     ...rest
-  }: Props,
+  }: UnformInputProps,
   ref: any,
 ) => {
   const customTextInputRef = useRef<any>(null);

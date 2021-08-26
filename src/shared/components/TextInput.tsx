@@ -154,7 +154,8 @@ const TextInput = (
             defaultValue={defaultValue}
             ref={inputRef}
             style={[styles.input, style]}
-            onFocus={(e) => {
+            returnKeyType="next"
+            onFocus={e => {
               if (!textRef.current.isValueNotEmpty) {
                 animation(true);
               }
@@ -162,14 +163,14 @@ const TextInput = (
 
               onFocus && onFocus(e);
             }}
-            onBlur={(e) => {
+            onBlur={e => {
               !textRef.current.isValueNotEmpty && animation(false);
 
               !error && borderColorAnimation(1);
 
               onBlur && onBlur(e);
             }}
-            onChangeText={(text) => {
+            onChangeText={text => {
               if ((!text || text.length === 1) && textRef.current) {
                 textRef.current.isValueNotEmpty = Boolean(text);
               }

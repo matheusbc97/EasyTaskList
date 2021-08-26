@@ -22,6 +22,11 @@ import TextButton, {TextButtonProps} from './TextButton';
 import BackButton from './BackButton';
 import AnimatedBackgroundContent from './AnimatedBackgroundContent';
 import AvatarList from './AvatarList';
+import EmailInput from './EmailInput';
+import ConfirmNewPasswordInput from './ConfirmNewPasswordInput';
+import NewPasswordInput from './NewPasswordInput';
+import CheckInput from './CheckInput';
+import CheckInputWithButtonText from './CheckInputWithButtonText';
 
 export {
   Avatar,
@@ -48,7 +53,11 @@ export {
   BackButton,
   AnimatedBackgroundContent,
   AvatarList,
-  TextProps,
+  EmailInput,
+  ConfirmNewPasswordInput,
+  NewPasswordInput,
+  CheckInput,
+  CheckInputWithButtonText,
 };
 
-export type {TextButtonProps};
+export type {TextButtonProps, TextProps};
