@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import {Image} from 'react-native';
 import {FormHandles} from '@unform/core';
 
-import {useValidateField} from '@shared/hooks';
+import {useValidateField, useTranslation} from '@shared/hooks';
 import {ScreenWrapper} from '@shared/components';
 
 import TextInput from './components/Input';
@@ -19,6 +19,7 @@ import {
 import useHandleSubmit from './hooks/useHandleSubmit';
 
 const Login = ({navigation}: Props) => {
+  const {translation} = useTranslation();
   const formRef = useRef<FormHandles>(null);
   const validateField = useValidateField(formRef);
 
@@ -42,12 +43,12 @@ const Login = ({navigation}: Props) => {
         <Image source={require('../../../assets/images/imagem_login.png')} />
       </ImageBackground>
       <FormContainer>
-        <TopText>Digite seu e-mail e senha</TopText>
+        <TopText>{translation('TYPE_YOUR_EMAIL_AND_PASSWORD')}</TopText>
         <LoginForm ref={formRef} onSubmit={handleSubmit}>
           <TextInput
             iconName="user"
             name="email"
-            placeholder="Email"
+            placeholder={translation('EMAIL')}
             textContentType="emailAddress"
             autoCompleteType="email"
             validateField={validateField}
@@ -60,7 +61,7 @@ const Login = ({navigation}: Props) => {
           <TextInput
             iconName="lock"
             name="password"
-            placeholder="Senha"
+            placeholder={translation('PASSWORD')}
             textContentType="password"
             validateField={validateField}
             secureTextEntry
@@ -70,20 +71,20 @@ const Login = ({navigation}: Props) => {
           />
           <ButtonContainer>
             <LoginButton
-              text="ENTRAR"
+              text={translation('LOG_IN')}
               onPress={() => formRef.current?.submitForm()}
             />
           </ButtonContainer>
         </LoginForm>
 
         <LoginTextButton
-          text="Não tem cadastro?"
-          textInEvidence="Cadastre-se aqui"
+          text={translation('QUESTION_DO_NOT_HAVE_A_REGISTRATION')}
+          textInEvidence={translation('REGISTER_HERE')}
           onPress={handleRegisterPress}
         />
         <LoginTextButton
-          text="Esqueceu sua senha?"
-          textInEvidence="Recupere-a aqui"
+          text={translation('QUESTION_FORGOT_PASSWORD')}
+          textInEvidence={translation('RECOVER_HERE')}
           onPress={handleForgotPasswordPress}
         />
       </FormContainer>

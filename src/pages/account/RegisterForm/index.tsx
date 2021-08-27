@@ -13,6 +13,7 @@ import {
   ScreenWrapper,
   CheckInputWithButtonText,
 } from '@shared/components';
+import {useTranslation} from '@/shared/hooks';
 
 import useHandleSubmit from './hooks/useHandleSubmit';
 import useOnRegisterUserSuccessAnimation from './hooks/useOnRegisterUserSuccessAnimation';
@@ -32,6 +33,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
   const formRef = useRef<FormHandles>(null);
   const scrollViewRef = useRef<ScrollView>(null);
   const validateField = useValidateField(formRef);
+  const {translation} = useTranslation();
 
   const [privacyPolicyIsChecked, setPrivacyPolicyIsChecked] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
@@ -60,7 +62,9 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
       <Scroll ref={scrollViewRef}>
         <RegisterFormAnimatedBackground>
           <Content>
-            <Title type="title">Crie Sua Conta de Usuário</Title>
+            <Title type="title">
+              {translation('CREATE_YOUR_USER_ACCOUNT')}
+            </Title>
             <FormWrapper>
               <Form ref={formRef} onSubmit={handleSubmit}>
                 <EmailInput
@@ -76,8 +80,8 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                 <CheckInputWithButtonText
                   value={privacyPolicyIsChecked}
                   onChange={value => setPrivacyPolicyIsChecked(value)}
-                  text="Li e concordo com a"
-                  textInEvidence="política de privacidade"
+                  text={translation('I_READ_AND_I_AGREE_WITH_THE')}
+                  textInEvidence={translation('PRIVACY_POLICY')}
                   onTextInEvidencePress={() =>
                     navigation.navigate('PrivacyPolicy')
                   }
@@ -87,7 +91,7 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                     <RoundedButton
                       disabled={isConfirmed}
                       style={{width: '100%'}}
-                      text={isConfirmed ? '' : 'Enviar'}
+                      text={isConfirmed ? '' : translation('SEND')}
                       inverted
                       icon={isConfirmed ? 'check' : ''}
                       onPress={() => formRef.current?.submitForm()}
@@ -96,8 +100,8 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                   <TextButton
                     style={{marginTop: 10, marginBottom: 5}}
                     onPress={() => navigation.navigate('Login')}
-                    text="Já possui uma conta?"
-                    textInEvidence="Conecte-se aqui."
+                    text={translation('QUESTION_ALREADY_HAVE_AN_ACCOUNT')}
+                    textInEvidence={translation('CONNECT_HERE')}
                   />
                 </FormFooter>
               </Form>

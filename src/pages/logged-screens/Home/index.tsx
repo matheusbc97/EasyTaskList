@@ -1,5 +1,7 @@
 import React, {useEffect, useMemo, useCallback, useState} from 'react';
 import {View, FlatList} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 import {
   ScreenWrapper,
@@ -9,23 +11,20 @@ import {
   TaskListItem,
   OutlineButton,
 } from '@shared/components';
-
-import {useSelector, useDispatch} from 'react-redux';
 import {selectUser} from '@store/account/user';
-import {useFormatDate} from '@shared/hooks';
+import {useFormatDate, useTranslation} from '@shared/hooks';
 import {categoryListSelectors} from '@store/categories';
-
-import styles from './styles';
 import {
   tasksListSelectors,
   selectTasksFetchState,
   getTasks,
 } from '@store/tasks';
 import FlatListWithFetchControl from '@shared/components/FlatListWithFetchIndicator';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthenticatedStackParams} from '@navigation/types';
 import TaskDetailsModal from '@shared/modals/TaskDetailsModal';
 import {Task} from '@shared/models';
+
+import styles from './styles';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -46,9 +45,9 @@ const Home: React.FC<Props> = ({navigation}) => {
   const tasks = useSelector(tasksListSelectors.selectAll);
   const tasksFetchState = useSelector(selectTasksFetchState);
 
-  const tasksNotDone = useMemo(() => tasks.filter((task) => !task.done), [
-    tasks,
-  ]);
+  const tasksNotDone = useMemo(() => tasks.filter(task => !task.done), [tasks]);
+
+  const {translation} = useTranslation();
 
   useEffect(() => {
     dispatch(getTasks());
@@ -90,7 +89,7 @@ const Home: React.FC<Props> = ({navigation}) => {
     <ScreenWrapper>
       <FlatList
         data={[1, 2, 3]}
-        keyExtractor={(item) => item.toString()}
+        keyExtractor={item => item.toString()}
         renderItem={({item}) => {
           if (item === 1) {
             return (
@@ -108,14 +107,14 @@ const Home: React.FC<Props> = ({navigation}) => {
             return (
               <View>
                 <Text type="title-medium" style={styles.title}>
-                  Categorias
+                  {translation('CATEGORIES')}
                 </Text>
                 <View style={styles.contentWrapper}>
                   <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal
                     data={lsCategories}
-                    keyExtractor={(item) => item.id}
+                    keyExtractor={item => item.id}
                     renderItem={({item: category}) => (
                       <CategoryListItem
                         category={category}
@@ -133,15 +132,15 @@ const Home: React.FC<Props> = ({navigation}) => {
           return (
             <View>
               <Text type="title-medium" style={styles.title}>
-                Tarefas Não Feitas
+                {translation('TASKS_NOT_DONE')}
               </Text>
               <View style={[styles.contentWrapper]}>
                 <FlatListWithFetchControl
                   data={tasksNotDone}
                   isLoading={tasksFetchState.isLoading}
                   hasError={tasksFetchState.hasError}
-                  emptyListText="Nenhuma Tarefa a fazer"
-                  keyExtractor={(task) => task.id}
+                  emptyListText={translation('NO_TASK_TO_DO')}
+                  keyExtractor={task => task.id}
                   onRefresh={() => dispatch(getTasks())}
                   renderItem={({item: task}) => (
                     <TaskListItem
@@ -176,7 +175,7 @@ const Home: React.FC<Props> = ({navigation}) => {
       <View style={{paddingVertical: 5, paddingHorizontal: 20}}>
         <OutlineButton
           iconName="plus"
-          text="Criar Nova Tarefa"
+          text={translation('CREATE_NEW_TASK')}
           onPress={() => navigation.navigate('TaskForm')}
         />
       </View>

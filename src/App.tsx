@@ -1,6 +1,9 @@
 import React from 'react';
 import AppNavigator from './navigation';
 import {Provider} from 'react-redux';
+
+import './translations';
+
 import store from './store';
 import {LoadingHandler, Toast} from './shared/components';
 

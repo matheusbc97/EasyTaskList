@@ -1,0 +1,31 @@
+import tKeys from '../keys';
+
+export default {
+  [tKeys.CONFIRM_PASSWORD]: 'Confirmar Senha',
+  [tKeys.CONNECT_HERE]: 'Conecte-se aqui',
+  [tKeys.CREATE_YOUR_USER_ACCOUNT]: 'Crie sua conta de usuário',
+  [tKeys.EMAIL]: 'E-mail',
+  [tKeys.I_READ_AND_I_AGREE_WITH_THE]: 'Li e concordo com a ',
+  [tKeys.TYPE_YOUR_EMAIL_AND_PASSWORD]: 'Type your e-mail and password',
+  [tKeys.EASY_TASK_LIST]: 'Minha Agenda',
+  [tKeys.ENTER_WITH_YOUR_ACCOUNT]:
+    'Entre com a sua conta para acessar o aplicativo',
+  [tKeys.I_READ_AND_I_AGREE_WITH_THE]: 'Li e concordo com a',
+  [tKeys.LOG_IN]: 'Entrar',
+  [tKeys.PASSWORD]: 'Senha',
+  [tKeys.PRIVACY_POLICY]: 'Política de Privacidade',
+  [tKeys.QUESTION_ALREADY_HAVE_AN_ACCOUNT]: 'Já possui uma conta?',
+  [tKeys.CREATE_ACCOUNT]: 'Criar conta',
+  [tKeys.QUESTION_DO_NOT_HAVE_AN_ACCOUNT]: 'Não possui conta?',
+  [tKeys.QUESTION_DO_NOT_HAVE_A_REGISTRATION]: 'Não possui conta um cadastro?',
+  [tKeys.QUESTION_FORGOT_PASSWORD]: 'Esqueceu sua senha?',
+  [tKeys.RECOVER_HERE]: 'Recupere aqui',
+  [tKeys.REGISTER_BELOW]: 'Registre-se abaixo',
+  [tKeys.REGISTER_HERE]: 'Cadastre-se aqui',
+  [tKeys.SEND]: 'Enviar',
+  [tKeys.TYPE_YOUR_EMAIL_AND_PASSWORD]: 'Digite seu email e senha',
+  [tKeys.WELCOME]: 'Seja bem vindo!',
+  [tKeys.CATEGORIES]: 'Tarefas não feitas',
+  [tKeys.CREATE_NEW_TASK]: 'Criar nova tarefa',
+  [tKeys.NO_TASK_TO_DO]: 'Nenhuma tarefa a fazer',
+};
