@@ -10,6 +10,7 @@ import {
   tasksListSelectors,
   selectTasksFetchState,
   selectTaskOfCategory,
+  selectTasksNotDone,
 } from './selectors';
 import {tasksAdapter} from './adapters';
 
@@ -28,7 +29,7 @@ const tasks = createSlice({
       return initialState;
     },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(createTask.fulfilled, (state, action) => {
       tasksAdapter.addOne(state, action.payload);
     });
@@ -47,7 +48,7 @@ const tasks = createSlice({
       },
     );
 
-    builder.addCase(getTasks.pending, (state) => {
+    builder.addCase(getTasks.pending, state => {
       state.fetchState.isLoading = true;
       state.fetchState.hasError = false;
     });
@@ -58,7 +59,7 @@ const tasks = createSlice({
       state.fetchState.hasError = false;
     });
 
-    builder.addCase(getTasks.rejected, (state) => {
+    builder.addCase(getTasks.rejected, state => {
       state.fetchState.isLoading = false;
       state.fetchState.hasError = true;
     });
@@ -76,4 +77,5 @@ export {
   getTasks,
   updateTask,
   selectTaskOfCategory,
+  selectTasksNotDone,
 };

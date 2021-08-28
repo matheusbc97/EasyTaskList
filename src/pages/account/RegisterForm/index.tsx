@@ -97,15 +97,15 @@ const RegisterForm: React.FC<Props> = ({navigation}) => {
                       onPress={() => formRef.current?.submitForm()}
                     />
                   </Animated.View>
-                  <TextButton
-                    style={{marginTop: 10, marginBottom: 5}}
-                    onPress={() => navigation.navigate('Login')}
-                    text={translation('QUESTION_ALREADY_HAVE_AN_ACCOUNT')}
-                    textInEvidence={translation('CONNECT_HERE')}
-                  />
                 </FormFooter>
               </Form>
             </FormWrapper>
+            <TextButton
+              style={{marginTop: 10, marginBottom: 5, alignSelf: 'center'}}
+              onPress={() => navigation.navigate('Login')}
+              text={translation('QUESTION_ALREADY_HAVE_AN_ACCOUNT')}
+              textInEvidence={translation('CONNECT_HERE')}
+            />
           </Content>
         </RegisterFormAnimatedBackground>
         {isConfirmed && <Shadow />}

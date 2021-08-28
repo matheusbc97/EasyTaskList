@@ -16,7 +16,7 @@ interface Props<T> extends FlatListProps<T> {
   emptyListText: string;
   refreshControlEnabled?: boolean;
   showActivityIndicator?: boolean;
-  onRefresh: (() => void) | null;
+  onRefresh?: (() => void) | null;
   showListHeaderWhenListIsNotShown?: boolean;
   keyExtractor(item: T, index: number): string;
 }

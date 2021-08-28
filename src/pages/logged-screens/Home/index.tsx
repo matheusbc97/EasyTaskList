@@ -1,6 +1,5 @@
-import React, {useEffect, useMemo, useCallback, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, FlatList} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import {
@@ -11,18 +10,15 @@ import {
   TaskListItem,
   OutlineButton,
 } from '@shared/components';
-import {selectUser} from '@store/account/user';
 import {useFormatDate, useTranslation} from '@shared/hooks';
-import {categoryListSelectors} from '@store/categories';
-import {
-  tasksListSelectors,
-  selectTasksFetchState,
-  getTasks,
-} from '@store/tasks';
 import FlatListWithFetchControl from '@shared/components/FlatListWithFetchIndicator';
 import {AuthenticatedStackParams} from '@navigation/types';
 import TaskDetailsModal from '@shared/modals/TaskDetailsModal';
 import {Task} from '@shared/models';
+import useGetUser from '@/hooks/useGetUser';
+import useTaskNotDone from '@hooks/useTaskNotDone';
+import useCategories from '@hooks/useCategories';
+import useFetchTasks from '@/hooks/useFetchTasks';
 
 import styles from './styles';
 
@@ -36,54 +32,37 @@ interface Props {
 }
 
 const Home: React.FC<Props> = ({navigation}) => {
-  const user = useSelector(selectUser);
-  const lsCategories = useSelector(categoryListSelectors.selectAll);
   const formatDate = useFormatDate();
 
-  const dispatch = useDispatch();
+  const {lsCategories, lsCategoriesFetchState} = useCategories();
+  const {tasksFetchState, tasksNotDone} = useTaskNotDone();
 
-  const tasks = useSelector(tasksListSelectors.selectAll);
-  const tasksFetchState = useSelector(selectTasksFetchState);
-
-  const tasksNotDone = useMemo(() => tasks.filter(task => !task.done), [tasks]);
+  const user = useGetUser();
+  const fetchTasks = useFetchTasks();
 
   const {translation} = useTranslation();
 
   useEffect(() => {
-    dispatch(getTasks());
-  }, [dispatch]);
+    fetchTasks();
+  }, [fetchTasks]);
 
   const [taskSelected, setTaskSelected] = useState<Task | null>(null);
 
-  const handleTaskDetailsModalEditButtonPress = useCallback(() => {
+  const navigateToTaskForm = (task: Task) => {
+    const navigationOptions = {
+      task: {
+        ...task,
+      },
+    };
+    navigation.navigate('TaskForm', navigationOptions);
+  };
+
+  const handleTaskDetailsModalEditButtonPress = () => {
     if (taskSelected) {
-      const selectedTask = {
-        ...taskSelected,
-      };
-
       setTaskSelected(null);
-      navigation.navigate('TaskForm', {task: selectedTask});
+      navigateToTaskForm(taskSelected);
     }
-  }, [navigation, taskSelected]);
-
-  /*const tasks = [
-    {
-      title: 'HOJE',
-      data: [],
-    },
-    {
-      title: 'Amanhã',
-      data: [],
-    },
-    {
-      title: '14/06',
-      data: [],
-    },
-    {
-      title: '15/06',
-      data: [],
-    },
-  ];*/
+  };
 
   return (
     <ScreenWrapper>
@@ -96,7 +75,9 @@ const Home: React.FC<Props> = ({navigation}) => {
               <View style={styles.header}>
                 <Avatar avatarNumber={user?.avatar} size={50} />
                 <View style={styles.headerContent}>
-                  <Text type="title-medium">Olá, {user?.name}</Text>
+                  <Text type="title-medium">
+                    {translation('HELLO')}, {user?.name}
+                  </Text>
                   <Text>{formatDate(new Date(), 'dateOfMotnhAndYear')}</Text>
                 </View>
               </View>
@@ -110,11 +91,14 @@ const Home: React.FC<Props> = ({navigation}) => {
                   {translation('CATEGORIES')}
                 </Text>
                 <View style={styles.contentWrapper}>
-                  <FlatList
+                  <FlatListWithFetchControl
+                    emptyListText={translation('NO_CATEGORIES_FOUND')}
+                    hasError={lsCategoriesFetchState.hasError}
+                    isLoading={lsCategoriesFetchState.isLoading}
                     showsHorizontalScrollIndicator={false}
                     horizontal
                     data={lsCategories}
-                    keyExtractor={item => item.id}
+                    keyExtractor={category => category.id}
                     renderItem={({item: category}) => (
                       <CategoryListItem
                         category={category}
@@ -130,45 +114,34 @@ const Home: React.FC<Props> = ({navigation}) => {
           }
 
           return (
-            <View>
-              <Text type="title-medium" style={styles.title}>
-                {translation('TASKS_NOT_DONE')}
-              </Text>
-              <View style={[styles.contentWrapper]}>
-                <FlatListWithFetchControl
-                  data={tasksNotDone}
-                  isLoading={tasksFetchState.isLoading}
-                  hasError={tasksFetchState.hasError}
-                  emptyListText={translation('NO_TASK_TO_DO')}
-                  keyExtractor={task => task.id}
-                  onRefresh={() => dispatch(getTasks())}
-                  renderItem={({item: task}) => (
-                    <TaskListItem
-                      task={task}
-                      onPress={() => setTaskSelected(task)}
-                    />
-                  )}
-                />
-                {/*<View style={{flexDirection: 'row', marginHorizontal: 10}}>
-                  {tasks.map((item) => (
-                    <Text
-                      style={{
-                        borderBottomWidth: 2,
-                        marginHorizontal: 5,
-                        borderColor: '#4ADDB5',
-                        color: '#bdbdbd',
-                      }}>
-                      {item.title.toUpperCase()}
-                    </Text>
-                  ))}
+            <>
+              <View>
+                <Text type="title-medium" style={styles.title}>
+                  {translation('TASKS_NOT_DONE')}
+                </Text>
+                <View style={[styles.contentWrapper]}>
+                  <FlatListWithFetchControl
+                    data={tasksNotDone}
+                    isLoading={tasksFetchState.isLoading}
+                    hasError={tasksFetchState.hasError}
+                    emptyListText={translation('NO_TASK_TO_DO')}
+                    keyExtractor={task => task.id}
+                    onRefresh={fetchTasks}
+                    renderItem={({item: task}) => (
+                      <TaskListItem
+                        task={task}
+                        onPress={() => setTaskSelected(task)}
+                      />
+                    )}
+                  />
                 </View>
-                <TwoDimensionalTaskList
-                  tasks={tasks}
-                  offset={30}
-                  onItemPress={() => {}}
-                    />*/}
               </View>
-            </View>
+              <TaskDetailsModal
+                onEditButtonPress={handleTaskDetailsModalEditButtonPress}
+                task={taskSelected}
+                onBackButtonPress={() => setTaskSelected(null)}
+              />
+            </>
           );
         }}
       />
@@ -179,11 +152,6 @@ const Home: React.FC<Props> = ({navigation}) => {
           onPress={() => navigation.navigate('TaskForm')}
         />
       </View>
-      <TaskDetailsModal
-        onEditButtonPress={handleTaskDetailsModalEditButtonPress}
-        task={taskSelected}
-        onBackButtonPress={() => setTaskSelected(null)}
-      />
     </ScreenWrapper>
   );
 };

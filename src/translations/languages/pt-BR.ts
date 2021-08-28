@@ -28,4 +28,6 @@ export default {
   [tKeys.CATEGORIES]: 'Tarefas não feitas',
   [tKeys.CREATE_NEW_TASK]: 'Criar nova tarefa',
   [tKeys.NO_TASK_TO_DO]: 'Nenhuma tarefa a fazer',
+  [tKeys.HELLO]: 'Olá',
+  [tKeys.NO_CATEGORIES_FOUND]: 'Nenhuma categoria encontrada',
 };

@@ -1,7 +1,7 @@
 import tKeys from '../keys';
 
 export default {
-  [tKeys.CONFIRM_PASSWORD]: 'Confirm your password',
+  [tKeys.CONFIRM_PASSWORD]: 'Confirm password',
   [tKeys.CONNECT_HERE]: 'Conect here',
   [tKeys.CREATE_YOUR_USER_ACCOUNT]: 'Create your user account',
   [tKeys.EMAIL]: 'E-mail',
@@ -9,7 +9,6 @@ export default {
   [tKeys.TYPE_YOUR_EMAIL_AND_PASSWORD]: 'Type your e-mail and password',
   [tKeys.EASY_TASK_LIST]: 'EasyTaskList',
   [tKeys.ENTER_WITH_YOUR_ACCOUNT]: 'Enter with your account to access the app',
-  [tKeys.I_READ_AND_I_AGREE_WITH_THE]: 'Li e concordo com a',
   [tKeys.LOG_IN]: 'Log in',
   [tKeys.PASSWORD]: 'Password',
   [tKeys.PRIVACY_POLICY]: 'Privacy Policy',
@@ -27,4 +26,6 @@ export default {
   [tKeys.TASKS_NOT_DONE]: 'Tasks not done',
   [tKeys.CREATE_NEW_TASK]: 'Create new task',
   [tKeys.NO_TASK_TO_DO]: 'No tasks to do',
+  [tKeys.HELLO]: 'Hello',
+  [tKeys.NO_CATEGORIES_FOUND]: 'No categories found',
 };
