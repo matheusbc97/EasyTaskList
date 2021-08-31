@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {shadow} from '@/shared/styles';
 
 export default StyleSheet.create({
   header: {
@@ -11,13 +12,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 5,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    ...shadow,
   },
   headerContent: {marginLeft: 15},
   contentWrapper: {
@@ -28,13 +23,7 @@ export default StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#fff',
     elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    ...shadow,
   },
   title: {marginHorizontal: 20, marginTop: 30},
 });

@@ -1,13 +1,12 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {View} from 'react-native';
-import {useDispatch} from 'react-redux';
-
-import {ScreenWrapper, Text} from '@shared/components';
-import {setIsLogged} from '@store/configs';
-import {resetUser} from '@store/account/user';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
+
+import {ScreenWrapper, Text} from '@shared/components';
 import {AuthenticatedStackParams} from '@navigation/types';
+import {useTranslation} from '@/shared/hooks';
+import useSignOut from '@/hooks/useSignOut';
 
 import OptionButton from './OptionButton';
 
@@ -17,55 +16,48 @@ interface Props {
 }
 
 export default function More({navigation}: Props) {
-  const dispatch = useDispatch();
-
-  const handleSignOut = useCallback(() => {
-    dispatch(resetUser());
-    dispatch(setIsLogged(false));
-  }, [dispatch]);
+  const {translation} = useTranslation();
+  const signOut = useSignOut();
 
   return (
     <ScreenWrapper>
       <View style={{marginHorizontal: 15, marginVertical: 10}}>
-        <Text type="title-big">Mais Opções</Text>
+        <Text type="title-big">{translation('MORE_OPTIONS')}</Text>
       </View>
-      {/* <OptionButton
-        title="Estatísticas"
-        iconName="chart-bar"
-        type="FontAwesome5"
-      />*/}
-      {/* <OptionButton title="Notificações" iconName="bell" /> */}
       <OptionButton
-        title="Alterar Avatar"
+        title={translation('CHANGE_AVATAR')}
         iconName="user-tie"
         type="FontAwesome5"
         onPress={() => navigation.navigate('ChangeAvatar')}
       />
       <OptionButton
-        title="Alterar Nome"
+        title={translation('CHANGE_NAME')}
         iconName="pencil"
         onPress={() => navigation.navigate('ChangeNameForm')}
       />
       <OptionButton
-        title="Alterar Tema"
+        title={translation('CHANGE_THEME')}
         iconName="palette"
         type="FontAwesome5"
         onPress={() => navigation.navigate('ChangeThemeForm')}
       />
       <OptionButton
-        title="Alterar Senha"
+        title={translation('CHANGE_PASSWORD')}
         iconName="key"
         type="FontAwesome5"
         onPress={() => navigation.navigate('ChangePasswordForm')}
       />
       <OptionButton
-        title="Sobre"
+        title={translation('ABOUT')}
         iconName="info-circle"
         type="FontAwesome5"
         onPress={() => navigation.navigate('About')}
       />
-      {/* <OptionButton title="Avalie-nos" iconName="star" />*/}
-      <OptionButton title="Sair" iconName="sign-out" onPress={handleSignOut} />
+      <OptionButton
+        title={translation('LOG_OUT')}
+        iconName="sign-out"
+        onPress={signOut}
+      />
     </ScreenWrapper>
   );
 }

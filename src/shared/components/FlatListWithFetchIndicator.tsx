@@ -10,7 +10,7 @@ import EmptyListText from './EmptyListText';
 import ErrorMessage from './ErrorMessage';
 import ActivityIndicator from './ActivityIndicator';
 
-interface Props<T> extends FlatListProps<T> {
+export interface FlatListWithFetchIndicatorProps<T> extends FlatListProps<T> {
   isLoading: boolean;
   hasError: boolean;
   emptyListText: string;
@@ -21,7 +21,7 @@ interface Props<T> extends FlatListProps<T> {
   keyExtractor(item: T, index: number): string;
 }
 
-function FlatListWithFetchControl<T>({
+function FlatListWithFetchIndicator<T>({
   isLoading = false,
   data = [],
   hasError = false,
@@ -34,7 +34,7 @@ function FlatListWithFetchControl<T>({
   contentContainerStyle,
   onRefresh,
   ...rest
-}: Props<T>) {
+}: FlatListWithFetchIndicatorProps<T>) {
   const [firstLoading, setFirstLoading] = useState(true);
 
   if (hasError || (showActivityIndicator && isLoading && firstLoading)) {
@@ -82,7 +82,7 @@ function FlatListWithFetchControl<T>({
   );
 }
 
-export default FlatListWithFetchControl;
+export default FlatListWithFetchIndicator;
 
 const styles = StyleSheet.create({
   list: {flex: 1},

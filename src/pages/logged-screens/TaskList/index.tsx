@@ -1,35 +1,24 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import {
   Text,
   ScreenWrapper,
-  //TwoDimensionalTaskList,
   OutlineButton,
   TaskListItem,
   FlatListWithFetchIndicator,
 } from '@shared/components';
 import {selectAppTheme} from '@store/configs';
 import {AuthenticatedStackParams} from '@navigation/types';
-
-import {
-  Header,
-  HeaderContent,
-  Body,
-  FooterSeparator,
-  Footer,
-  VerticalSeparator,
-} from './styles';
-import {
-  getTasks,
-  tasksListSelectors,
-  selectTasksFetchState,
-} from '@store/tasks';
-
-import TaskDetailsModal from '../../../shared/modals/TaskDetailsModal';
+import TaskDetailsModal from '@/shared/modals/TaskDetailsModal';
 import {Task} from '@shared/models';
+import useTasks from '@/hooks/useTasks';
+import useFetchTasks from '@/hooks/useFetchTasks';
+import {useTranslation} from '@/shared/hooks';
+
+import {Header, Body, FooterSeparator, Footer} from './styles';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -41,30 +30,16 @@ interface Props {
 }
 
 const TaskList: React.FC<Props> = ({navigation}) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getTasks());
-  }, [dispatch]);
+  const {translation} = useTranslation();
+  const fetchTasks = useFetchTasks();
 
   const appTheme = useSelector(selectAppTheme);
-  const tasks = useSelector(tasksListSelectors.selectAll);
-  const fetchState = useSelector(selectTasksFetchState);
 
   const [taskSelected, setTaskSelected] = useState<Task | null>(null);
 
-  /*const tasksSections = [
-    {
-      title: 'HOJE',
-      data: tasks,
-    },
-    {
-      title: 'Amanhã',
-      data: tasks,
-    },
-  ];*/
+  const {tasks, tasksFetchState} = useTasks();
 
-  const handleTaskDetailsModalEditButtonPress = useCallback(() => {
+  const handleTaskDetailsModalEditButtonPress = () => {
     if (taskSelected) {
       const selectedTask = {
         ...taskSelected,
@@ -73,40 +48,26 @@ const TaskList: React.FC<Props> = ({navigation}) => {
       setTaskSelected(null);
       navigation.navigate('TaskForm', {task: selectedTask});
     }
-  }, [navigation, taskSelected]);
+  };
 
   return (
     <ScreenWrapper>
       <Header backgroundColor={appTheme.aboveBackground}>
-        <Text type="title-big"> Minhas tarefas</Text>
-        {false && (
-          <HeaderContent>
-            <Text>Todas</Text>
-            <VerticalSeparator color={appTheme.textColor} />
-            <Text>Em Andamento</Text>
-            <VerticalSeparator color={appTheme.textColor} />
-            <Text>Concluídas</Text>
-          </HeaderContent>
-        )}
+        <Text type="title-big">{translation('MY_TASKS')}</Text>
       </Header>
       <Body backgroundColor={appTheme.aboveBackground}>
         <FlatListWithFetchIndicator
-          onRefresh={() => dispatch(getTasks())}
-          emptyListText={'Nenhuma Tarefa Encontrada'}
-          hasError={fetchState.hasError}
-          isLoading={fetchState.isLoading}
+          onRefresh={fetchTasks}
+          emptyListText={translation('NO_TASKS_FOUND')}
+          hasError={tasksFetchState.hasError}
+          isLoading={tasksFetchState.isLoading}
           style={{marginVertical: 10}}
           data={tasks}
-          keyExtractor={(task) => task.id}
+          keyExtractor={task => task.id}
           renderItem={({item: task}) => (
             <TaskListItem task={task} onPress={() => setTaskSelected(task)} />
           )}
         />
-        {/*<TwoDimensionalTaskList
-          tasks={tasksSections}
-          offset={30}
-          onItemPress={setTaskSelected}
-        />*/}
       </Body>
       <View style={{marginHorizontal: 20}}>
         <FooterSeparator />
@@ -114,7 +75,7 @@ const TaskList: React.FC<Props> = ({navigation}) => {
       <Footer>
         <OutlineButton
           iconName="plus"
-          text="Criar Nova Tarefa"
+          text={translation('CREATE_NEW_TASK')}
           onPress={() => navigation.navigate('TaskForm')}
         />
       </Footer>

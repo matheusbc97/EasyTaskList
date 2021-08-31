@@ -42,14 +42,17 @@ import BottonTabNavigator from './BottonTabNavigator';
 import TaskForm from '@pages/logged-screens/TaskForm';
 import {verifyIfUserIsLogged} from '@store/account/user/thunkActions';
 
+import {useTranslation} from '@/shared/hooks';
+
 const Tab = createBottomTabNavigator<BottomNavigatorStackParams>();
 
 function MyTabs() {
+  const {translation} = useTranslation();
   const appTheme = useSelector(selectAppTheme);
 
   return (
     <Tab.Navigator
-      tabBar={(props) => <BottonTabNavigator {...props} />}
+      tabBar={props => <BottonTabNavigator {...props} />}
       tabBarOptions={{
         activeBackgroundColor: appTheme.primaryColor,
         inactiveBackgroundColor: appTheme.primaryColor,
@@ -62,7 +65,7 @@ function MyTabs() {
         name="Home"
         component={Home}
         options={{
-          title: 'Início',
+          title: translation('HOME'),
           tabBarIcon: ({color}) => (
             <FontAwesomeIcon name="home" size={22} color={color} />
           ),
@@ -72,7 +75,7 @@ function MyTabs() {
         name="TaskList"
         component={TaskList}
         options={{
-          title: 'Tarefas',
+          title: translation('TASKS'),
           tabBarIcon: ({color}) => (
             <FontAwesomeIcon name="tasks" size={22} color={color} />
           ),
@@ -92,7 +95,7 @@ function MyTabs() {
         name="CategoryList"
         component={CategoryList}
         options={{
-          title: 'Categorias',
+          title: translation('CATEGORIES'),
           tabBarIcon: ({color}) => (
             <FontAwesomeIcon name="folder" size={22} color={color} />
           ),
@@ -102,7 +105,7 @@ function MyTabs() {
         name="More"
         component={More}
         options={{
-          title: 'Mais',
+          title: translation('MORE'),
           tabBarIcon: ({color}) => (
             <FontAwesomeIcon name="bars" size={22} color={color} />
           ),

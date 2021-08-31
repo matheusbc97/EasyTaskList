@@ -5,7 +5,9 @@ import Shadow from './Shadow';
 import TextInput from './TextInput';
 import UnformInput from './UnformInput';
 import EmptyListText from './EmptyListText';
-import FlatListWithFetchIndicator from './FlatListWithFetchIndicator';
+import FlatListWithFetchIndicator, {
+  FlatListWithFetchIndicatorProps,
+} from './FlatListWithFetchIndicator';
 import LoadingIndicator from './LoadingIndicator';
 import ErrorMessage from './ErrorMessage';
 import Avatar from './Avatar';
@@ -60,4 +62,4 @@ export {
   CheckInputWithButtonText,
 };
 
-export type {TextButtonProps, TextProps};
+export type {TextButtonProps, TextProps, FlatListWithFetchIndicatorProps};

@@ -6,6 +6,7 @@ import {AppThemeName} from './AppThemeName';
 import {Task} from './Task';
 import {Category} from './Category';
 import {AboutItem} from './AboutItem';
+import {FetchState} from './FetchState';
 
 export type {
   AppTheme,
@@ -16,4 +17,5 @@ export type {
   Task,
   Category,
   AboutItem,
+  FetchState,
 };

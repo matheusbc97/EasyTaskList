@@ -16,9 +16,9 @@ import {selectAppTheme} from '@store/configs';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthenticatedStackParams} from '@navigation/types';
 
-import CategoryColorBox from './CategoryColorBox';
-import ChooseCategoryColorModal from './ChooseCategoryColorModal';
-import ChooseCategoryIconModal from './ChooseCategoryIconModal';
+import CategoryColorBox from './components/CategoryColorBox';
+import ChooseCategoryColorModal from './components/ChooseCategoryColorModal';
+import ChooseCategoryIconModal from './components/ChooseCategoryIconModal';
 import {
   Container,
   Content,
@@ -121,7 +121,7 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
           iconIndex: iconIndex,
         };
 
-        dispatch(createCategory(newCategory)).then((action) => {
+        dispatch(createCategory(newCategory)).then(action => {
           if (action.payload) {
             navigation.pop();
           }
@@ -137,7 +137,7 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
         iconIndex: iconIndex,
       };
 
-      dispatch(updateCategory(updatedCategory)).then((action) => {
+      dispatch(updateCategory(updatedCategory)).then(action => {
         if (action.payload) {
           navigation.pop();
         }
@@ -212,7 +212,7 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
       </AnimatedBackground>
 
       <ChooseCategoryColorModal
-        onColorPress={(colorIndex) => {
+        onColorPress={colorIndex => {
           setSelectedColorIndex(colorIndex);
           setCategoryColorModalIsVisible(false);
         }}
@@ -223,7 +223,7 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
       <ChooseCategoryIconModal
         onBackButtonPress={() => setCategoryIconModalIsVisible(false)}
         isVisible={categoryIconModalIsVisible}
-        onIconPress={(iconIndex) => {
+        onIconPress={iconIndex => {
           setIconIndex(iconIndex);
           setCategoryIconModalIsVisible(false);
         }}

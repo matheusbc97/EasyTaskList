@@ -2,16 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {View, FlatList} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {
-  ScreenWrapper,
-  Avatar,
-  Text,
-  CategoryListItem,
-  TaskListItem,
-  OutlineButton,
-} from '@shared/components';
-import {useFormatDate, useTranslation} from '@shared/hooks';
-import FlatListWithFetchControl from '@shared/components/FlatListWithFetchIndicator';
+import {ScreenWrapper, OutlineButton} from '@shared/components';
+import {useTranslation} from '@shared/hooks';
 import {AuthenticatedStackParams} from '@navigation/types';
 import TaskDetailsModal from '@shared/modals/TaskDetailsModal';
 import {Task} from '@shared/models';
@@ -20,7 +12,9 @@ import useTaskNotDone from '@hooks/useTaskNotDone';
 import useCategories from '@hooks/useCategories';
 import useFetchTasks from '@/hooks/useFetchTasks';
 
-import styles from './styles';
+import CategoriesList from './templates/CategoriesList';
+import TasksList from './templates/TasksList';
+import HomeHeader from './components/HomeHeader';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -31,16 +25,26 @@ interface Props {
   navigation: TaskListNavigationProp;
 }
 
-const Home: React.FC<Props> = ({navigation}) => {
-  const formatDate = useFormatDate();
+// eslint-disable-next-line no-shadow
+enum HomeItemEnum {
+  HEADER,
+  CATEGORIES_LIST,
+  TASK_LIST,
+}
 
+const HomeListData = [
+  HomeItemEnum.HEADER,
+  HomeItemEnum.CATEGORIES_LIST,
+  HomeItemEnum.TASK_LIST,
+];
+
+const Home: React.FC<Props> = ({navigation}) => {
+  const {translation} = useTranslation();
+
+  const fetchTasks = useFetchTasks();
+  const user = useGetUser();
   const {lsCategories, lsCategoriesFetchState} = useCategories();
   const {tasksFetchState, tasksNotDone} = useTaskNotDone();
-
-  const user = useGetUser();
-  const fetchTasks = useFetchTasks();
-
-  const {translation} = useTranslation();
 
   useEffect(() => {
     fetchTasks();
@@ -67,82 +71,33 @@ const Home: React.FC<Props> = ({navigation}) => {
   return (
     <ScreenWrapper>
       <FlatList
-        data={[1, 2, 3]}
+        data={HomeListData}
         keyExtractor={item => item.toString()}
         renderItem={({item}) => {
-          if (item === 1) {
-            return (
-              <View style={styles.header}>
-                <Avatar avatarNumber={user?.avatar} size={50} />
-                <View style={styles.headerContent}>
-                  <Text type="title-medium">
-                    {translation('HELLO')}, {user?.name}
-                  </Text>
-                  <Text>{formatDate(new Date(), 'dateOfMotnhAndYear')}</Text>
-                </View>
-              </View>
-            );
+          switch (item) {
+            case HomeItemEnum.HEADER:
+              return <HomeHeader user={user} />;
+            case HomeItemEnum.CATEGORIES_LIST:
+              return (
+                <CategoriesList
+                  lsCategories={lsCategories}
+                  lsCategoriesFetchState={lsCategoriesFetchState}
+                  onCategoryPress={category =>
+                    navigation.navigate('CategoryDetails', {category})
+                  }
+                />
+              );
+            case HomeItemEnum.TASK_LIST:
+              return (
+                <TasksList
+                  tasks={tasksNotDone}
+                  tasksFetchState={tasksFetchState}
+                  onTaskPress={task => setTaskSelected(task)}
+                />
+              );
+            default:
+              return null;
           }
-
-          if (item === 2) {
-            return (
-              <View>
-                <Text type="title-medium" style={styles.title}>
-                  {translation('CATEGORIES')}
-                </Text>
-                <View style={styles.contentWrapper}>
-                  <FlatListWithFetchControl
-                    emptyListText={translation('NO_CATEGORIES_FOUND')}
-                    hasError={lsCategoriesFetchState.hasError}
-                    isLoading={lsCategoriesFetchState.isLoading}
-                    showsHorizontalScrollIndicator={false}
-                    horizontal
-                    data={lsCategories}
-                    keyExtractor={category => category.id}
-                    renderItem={({item: category}) => (
-                      <CategoryListItem
-                        category={category}
-                        onPress={() =>
-                          navigation.navigate('CategoryDetails', {category})
-                        }
-                      />
-                    )}
-                  />
-                </View>
-              </View>
-            );
-          }
-
-          return (
-            <>
-              <View>
-                <Text type="title-medium" style={styles.title}>
-                  {translation('TASKS_NOT_DONE')}
-                </Text>
-                <View style={[styles.contentWrapper]}>
-                  <FlatListWithFetchControl
-                    data={tasksNotDone}
-                    isLoading={tasksFetchState.isLoading}
-                    hasError={tasksFetchState.hasError}
-                    emptyListText={translation('NO_TASK_TO_DO')}
-                    keyExtractor={task => task.id}
-                    onRefresh={fetchTasks}
-                    renderItem={({item: task}) => (
-                      <TaskListItem
-                        task={task}
-                        onPress={() => setTaskSelected(task)}
-                      />
-                    )}
-                  />
-                </View>
-              </View>
-              <TaskDetailsModal
-                onEditButtonPress={handleTaskDetailsModalEditButtonPress}
-                task={taskSelected}
-                onBackButtonPress={() => setTaskSelected(null)}
-              />
-            </>
-          );
         }}
       />
       <View style={{paddingVertical: 5, paddingHorizontal: 20}}>
@@ -152,6 +107,11 @@ const Home: React.FC<Props> = ({navigation}) => {
           onPress={() => navigation.navigate('TaskForm')}
         />
       </View>
+      <TaskDetailsModal
+        onEditButtonPress={handleTaskDetailsModalEditButtonPress}
+        task={taskSelected}
+        onBackButtonPress={() => setTaskSelected(null)}
+      />
     </ScreenWrapper>
   );
 };
