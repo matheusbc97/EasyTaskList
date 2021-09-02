@@ -1,17 +1,10 @@
-import React, {useState, useCallback, useRef, useEffect, useMemo} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {View} from 'react-native';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
-import {useSelector, useDispatch} from 'react-redux';
-
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {StackNavigationProp} from '@react-navigation/stack';
+
 import formatDate from '@shared/utils/fomatDate';
-
-import {selectAppTheme} from '@store/configs';
-import {AuthenticatedStackParams} from '@navigation/types';
-
-import convertMillisecondsToDate from '@shared/utils/convertMillisecondsToDate';
 import {
   ScreenWrapper,
   UnformInput as TextInput,
@@ -19,122 +12,45 @@ import {
   AnimatedBackground,
   Text,
 } from '@shared/components';
+import {useValidateField, useAppTheme, useTranslation} from '@shared/hooks';
 
+import useHandleSubmit from './hooks/useHandleSubmit';
+import getInitialData from './utils/getInitialData';
 import styles from './styles';
-import {RouteProp} from '@react-navigation/native';
-import {createTask} from '@store/tasks';
-import {updateTask} from '@store/tasks/thunkActions';
+import {Props} from './types';
 
-interface FormData {
-  title: string;
-  description: string;
-  date: string;
-  time: string;
-  category: string;
-}
-
-interface Props {
-  route: RouteProp<AuthenticatedStackParams, 'TaskForm'>;
-  navigation: StackNavigationProp<AuthenticatedStackParams, 'TaskForm'>;
-}
+const Wrapper: React.FC = ({children}) => {
+  return (
+    <AnimatedBackground>
+      <View style={styles.container}>
+        <View style={styles.content}>{children}</View>
+      </View>
+    </AnimatedBackground>
+  );
+};
 
 const TaskForm: React.FC<Props> = ({navigation, route}) => {
-  const {chosenCategory, task} = useMemo(
-    () => route.params ?? {chosenCategory: null, task: null},
-    [route.params],
-  );
+  const {chosenCategory, task} = route.params ?? {
+    chosenCategory: null,
+    task: null,
+  };
 
-  const initialData = useMemo<undefined | FormData>(() => {
-    if (!task) {
-      return undefined;
-    }
-
-    const _initialData: FormData = {
-      title: task.title,
-      category: task.category!.name,
-      date: convertMillisecondsToDate(task.date).toString(),
-      time: convertMillisecondsToDate(task.date).toString(),
-      description: task.description,
-    };
-
-    return _initialData;
-  }, [task]);
+  const initialData = getInitialData(task);
 
   const formRef = useRef<FormHandles>(null);
   const datePickerRef = useRef<any>(null);
   const timePickerRef = useRef<any>(null);
   const categorySearchPickerRef = useRef<any>(null);
 
-  const dispatch = useDispatch();
+  const {translation} = useTranslation();
+  const appTheme = useAppTheme();
 
-  const appTheme = useSelector(selectAppTheme);
   const [datePickerIsVisible, setDatePickerIsVisible] = useState(false);
   const [timePickerIsVisible, setTimePickerIsVisible] = useState(false);
 
-  const formatDatePickerDate = useCallback(
-    (value: string) => formatDate(value),
-    [],
-  );
+  const validateField = useValidateField(formRef);
 
-  const formatTime = useCallback(
-    (value: string) => formatDate(value, 'time'),
-    [],
-  );
-
-  const getDateByDateAndTime = useCallback((date: string, time: string) => {
-    const formTime = new Date(time);
-    const formDate = new Date(date);
-
-    return new Date(
-      formDate.getFullYear(),
-      formDate.getMonth(),
-      formDate.getDate(),
-      formTime.getHours(),
-      formTime.getMinutes(),
-    );
-  }, []);
-
-  const handleFormSubmit = useCallback(
-    (form: FormData) => {
-      if (!task) {
-        if (!chosenCategory) {
-          return;
-        }
-
-        const newTask = {
-          title: form.title,
-          category: chosenCategory,
-          date: getDateByDateAndTime(form.date, form.time),
-          description: form.description,
-        };
-
-        dispatch(createTask(newTask)).then((action) => {
-          if (action.payload) {
-            navigation.pop();
-          }
-        });
-
-        return;
-      }
-
-      const updatedTask = {
-        id: task.id,
-        title: form.title,
-        description: form.description,
-        category: chosenCategory ? chosenCategory : task.category!,
-        date: getDateByDateAndTime(form.date, form.time),
-      };
-
-      dispatch(updateTask(updatedTask)).then((action) => {
-        if (action.payload) {
-          navigation.pop();
-        }
-      });
-
-      return;
-    },
-    [chosenCategory, dispatch, navigation, task, getDateByDateAndTime],
-  );
+  const handleFormSubmit = useHandleSubmit({formRef, chosenCategory, task});
 
   useEffect(() => {
     if (chosenCategory) {
@@ -144,88 +60,82 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
 
   return (
     <ScreenWrapper>
-      <AnimatedBackground>
-        <View style={styles.container}>
-          <View style={styles.content}>
-            <View style={styles.header}>
-              <View style={styles.titleWrapper}>
-                <Text
-                  type="title-big"
-                  style={[
-                    {
-                      color: appTheme.primaryColor,
-                    },
-                    styles.title,
-                  ]}>
-                  {!task ? 'Criar Tarefa' : 'Editar Tarefa'}
-                </Text>
-              </View>
-            </View>
-            <Form
-              onSubmit={handleFormSubmit}
-              ref={formRef}
-              initialData={initialData}>
-              <TextInput
-                name="title"
-                label="Título"
-                onSubmitEditing={() =>
-                  formRef.current?.getFieldRef('description').focus()
-                }
-              />
-              <TextInput name="description" label="Descrição" />
-              <TextInput
-                ref={datePickerRef}
-                mask={formatDatePickerDate}
-                name="date"
-                label="Data"
-                button
-                onPress={() => setDatePickerIsVisible(true)}
-              />
-              <TextInput
-                ref={timePickerRef}
-                name="time"
-                label="Horário"
-                mask={formatTime}
-                button
-                onPress={() => setTimePickerIsVisible(true)}
-              />
-              <TextInput
-                ref={categorySearchPickerRef}
-                name="category"
-                label="Categoria"
-                button
-                onPress={() => navigation.navigate('CategorySearch')}
-              />
-            </Form>
-            <View style={styles.footer}>
-              <RoundedButton
-                text="Voltar"
-                inverted
-                style={styles.backButton}
-                onPress={() => navigation.pop()}
-              />
-              <RoundedButton
-                text="Salvar"
-                style={styles.saveButton}
-                onPress={() => formRef.current?.submitForm()}
-              />
-            </View>
-          </View>
+      <Wrapper>
+        <Text
+          type="title-big"
+          style={[
+            {
+              color: appTheme.primaryColor,
+            },
+            styles.title,
+          ]}>
+          {!task ? translation('CREATE_TASK') : translation('EDIT_TASK')}
+        </Text>
+        <Form
+          onSubmit={handleFormSubmit}
+          ref={formRef}
+          initialData={initialData}>
+          <TextInput
+            name="title"
+            label={translation('TITLE')}
+            validateField={validateField}
+            onSubmitEditing={() =>
+              formRef.current?.getFieldRef('description').focus()
+            }
+          />
+          <TextInput name="description" label={translation('DESCRIPTION')} />
+          <TextInput
+            ref={datePickerRef}
+            mask={value => formatDate(value)}
+            name="date"
+            label={translation('DATE')}
+            button
+            onPress={() => setDatePickerIsVisible(true)}
+          />
+          <DateTimePickerModal
+            isVisible={datePickerIsVisible}
+            mode="date"
+            onConfirm={date => {
+              datePickerRef.current?.setValue(String(date));
+              setDatePickerIsVisible(false);
+            }}
+            onCancel={() => setDatePickerIsVisible(false)}
+          />
+          <TextInput
+            ref={timePickerRef}
+            name="time"
+            label={translation('HOUR')}
+            mask={value => formatDate(value, 'time')}
+            button
+            onPress={() => setTimePickerIsVisible(true)}
+          />
+          <TextInput
+            ref={categorySearchPickerRef}
+            name="category"
+            label={translation('CATEGORY')}
+            button
+            onPress={() => navigation.navigate('CategorySearch')}
+          />
+        </Form>
+        <View style={styles.footer}>
+          <RoundedButton
+            text={translation('GO_BACK')}
+            inverted
+            style={styles.backButton}
+            onPress={() => navigation.pop()}
+          />
+          <RoundedButton
+            text={translation('SAVE')}
+            style={styles.saveButton}
+            onPress={() => formRef.current?.submitForm()}
+          />
         </View>
-      </AnimatedBackground>
-      <DateTimePickerModal
-        isVisible={datePickerIsVisible}
-        mode="date"
-        onConfirm={(date) => {
-          datePickerRef.current?.setValue(String(date));
-          setDatePickerIsVisible(false);
-        }}
-        onCancel={() => setDatePickerIsVisible(false)}
-      />
+      </Wrapper>
+
       <DateTimePickerModal
         isVisible={timePickerIsVisible}
         mode="time"
-        onConfirm={(time) => {
+        onConfirm={time => {
           timePickerRef.current?.setValue(String(time));
           setTimePickerIsVisible(false);
         }}

@@ -1,16 +1,17 @@
 import React, {useCallback} from 'react';
+import {useDispatch} from 'react-redux';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
 
 import {AnimatedBackground} from '@shared/components';
+import {AuthenticatedStackParams} from '@navigation/types';
+import {updateUser} from '@store/account/user';
+import {showToast} from '@shared/components/Toast';
+import {AppThemeName} from '@shared/models';
+import {useTranslation} from '@/shared/hooks';
 
 import ChooseTheme from '../../account/ChooseUserConfigurations/ChooseTheme';
 import {Content} from './styles';
-import {AuthenticatedStackParams} from '@navigation/types';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RouteProp} from '@react-navigation/native';
-import {updateUser} from '@store/account/user';
-import {showToast} from '@shared/components/Toast';
-import {useDispatch} from 'react-redux';
-import {AppThemeName} from '@shared/models';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryDetails'>;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 function ChangeNameForm({navigation}: Props) {
+  const {translation} = useTranslation();
   const dispatch = useDispatch();
 
   const handleSaveTheme = useCallback(
@@ -44,7 +46,7 @@ function ChangeNameForm({navigation}: Props) {
       <Content>
         <ChooseTheme
           onAdvancePress={handleSaveTheme}
-          advanceButtonText="SALVAR"
+          advanceButtonText={translation('SAVE').toUpperCase()}
           onBackPress={() => navigation.pop()}
         />
       </Content>

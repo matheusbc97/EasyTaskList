@@ -100,6 +100,19 @@ export function validateField(
       }
 
       return null;
+    case 'title':
+      if (!value) {
+        return 'Campo Obrigatório';
+      }
+
+      return null;
+    case 'category':
+      if (!value) {
+        return 'Campo Obrigatório';
+      }
+
+      return null;
+
     default:
       return null;
   }

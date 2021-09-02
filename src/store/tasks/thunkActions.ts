@@ -21,7 +21,7 @@ export const getTasks = createAsyncThunk(
       const databaseTasks = await getUserTasks();
 
       return databaseTasks.map(({categoryId, ...rest}) => ({
-        category: categories.find((category) => category.id === categoryId),
+        category: categories.find(category => category.id === categoryId),
         ...rest,
       }));
     } catch (error) {
@@ -31,7 +31,7 @@ export const getTasks = createAsyncThunk(
   },
 );
 
-interface CreateTaskDTO {
+export interface CreateTaskDTO {
   title: string;
   description: string;
   date: Date;
@@ -62,7 +62,7 @@ export const createTask = createAsyncThunk(
 
       return {
         id: taskId,
-        category: categories.find((item) => item.id === category.id),
+        category: categories.find(item => item.id === category.id),
         done: false,
         date: getTime(date),
         ...rest,
@@ -74,7 +74,7 @@ export const createTask = createAsyncThunk(
   },
 );
 
-interface UpdateTaskDTO {
+export interface UpdateTaskDTO {
   id: string;
   title: string;
   description: string;
@@ -105,7 +105,7 @@ export const updateTask = createAsyncThunk(
       loaderHandler.hideLoader();
 
       return {
-        category: categories.find((item) => item.id === category.id),
+        category: categories.find(item => item.id === category.id),
         done: false,
         date: getTime(date),
         ...rest,

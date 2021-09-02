@@ -9,6 +9,7 @@ import * as appThemes from '@assets/themes';
 
 import ThemeBox from './ThemeBox';
 import {AppThemeName} from '@shared/models';
+import {useTranslation} from '@/shared/hooks';
 
 interface Props {
   onAdvancePress(theme: AppThemeName): void;
@@ -23,6 +24,7 @@ const ChooseTheme: React.FC<Props> = ({
   showBackButton = true,
   onBackPress,
 }) => {
+  const {translation} = useTranslation();
   const [appThemeState, setAppThemeState] = useState<AppThemeName>(
     'BLUE_GREEN',
   );
@@ -41,7 +43,7 @@ const ChooseTheme: React.FC<Props> = ({
     <View style={styles.container}>
       {showBackButton && <BackButton onPress={onBackPress} />}
       <Text type="title-big" style={{marginVertical: showBackButton ? 15 : 0}}>
-        Escolha um Tema:
+        {translation('CHOOSE_A_THEME')}:
       </Text>
       <View style={styles.content}>
         <View style={styles.themeRow}>
@@ -50,7 +52,7 @@ const ChooseTheme: React.FC<Props> = ({
         </View>
       </View>
       <RoundedButton
-        text={advanceButtonText ?? 'AVANÇAR'}
+        text={advanceButtonText ?? translation('ADVANCE')}
         onPress={() => onAdvancePress(appThemeState)}
       />
     </View>

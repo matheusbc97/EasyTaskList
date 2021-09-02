@@ -5,6 +5,7 @@ import {
   getTasks,
   updateTask,
   updateTaskStatus,
+  CreateTaskDTO,
 } from './thunkActions';
 import {
   tasksListSelectors,
@@ -79,3 +80,5 @@ export {
   selectTaskOfCategory,
   selectTasksNotDone,
 };
+
+export type {CreateTaskDTO};

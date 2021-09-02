@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
 import {Text, Avatar, BackButton} from '@shared/components';
+import {useTranslation} from '@/shared/hooks';
 
 interface Props {
   onBackPress(): void;
@@ -14,11 +15,13 @@ const ChoosePhotoOrAvatar: React.FC<Props> = ({
   onAvatarPress,
   showBackButton = true,
 }) => {
+  const {translation} = useTranslation();
+
   return (
     <View style={styles.container}>
       {showBackButton && <BackButton onPress={onBackPress} />}
       <Text type="title-medium" style={{textAlign: 'center'}}>
-        Você também pode escolher um dos nossos avatares!
+        {translation('CHOOSE_ONE_OF_OUR_AVATARS')}
       </Text>
       <View style={styles.content}>
         <View style={styles.row}>
@@ -35,7 +38,7 @@ const ChoosePhotoOrAvatar: React.FC<Props> = ({
         </View>
       </View>
       <Text type="title-medium" style={{textAlign: 'center'}}>
-        Não se preocupe, seus dados poderão ser alterados posteriormente!
+        {translation('YOUR_DATA_CAN_BE_CHANGE_FUTURELY')}
       </Text>
     </View>
   );

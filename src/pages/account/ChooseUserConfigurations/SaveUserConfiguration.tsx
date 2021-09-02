@@ -5,6 +5,7 @@ import useUpdateUser from '@hooks/useUpdateUser';
 import useSetUserLogged from '@hooks/useSetUserLogged';
 
 import {Avatar, Text, RoundedButton} from '@shared/components';
+import {useTranslation} from '@/shared/hooks';
 
 import ThemeBox from './ThemeBox';
 
@@ -16,6 +17,20 @@ const SaveUserConfiguration: React.FC<Props> = ({onChangePress}) => {
   const user = useGetUser();
   const updateUser = useUpdateUser();
   const setUserLogged = useSetUserLogged();
+
+  const {translation} = useTranslation();
+
+  const handleFinishRegistrationPress = async () => {
+    try {
+      await updateUser({
+        name: user?.name,
+        avatar: user?.avatar,
+        theme: user?.theme,
+      });
+
+      setUserLogged(true);
+    } catch (error) {}
+  };
 
   return (
     <View style={styles.container}>
@@ -30,39 +45,29 @@ const SaveUserConfiguration: React.FC<Props> = ({onChangePress}) => {
       </View>
       <View style={styles.row}>
         <RoundedButton
-          text="Alterar Nome"
+          text={translation('CHANGE_NAME')}
           inverted
           style={styles.button}
           onPress={() => onChangePress(1)}
         />
         <View style={styles.betweenButtonsSpace} />
         <RoundedButton
-          text="Alterar Avatar"
+          text={translation('CHANGE_AVATAR')}
           inverted
           style={styles.button}
           onPress={() => onChangePress(2)}
         />
       </View>
       <RoundedButton
-        text="Alterar Tema"
+        text={translation('CHANGE_THEME')}
         inverted
         style={styles.alterateThemeButton}
         onPress={() => onChangePress(0)}
       />
       <RoundedButton
-        text="Finalizar Cadastro"
+        text={translation('FINISH_REGISTRATION')}
         style={styles.finalizeRegisterBtn}
-        onPress={async () => {
-          try {
-            await updateUser({
-              name: user?.name,
-              avatar: user?.avatar,
-              theme: user?.theme,
-            });
-
-            setUserLogged(true);
-          } catch (error) {}
-        }}
+        onPress={handleFinishRegistrationPress}
       />
     </View>
   );

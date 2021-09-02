@@ -16,6 +16,7 @@ import {selectUser, updateUser} from '@store/account/user';
 import {showToast} from '@shared/components/Toast';
 
 import {Content, Header, AvatarListContainer} from './styles';
+import {useTranslation} from '@/shared/hooks';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryDetails'>;
@@ -24,6 +25,7 @@ interface Props {
 
 function ChangeAvatar({navigation}: Props) {
   const dispatch = useDispatch();
+  const {translation} = useTranslation();
 
   const user = useSelector(selectUser);
 
@@ -54,7 +56,7 @@ function ChangeAvatar({navigation}: Props) {
           <Avatar avatarNumber={user?.avatar} size={80} />
         </Header>
         <Text type="title-medium" style={{textAlign: 'center'}}>
-          Escolha um avartar para alterar!
+          {translation('SELECT_ONE_AVATAR_TO_CHANGE')}
         </Text>
         <AvatarListContainer>
           <AvatarList onAvatarPress={handleSaveAvatar} />

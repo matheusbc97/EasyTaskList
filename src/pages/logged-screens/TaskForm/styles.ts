@@ -14,17 +14,10 @@ export default StyleSheet.create({
     borderRadius: 30,
     elevation: 3,
   },
-  header: {
+  title: {
+    alignSelf: 'center',
     paddingBottom: 10,
-    paddingHorizontal: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
   },
-  titleWrapper: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  title: {},
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

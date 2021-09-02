@@ -10,9 +10,9 @@ import {
   Text,
   BackButton,
 } from '@shared/components';
-import useValidateField from '@shared/hooks/useValidateField';
 import {validateAll} from '@shared/utils/validations';
 import {selectUserName} from '@store/account/user';
+import {useTranslation, useValidateField} from '@/shared/hooks';
 
 interface Props {
   onAdvancePress(name: string): void;
@@ -31,6 +31,7 @@ const ChooseName: React.FC<Props> = ({
   showBackButton = true,
   advanceButtonText,
 }) => {
+  const {translation} = useTranslation();
   const userName = useSelector(selectUserName);
   const formRef = useRef<FormHandles>(null);
   const validateField = useValidateField(formRef);
@@ -50,7 +51,7 @@ const ChooseName: React.FC<Props> = ({
       <Text
         type="title-big"
         style={[styles.text, {marginTop: showBackButton ? 0 : 35}]}>
-        Nos diga como deseja ser chamado
+        {translation('TELL_US_YOUR_NAME')}
       </Text>
       <Form
         style={{width: '100%'}}

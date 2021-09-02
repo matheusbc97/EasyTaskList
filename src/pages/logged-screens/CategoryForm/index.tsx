@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState, useMemo} from 'react';
+import React, {useRef, useState, useMemo} from 'react';
 
 import {
   Text,
@@ -39,6 +39,7 @@ import {useValidateField} from '@shared/hooks';
 import {Category} from '@shared/models';
 import {createCategory, updateCategory} from '@store/categories';
 import {RouteProp} from '@react-navigation/native';
+import {useTranslation} from '@/shared/hooks';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryForm'>;
@@ -50,6 +51,7 @@ interface FormData {
 }
 
 const CategoryForm: React.FC<Props> = ({navigation, route}) => {
+  const {translation} = useTranslation();
   const category = route.params?.category;
 
   const formRef = useRef<FormHandles>(null);
@@ -87,64 +89,61 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
     return _initialData;
   }, [category]);
 
-  const handleFormSubmit = useCallback(
-    (form: FormData) => {
-      const [formErrors, isValid] = validateAll(form);
+  const handleFormSubmit = (form: FormData) => {
+    const [formErrors, isValid] = validateAll(form);
 
-      if (!isValid) {
-        formRef.current?.setErrors(formErrors);
-        return;
-      }
+    if (!isValid) {
+      formRef.current?.setErrors(formErrors);
+      return;
+    }
 
-      if (selectedColorIndex === -1) {
-        dispatch(
-          showToast({
-            text: 'Cor Obrigatória',
-          }),
-        );
-        return;
-      }
+    if (selectedColorIndex === -1) {
+      dispatch(
+        showToast({
+          text: translation('REQUIRED_COLOR'),
+        }),
+      );
+      return;
+    }
 
-      if (iconIndex === -1) {
-        dispatch(
-          showToast({
-            text: 'Ícone Obrigatório',
-          }),
-        );
-        return;
-      }
+    if (iconIndex === -1) {
+      dispatch(
+        showToast({
+          text: translation('REQUIRED_ICON'),
+        }),
+      );
+      return;
+    }
 
-      if (!category) {
-        const newCategory: Omit<Category, 'id'> = {
-          colorIndex: selectedColorIndex,
-          name: form.name,
-          iconIndex: iconIndex,
-        };
-
-        dispatch(createCategory(newCategory)).then(action => {
-          if (action.payload) {
-            navigation.pop();
-          }
-        });
-
-        return;
-      }
-
-      const updatedCategory: Category = {
-        id: category.id,
+    if (!category) {
+      const newCategory: Omit<Category, 'id'> = {
         colorIndex: selectedColorIndex,
         name: form.name,
         iconIndex: iconIndex,
       };
 
-      dispatch(updateCategory(updatedCategory)).then(action => {
+      dispatch(createCategory(newCategory)).then(action => {
         if (action.payload) {
           navigation.pop();
         }
       });
-    },
-    [dispatch, selectedColorIndex, iconIndex, navigation, category],
-  );
+
+      return;
+    }
+
+    const updatedCategory: Category = {
+      id: category.id,
+      colorIndex: selectedColorIndex,
+      name: form.name,
+      iconIndex: iconIndex,
+    };
+
+    dispatch(updateCategory(updatedCategory)).then(action => {
+      if (action.payload) {
+        navigation.pop();
+      }
+    });
+  };
 
   return (
     <ScreenWrapper>
@@ -159,7 +158,7 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
               />
               <TitleContainer>
                 <Title type="title-big" color={appTheme.primaryColor}>
-                  {'Criar Categoria'}
+                  {translation('CREATE_CATEGORY')}
                 </Title>
               </TitleContainer>
             </Header>
@@ -169,7 +168,7 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
               initialData={initialData}>
               <TextInput
                 name="name"
-                label="Nome"
+                label={translation('NAME')}
                 validateField={validateFied}
               />
               <ColorAndIconContainer>
@@ -177,7 +176,7 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
                   onPress={() => setCategoryColorModalIsVisible(true)}>
                   <CategoryColorBox colorIndex={selectedColorIndex} />
                   <Text type="title" primaryColor style={{marginTop: 5}}>
-                    Selecionar Cor
+                    {translation('SELECT_COLOR')}
                   </Text>
                 </SelectColorOrIconButton>
                 <SelectColorOrIconButton
@@ -191,19 +190,19 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
                     )}
                   </SelectIconContainer>
                   <Text type="title" primaryColor style={{marginTop: 5}}>
-                    Selecionar Ícone
+                    {translation('SELECT_ICON')}
                   </Text>
                 </SelectColorOrIconButton>
               </ColorAndIconContainer>
             </Form>
             <Footer>
               <BackButton
-                text="Voltar"
+                text={translation('GO_BACK')}
                 inverted
                 onPress={() => navigation.pop()}
               />
               <SaveButton
-                text="Salvar"
+                text={translation('SAVE')}
                 onPress={() => formRef.current?.submitForm()}
               />
             </Footer>

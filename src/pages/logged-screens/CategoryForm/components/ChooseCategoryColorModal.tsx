@@ -1,12 +1,13 @@
 import React, {useCallback} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
-
-import Modal from 'react-native-modal';
-import categoryColors from '@assets/categoryColors';
-import {Text} from '@shared/components';
 import LinearGradient from 'react-native-linear-gradient';
 import {RectButton} from 'react-native-gesture-handler';
+import Modal from 'react-native-modal';
+
+import categoryColors from '@assets/categoryColors';
+import {Text} from '@shared/components';
+import {useTranslation} from '@/shared/hooks';
 
 interface Props {
   isVisible: boolean;
@@ -25,6 +26,8 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
   onBackButtonPress,
   onColorPress,
 }) => {
+  const {translation} = useTranslation();
+
   const getColors = useCallback(() => {
     const components: any[] = [];
 
@@ -84,7 +87,7 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
           type="title-big"
           primaryColor
           style={{alignSelf: 'center', marginTop: 5, marginBottom: 10}}>
-          Selecionar Cor
+          {translation('SELECT_COLOR')}
         </Text>
         {getColors()}
         <RectButton onPress={onBackButtonPress}>
@@ -92,7 +95,7 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
             type="title-big"
             secondaryColor
             style={{alignSelf: 'center', marginTop: 5, paddingVertical: 10}}>
-            Cancelar
+            {translation('CANCEL')}
           </Text>
         </RectButton>
       </Container>

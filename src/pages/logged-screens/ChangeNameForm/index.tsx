@@ -5,11 +5,13 @@ import {RouteProp} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 
 import {AnimatedBackground} from '@shared/components';
+import {useTranslation} from '@/shared/hooks';
 
 import ChooseName from '../../account/ChooseUserConfigurations/ChooseName';
-import {Content} from './styles';
 import {updateUser} from '@store/account/user';
 import {showToast} from '@shared/components/Toast';
+
+import {Content} from './styles';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'ChangeNameForm'>;
@@ -18,6 +20,7 @@ interface Props {
 
 function ChangeNameForm({navigation}: Props) {
   const dispatch = useDispatch();
+  const {translation} = useTranslation();
 
   const handleSaveName = useCallback(
     async (name: string) => {
@@ -43,7 +46,7 @@ function ChangeNameForm({navigation}: Props) {
       <Content>
         <ChooseName
           onAdvancePress={handleSaveName}
-          advanceButtonText="SALVAR"
+          advanceButtonText={translation('SAVE').toUpperCase()}
           onBackPress={() => navigation.pop()}
         />
       </Content>

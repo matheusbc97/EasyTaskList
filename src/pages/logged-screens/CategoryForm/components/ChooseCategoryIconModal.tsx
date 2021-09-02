@@ -1,13 +1,13 @@
 import React, {useCallback} from 'react';
-import {View, TouchableOpacity} from 'react-native';
-
 import styled from 'styled-components/native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import Modal from 'react-native-modal';
+import {RectButton} from 'react-native-gesture-handler';
 
 import categoryIconNames from '@assets/categoryIconNames';
 import {Text} from '@shared/components';
-import {RectButton} from 'react-native-gesture-handler';
+
+import {useTranslation} from '@/shared/hooks';
 
 const Title = styled(Text)`
   align-self: center;
@@ -44,6 +44,8 @@ const ChooseCategoryIconModal: React.FC<Props> = ({
   onIconPress,
   onBackButtonPress,
 }) => {
+  const {translation} = useTranslation();
+
   const getIcons = useCallback(() => {
     const components: any[] = [];
 
@@ -75,7 +77,7 @@ const ChooseCategoryIconModal: React.FC<Props> = ({
     <Modal isVisible={isVisible} onBackButtonPress={onBackButtonPress}>
       <Container>
         <Title type="title-big" primaryColor>
-          Selecionar Ícone
+          {translation('SELECT_ICON')}
         </Title>
         {getIcons()}
         <RectButton onPress={onBackButtonPress}>
@@ -83,7 +85,7 @@ const ChooseCategoryIconModal: React.FC<Props> = ({
             type="title-big"
             secondaryColor
             style={{alignSelf: 'center', paddingVertical: 10}}>
-            Cancelar
+            {translation('CANCEL')}
           </Text>
         </RectButton>
       </Container>
