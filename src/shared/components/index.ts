@@ -29,6 +29,9 @@ import ConfirmNewPasswordInput from './ConfirmNewPasswordInput';
 import NewPasswordInput from './NewPasswordInput';
 import CheckInput from './CheckInput';
 import CheckInputWithButtonText from './CheckInputWithButtonText';
+import DateInput from './DateInput';
+import TimeInput from './TimeInput';
+import CategoryInput from './CategoryInput';
 
 export {
   Avatar,
@@ -60,6 +63,9 @@ export {
   NewPasswordInput,
   CheckInput,
   CheckInputWithButtonText,
+  DateInput,
+  TimeInput,
+  CategoryInput,
 };
 
 export type {TextButtonProps, TextProps, FlatListWithFetchIndicatorProps};

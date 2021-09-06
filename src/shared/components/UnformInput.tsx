@@ -112,7 +112,7 @@ const FloatingLabelInput = (
         inputElementRef.current.clear();
       },
       setValue(_: any, value: string) {
-        inputElementRef.current.setNativeProps({text: value});
+        customTextInputRef.current.setNativeProps({text: value});
         inputElementRef.current.value = value;
       },
     };

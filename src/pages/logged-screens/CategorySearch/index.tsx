@@ -2,6 +2,7 @@ import React, {useState, useEffect, useCallback, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
 
 import {AuthenticatedStackParams} from '@navigation/types';
 import {ScreenWrapper, Header} from '@shared/components';
@@ -20,9 +21,10 @@ import {TextInput} from 'react-native';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategorySearch'>;
+  route: RouteProp<AuthenticatedStackParams, 'CategorySearch'>;
 }
 
-const CategorySearch: React.FC<Props> = ({navigation}) => {
+const CategorySearch: React.FC<Props> = ({navigation, route}) => {
   const [search, setSearch] = useState('');
   const [lsCategories, setLsCategories] = useState<Category[]>([]);
   const dispatch = useDispatch();
@@ -33,25 +35,25 @@ const CategorySearch: React.FC<Props> = ({navigation}) => {
 
   const inputRef = useRef<TextInput>(null);
 
+  const {onCategoryChange} = route.params;
+
   useEffect(() => {
     dispatch(getUserCategories());
     setTimeout(() => inputRef.current?.focus());
   }, [dispatch]);
 
   useEffect(() => {
-    const newCategoryList = categoryListRedux.filter((category) =>
+    const newCategoryList = categoryListRedux.filter(category =>
       new RegExp(search, 'i').test(category.name),
     );
 
     setLsCategories(newCategoryList);
   }, [search, categoryListRedux]);
 
-  const handleChosenCategory = useCallback(
-    (chosenCategory: Category) => {
-      navigation.navigate('TaskForm', {chosenCategory});
-    },
-    [navigation],
-  );
+  const handleChosenCategory = (chosenCategory: Category) => {
+    onCategoryChange(chosenCategory);
+    navigation.pop();
+  };
 
   const handleRefresh = useCallback(() => dispatch(getUserCategories()), [
     dispatch,

@@ -1,74 +1,56 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useRef} from 'react';
 import {View} from 'react-native';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
-import formatDate from '@shared/utils/fomatDate';
 import {
   ScreenWrapper,
   UnformInput as TextInput,
   RoundedButton,
-  AnimatedBackground,
   Text,
+  DateInput,
+  TimeInput,
+  CategoryInput,
 } from '@shared/components';
 import {useValidateField, useAppTheme, useTranslation} from '@shared/hooks';
+import {Category} from '@shared/models';
 
+import Wrapper from './components/Wrapper';
 import useHandleSubmit from './hooks/useHandleSubmit';
 import getInitialData from './utils/getInitialData';
 import styles from './styles';
 import {Props} from './types';
 
-const Wrapper: React.FC = ({children}) => {
-  return (
-    <AnimatedBackground>
-      <View style={styles.container}>
-        <View style={styles.content}>{children}</View>
-      </View>
-    </AnimatedBackground>
-  );
-};
-
 const TaskForm: React.FC<Props> = ({navigation, route}) => {
-  const {chosenCategory, task} = route.params ?? {
-    chosenCategory: null,
+  const {task} = route.params ?? {
     task: null,
   };
 
   const initialData = getInitialData(task);
 
   const formRef = useRef<FormHandles>(null);
-  const datePickerRef = useRef<any>(null);
-  const timePickerRef = useRef<any>(null);
-  const categorySearchPickerRef = useRef<any>(null);
+
+  let chosenCategory: Category | null = useRef(null).current;
 
   const {translation} = useTranslation();
   const appTheme = useAppTheme();
-
-  const [datePickerIsVisible, setDatePickerIsVisible] = useState(false);
-  const [timePickerIsVisible, setTimePickerIsVisible] = useState(false);
 
   const validateField = useValidateField(formRef);
 
   const handleFormSubmit = useHandleSubmit({formRef, chosenCategory, task});
 
-  useEffect(() => {
-    if (chosenCategory) {
-      categorySearchPickerRef.current?.setValue(chosenCategory.name);
+  const onCategoryChange = (category: Category) => {
+    if (category) {
+      formRef.current?.setFieldValue('category', category.name);
     }
-  }, [chosenCategory]);
+
+    chosenCategory = category;
+  };
 
   return (
     <ScreenWrapper>
       <Wrapper>
-        <Text
-          type="title-big"
-          style={[
-            {
-              color: appTheme.primaryColor,
-            },
-            styles.title,
-          ]}>
+        <Text type="title-big" primaryColor style={styles.title}>
           {!task ? translation('CREATE_TASK') : translation('EDIT_TASK')}
         </Text>
         <Form
@@ -84,45 +66,19 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
             }
           />
           <TextInput name="description" label={translation('DESCRIPTION')} />
-          <TextInput
-            ref={datePickerRef}
-            mask={value => formatDate(value)}
-            name="date"
-            label={translation('DATE')}
-            button
-            onPress={() => setDatePickerIsVisible(true)}
-          />
-          <DateTimePickerModal
-            isVisible={datePickerIsVisible}
-            mode="date"
-            onConfirm={date => {
-              datePickerRef.current?.setValue(String(date));
-              setDatePickerIsVisible(false);
-            }}
-            onCancel={() => setDatePickerIsVisible(false)}
-          />
-          <TextInput
-            ref={timePickerRef}
-            name="time"
-            label={translation('HOUR')}
-            mask={value => formatDate(value, 'time')}
-            button
-            onPress={() => setTimePickerIsVisible(true)}
-          />
-          <TextInput
-            ref={categorySearchPickerRef}
-            name="category"
-            label={translation('CATEGORY')}
-            button
-            onPress={() => navigation.navigate('CategorySearch')}
-          />
+
+          <DateInput />
+
+          <TimeInput />
+
+          <CategoryInput onCategoryChange={onCategoryChange} />
         </Form>
         <View style={styles.footer}>
           <RoundedButton
             text={translation('GO_BACK')}
             inverted
             style={styles.backButton}
-            onPress={() => navigation.pop()}
+            onPress={() => navigation.goBack()}
           />
           <RoundedButton
             text={translation('SAVE')}
@@ -131,17 +87,6 @@ const TaskForm: React.FC<Props> = ({navigation, route}) => {
           />
         </View>
       </Wrapper>
-
-      <DateTimePickerModal
-        isVisible={timePickerIsVisible}
-        mode="time"
-        onConfirm={time => {
-          timePickerRef.current?.setValue(String(time));
-          setTimePickerIsVisible(false);
-        }}
-        is24Hour
-        onCancel={() => setTimePickerIsVisible(false)}
-      />
     </ScreenWrapper>
   );
 };

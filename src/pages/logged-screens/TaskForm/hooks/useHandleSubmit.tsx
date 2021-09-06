@@ -1,11 +1,13 @@
 import {RefObject} from 'react';
+import {FormHandles} from '@unform/core';
+
 import {validateAll} from '@shared/utils/validations';
 import useCreateNewTask from '@/hooks/useCreateNewTask';
 import useUpdateTask from '@/hooks/useUpdateTask';
+import {Category, Task} from '@shared/models';
 
 import {FormObject} from '../types';
-import {FormHandles} from '@unform/core';
-import {Category, Task} from '@shared/models';
+
 const getDateByDateAndTime = (date: string, time: string) => {
   const formTime = new Date(time);
   const formDate = new Date(date);
@@ -24,6 +26,7 @@ interface Params {
   chosenCategory: Category | null | undefined;
   task: Task | null | undefined;
 }
+
 const useHandleSubmit = ({formRef, chosenCategory, task}: Params) => {
   const createNewTask = useCreateNewTask();
   const updateNewTask = useUpdateTask();

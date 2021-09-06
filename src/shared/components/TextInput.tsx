@@ -97,8 +97,9 @@ const TextInput = (
 
   useImperativeHandle(ref, () => ({
     setNativeProps(props: any) {
+      console.log('text 0202', props);
       animation(true);
-      inputRef?.current && inputRef.current.setNativeProps(props);
+      inputRef?.current.setNativeProps(props);
     },
   }));
 
