@@ -1,12 +1,9 @@
-import {RefObject} from 'react';
-import {FormHandles} from '@unform/core';
-
-import {validateAll} from '@shared/utils/validations';
 import useCreateNewTask from '@/hooks/useCreateNewTask';
 import useUpdateTask from '@/hooks/useUpdateTask';
-import {Category, Task} from '@shared/models';
+import {Task} from '@shared/models';
 
-import {FormObject} from '../types';
+import {FormObject, TaskFormHandles} from '../templates/TaskForm';
+import {RefObject} from 'react';
 
 const getDateByDateAndTime = (date: string, time: string) => {
   const formTime = new Date(time);
@@ -22,12 +19,11 @@ const getDateByDateAndTime = (date: string, time: string) => {
 };
 
 interface Params {
-  formRef: RefObject<FormHandles>;
-  chosenCategory: Category | null | undefined;
   task: Task | null | undefined;
+  formRef: RefObject<TaskFormHandles>;
 }
 
-const useHandleSubmit = ({formRef, chosenCategory, task}: Params) => {
+const useHandleSubmit = ({task}: Params) => {
   const createNewTask = useCreateNewTask();
   const updateNewTask = useUpdateTask();
 
@@ -36,7 +32,7 @@ const useHandleSubmit = ({formRef, chosenCategory, task}: Params) => {
       id: _task.id,
       title: form.title,
       description: form.description,
-      category: chosenCategory ? chosenCategory : _task.category!,
+      category: form.category,
       date: getDateByDateAndTime(form.date, form.time),
     };
 
@@ -46,13 +42,9 @@ const useHandleSubmit = ({formRef, chosenCategory, task}: Params) => {
   };
 
   const handleCreateFormSubmit = async (form: FormObject) => {
-    if (!chosenCategory) {
-      return;
-    }
-
     const newTask = {
       title: form.title,
-      category: chosenCategory,
+      category: form.category,
       date: getDateByDateAndTime(form.date, form.time),
       description: form.description,
     };
@@ -62,13 +54,6 @@ const useHandleSubmit = ({formRef, chosenCategory, task}: Params) => {
   };
 
   const handleFormSubmit = async (form: FormObject) => {
-    const [formErrors, isValid] = validateAll(form);
-
-    if (!isValid) {
-      formRef.current?.setErrors(formErrors);
-      return;
-    }
-
     if (!task) {
       handleCreateFormSubmit(form);
 

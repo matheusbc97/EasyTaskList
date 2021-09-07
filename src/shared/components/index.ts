@@ -35,7 +35,7 @@ import CategoryInput from './CategoryInput';
 import FormContainer from './FormContainer';
 import DescriptionInput from './DescriptionInput';
 import TitleInput from './TitleInput';
-import SaveRoundedButton from './SaveRoundedButton';
+import RoundedSaveButton from './RoundedSaveButton';
 
 export {
   Avatar,
@@ -73,7 +73,7 @@ export {
   FormContainer,
   DescriptionInput,
   TitleInput,
-  SaveRoundedButton,
+  RoundedSaveButton,
 };
 
 export type {TextButtonProps, TextProps, FlatListWithFetchIndicatorProps};

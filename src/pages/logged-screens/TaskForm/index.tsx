@@ -1,53 +1,29 @@
 import React, {useRef} from 'react';
 
-import {Form} from '@unform/mobile';
-import {FormHandles} from '@unform/core';
-
 import {
-  RoundedButton,
-  DateInput,
-  TimeInput,
-  CategoryInput,
   AnimatedBackground,
   Header,
   FormContainer,
-  DescriptionInput,
-  TitleInput,
-  SaveRoundedButton,
+  RoundedSaveButton,
 } from '@shared/components';
-import {useValidateField, useTranslation} from '@shared/hooks';
-import {Category} from '@shared/models';
+import {useTranslation} from '@shared/hooks';
 
 import Center from './components/Center';
 import useHandleSubmit from './hooks/useHandleSubmit';
 import getInitialData from './utils/getInitialData';
-import styles from './styles';
 import {Props} from './types';
+import TaskFormTemplate, {TaskFormHandles} from './templates/TaskForm';
 
 const TaskForm: React.FC<Props> = ({route}) => {
   const {task} = route.params ?? {
     task: null,
   };
 
-  const initialData = getInitialData(task);
-
-  const formRef = useRef<FormHandles>(null);
-
-  let chosenCategory: Category | null = useRef(null).current;
+  const formRef = useRef<TaskFormHandles>(null);
 
   const {translation} = useTranslation();
 
-  const validateField = useValidateField(formRef);
-
-  const handleFormSubmit = useHandleSubmit({formRef, chosenCategory, task});
-
-  const onCategoryChange = (category: Category) => {
-    if (category) {
-      formRef.current?.setFieldValue('category', category.name);
-    }
-
-    chosenCategory = category;
-  };
+  const handleFormSubmit = useHandleSubmit({task, formRef});
 
   return (
     <AnimatedBackground>
@@ -60,27 +36,13 @@ const TaskForm: React.FC<Props> = ({route}) => {
             }
           />
 
-          <Form
-            onSubmit={handleFormSubmit}
+          <TaskFormTemplate
             ref={formRef}
-            initialData={initialData}>
-            <TitleInput
-              validateField={validateField}
-              onSubmitEditing={() =>
-                formRef.current?.getFieldRef('description').focus()
-              }
-            />
+            onSubmitSuccess={handleFormSubmit}
+            initialValues={getInitialData(task)}
+          />
 
-            <DescriptionInput />
-
-            <DateInput />
-
-            <TimeInput />
-
-            <CategoryInput onCategoryChange={onCategoryChange} />
-          </Form>
-
-          <SaveRoundedButton onPress={() => formRef.current?.submitForm()} />
+          <RoundedSaveButton onPress={() => formRef.current?.submitForm()} />
         </FormContainer>
       </Center>
     </AnimatedBackground>

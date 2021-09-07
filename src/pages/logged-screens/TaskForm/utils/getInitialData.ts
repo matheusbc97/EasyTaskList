@@ -1,6 +1,7 @@
 import {Task} from '@shared/models';
 import convertMillisecondsToDate from '@shared/utils/convertMillisecondsToDate';
-import {FormObject} from '../types';
+
+import {FormObject} from '../templates/TaskForm';
 
 const getInitialData = (task: Task | null | undefined) => {
   if (!task) {
@@ -9,7 +10,7 @@ const getInitialData = (task: Task | null | undefined) => {
 
   const _initialData: FormObject = {
     title: task.title,
-    category: task.category!.name,
+    category: task.category!,
     date: convertMillisecondsToDate(task.date).toString(),
     time: convertMillisecondsToDate(task.date).toString(),
     description: task.description,
