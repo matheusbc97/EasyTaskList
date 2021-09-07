@@ -11,27 +11,43 @@ import {selectAppTheme} from '@store/configs';
 
 interface Props {
   onPress?: (() => void) | undefined;
+  showLabel?: boolean;
 }
 
-const ChooseScreenBackButton: React.FC<Props> = ({onPress}) => {
+const ChooseScreenBackButton: React.FC<Props> = ({
+  onPress,
+  showLabel = true,
+}) => {
   const navigation = useNavigation();
   const appTheme = useSelector(selectAppTheme);
   const {translation} = useTranslation();
 
+  if (showLabel) {
+    return (
+      <TouchableRipple
+        style={styles.container}
+        onPress={onPress ?? navigation.goBack}>
+        <View style={styles.content}>
+          <MaterialIcon
+            name="arrow-back"
+            size={24}
+            color={appTheme.primaryColor}
+          />
+          {showLabel && (
+            <Text type="title" primaryColor style={styles.text}>
+              {translation('GO_BACK').toUpperCase()}
+            </Text>
+          )}
+        </View>
+      </TouchableRipple>
+    );
+  }
+
   return (
     <TouchableRipple
-      style={styles.container}
-      onPress={onPress ?? navigation.goBack}>
-      <View style={styles.content}>
-        <MaterialIcon
-          name="arrow-back"
-          size={24}
-          color={appTheme.primaryColor}
-        />
-        <Text type="title" primaryColor style={styles.text}>
-          {translation('GO_BACK').toUpperCase()}
-        </Text>
-      </View>
+      onPress={onPress ?? navigation.goBack}
+      style={{alignSelf: 'flex-start'}}>
+      <MaterialIcon name="arrow-back" size={24} color={appTheme.primaryColor} />
     </TouchableRipple>
   );
 };

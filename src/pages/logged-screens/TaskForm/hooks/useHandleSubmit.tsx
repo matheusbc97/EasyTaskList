@@ -31,6 +31,36 @@ const useHandleSubmit = ({formRef, chosenCategory, task}: Params) => {
   const createNewTask = useCreateNewTask();
   const updateNewTask = useUpdateTask();
 
+  const handleUpdateFormSubmit = async (form: FormObject, _task: Task) => {
+    const updatedTask = {
+      id: _task.id,
+      title: form.title,
+      description: form.description,
+      category: chosenCategory ? chosenCategory : _task.category!,
+      date: getDateByDateAndTime(form.date, form.time),
+    };
+
+    updateNewTask(updatedTask);
+
+    return;
+  };
+
+  const handleCreateFormSubmit = async (form: FormObject) => {
+    if (!chosenCategory) {
+      return;
+    }
+
+    const newTask = {
+      title: form.title,
+      category: chosenCategory,
+      date: getDateByDateAndTime(form.date, form.time),
+      description: form.description,
+    };
+
+    createNewTask(newTask);
+    return;
+  };
+
   const handleFormSubmit = async (form: FormObject) => {
     const [formErrors, isValid] = validateAll(form);
 
@@ -40,30 +70,12 @@ const useHandleSubmit = ({formRef, chosenCategory, task}: Params) => {
     }
 
     if (!task) {
-      if (!chosenCategory) {
-        return;
-      }
+      handleCreateFormSubmit(form);
 
-      const newTask = {
-        title: form.title,
-        category: chosenCategory,
-        date: getDateByDateAndTime(form.date, form.time),
-        description: form.description,
-      };
-
-      createNewTask(newTask);
       return;
     }
 
-    const updatedTask = {
-      id: task.id,
-      title: form.title,
-      description: form.description,
-      category: chosenCategory ? chosenCategory : task.category!,
-      date: getDateByDateAndTime(form.date, form.time),
-    };
-
-    updateNewTask(updatedTask);
+    handleUpdateFormSubmit(form, task);
 
     return;
   };

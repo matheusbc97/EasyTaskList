@@ -32,6 +32,10 @@ import CheckInputWithButtonText from './CheckInputWithButtonText';
 import DateInput from './DateInput';
 import TimeInput from './TimeInput';
 import CategoryInput from './CategoryInput';
+import FormContainer from './FormContainer';
+import DescriptionInput from './DescriptionInput';
+import TitleInput from './TitleInput';
+import SaveRoundedButton from './SaveRoundedButton';
 
 export {
   Avatar,
@@ -66,6 +70,10 @@ export {
   DateInput,
   TimeInput,
   CategoryInput,
+  FormContainer,
+  DescriptionInput,
+  TitleInput,
+  SaveRoundedButton,
 };
 
 export type {TextButtonProps, TextProps, FlatListWithFetchIndicatorProps};

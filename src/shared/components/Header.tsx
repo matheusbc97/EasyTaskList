@@ -1,23 +1,27 @@
 import React from 'react';
-import {ViewStyle, TextStyle} from 'react-native';
+import {ViewStyle, TextStyle, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import styled from 'styled-components/native';
 
 import {selectAppTheme} from '../../store/configs';
 import {Text} from '@shared/components';
+import BackButton from './BackButton';
 
 interface Props {
   title: string;
   style?: ViewStyle;
   textStyle?: TextStyle;
   onBackPress?: () => void;
+  type?: 'secondary' | 'default';
 }
+
 interface ContainerProps {
   backgroundColor: string;
 }
+
 const Container = styled.View<ContainerProps>`
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${props => props.backgroundColor};
   elevation: 3;
   padding: 20px 20px 15px 35px;
   border-bottom-left-radius: 40px;
@@ -26,8 +30,36 @@ const Container = styled.View<ContainerProps>`
   flex-direction: row;
 `;
 
-const Header: React.FC<Props> = ({title, style, textStyle, onBackPress}) => {
+const Header: React.FC<Props> = ({
+  title,
+  style,
+  textStyle,
+  onBackPress,
+  type,
+}) => {
   const appTheme = useSelector(selectAppTheme);
+
+  if (type === 'secondary') {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          paddingTop: 5,
+          paddingBottom: 10,
+          paddingHorizontal: 5,
+        }}>
+        <View style={{flex: 1}}>
+          <BackButton showLabel={false} />
+        </View>
+        <Text type="title-big" primaryColor>
+          {title}
+        </Text>
+        <View style={{flex: 1}} />
+      </View>
+    );
+  }
+
   return (
     <Container backgroundColor={appTheme.aboveBackground} style={style}>
       <MaterialIcon

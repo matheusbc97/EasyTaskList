@@ -8,7 +8,7 @@ import {selectAppTheme} from '../../store/configs';
 
 import Text from './Text';
 
-interface Props {
+export interface RoundedButtonProps {
   text?: string | null;
   onPress?(): void;
   style?: ViewStyle;
