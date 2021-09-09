@@ -41,9 +41,10 @@ const HomeListData = [
 const Home: React.FC<Props> = ({navigation}) => {
   const {translation} = useTranslation();
 
-  const fetchTasks = useFetchTasks();
   const user = useGetUser();
   const {lsCategories, lsCategoriesFetchState} = useCategories();
+
+  const fetchTasks = useFetchTasks();
   const {tasksFetchState, tasksNotDone} = useTaskNotDone();
 
   useEffect(() => {
@@ -58,7 +59,7 @@ const Home: React.FC<Props> = ({navigation}) => {
         ...task,
       },
     };
-    navigation.navigate('TaskForm', navigationOptions);
+    navigation.navigate('UpdateTaskForm', navigationOptions);
   };
 
   const handleTaskDetailsModalEditButtonPress = () => {
@@ -104,7 +105,7 @@ const Home: React.FC<Props> = ({navigation}) => {
         <OutlineButton
           iconName="plus"
           text={translation('CREATE_NEW_TASK')}
-          onPress={() => navigation.navigate('TaskForm')}
+          onPress={() => navigation.navigate('CreateTaskForm')}
         />
       </View>
       <TaskDetailsModal

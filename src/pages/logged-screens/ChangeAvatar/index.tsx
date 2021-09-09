@@ -11,6 +11,8 @@ import {
   AvatarList,
   BackButton,
   Text,
+  Center,
+  FormContainer,
 } from '@shared/components';
 import {selectUser, updateUser} from '@store/account/user';
 import {showToast} from '@shared/components/Toast';
@@ -50,18 +52,22 @@ function ChangeAvatar({navigation}: Props) {
 
   return (
     <AnimatedBackground>
-      <Content>
-        <Header>
-          <BackButton onPress={() => navigation.navigate('BottomNavigation')} />
-          <Avatar avatarNumber={user?.avatar} size={80} />
-        </Header>
-        <Text type="title-medium" style={{textAlign: 'center'}}>
-          {translation('SELECT_ONE_AVATAR_TO_CHANGE')}
-        </Text>
-        <AvatarListContainer>
-          <AvatarList onAvatarPress={handleSaveAvatar} />
-        </AvatarListContainer>
-      </Content>
+      <Center>
+        <FormContainer>
+          <Header>
+            <BackButton
+              onPress={() => navigation.navigate('BottomNavigation')}
+            />
+            <Avatar avatarNumber={user?.avatar} size={80} />
+          </Header>
+          <Text type="title-medium" style={{textAlign: 'center'}}>
+            {translation('SELECT_ONE_AVATAR_TO_CHANGE')}
+          </Text>
+          <AvatarListContainer>
+            <AvatarList onAvatarPress={handleSaveAvatar} />
+          </AvatarListContainer>
+        </FormContainer>
+      </Center>
     </AnimatedBackground>
   );
 }

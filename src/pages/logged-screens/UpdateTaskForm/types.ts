@@ -11,6 +11,6 @@ export interface FormObject {
 }
 
 export interface Props {
-  route: RouteProp<AuthenticatedStackParams, 'TaskForm'>;
-  navigation: StackNavigationProp<AuthenticatedStackParams, 'TaskForm'>;
+  route: RouteProp<AuthenticatedStackParams, 'UpdateTaskForm'>;
+  navigation: StackNavigationProp<AuthenticatedStackParams, 'UpdateTaskForm'>;
 }

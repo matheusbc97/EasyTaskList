@@ -46,7 +46,7 @@ const TaskList: React.FC<Props> = ({navigation}) => {
       };
 
       setTaskSelected(null);
-      navigation.navigate('TaskForm', {task: selectedTask});
+      navigation.navigate('UpdateTaskForm', {task: selectedTask});
     }
   };
 
@@ -76,7 +76,7 @@ const TaskList: React.FC<Props> = ({navigation}) => {
         <OutlineButton
           iconName="plus"
           text={translation('CREATE_NEW_TASK')}
-          onPress={() => navigation.navigate('TaskForm')}
+          onPress={() => navigation.navigate('CreateTaskForm')}
         />
       </Footer>
       <TaskDetailsModal

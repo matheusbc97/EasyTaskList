@@ -37,9 +37,10 @@ import ChangePasswordForm from '@pages/logged-screens/ChangePasswordForm';
 import ForgotPasswordForm from '@pages/account/ForgotPasswordForm';
 import PrivacyPolicy from '@pages/account/PrivacyPolicy';
 import About from '@pages/logged-screens/About';
+import CreateTaskForm from '@/pages/logged-screens/CreateTaskForm';
+import UpdateTaskForm from '@/pages/logged-screens/UpdateTaskForm';
 
 import BottonTabNavigator from './BottonTabNavigator';
-import TaskForm from '@pages/logged-screens/TaskForm';
 import {verifyIfUserIsLogged} from '@store/account/user/thunkActions';
 
 import {useTranslation} from '@/shared/hooks';
@@ -142,8 +143,12 @@ const App = () => {
             component={MyTabs}
           />
           <AuthenticatedStack.Screen
-            name="TaskForm"
-            component={TaskForm}
+            name="CreateTaskForm"
+            component={CreateTaskForm}
+          />
+          <AuthenticatedStack.Screen
+            name="UpdateTaskForm"
+            component={UpdateTaskForm}
             initialParams={{}}
           />
           <AuthenticatedStack.Screen

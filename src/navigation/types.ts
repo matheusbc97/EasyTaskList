@@ -16,6 +16,10 @@ export type AuthenticatedStackParams = {
     | {
         task?: Task;
       };
+  CreateTaskForm: undefined;
+  UpdateTaskForm: {
+    task: Task;
+  };
   CategorySearch: {
     onCategoryChange: (category: Category) => void;
   };

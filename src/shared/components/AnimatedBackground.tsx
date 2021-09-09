@@ -3,7 +3,6 @@ import {View, Animated, Image, StyleSheet} from 'react-native';
 import {useDimensions} from '@react-native-community/hooks';
 import {useSelector} from 'react-redux';
 
-import {ScreenWrapper} from '.';
 import {selectAppTheme} from '../../store/configs';
 import {
   MARKED_LIST,
@@ -38,7 +37,7 @@ const AnimatedBackground: React.FC = ({children}) => {
   }, [firstAnimationValue]);
 
   return (
-    <ScreenWrapper>
+    <View>
       <Animated.View
         style={[
           {
@@ -69,7 +68,7 @@ const AnimatedBackground: React.FC = ({children}) => {
       <Animated.View style={[styles.container, {opacity: firstAnimationValue}]}>
         {children}
       </Animated.View>
-    </ScreenWrapper>
+    </View>
   );
 };
 

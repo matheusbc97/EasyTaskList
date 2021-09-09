@@ -5,36 +5,29 @@ import {
   Header,
   FormContainer,
   RoundedSaveButton,
+  Center,
 } from '@shared/components';
 import {useTranslation} from '@shared/hooks';
 
-import Center from './components/Center';
 import useHandleSubmit from './hooks/useHandleSubmit';
 import getInitialData from './utils/getInitialData';
 import {Props} from './types';
-import TaskFormTemplate, {TaskFormHandles} from './templates/TaskForm';
+import TaskFormTemplate, {TaskFormHandles} from '../../../templates/TaskForm';
 
-const TaskForm: React.FC<Props> = ({route}) => {
-  const {task} = route.params ?? {
-    task: null,
-  };
+const UpdateTaskForm: React.FC<Props> = ({route}) => {
+  const {task} = route.params;
 
   const formRef = useRef<TaskFormHandles>(null);
 
   const {translation} = useTranslation();
 
-  const handleFormSubmit = useHandleSubmit({task, formRef});
+  const handleFormSubmit = useHandleSubmit({task});
 
   return (
     <AnimatedBackground>
       <Center>
         <FormContainer>
-          <Header
-            type="secondary"
-            title={
-              !task ? translation('CREATE_TASK') : translation('EDIT_TASK')
-            }
-          />
+          <Header type="secondary" title={translation('EDIT_TASK')} />
 
           <TaskFormTemplate
             ref={formRef}
@@ -49,4 +42,4 @@ const TaskForm: React.FC<Props> = ({route}) => {
   );
 };
 
-export default TaskForm;
+export default UpdateTaskForm;

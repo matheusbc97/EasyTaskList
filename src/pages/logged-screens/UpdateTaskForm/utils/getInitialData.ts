@@ -1,13 +1,8 @@
 import {Task} from '@shared/models';
 import convertMillisecondsToDate from '@shared/utils/convertMillisecondsToDate';
+import {FormObject} from '@/templates/TaskForm';
 
-import {FormObject} from '../templates/TaskForm';
-
-const getInitialData = (task: Task | null | undefined) => {
-  if (!task) {
-    return undefined;
-  }
-
+const getInitialData = (task: Task) => {
   const _initialData: FormObject = {
     title: task.title,
     category: task.category!,

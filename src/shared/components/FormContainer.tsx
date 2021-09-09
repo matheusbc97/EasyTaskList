@@ -7,7 +7,7 @@ const FormContainer: React.FC = ({children}) => {
       style={{
         paddingVertical: 15,
         backgroundColor: '#FFF',
-        marginHorizontal: 10,
+        marginHorizontal: 20,
         paddingHorizontal: 10,
         borderRadius: 30,
         elevation: 3,

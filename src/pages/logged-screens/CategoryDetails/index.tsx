@@ -51,7 +51,7 @@ const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
       };
 
       setTaskSelected(null);
-      navigation.navigate('TaskForm', {task: selectedTask});
+      navigation.navigate('UpdateTaskForm', {task: selectedTask});
     }
   }, [navigation, taskSelected]);
 
@@ -68,7 +68,7 @@ const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
             isLoading={tasksFetchState.isLoading}
             hasError={tasksFetchState.hasError}
             emptyListText="Nenhuma Tarefa a fazer"
-            keyExtractor={(task) => task.id}
+            keyExtractor={task => task.id}
             onRefresh={dispatchGetTasks}
             renderItem={({item: task}) => (
               <TaskListItem task={task} onPress={() => setTaskSelected(task)} />
