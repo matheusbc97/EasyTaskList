@@ -1,27 +1,26 @@
 import React, {useRef, useState, useMemo} from 'react';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import {FormHandles} from '@unform/core';
+import {Form} from '@unform/mobile';
+import {useSelector, useDispatch} from 'react-redux';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 import {
   Text,
   UnformInput as TextInput,
-  ScreenWrapper,
   AnimatedBackground,
-} from '@shared/components';
-import {FormHandles} from '@unform/core';
-import {Form} from '@unform/mobile';
-import {useSelector, useDispatch} from 'react-redux';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-import {selectAppTheme} from '@store/configs';
-
-import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthenticatedStackParams} from '@navigation/types';
+  Center,
+  FormContainer,
+} from '@/shared/components';
+import {selectAppTheme} from '@/store/configs';
+import {useTranslation} from '@/shared/hooks';
+import categoryIconNames from '@/assets/categoryIconNames';
+import {useValidateField} from '@/shared/hooks';
 
 import CategoryColorBox from './components/CategoryColorBox';
 import ChooseCategoryColorModal from './components/ChooseCategoryColorModal';
 import ChooseCategoryIconModal from './components/ChooseCategoryIconModal';
 import {
-  Container,
-  Content,
   Header,
   TitleContainer,
   Title,
@@ -32,23 +31,9 @@ import {
   ColorAndIconContainer,
   SelectIconContainer,
 } from './styles';
-import categoryIconNames from '@assets/categoryIconNames';
-import {validateAll} from '@shared/utils/validations';
-import {showToast} from '@shared/components/Toast';
-import {useValidateField} from '@shared/hooks';
-import {Category} from '@shared/models';
-import {createCategory, updateCategory} from '@store/categories';
-import {RouteProp} from '@react-navigation/native';
-import {useTranslation} from '@/shared/hooks';
 
-interface Props {
-  navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryForm'>;
-  route: RouteProp<AuthenticatedStackParams, 'CategoryForm'>;
-}
-
-interface FormData {
-  name: string;
-}
+import {FormObject, Props} from './types';
+import useHandleSubmit from './hooks/useHandleSubmit';
 
 const CategoryForm: React.FC<Props> = ({navigation, route}) => {
   const {translation} = useTranslation();
@@ -65,21 +50,25 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
     false,
   );
 
-  const dispatch = useDispatch();
-
   const appTheme = useSelector(selectAppTheme);
 
-  const validateFied = useValidateField(formRef);
+  const validateField = useValidateField(formRef);
 
   const [selectedColorIndex, setSelectedColorIndex] = useState(-1);
   const [iconIndex, setIconIndex] = useState(-1);
 
-  const initialData = useMemo<undefined | FormData>(() => {
+  const handleFormSubmit = useHandleSubmit({formRef, category});
+
+  const onSubmit = (form: FormObject) => {
+    handleFormSubmit({form, iconIndex, selectedColorIndex});
+  };
+
+  const initialData = useMemo<undefined | FormObject>(() => {
     if (!category) {
       return undefined;
     }
 
-    const _initialData: FormData = {
+    const _initialData: FormObject = {
       name: category.name,
     };
 
@@ -89,67 +78,11 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
     return _initialData;
   }, [category]);
 
-  const handleFormSubmit = (form: FormData) => {
-    const [formErrors, isValid] = validateAll(form);
-
-    if (!isValid) {
-      formRef.current?.setErrors(formErrors);
-      return;
-    }
-
-    if (selectedColorIndex === -1) {
-      dispatch(
-        showToast({
-          text: translation('REQUIRED_COLOR'),
-        }),
-      );
-      return;
-    }
-
-    if (iconIndex === -1) {
-      dispatch(
-        showToast({
-          text: translation('REQUIRED_ICON'),
-        }),
-      );
-      return;
-    }
-
-    if (!category) {
-      const newCategory: Omit<Category, 'id'> = {
-        colorIndex: selectedColorIndex,
-        name: form.name,
-        iconIndex: iconIndex,
-      };
-
-      dispatch(createCategory(newCategory)).then(action => {
-        if (action.payload) {
-          navigation.pop();
-        }
-      });
-
-      return;
-    }
-
-    const updatedCategory: Category = {
-      id: category.id,
-      colorIndex: selectedColorIndex,
-      name: form.name,
-      iconIndex: iconIndex,
-    };
-
-    dispatch(updateCategory(updatedCategory)).then(action => {
-      if (action.payload) {
-        navigation.pop();
-      }
-    });
-  };
-
   return (
-    <ScreenWrapper>
+    <>
       <AnimatedBackground>
-        <Container>
-          <Content>
+        <Center>
+          <FormContainer>
             <Header>
               <MaterialIcon
                 name="arrow-back"
@@ -162,14 +95,11 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
                 </Title>
               </TitleContainer>
             </Header>
-            <Form
-              onSubmit={handleFormSubmit}
-              ref={formRef}
-              initialData={initialData}>
+            <Form onSubmit={onSubmit} ref={formRef} initialData={initialData}>
               <TextInput
                 name="name"
                 label={translation('NAME')}
-                validateField={validateFied}
+                validateField={validateField}
               />
               <ColorAndIconContainer>
                 <SelectColorOrIconButton
@@ -206,8 +136,8 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
                 onPress={() => formRef.current?.submitForm()}
               />
             </Footer>
-          </Content>
-        </Container>
+          </FormContainer>
+        </Center>
       </AnimatedBackground>
 
       <ChooseCategoryColorModal
@@ -227,7 +157,7 @@ const CategoryForm: React.FC<Props> = ({navigation, route}) => {
           setCategoryIconModalIsVisible(false);
         }}
       />
-    </ScreenWrapper>
+    </>
   );
 };
 

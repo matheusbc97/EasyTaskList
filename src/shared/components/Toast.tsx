@@ -13,14 +13,14 @@ interface ToastOptions {
   buttonOnPress?(): void;
 }
 
-interface showToastOptions
+export interface ShowToastOptions
   extends Omit<ToastOptions, 'isVisible' | 'idTimeout'> {
   remain?: boolean;
   buttonLabel?: string;
   buttonOnPress?(): void;
 }
 
-export const showToast = (toastOptions: showToastOptions) =>
+export const showToast = (toastOptions: ShowToastOptions) =>
   DeviceEventEmitter.emit('show-toast', toastOptions);
 
 const _getToastColor = (type: ToastType) => {
@@ -55,7 +55,7 @@ const Toast = () => {
   useEffect(() => {
     const emitter = DeviceEventEmitter.addListener(
       'show-toast',
-      (data: showToastOptions) => {
+      (data: ShowToastOptions) => {
         clearTimeoutIfExists();
 
         const timeout = data.remain

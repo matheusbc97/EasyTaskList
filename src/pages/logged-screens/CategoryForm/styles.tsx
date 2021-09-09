@@ -2,20 +2,6 @@ import styled from 'styled-components/native';
 import {RoundedButton, Text} from '@shared/components';
 import {RectButton} from 'react-native-gesture-handler';
 
-export const Container = styled.View`
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-`;
-
-export const Content = styled.View`
-  padding: 15px 10px;
-  margin: 0 10px;
-  background-color: #fff;
-  border-radius: 30px;
-  elevation: 3;
-`;
-
 export const Header = styled.View`
   padding: 0 10px 10px 10px;
   flex-direction: row;
@@ -32,7 +18,7 @@ interface TitleProps {
 }
 
 export const Title = styled(Text)<TitleProps>`
-  color: ${(props) => props.color};
+  color: ${props => props.color};
   margin-left: -38px;
 `;
 
