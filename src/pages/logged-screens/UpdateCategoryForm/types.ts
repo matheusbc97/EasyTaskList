@@ -3,8 +3,11 @@ import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 export interface Props {
-  navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryForm'>;
-  route: RouteProp<AuthenticatedStackParams, 'CategoryForm'>;
+  navigation: StackNavigationProp<
+    AuthenticatedStackParams,
+    'UpdateCategoryForm'
+  >;
+  route: RouteProp<AuthenticatedStackParams, 'UpdateCategoryForm'>;
 }
 
 export interface FormObject {

@@ -1,18 +1,18 @@
 import React, {useImperativeHandle, useRef, useState, forwardRef} from 'react';
-import categoryIconNames from '@/assets/categoryIconNames';
-
-import {Text, UnformInput as TextInput} from '@/shared/components';
 import styled from 'styled-components/native';
 import {RectButton} from 'react-native-gesture-handler';
-import CategoryColorBox from '@pages/logged-screens/CategoryForm/components/CategoryColorBox';
-import {Form} from '@unform/mobile';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-import {useTranslation, useValidateField} from '@shared/hooks';
-import {validateAll} from '@shared/utils/validations';
-import {showToast} from '@shared/components/Toast';
-import ChooseCategoryColorModal from '@pages/logged-screens/CategoryForm/components/ChooseCategoryColorModal';
-import ChooseCategoryIconModal from '@pages/logged-screens/CategoryForm/components/ChooseCategoryIconModal';
+import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
+
+import categoryIconNames from '@/assets/categoryIconNames';
+import {Text, UnformInput as TextInput} from '@/shared/components';
+import {useTranslation, useValidateField} from '@/shared/hooks';
+import {validateAll} from '@/shared/utils/validations';
+import {showToast} from '@/shared/components/Toast';
+import ChooseCategoryColorModal from '@/shared/components/ChooseCategoryColorModal';
+import ChooseCategoryIconModal from '@/shared/components/ChooseCategoryIconModal';
+import CategoryColorBox from '@/shared/components/CategoryColorBox';
 
 const ColorAndIconContainer = styled.View`
   flex-direction: row;

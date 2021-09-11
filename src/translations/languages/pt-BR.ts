@@ -60,6 +60,7 @@ export default {
     'Não se preocupe, seus dados poderão ser alterados posteriormente!',
   [tKeys.FINISH_REGISTRATION]: 'Finalizar Cadastro',
   [tKeys.CREATE_CATEGORY]: 'Criar Categoria',
+  [tKeys.EDIT_CATEGORY]: 'Editar Categoria',
   [tKeys.NAME]: 'Nome',
   [tKeys.SELECT_COLOR]: 'Selecionar Cor',
   [tKeys.SELECT_ICON]: 'Selecionar Ícone',

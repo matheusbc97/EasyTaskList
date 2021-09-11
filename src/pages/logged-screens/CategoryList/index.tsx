@@ -75,7 +75,7 @@ const CategoryList: React.FC<Props> = ({navigation}) => {
         renderItem={getCategoriesBoard}
       />
       <FloatingActionButton
-        onPress={() => navigation.navigate('CategoryForm')}
+        onPress={() => navigation.navigate('CreateCategoryForm')}
       />
     </ScreenWrapper>
   );

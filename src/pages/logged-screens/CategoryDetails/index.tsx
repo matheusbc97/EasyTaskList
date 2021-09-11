@@ -79,7 +79,9 @@ const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
           <OutlineButton
             iconName="pen"
             text="Editar Categoria"
-            onPress={() => navigation.navigate('CategoryForm', {category})}
+            onPress={() =>
+              navigation.navigate('UpdateCategoryForm', {category})
+            }
           />
         </Footer>
       </ScreenWrapper>

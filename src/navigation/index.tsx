@@ -28,7 +28,6 @@ import More from '@pages/logged-screens/More';
 //import Calendar from '@pages/logged-screens/Calendar';
 import CategorySearch from '@pages/logged-screens/CategorySearch';
 import CategoryList from '@pages/logged-screens/CategoryList';
-import CategoryForm from '@pages/logged-screens/CategoryForm';
 import CategoryDetails from '@pages/logged-screens/CategoryDetails';
 import ChangeNameForm from '@pages/logged-screens/ChangeNameForm';
 import ChangeThemeForm from '@pages/logged-screens/ChangeThemeForm';
@@ -39,6 +38,8 @@ import PrivacyPolicy from '@pages/account/PrivacyPolicy';
 import About from '@pages/logged-screens/About';
 import CreateTaskForm from '@/pages/logged-screens/CreateTaskForm';
 import UpdateTaskForm from '@/pages/logged-screens/UpdateTaskForm';
+import CreateCategoryForm from '@/pages/logged-screens/CreateCategoryForm';
+import UpdateCategoryForm from '@/pages/logged-screens/UpdateCategoryForm';
 
 import BottonTabNavigator from './BottonTabNavigator';
 import {verifyIfUserIsLogged} from '@store/account/user/thunkActions';
@@ -157,9 +158,12 @@ const App = () => {
           />
           <AuthenticatedStack.Screen name="About" component={About} />
           <AuthenticatedStack.Screen
-            name="CategoryForm"
-            component={CategoryForm}
-            initialParams={{}}
+            name="CreateCategoryForm"
+            component={CreateCategoryForm}
+          />
+          <AuthenticatedStack.Screen
+            name="UpdateCategoryForm"
+            component={UpdateCategoryForm}
           />
           <AuthenticatedStack.Screen
             name="CategoryDetails"

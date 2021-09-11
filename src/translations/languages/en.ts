@@ -58,6 +58,7 @@ export default {
     "Don't worry, your data can be change in the future",
   [tKeys.FINISH_REGISTRATION]: 'Finish Registration',
   [tKeys.CREATE_CATEGORY]: 'Create Category',
+  [tKeys.EDIT_CATEGORY]: 'Edit Category',
   [tKeys.NAME]: 'Name',
   [tKeys.SELECT_COLOR]: 'Select Color',
   [tKeys.SELECT_ICON]: 'Select Icon',

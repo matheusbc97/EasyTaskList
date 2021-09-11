@@ -1,10 +1,11 @@
-import React, {useRef, useMemo} from 'react';
+import React, {useRef} from 'react';
 
 import {
   AnimatedBackground,
   Center,
   FormContainer,
   Header,
+  RoundedSaveButton,
 } from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 import CategoryForm, {
@@ -12,47 +13,42 @@ import CategoryForm, {
   CategoryFormHandles,
 } from '@/templates/CategoryForm';
 
-import {SaveButton} from './styles';
 import {Props} from './types';
 import useHandleSubmit from './hooks/useHandleSubmit';
+import {Category} from '@shared/models';
+
+const getInitialData = (category: Category) => {
+  const initialData: FormObject = {
+    name: category.name,
+    colorIndex: category.colorIndex,
+    iconIndex: category.iconIndex,
+  };
+
+  return initialData;
+};
 
 const CategoryFormScreen: React.FC<Props> = ({route}) => {
   const {translation} = useTranslation();
-  const category = route.params?.category;
+  const category = route.params.category;
 
   const formRef = useRef<CategoryFormHandles>(null);
 
   const handleFormSubmit = useHandleSubmit(category);
 
-  const initialData = useMemo<undefined | FormObject>(() => {
-    if (!category) {
-      return undefined;
-    }
-
-    const _initialData: FormObject = {
-      name: category.name,
-      colorIndex: category.colorIndex,
-      iconIndex: category.iconIndex,
-    };
-
-    return _initialData;
-  }, [category]);
+  const initialData = getInitialData(category);
 
   return (
     <AnimatedBackground>
       <Center>
         <FormContainer>
-          <Header type="secondary" title={translation('CREATE_CATEGORY')} />
+          <Header type="secondary" title={translation('EDIT_CATEGORY')} />
 
           <CategoryForm
             ref={formRef}
             onSubmitSuccess={form => handleFormSubmit(form)}
             initialValues={initialData}
           />
-          <SaveButton
-            text={translation('SAVE')}
-            onPress={() => formRef.current?.submitForm()}
-          />
+          <RoundedSaveButton onPress={() => formRef.current?.submitForm()} />
         </FormContainer>
       </Center>
     </AnimatedBackground>

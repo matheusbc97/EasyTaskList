@@ -11,11 +11,6 @@ export type UnauthenticatedStackParams = {
 
 export type AuthenticatedStackParams = {
   BottomNavigation: undefined;
-  TaskForm:
-    | undefined
-    | {
-        task?: Task;
-      };
   CreateTaskForm: undefined;
   UpdateTaskForm: {
     task: Task;
@@ -23,11 +18,10 @@ export type AuthenticatedStackParams = {
   CategorySearch: {
     onCategoryChange: (category: Category) => void;
   };
-  CategoryForm:
-    | {
-        category?: Category;
-      }
-    | undefined;
+  CreateCategoryForm: undefined;
+  UpdateCategoryForm: {
+    category: Category;
+  };
   CategoryDetails: {
     category: Category;
   };
