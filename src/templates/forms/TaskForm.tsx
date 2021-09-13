@@ -1,7 +1,6 @@
-import React, {useRef, useImperativeHandle, forwardRef} from 'react';
+import React, {useRef, forwardRef} from 'react';
 
 import {Form} from '@unform/mobile';
-import {FormHandles} from '@unform/core';
 
 import {
   DateInput,
@@ -10,9 +9,11 @@ import {
   DescriptionInput,
   TitleInput,
 } from '@shared/components';
-import {useValidateField} from '@shared/hooks';
+import {useValidateField, useFormHandles} from '@shared/hooks';
 import {Category} from '@shared/models';
 import {validateAll} from '@shared/utils/validations';
+
+import {FunctionalFormComponent, FormProps} from '@/shared/models';
 
 interface UnFormObject {
   title: string;
@@ -30,20 +31,13 @@ export interface FormObject {
   category: Category;
 }
 
-interface TaskFormProps {
-  onSubmitSuccess: (form: FormObject) => void;
-  initialValues?: Partial<FormObject>;
-}
+interface TaskFormProps extends FormProps<FormObject> {}
 
-export interface TaskFormHandles {
-  submitForm: () => void;
-}
-
-const TaskForm: React.ForwardRefRenderFunction<
-  TaskFormHandles,
-  TaskFormProps
-> = ({onSubmitSuccess, initialValues: initialValuesProp}, ref) => {
-  const formRef = useRef<FormHandles>(null);
+const TaskFormTemplate: FunctionalFormComponent<TaskFormProps> = (
+  {onSubmitSuccess, initialValues: initialValuesProp},
+  ref,
+) => {
+  const formRef = useFormHandles(ref);
 
   let chosenCategory: Category | null | undefined = useRef(
     initialValuesProp?.category,
@@ -61,16 +55,6 @@ const TaskForm: React.ForwardRefRenderFunction<
     ...initialValuesProp,
     category: initialValuesProp?.category?.name,
   }).current;
-
-  useImperativeHandle(
-    ref,
-    () => ({
-      submitForm: () => {
-        formRef.current?.submitForm();
-      },
-    }),
-    [formRef],
-  );
 
   const validateField = useValidateField(formRef);
 
@@ -114,4 +98,4 @@ const TaskForm: React.ForwardRefRenderFunction<
   );
 };
 
-export default forwardRef(TaskForm);
+export default forwardRef(TaskFormTemplate);

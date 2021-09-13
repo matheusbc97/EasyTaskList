@@ -9,6 +9,8 @@ const getErrorMessage = (code: string) => {
       return 'Usuário não encontrado';
     case 'auth/email-already-exists':
       return 'O email já existe';
+    case 'auth/email-already-in-use':
+      return 'O email já está sendo utilizado';
     case 'auth/invalid-email':
       return 'email inválido';
     case 'auth/invalid-password':

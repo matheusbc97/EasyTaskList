@@ -7,6 +7,9 @@ import {Task} from './Task';
 import {Category} from './Category';
 import {AboutItem} from './AboutItem';
 import {FetchState} from './FetchState';
+import {FormHandles} from './FormHandles';
+import {FunctionalFormComponent} from './FunctionalFormComponent';
+import {FormProps} from './FormProps';
 
 export type {
   AppTheme,
@@ -18,4 +21,7 @@ export type {
   Category,
   AboutItem,
   FetchState,
+  FormHandles,
+  FunctionalFormComponent,
+  FormProps,
 };

@@ -8,7 +8,9 @@ import {
   RoundedSaveButton,
 } from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
-import CategoryForm, {CategoryFormHandles} from '@/templates/CategoryForm';
+import CategoryForm, {
+  CategoryFormHandles,
+} from '@/templates/forms/CategoryForm';
 
 import {Props} from './types';
 import useHandleSubmit from './hooks/useHandleSubmit';

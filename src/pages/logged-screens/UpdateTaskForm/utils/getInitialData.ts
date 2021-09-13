@@ -1,6 +1,6 @@
 import {Task} from '@shared/models';
 import convertMillisecondsToDate from '@shared/utils/convertMillisecondsToDate';
-import {FormObject} from '@/templates/TaskForm';
+import {FormObject} from '@/templates/forms/TaskForm';
 
 const getInitialData = (task: Task) => {
   const _initialData: FormObject = {

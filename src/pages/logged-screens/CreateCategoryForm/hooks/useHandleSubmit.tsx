@@ -3,7 +3,7 @@ import {Category} from '@shared/models';
 import {createCategory} from '@store/categories';
 import {useDispatch} from 'react-redux';
 
-import {FormObject} from '@/templates/CategoryForm';
+import {FormObject} from '@/templates/forms/CategoryForm';
 
 const useHandleSubmit = () => {
   const dispatch = useDispatch();

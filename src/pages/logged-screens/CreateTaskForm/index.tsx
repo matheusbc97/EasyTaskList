@@ -8,13 +8,14 @@ import {
   Center,
 } from '@shared/components';
 import {useTranslation} from '@shared/hooks';
-import TaskFormTemplate, {TaskFormHandles} from '@/templates/TaskForm';
+import TaskFormTemplate from '@/templates/forms/TaskForm';
+import {FormHandles} from '@/shared/models';
 
 import useHandleSubmit from './hooks/useHandleSubmit';
 import {Props} from './types';
 
 const TaskForm: React.FC<Props> = () => {
-  const formRef = useRef<TaskFormHandles>(null);
+  const formRef = useRef<FormHandles>(null);
 
   const {translation} = useTranslation();
 

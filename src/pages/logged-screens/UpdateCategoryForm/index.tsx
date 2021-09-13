@@ -11,7 +11,7 @@ import {useTranslation} from '@/shared/hooks';
 import CategoryForm, {
   FormObject,
   CategoryFormHandles,
-} from '@/templates/CategoryForm';
+} from '@/templates/forms/CategoryForm';
 
 import {Props} from './types';
 import useHandleSubmit from './hooks/useHandleSubmit';

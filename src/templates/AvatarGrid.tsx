@@ -1,9 +1,10 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import Avatar from '@shared/components/Avatar';
+
+import Avatar from '@/shared/components/Avatar';
 
 interface Props {
-  onAvatarPress(arg0: number): void;
+  onAvatarPress(avatarIndex: number): void;
 }
 
 const AvatarList: React.FC<Props> = ({onAvatarPress}) => {

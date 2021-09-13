@@ -1,18 +1,18 @@
-import React, {useImperativeHandle, useRef, useState, forwardRef} from 'react';
+import React, {useRef, useState, forwardRef} from 'react';
 import styled from 'styled-components/native';
 import {RectButton} from 'react-native-gesture-handler';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import {Form} from '@unform/mobile';
-import {FormHandles} from '@unform/core';
 
 import categoryIconNames from '@/assets/categoryIconNames';
 import {Text, UnformInput as TextInput} from '@/shared/components';
-import {useTranslation, useValidateField} from '@/shared/hooks';
+import {useFormHandles, useTranslation, useValidateField} from '@/shared/hooks';
 import {validateAll} from '@/shared/utils/validations';
 import {showToast} from '@/shared/components/Toast';
 import ChooseCategoryColorModal from '@/shared/components/ChooseCategoryColorModal';
 import ChooseCategoryIconModal from '@/shared/components/ChooseCategoryIconModal';
 import CategoryColorBox from '@/shared/components/CategoryColorBox';
+import {FunctionalFormComponent, FormProps, FormHandles} from '@shared/models';
 
 const ColorAndIconContainer = styled.View`
   flex-direction: row;
@@ -48,37 +48,23 @@ interface UnFormObject {
   name: string;
 }
 
-export interface CategoryFormHandles {
-  submitForm: () => void;
-}
+export interface CategoryFormHandles extends FormHandles {}
 
-interface CategoryFormProps {
-  initialValues?: Partial<FormObject>;
-  onSubmitSuccess: (form: FormObject) => void;
-}
+interface CategoryFormProps extends FormProps<FormObject> {}
 
-const CategoryForm: React.ForwardRefRenderFunction<
-  CategoryFormHandles,
-  CategoryFormProps
-> = ({initialValues: initialValuesProp, onSubmitSuccess}, ref) => {
-  const formRef = useRef<FormHandles>(null);
+const CategoryForm: FunctionalFormComponent<CategoryFormProps> = (
+  {initialValues: initialValuesProp, onSubmitSuccess},
+  ref,
+) => {
+  const formRef = useFormHandles(ref);
   const {translation} = useTranslation();
   const validateField = useValidateField(formRef);
+
   const [selectedColorIndex, setSelectedColorIndex] = useState(
     initialValuesProp?.colorIndex ?? -1,
   );
   const [iconIndex, setIconIndex] = useState(
     initialValuesProp?.iconIndex ?? -1,
-  );
-
-  useImperativeHandle(
-    ref,
-    () => ({
-      submitForm: () => {
-        formRef.current?.submitForm();
-      },
-    }),
-    [formRef],
   );
 
   const initialValues = useRef<Partial<UnFormObject>>({

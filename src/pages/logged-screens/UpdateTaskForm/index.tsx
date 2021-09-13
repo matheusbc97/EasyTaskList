@@ -12,7 +12,9 @@ import {useTranslation} from '@shared/hooks';
 import useHandleSubmit from './hooks/useHandleSubmit';
 import getInitialData from './utils/getInitialData';
 import {Props} from './types';
-import TaskFormTemplate, {TaskFormHandles} from '../../../templates/TaskForm';
+import TaskFormTemplate, {
+  TaskFormHandles,
+} from '../../../templates/forms/TaskForm';
 
 const UpdateTaskForm: React.FC<Props> = ({route}) => {
   const {task} = route.params;

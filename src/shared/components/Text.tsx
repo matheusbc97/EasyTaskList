@@ -1,5 +1,9 @@
 import React, {PropsWithChildren, useCallback} from 'react';
-import {Text as RNText, TextProps as RNTextProps} from 'react-native';
+import {
+  Text as RNText,
+  TextProps as RNTextProps,
+  TextStyle,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import {selectAppTheme} from '../../store/configs';
@@ -17,6 +21,7 @@ export interface TextProps extends RNTextProps, PropsWithChildren<Text> {
   type?: TextTypes;
   primaryColor?: boolean;
   secondaryColor?: boolean;
+  centerText?: boolean;
 }
 
 const Text = ({
@@ -25,6 +30,7 @@ const Text = ({
   type = 'body',
   primaryColor = false,
   secondaryColor = false,
+  centerText = false,
 }: TextProps) => {
   const theme = useSelector(selectAppTheme);
 
@@ -44,50 +50,66 @@ const Text = ({
   );
 
   const getStyle: any = useCallback(() => {
+    let textStyle: TextStyle = {};
+
     switch (type) {
       case 'title':
-        return {
+        textStyle = {
           color: getColor(theme.textColor),
           fontWeight: 'bold',
         };
+        break;
       case 'title-medium':
-        return {
+        textStyle = {
           color: getColor(theme.textColor),
           fontWeight: 'bold',
           fontSize: 18,
         };
+        break;
       case 'title-big':
-        return {
+        textStyle = {
           color: getColor(theme.textColor),
           fontWeight: 'bold',
           fontSize: 21,
         };
+        break;
       case 'title-grey':
-        return {
+        textStyle = {
           color: getColor(theme.secondaryTextColor),
           fontWeight: 'bold',
         };
+        break;
       case 'title-inverse':
-        return {
+        textStyle = {
           color: getColor(theme.aboveBackground),
           fontWeight: 'bold',
         };
+        break;
       case 'subtitle':
-        return {
+        textStyle = {
           color: getColor(theme.secondaryTextColor),
           fontSize: 16,
         };
+        break;
       case 'body': {
-        return {
+        textStyle = {
           color: getColor(theme.textColor),
         };
+        break;
       }
       default:
-        return {
+        textStyle = {
           color: getColor(theme.textColor),
         };
+        break;
     }
-  }, [theme, type, getColor]);
+
+    if (centerText) {
+      textStyle.textAlign = 'center';
+    }
+
+    return textStyle;
+  }, [theme, type, getColor, centerText]);
 
   return <RNText style={[getStyle(), style]}>{children}</RNText>;
 };

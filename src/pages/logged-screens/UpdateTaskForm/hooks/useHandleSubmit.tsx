@@ -2,7 +2,7 @@ import useUpdateTask from '@/hooks/useUpdateTask';
 import {Task} from '@shared/models';
 import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
 
-import {FormObject} from '@/templates/TaskForm';
+import {FormObject} from '@/templates/forms/TaskForm';
 
 interface Params {
   task: Task;

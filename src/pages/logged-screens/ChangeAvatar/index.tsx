@@ -8,16 +8,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
   AnimatedBackground,
   Avatar,
-  AvatarList,
   BackButton,
   Text,
   Center,
   FormContainer,
 } from '@shared/components';
+import AvatarList from '@/templates/AvatarGrid';
 import {selectUser, updateUser} from '@store/account/user';
 import {showToast} from '@shared/components/Toast';
 
-import {Content, Header, AvatarListContainer} from './styles';
+import {Header, AvatarListContainer} from './styles';
 import {useTranslation} from '@/shared/hooks';
 
 interface Props {
@@ -60,7 +60,7 @@ function ChangeAvatar({navigation}: Props) {
             />
             <Avatar avatarNumber={user?.avatar} size={80} />
           </Header>
-          <Text type="title-medium" style={{textAlign: 'center'}}>
+          <Text type="title-medium" centerText>
             {translation('SELECT_ONE_AVATAR_TO_CHANGE')}
           </Text>
           <AvatarListContainer>

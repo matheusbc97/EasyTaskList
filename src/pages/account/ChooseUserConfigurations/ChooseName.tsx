@@ -1,49 +1,27 @@
 import React, {useRef} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {FormHandles} from '@unform/core';
-import {Form} from '@unform/mobile';
 import {useSelector} from 'react-redux';
 
-import {
-  UnformInput as TextInput,
-  RoundedButton,
-  Text,
-  BackButton,
-} from '@shared/components';
-import {validateAll} from '@shared/utils/validations';
+import {RoundedButton, Text, BackButton} from '@shared/components';
 import {selectUserName} from '@store/account/user';
-import {useTranslation, useValidateField} from '@/shared/hooks';
+import {useTranslation} from '@/shared/hooks';
+import NameForm from '@/templates/forms/NameForm';
 
 interface Props {
   onAdvancePress(name: string): void;
   onBackPress?(): void;
   showBackButton?: boolean;
-  advanceButtonText?: string;
 }
-
-type FormDetails = {
-  name: string;
-};
 
 const ChooseName: React.FC<Props> = ({
   onAdvancePress,
   onBackPress,
   showBackButton = true,
-  advanceButtonText,
 }) => {
   const {translation} = useTranslation();
   const userName = useSelector(selectUserName);
   const formRef = useRef<FormHandles>(null);
-  const validateField = useValidateField(formRef);
-
-  const handleSubmit = (form: FormDetails) => {
-    const [errors, isValid] = validateAll(form);
-
-    formRef.current?.setErrors(errors);
-    if (isValid) {
-      onAdvancePress(form.name);
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -53,20 +31,14 @@ const ChooseName: React.FC<Props> = ({
         style={[styles.text, {marginTop: showBackButton ? 0 : 35}]}>
         {translation('TELL_US_YOUR_NAME')}
       </Text>
-      <Form
-        style={{width: '100%'}}
+      <NameForm
         ref={formRef}
-        onSubmit={handleSubmit}
-        initialData={{name: userName}}>
-        <TextInput
-          label="Nome"
-          name="name"
-          validateField={validateField}
-          containerStyle={styles.input}
-        />
-      </Form>
+        initialValues={{name: userName}}
+        onSubmitSuccess={form => onAdvancePress(form.name)}
+      />
+
       <RoundedButton
-        text={advanceButtonText ?? 'AVANÇAR'}
+        text={translation('ADVANCE')}
         onPress={() => formRef.current?.submitForm()}
         style={styles.button}
       />

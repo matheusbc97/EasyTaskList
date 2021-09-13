@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import {Text, Avatar, BackButton} from '@shared/components';
+import {Text, BackButton} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
+import AvatarGrid from '@/templates/AvatarGrid';
 
 interface Props {
   onBackPress(): void;
@@ -24,18 +25,7 @@ const ChoosePhotoOrAvatar: React.FC<Props> = ({
         {translation('CHOOSE_ONE_OF_OUR_AVATARS')}
       </Text>
       <View style={styles.content}>
-        <View style={styles.row}>
-          <Avatar avatarNumber={0} onPress={() => onAvatarPress(0)} />
-          <Avatar avatarNumber={1} onPress={() => onAvatarPress(1)} />
-          <Avatar avatarNumber={2} onPress={() => onAvatarPress(2)} />
-          <Avatar avatarNumber={3} onPress={() => onAvatarPress(3)} />
-        </View>
-        <View style={styles.row}>
-          <Avatar avatarNumber={4} onPress={() => onAvatarPress(4)} />
-          <Avatar avatarNumber={5} onPress={() => onAvatarPress(5)} />
-          <Avatar avatarNumber={6} onPress={() => onAvatarPress(6)} />
-          <Avatar avatarNumber={7} onPress={() => onAvatarPress(7)} />
-        </View>
+        <AvatarGrid onAvatarPress={onAvatarPress} />
       </View>
       <Text type="title-medium" style={{textAlign: 'center'}}>
         {translation('YOUR_DATA_CAN_BE_CHANGE_FUTURELY')}

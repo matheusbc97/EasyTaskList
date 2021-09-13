@@ -1,6 +1,6 @@
 import useCreateNewTask from '@/hooks/useCreateNewTask';
 
-import {FormObject} from '@/templates/TaskForm';
+import {FormObject} from '@/templates/forms/TaskForm';
 
 import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
 

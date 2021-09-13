@@ -12,7 +12,6 @@ import LoadingIndicator from './LoadingIndicator';
 import ErrorMessage from './ErrorMessage';
 import Avatar from './Avatar';
 import TaskListItem from './TaskListItem';
-import TwoDimensionalTaskList from './TwoDimensionalTaskList';
 import Header from './Header';
 import OutlineButton from './OutlineButton';
 import AnimatedBackground from './AnimatedBackground';
@@ -23,7 +22,6 @@ import FloatingActionButton from './FloatingActionButton';
 import TextButton, {TextButtonProps} from './TextButton';
 import BackButton from './BackButton';
 import AnimatedBackgroundContent from './AnimatedBackgroundContent';
-import AvatarList from './AvatarList';
 import EmailInput from './EmailInput';
 import ConfirmNewPasswordInput from './ConfirmNewPasswordInput';
 import NewPasswordInput from './NewPasswordInput';
@@ -37,6 +35,7 @@ import DescriptionInput from './DescriptionInput';
 import TitleInput from './TitleInput';
 import RoundedSaveButton from './RoundedSaveButton';
 import Center from './Center';
+import NameInput from './NameInput';
 
 export {
   Avatar,
@@ -51,7 +50,6 @@ export {
   ErrorMessage,
   UnformInput,
   TaskListItem,
-  TwoDimensionalTaskList,
   Header,
   OutlineButton,
   AnimatedBackground,
@@ -62,7 +60,6 @@ export {
   TextButton,
   BackButton,
   AnimatedBackgroundContent,
-  AvatarList,
   EmailInput,
   ConfirmNewPasswordInput,
   NewPasswordInput,
@@ -76,6 +73,7 @@ export {
   TitleInput,
   RoundedSaveButton,
   Center,
+  NameInput,
 };
 
 export type {TextButtonProps, TextProps, FlatListWithFetchIndicatorProps};
