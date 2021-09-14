@@ -5,6 +5,7 @@ import {Text} from '@shared/components';
 
 export const FormWrapper = styled.View`
   padding: 10px 10px 0 10px;
+  align-items: center;
 `;
 
 export const Title = styled(Text)`
@@ -19,13 +20,6 @@ export const Scroll = styled(ScrollView).attrs({
     flexGrow: 1,
   },
 })``;
-
-export const FormFooter = styled.View`
-  width: 100%;
-  align-items: center;
-  margin-bottom: 5px;
-  margin-top: 10px;
-`;
 
 export const Shadow = styled.View`
   width: 100%;

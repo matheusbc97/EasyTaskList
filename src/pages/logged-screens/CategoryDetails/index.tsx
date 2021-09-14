@@ -17,10 +17,10 @@ import {
   selectTasksFetchState,
   selectTaskOfCategory,
 } from '@store/tasks';
-
-import {Content, Footer} from './styles';
 import TaskDetailsModal from '@shared/modals/TaskDetailsModal';
 import {Task} from '@shared/models';
+
+import {Content, Footer} from './styles';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryDetails'>;

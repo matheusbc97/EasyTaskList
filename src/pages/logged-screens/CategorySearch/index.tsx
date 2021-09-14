@@ -1,23 +1,21 @@
 import React, {useState, useEffect, useCallback, useRef} from 'react';
+import {TextInput} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 
 import {AuthenticatedStackParams} from '@navigation/types';
 import {ScreenWrapper, Header} from '@shared/components';
+import {Category} from '@shared/models';
 import {
   selectCategoriesFetchState,
   getUserCategories,
   categoryListSelectors,
 } from '@store/categories';
-import {Category} from '@shared/models';
+import {selectAppTheme} from '@store/configs';
 
 import CategorySearchListItem from './CategorySearchListItem';
-
 import {SearchInput, SearchList, Container} from './styles';
-import {selectAppTheme} from '@store/configs';
-import {TextInput} from 'react-native';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategorySearch'>;
