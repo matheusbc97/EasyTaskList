@@ -23,6 +23,7 @@ const FormContainer: React.FC<FormContainerProps> = ({
           borderRadius: 30,
           elevation: 3,
           height,
+          maxHeight: '85%',
           justifyContent: spaceBetween ? 'space-between' : 'flex-start',
         },
         style,

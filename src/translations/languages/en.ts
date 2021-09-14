@@ -65,4 +65,5 @@ export default {
   [tKeys.REQUIRED_COLOR]: 'Required Color',
   [tKeys.REQUIRED_ICON]: 'Required Icon',
   [tKeys.CANCEL]: 'Cancel',
+  [tKeys.RECOVER_PASSWORD]: 'Recover Password',
 };

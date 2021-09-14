@@ -1,11 +1,9 @@
 import React, {useRef} from 'react';
 
 import {
-  AnimatedBackground,
-  Center,
-  FormContainer,
   Header,
   RoundedSaveButton,
+  FormScreenWrapper,
 } from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 import CategoryForm, {
@@ -23,19 +21,15 @@ const CategoryFormScreen: React.FC<Props> = ({}) => {
   const handleFormSubmit = useHandleSubmit();
 
   return (
-    <AnimatedBackground>
-      <Center>
-        <FormContainer>
-          <Header type="secondary" title={translation('CREATE_CATEGORY')} />
+    <FormScreenWrapper>
+      <Header type="secondary" title={translation('CREATE_CATEGORY')} />
 
-          <CategoryForm
-            ref={formRef}
-            onSubmitSuccess={form => handleFormSubmit(form)}
-          />
-          <RoundedSaveButton onPress={() => formRef.current?.submitForm()} />
-        </FormContainer>
-      </Center>
-    </AnimatedBackground>
+      <CategoryForm
+        ref={formRef}
+        onSubmitSuccess={form => handleFormSubmit(form)}
+      />
+      <RoundedSaveButton onPress={() => formRef.current?.submitForm()} />
+    </FormScreenWrapper>
   );
 };
 
