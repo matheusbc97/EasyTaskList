@@ -1,20 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {View, FlatList} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {ScreenWrapper, OutlineButton} from '@shared/components';
-import {useTranslation} from '@shared/hooks';
-import {AuthenticatedStackParams} from '@navigation/types';
-import TaskDetailsModal from '@shared/modals/TaskDetailsModal';
-import {Task} from '@shared/models';
+import {ScreenWrapper, CreateNewTaskButton} from '@shared/components';
+import {useTranslation} from '@/shared/hooks';
+import {AuthenticatedStackParams} from '@/navigation/types';
+import TaskDetailsModal, {
+  TaskDetailsModalHandles,
+} from '@shared/modals/TaskDetailsModal';
 import useGetUser from '@/hooks/useGetUser';
-import useTaskNotDone from '@hooks/useTaskNotDone';
-import useCategories from '@hooks/useCategories';
+import useTaskNotDone from '@/hooks/useTaskNotDone';
+import useCategories from '@/hooks/useCategories';
 import useFetchTasks from '@/hooks/useFetchTasks';
+import TasksList from '@/templates/lists/TaskList';
 
 import CategoriesList from './templates/CategoriesList';
-import TasksList from './templates/TasksList';
 import HomeHeader from './components/HomeHeader';
+import HomeSection from './components/HomeSection';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -40,6 +42,7 @@ const HomeListData = [
 
 const Home: React.FC<Props> = ({navigation}) => {
   const {translation} = useTranslation();
+  const taskModalRef = useRef<TaskDetailsModalHandles>(null);
 
   const user = useGetUser();
   const {lsCategories, lsCategoriesFetchState} = useCategories();
@@ -50,24 +53,6 @@ const Home: React.FC<Props> = ({navigation}) => {
   useEffect(() => {
     fetchTasks();
   }, [fetchTasks]);
-
-  const [taskSelected, setTaskSelected] = useState<Task | null>(null);
-
-  const navigateToTaskForm = (task: Task) => {
-    const navigationOptions = {
-      task: {
-        ...task,
-      },
-    };
-    navigation.navigate('UpdateTaskForm', navigationOptions);
-  };
-
-  const handleTaskDetailsModalEditButtonPress = () => {
-    if (taskSelected) {
-      setTaskSelected(null);
-      navigateToTaskForm(taskSelected);
-    }
-  };
 
   return (
     <ScreenWrapper>
@@ -90,11 +75,13 @@ const Home: React.FC<Props> = ({navigation}) => {
               );
             case HomeItemEnum.TASK_LIST:
               return (
-                <TasksList
-                  tasks={tasksNotDone}
-                  tasksFetchState={tasksFetchState}
-                  onTaskPress={task => setTaskSelected(task)}
-                />
+                <HomeSection title={translation('TASKS_NOT_DONE')}>
+                  <TasksList
+                    tasks={tasksNotDone}
+                    tasksFetchState={tasksFetchState}
+                    onTaskPress={task => taskModalRef.current?.open(task)}
+                  />
+                </HomeSection>
               );
             default:
               return null;
@@ -102,17 +89,9 @@ const Home: React.FC<Props> = ({navigation}) => {
         }}
       />
       <View style={{paddingVertical: 5, paddingHorizontal: 20}}>
-        <OutlineButton
-          iconName="plus"
-          text={translation('CREATE_NEW_TASK')}
-          onPress={() => navigation.navigate('CreateTaskForm')}
-        />
+        <CreateNewTaskButton />
       </View>
-      <TaskDetailsModal
-        onEditButtonPress={handleTaskDetailsModalEditButtonPress}
-        task={taskSelected}
-        onBackButtonPress={() => setTaskSelected(null)}
-      />
+      <TaskDetailsModal ref={taskModalRef} onBackButtonPress={() => {}} />
     </ScreenWrapper>
   );
 };

@@ -1,15 +1,24 @@
-import React, {useCallback} from 'react';
+import React, {
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  ForwardRefRenderFunction,
+} from 'react';
 import {View} from 'react-native';
-
 import Modal from 'react-native-modal';
 import {useSelector, useDispatch} from 'react-redux';
 import {Checkbox} from 'react-native-paper';
 import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
+import {useCategoryColor, useFormatDate} from '@shared/hooks';
+import {useNavigation} from '@react-navigation/native';
+
 import {Text} from '@shared/components';
 import {Task} from '@shared/models';
-import {useCategoryColor, useFormatDate} from '@shared/hooks';
+import {selectAppTheme} from '@store/configs';
+import {updateTaskStatus} from '@store/tasks/thunkActions';
+import categoryIconNames from '@assets/categoryIconNames';
 
 import {
   Container,
@@ -19,71 +28,89 @@ import {
   Footer,
   FooterButton,
 } from './styles';
-import {selectAppTheme} from '@store/configs';
-import {updateTaskStatus} from '@store/tasks/thunkActions';
-import categoryIconNames from '@assets/categoryIconNames';
 
-interface Props {
-  isVisible?: boolean;
-  task: Task | null;
-  onBackButtonPress(): void;
-  onEditButtonPress(): void;
+export interface TaskDetailsModalHandles {
+  open: (task: Task) => void;
 }
 
-const TaskDetailsModal: React.FC<Props> = ({
-  isVisible = true,
-  task,
-  onBackButtonPress,
-  onEditButtonPress,
-}) => {
-  const color = useCategoryColor(task?.category);
+const TaskDetailsModal: ForwardRefRenderFunction<TaskDetailsModalHandles> = (
+  {},
+  ref,
+) => {
+  const [taskSelected, setTaskSelected] = useState<Task | null>(null);
+
+  useImperativeHandle(ref, () => ({
+    open: task => {
+      setTaskSelected(task);
+    },
+  }));
+
+  const color = useCategoryColor(taskSelected?.category);
   const {primaryColor} = useSelector(selectAppTheme);
   const dispatch = useDispatch();
 
   const formatDate = useFormatDate();
 
-  const handleMarkAsDonePress = useCallback(() => {
-    onBackButtonPress();
-    dispatch(updateTaskStatus({id: task!.id, done: !task?.done}));
-  }, [dispatch, onBackButtonPress, task]);
+  const resetSelectedTask = () => {
+    setTaskSelected(null);
+  };
+
+  const handleMarkAsDonePress = () => {
+    resetSelectedTask();
+    dispatch(
+      updateTaskStatus({id: taskSelected!.id, done: !taskSelected?.done}),
+    );
+  };
+
+  const navigation = useNavigation();
+
+  const navigateToTaskForm = () => {
+    resetSelectedTask();
+    const navigationOptions = {
+      task: {
+        ...taskSelected,
+      },
+    };
+    navigation.navigate('UpdateTaskForm', navigationOptions);
+  };
 
   return (
-    <Modal
-      isVisible={isVisible && !!task}
-      onBackButtonPress={onBackButtonPress}>
+    <Modal isVisible={!!taskSelected} onBackButtonPress={resetSelectedTask}>
       <Container>
         <Text type="title-big" primaryColor>
-          {task?.title}
+          {taskSelected?.title}
         </Text>
 
-        {task?.date && (
-          <Text type="subtitle">{formatDate(task?.date, 'dateAndTime')}</Text>
+        {taskSelected?.date && (
+          <Text type="subtitle">
+            {formatDate(taskSelected?.date, 'dateAndTime')}
+          </Text>
         )}
 
         <CategoryContainer>
           <IconContainer backgroundColor={color}>
             <FontAwesomeIcon5
-              name={categoryIconNames[task?.category?.iconIndex]}
+              name={categoryIconNames[taskSelected?.category?.iconIndex]}
               size={25}
               color="#FFF"
               style={{marginLeft: 5}}
             />
           </IconContainer>
           <View style={{marginLeft: 10}}>
-            <Text type="title-medium">{task?.category?.name}</Text>
+            <Text type="title-medium">{taskSelected?.category?.name}</Text>
             <Text>Categoria</Text>
           </View>
         </CategoryContainer>
 
-        <Text>{task?.description}</Text>
+        <Text>{taskSelected?.description}</Text>
 
         <DoneCheckButton onPress={handleMarkAsDonePress}>
-          <Checkbox status={task?.done ? 'checked' : 'unchecked'} />
-          <Text>{task?.done ? 'Feito' : 'Não feito'}</Text>
+          <Checkbox status={taskSelected?.done ? 'checked' : 'unchecked'} />
+          <Text>{taskSelected?.done ? 'Feito' : 'Não feito'}</Text>
         </DoneCheckButton>
 
         <Footer>
-          <FooterButton onPress={onEditButtonPress}>
+          <FooterButton onPress={navigateToTaskForm}>
             <Text type="title" primaryColor>
               EDITAR
             </Text>
@@ -94,7 +121,7 @@ const TaskDetailsModal: React.FC<Props> = ({
               color={primaryColor}
             />
           </FooterButton>
-          <FooterButton onPress={onBackButtonPress}>
+          <FooterButton onPress={resetSelectedTask}>
             <Text>FECHAR</Text>
           </FooterButton>
         </Footer>
@@ -103,4 +130,4 @@ const TaskDetailsModal: React.FC<Props> = ({
   );
 };
 
-export default TaskDetailsModal;
+export default forwardRef(TaskDetailsModal);

@@ -4,7 +4,7 @@ export interface Task {
   id: string;
   title: string;
   description: string;
-  date: number;
+  date: string;
   category: Category | undefined;
   done: boolean;
 }

@@ -39,6 +39,7 @@ import NameInput from './NameInput';
 import FormScreenWrapper from './FormScreenWrapper';
 import ShowFallbackComponent from './ShowFallbackComponent';
 import LoadingFallback from './LoadingFallback';
+import CreateNewTaskButton from './CreateNewTaskButton';
 
 export {
   Avatar,
@@ -80,6 +81,7 @@ export {
   FormScreenWrapper,
   ShowFallbackComponent,
   LoadingFallback,
+  CreateNewTaskButton,
 };
 
 export type {TextButtonProps, TextProps, FlatListWithFetchIndicatorProps};

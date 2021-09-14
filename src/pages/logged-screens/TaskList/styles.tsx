@@ -26,7 +26,7 @@ interface BodyProps {
 export const Body = styled.View<BodyProps>`
   background-color: ${props => props.backgroundColor};
   margin: 10px;
-  padding: 0 5px 0 5px;
+  padding: 10px 5px 10px 5px;
   border-radius: 10px;
   flex: 1;
   ${shadowStyledComponents}
