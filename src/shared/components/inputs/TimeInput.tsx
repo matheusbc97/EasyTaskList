@@ -1,8 +1,8 @@
-import formatDate from '@shared/utils/fomatDate';
+import formatDate from '@/shared/utils/fomatDate';
 import React, {useRef, useState} from 'react';
 import TextInput from './UnformInput';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {useTranslation} from '@shared/hooks';
+import {useTranslation} from '@/shared/hooks';
 
 function TimeInput() {
   const {translation} = useTranslation();

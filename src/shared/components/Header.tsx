@@ -7,7 +7,7 @@ import {shadowStyledComponents} from '@/shared/styles';
 
 import {selectAppTheme} from '../../store/configs';
 import {Text} from '@shared/components';
-import BackButton from './BackButton';
+import BackButton from './buttons/BackButton';
 
 interface Props {
   title: string;

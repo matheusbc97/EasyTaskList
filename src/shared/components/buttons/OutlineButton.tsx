@@ -4,8 +4,8 @@ import {RectButton} from 'react-native-gesture-handler';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import {useSelector} from 'react-redux';
 
-import Text from './Text';
-import {selectAppTheme} from '../../store/configs';
+import Text from '../Text';
+import {selectAppTheme} from '@/store/configs';
 
 interface Props {
   text: string;

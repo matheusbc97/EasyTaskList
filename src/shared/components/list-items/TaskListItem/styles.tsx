@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import {RectButton} from 'react-native-gesture-handler';
-import Text from '../Text';
+import Text from '../../Text';
 
 export const ContainerButton = styled(RectButton)`
   height: 60px;
@@ -22,7 +22,7 @@ export const IconContainer = styled.View<IconContainerProps>`
   justify-content: center;
   align-items: center;
 
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${props => props.backgroundColor};
 `;
 
 interface BodyProps {
@@ -33,7 +33,7 @@ export const Body = styled.View<BodyProps>`
   border-width: 1px;
   flex: 1;
   height: 59.5px;
-  border-color: ${(props) => props.borderColor};
+  border-color: ${props => props.borderColor};
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   padding: 0 10px;
@@ -52,7 +52,7 @@ interface Separator {
 }
 
 export const Separator = styled.View<Separator>`
-  background-color: ${(props) => props.color};
+  background-color: ${props => props.color};
   width: 1px;
   height: 80%;
   margin: 0 8px;

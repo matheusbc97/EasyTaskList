@@ -9,10 +9,10 @@ import {View, TextInputProps, StyleSheet, ViewStyle} from 'react-native';
 import {useField} from '@unform/core';
 import TextInput from './TextInput';
 
-import {Text} from '.';
-import useOnChangeText from '../hooks/useOnChangeText';
-import {ValidateField} from '../models/ValidateField';
-import useMaskedOnChangeText from '../hooks/useMaskedOnChangeText';
+import {Text} from '..';
+import useOnChangeText from '../../hooks/useOnChangeText';
+import {ValidateField} from '../../models/ValidateField';
+import useMaskedOnChangeText from '../../hooks/useMaskedOnChangeText';
 
 export interface AppTextInputProps extends TextInputProps {
   label?: string;

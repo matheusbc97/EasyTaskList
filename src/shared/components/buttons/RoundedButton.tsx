@@ -4,9 +4,9 @@ import {TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {useSelector} from 'react-redux';
 
-import {selectAppTheme} from '../../store/configs';
+import {selectAppTheme} from '@/store/configs';
 
-import Text from './Text';
+import Text from '../Text';
 
 export interface RoundedButtonProps {
   text?: string | null;

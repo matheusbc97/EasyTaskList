@@ -20,7 +20,7 @@ import {
 import {useSelector} from 'react-redux';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-import {selectAppTheme} from '../../store/configs';
+import {selectAppTheme} from '../../../store/configs';
 import {TouchableRipple} from 'react-native-paper';
 
 const AnimatedFontAwesomeIcon = Animated.createAnimatedComponent(

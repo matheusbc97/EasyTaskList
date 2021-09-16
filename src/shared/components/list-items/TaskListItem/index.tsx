@@ -1,7 +1,7 @@
 import React from 'react';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
-import Text from '../Text';
+import Text from '../../Text';
 import useCategoryColor from '@shared/hooks/useCategoryColor';
 
 import {

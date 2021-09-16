@@ -1,9 +1,9 @@
-import RoundedButton from './RoundedButton';
+import RoundedButton from './buttons/RoundedButton';
 import ScreenWrapper from './ScreenWrapper';
 import Text, {TextProps} from './Text';
 import Shadow from './Shadow';
-import TextInput from './TextInput';
-import UnformInput from './UnformInput';
+import TextInput from './inputs/TextInput';
+import UnformInput from './inputs/UnformInput';
 import EmptyListText from './EmptyListText';
 import FlatListWithFetchIndicator, {
   FlatListWithFetchIndicatorProps,
@@ -11,35 +11,35 @@ import FlatListWithFetchIndicator, {
 import LoadingIndicator from './LoadingIndicator';
 import ErrorMessage from './ErrorMessage';
 import Avatar from './Avatar';
-import TaskListItem from './TaskListItem';
+import TaskListItem from './list-items/TaskListItem';
 import Header from './Header';
-import OutlineButton from './OutlineButton';
+import OutlineButton from './buttons/OutlineButton';
 import AnimatedBackground from './AnimatedBackground';
 import Toast from './Toast';
 import LoadingHandler from './LoadingHandler';
-import CategoryListItem from './CategoryListItem';
-import FloatingActionButton from './FloatingActionButton';
-import TextButton, {TextButtonProps} from './TextButton';
-import BackButton from './BackButton';
+import CategoryListItem from './list-items/CategoryListItem';
+import FloatingActionButton from './buttons/FloatingActionButton';
+import TextButton, {TextButtonProps} from './buttons/TextButton';
+import BackButton from './buttons/BackButton';
 import AnimatedBackgroundContent from './AnimatedBackgroundContent';
-import EmailInput from './EmailInput';
-import ConfirmNewPasswordInput from './ConfirmNewPasswordInput';
-import NewPasswordInput from './NewPasswordInput';
-import CheckInput from './CheckInput';
-import CheckInputWithButtonText from './CheckInputWithButtonText';
-import DateInput from './DateInput';
-import TimeInput from './TimeInput';
-import CategoryInput from './CategoryInput';
+import EmailInput from './inputs/EmailInput';
+import ConfirmNewPasswordInput from './inputs/ConfirmNewPasswordInput';
+import NewPasswordInput from './inputs/NewPasswordInput';
+import CheckInput from './inputs/CheckInput';
+import CheckInputWithButtonText from './inputs/CheckInputWithButtonText';
+import DateInput from './inputs/DateInput';
+import TimeInput from './inputs/TimeInput';
+import CategoryInput from './inputs/CategoryInput';
 import FormContainer from './FormContainer';
-import DescriptionInput from './DescriptionInput';
-import TitleInput from './TitleInput';
-import RoundedSaveButton from './RoundedSaveButton';
+import DescriptionInput from './inputs/DescriptionInput';
+import TitleInput from './inputs/TitleInput';
+import RoundedSaveButton from './buttons/RoundedSaveButton';
 import Center from './Center';
-import NameInput from './NameInput';
+import NameInput from './inputs/NameInput';
 import FormScreenWrapper from './FormScreenWrapper';
 import ShowFallbackComponent from './ShowFallbackComponent';
 import LoadingFallback from './LoadingFallback';
-import CreateNewTaskButton from './CreateNewTaskButton';
+import CreateNewTaskButton from './buttons/CreateNewTaskButton';
 import Separator from './Separator';
 
 export {
@@ -74,7 +74,6 @@ export {
   TimeInput,
   CategoryInput,
   FormContainer,
-  DescriptionInput,
   TitleInput,
   RoundedSaveButton,
   Center,
@@ -84,6 +83,7 @@ export {
   LoadingFallback,
   CreateNewTaskButton,
   Separator,
+  DescriptionInput,
 };
 
 export type {TextButtonProps, TextProps, FlatListWithFetchIndicatorProps};

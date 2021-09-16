@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 
-import TextButton from '@shared/components/TextButton';
+import TextButton from '@shared/components/buttons/TextButton';
 import CheckInput from './CheckInput';
 
 interface CheckInputWithButtonTextProps {
