@@ -1,4 +1,3 @@
-import {Category} from '@shared/models';
 import {createSelector} from '@reduxjs/toolkit';
 import {RootState} from '../index';
 import {tasksAdapter} from './adapters';
@@ -10,9 +9,9 @@ export const tasksListSelectors = tasksAdapter.getSelectors(
 export const selectTasksFetchState = (state: RootState) =>
   state.tasks.fetchState;
 
-export const selectTaskOfCategory = (category: Category) =>
+export const selectTaskOfCategory = (categoryId: string) =>
   createSelector(tasksListSelectors.selectAll, tasks =>
-    tasks.filter(task => task.category?.id === category.id),
+    tasks.filter(task => task.category?.id === categoryId),
   );
 
 export const selectTasksNotDone = createSelector(

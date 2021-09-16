@@ -1,9 +1,13 @@
 import React, {useRef} from 'react';
-import {View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {Text, ScreenWrapper, CreateNewTaskButton} from '@/shared/components';
+import {
+  Text,
+  ScreenWrapper,
+  CreateNewTaskButton,
+  Separator,
+} from '@/shared/components';
 import {selectAppTheme} from '@/store/configs';
 import {AuthenticatedStackParams} from '@/navigation/types';
 import TaskDetailsModal, {
@@ -14,7 +18,7 @@ import useFetchTasks from '@/hooks/useFetchTasks';
 import {useTranslation} from '@/shared/hooks';
 import TaskList from '@/templates/lists/TaskList';
 
-import {Header, Body, FooterSeparator, Footer} from './styles';
+import {Header, Body, Footer} from './styles';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -47,9 +51,7 @@ const TaskListPage: React.FC<Props> = ({}) => {
           onRefresh={fetchTasks}
         />
       </Body>
-      <View style={{marginHorizontal: 20}}>
-        <FooterSeparator />
-      </View>
+      <Separator />
       <Footer>
         <CreateNewTaskButton />
       </Footer>

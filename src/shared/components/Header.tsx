@@ -3,6 +3,7 @@ import {ViewStyle, TextStyle, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import styled from 'styled-components/native';
+import {shadowStyledComponents} from '@/shared/styles';
 
 import {selectAppTheme} from '../../store/configs';
 import {Text} from '@shared/components';
@@ -28,6 +29,7 @@ const Container = styled.View<ContainerProps>`
   border-bottom-right-radius: 40px;
   margin: 0 5px 0 5px;
   flex-direction: row;
+  ${shadowStyledComponents};
 `;
 
 const Header: React.FC<Props> = ({

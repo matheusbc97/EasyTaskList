@@ -40,6 +40,7 @@ import FormScreenWrapper from './FormScreenWrapper';
 import ShowFallbackComponent from './ShowFallbackComponent';
 import LoadingFallback from './LoadingFallback';
 import CreateNewTaskButton from './CreateNewTaskButton';
+import Separator from './Separator';
 
 export {
   Avatar,
@@ -82,6 +83,7 @@ export {
   ShowFallbackComponent,
   LoadingFallback,
   CreateNewTaskButton,
+  Separator,
 };
 
 export type {TextButtonProps, TextProps, FlatListWithFetchIndicatorProps};

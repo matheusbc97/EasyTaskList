@@ -32,12 +32,6 @@ export const Body = styled.View<BodyProps>`
   ${shadowStyledComponents}
 `;
 
-export const FooterSeparator = styled.View`
-  height: 1px;
-  width: 100%;
-  background-color: #e0e0e0;
-`;
-
 export const Footer = styled.View`
   padding: 5px 20px 5px 20px;
 `;

@@ -1,26 +1,25 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
 
 import {
   ScreenWrapper,
   Header,
-  FlatListWithFetchIndicator,
-  TaskListItem,
   OutlineButton,
-} from '@shared/components';
-import {AuthenticatedStackParams} from '@navigation/types';
-import {
-  getTasks,
-  selectTasksFetchState,
-  selectTaskOfCategory,
-} from '@store/tasks';
-import TaskDetailsModal from '@shared/modals/TaskDetailsModal';
-import {Task} from '@shared/models';
+  Separator,
+} from '@/shared/components';
+import {AuthenticatedStackParams} from '@/navigation/types';
+import TaskDetailsModal, {
+  TaskDetailsModalHandles,
+} from '@/shared/modals/TaskDetailsModal';
+import TaskList from '@/templates/lists/TaskList';
 
-import {Content, Footer} from './styles';
+import useFetchTasks from '@/hooks/useFetchTasks';
+import useTasksOfCategory from '@/hooks/useTasksOfCategory';
+import {useTranslation} from '@/shared/hooks';
+
+import {Content} from './styles';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryDetails'>;
@@ -28,32 +27,16 @@ interface Props {
 }
 
 const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
-  const category = useMemo(() => route.params.category, [
-    route.params.category,
-  ]);
+  const taskModalRef = useRef<TaskDetailsModalHandles>(null);
+  const {translation} = useTranslation();
+  const category = route.params.category;
 
-  const dispatch = useDispatch();
-  const selectTasks = useMemo(() => selectTaskOfCategory(category), [category]);
-  const tasks = useSelector(selectTasks);
-  const tasksFetchState = useSelector(selectTasksFetchState);
-  const dispatchGetTasks = useCallback(() => dispatch(getTasks()), [dispatch]);
+  const {tasks, tasksFetchState} = useTasksOfCategory(category.id);
+  const fetchTasks = useFetchTasks();
 
   useEffect(() => {
-    dispatchGetTasks();
-  }, [dispatchGetTasks]);
-
-  const [taskSelected, setTaskSelected] = useState<Task | null>(null);
-
-  const handleTaskDetailsModalEditButtonPress = useCallback(() => {
-    if (taskSelected) {
-      const selectedTask = {
-        ...taskSelected,
-      };
-
-      setTaskSelected(null);
-      navigation.navigate('UpdateTaskForm', {task: selectedTask});
-    }
-  }, [navigation, taskSelected]);
+    fetchTasks();
+  }, [fetchTasks]);
 
   return (
     <>
@@ -63,33 +46,22 @@ const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
           onBackPress={() => navigation.navigate('BottomNavigation')}
         />
         <Content>
-          <FlatListWithFetchIndicator
-            data={tasks}
-            isLoading={tasksFetchState.isLoading}
-            hasError={tasksFetchState.hasError}
-            emptyListText="Nenhuma Tarefa a fazer"
-            keyExtractor={task => task.id}
-            onRefresh={dispatchGetTasks}
-            renderItem={({item: task}) => (
-              <TaskListItem task={task} onPress={() => setTaskSelected(task)} />
-            )}
+          <TaskList
+            onRefresh={fetchTasks}
+            tasks={tasks}
+            onTaskPress={task => taskModalRef.current?.open(task)}
+            tasksFetchState={tasksFetchState}
           />
         </Content>
-        <Footer>
-          <OutlineButton
-            iconName="pen"
-            text="Editar Categoria"
-            onPress={() =>
-              navigation.navigate('UpdateCategoryForm', {category})
-            }
-          />
-        </Footer>
+        <Separator />
+        <OutlineButton
+          style={{marginHorizontal: 20, marginTop: 10}}
+          iconName="pen"
+          text={translation('EDIT_CATEGORY')}
+          onPress={() => navigation.navigate('UpdateCategoryForm', {category})}
+        />
       </ScreenWrapper>
-      <TaskDetailsModal
-        onEditButtonPress={handleTaskDetailsModalEditButtonPress}
-        task={taskSelected}
-        onBackButtonPress={() => setTaskSelected(null)}
-      />
+      <TaskDetailsModal ref={taskModalRef} />
     </>
   );
 };
