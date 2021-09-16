@@ -6,10 +6,10 @@ import {ScreenWrapper} from '@shared/components';
 import {selectAppTheme} from '@store/configs';
 import {setUserName, setUserAvatar} from '@store/account/user';
 
-import ChooseTheme from './ChooseTheme';
-import ChoosePhotoOrAvatar from './ChoosePhotoOrAvatar';
-import ChooseName from './ChooseName';
-import SaveUserConfiguration from './SaveUserConfiguration';
+import ChooseTheme from './sub-pages/ChooseTheme';
+import ChoosePhotoOrAvatar from './sub-pages/ChoosePhotoOrAvatar';
+import ChooseName from './sub-pages/ChooseName';
+import SaveUserConfiguration from './sub-pages/SaveUserConfiguration';
 import {AnimatedBackground} from '@shared/components';
 
 import styles from './styles';
@@ -85,12 +85,7 @@ const ChooseUserConfigurations: React.FC = () => {
   const getSubScreen = () => {
     switch (subScreems[screenShownState.index]) {
       case 'ChooseTheme':
-        return (
-          <ChooseTheme
-            onAdvancePress={() => advanceForNextScreen()}
-            showBackButton={false}
-          />
-        );
+        return <ChooseTheme onAdvancePress={() => advanceForNextScreen()} />;
       case 'ChooseName':
         return (
           <ChooseName

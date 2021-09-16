@@ -1,56 +1,48 @@
-import React, {useCallback} from 'react';
-import {useDispatch} from 'react-redux';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RouteProp} from '@react-navigation/native';
+import React, {useState} from 'react';
 
-import {AnimatedBackground} from '@shared/components';
-import {AuthenticatedStackParams} from '@navigation/types';
-import {updateUser} from '@store/account/user';
-import {showToast} from '@shared/components/Toast';
-import {AppThemeName} from '@shared/models';
+import {
+  BackButton,
+  RoundedButton,
+  Text,
+  FormScreenWrapper,
+} from '@/shared/components';
+import {AppTheme} from '@/shared/models';
 import {useTranslation} from '@/shared/hooks';
+import useAppTheme from '@/hooks/useAppTheme';
+import ChooseTheme from '@/templates/ChooseTheme';
 
-import ChooseTheme from '../../account/ChooseUserConfigurations/ChooseTheme';
-import {Content} from './styles';
+import useHandleSaveTheme from './hooks/useHandleSaveTheme';
 
-interface Props {
-  navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryDetails'>;
-  route: RouteProp<AuthenticatedStackParams, 'CategoryDetails'>;
-}
+import {Props} from './types';
 
-function ChangeNameForm({navigation}: Props) {
+function ChangeNameForm({}: Props) {
   const {translation} = useTranslation();
-  const dispatch = useDispatch();
 
-  const handleSaveTheme = useCallback(
-    async (theme: AppThemeName) => {
-      const payloadAction = await dispatch(
-        updateUser({
-          theme,
-        }),
-      );
+  const appTheme = useAppTheme();
 
-      if (payloadAction.payload) {
-        navigation.navigate('BottomNavigation');
-        showToast({
-          text: 'Tema alterado com sucesso',
-          type: 'success',
-        });
-      }
-    },
-    [dispatch, navigation],
-  );
+  const [appThemeState, setAppThemeState] = useState<AppTheme>(appTheme);
+
+  const handleThemeChoose = (theme: AppTheme) => {
+    setAppThemeState(theme);
+  };
+
+  const handleSaveTheme = useHandleSaveTheme();
 
   return (
-    <AnimatedBackground>
-      <Content>
-        <ChooseTheme
-          onAdvancePress={handleSaveTheme}
-          advanceButtonText={translation('SAVE').toUpperCase()}
-          onBackPress={() => navigation.pop()}
-        />
-      </Content>
-    </AnimatedBackground>
+    <FormScreenWrapper alignCenter theme={appThemeState}>
+      <BackButton />
+      <Text type="title-big" centerText style={{marginTop: 5}}>
+        {translation('CHOOSE_A_THEME')}:
+      </Text>
+      <ChooseTheme
+        onThemePress={handleThemeChoose}
+        style={{marginVertical: 20}}
+      />
+      <RoundedButton
+        text={translation('SAVE').toUpperCase()}
+        onPress={() => handleSaveTheme(appThemeState)}
+      />
+    </FormScreenWrapper>
   );
 }
 

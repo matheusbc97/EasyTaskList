@@ -4,10 +4,8 @@ import useGetUser from '@hooks/useGetUser';
 import useUpdateUser from '@hooks/useUpdateUser';
 import useSetUserLogged from '@hooks/useSetUserLogged';
 
-import {Avatar, Text, RoundedButton} from '@shared/components';
+import {Avatar, Text, RoundedButton, ThemeBox} from '@shared/components';
 import {useTranslation} from '@/shared/hooks';
-
-import ThemeBox from './ThemeBox';
 
 interface Props {
   onChangePress(index: number): void;

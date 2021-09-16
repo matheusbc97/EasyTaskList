@@ -1,3 +1,4 @@
+import {AppThemeName} from '@shared/models/AppThemeName';
 export type AppTheme = {
   primaryColor: string;
   secondaryColor: string;
@@ -6,4 +7,5 @@ export type AppTheme = {
   background: string;
   aboveBackground: string;
   dark: boolean;
+  name: AppThemeName;
 };

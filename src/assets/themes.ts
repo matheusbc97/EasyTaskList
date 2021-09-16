@@ -8,6 +8,7 @@ export const BLUE_GREEN: AppTheme = {
   background: '#fafafa',
   aboveBackground: '#FFF',
   dark: false,
+  name: 'BLUE_GREEN',
 };
 
 export const BLUE_RED: AppTheme = {
@@ -18,6 +19,7 @@ export const BLUE_RED: AppTheme = {
   background: '#fafafa',
   aboveBackground: '#FFF',
   dark: false,
+  name: 'BLUE_RED',
 };
 
 export const DARK: AppTheme = {
@@ -28,4 +30,5 @@ export const DARK: AppTheme = {
   background: '#757575',
   aboveBackground: '#828282',
   dark: true,
+  name: 'DARK',
 };

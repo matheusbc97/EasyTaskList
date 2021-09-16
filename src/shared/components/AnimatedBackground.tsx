@@ -12,8 +12,13 @@ import {
   GRAPH_2,
   BOTTOM_RIGHT_DOT,
 } from '../../assets/images';
+import {AppTheme} from '@shared/models';
 
-const AnimatedBackground: React.FC = ({children}) => {
+interface Props {
+  theme?: AppTheme;
+}
+
+const AnimatedBackground: React.FC<Props> = ({children, theme}) => {
   const firstAnimationValue = useMemo(() => new Animated.Value(0), []);
 
   const screenHeight = useDimensions().window.height;
@@ -26,7 +31,8 @@ const AnimatedBackground: React.FC = ({children}) => {
     outputRange: [-screenHeightDividedBy2, 0],
   });
 
-  const appTheme = useSelector(selectAppTheme);
+  const appThemeFromMemory = useSelector(selectAppTheme);
+  const appTheme = theme ?? appThemeFromMemory;
 
   useEffect(() => {
     Animated.timing(firstAnimationValue, {
