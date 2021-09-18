@@ -3,9 +3,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
 import categoryColors from '@assets/categoryColors';
-import {Text} from '@shared/components';
+import {Text, Button} from '@shared/components';
 import {Category} from '@shared/models';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import categoryIconNames from '@assets/categoryIconNames';
 import {ViewStyle} from 'react-native';
 
@@ -27,7 +26,7 @@ const CategoryListItem: React.FC<Props> = ({
   const iconSize = useMemo(() => size * 0.6, [size]);
 
   return (
-    <TouchableOpacity
+    <Button
       onPress={onPress}
       style={[
         {
@@ -72,7 +71,7 @@ const CategoryListItem: React.FC<Props> = ({
           </Text>
         )}
       </LinearGradient>
-    </TouchableOpacity>
+    </Button>
   );
 };
 

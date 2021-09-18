@@ -42,6 +42,8 @@ import LoadingFallback from './LoadingFallback';
 import CreateNewTaskButton from './buttons/CreateNewTaskButton';
 import Separator from './Separator';
 import ThemeBox from './ThemeBox';
+import NavigateButton from './buttons/NavigateButton';
+import Button from './buttons/Button';
 
 export {
   Avatar,
@@ -86,6 +88,8 @@ export {
   Separator,
   DescriptionInput,
   ThemeBox,
+  NavigateButton,
+  Button,
 };
 
 export type {TextButtonProps, TextProps, FlatListWithFetchIndicatorProps};

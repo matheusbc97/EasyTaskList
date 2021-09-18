@@ -1,9 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {TouchableRipple} from 'react-native-paper';
 
 import {AppTheme, AppThemeName} from '@shared/models';
-
+import {Button} from '@/shared/components';
 import * as themes from '@assets/themes';
 
 interface ThemeBoxProps {
@@ -16,14 +15,14 @@ const ThemeBox: React.FC<ThemeBoxProps> = ({theme, onPress}) => {
   const appTheme = themes[theme];
 
   return (
-    <TouchableRipple onPress={() => onPress && onPress(appTheme)}>
+    <Button onPress={() => onPress && onPress(appTheme)}>
       <View style={styles.container}>
         <View style={[styles.half, {backgroundColor: appTheme.primaryColor}]} />
         <View
           style={[styles.half, {backgroundColor: appTheme.secondaryColor}]}
         />
       </View>
-    </TouchableRipple>
+    </Button>
   );
 };
 

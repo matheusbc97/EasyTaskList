@@ -21,7 +21,7 @@ import {useSelector} from 'react-redux';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import {selectAppTheme} from '../../../store/configs';
-import {TouchableRipple} from 'react-native-paper';
+import Button from '../buttons/Button';
 
 const AnimatedFontAwesomeIcon = Animated.createAnimatedComponent(
   FontAwesomeIcon,
@@ -120,7 +120,7 @@ const TextInput = (
   }, [error, borderColorAnimation]);
 
   return (
-    <TouchableRipple disabled={!button} onPress={onPress}>
+    <Button disabled={!button} onPress={onPress}>
       <Animated.View style={[styles.container, {borderColor: borderColor}]}>
         <Animated.View
           style={[
@@ -187,7 +187,7 @@ const TextInput = (
           )}
         </View>
       </Animated.View>
-    </TouchableRipple>
+    </Button>
   );
 };
 

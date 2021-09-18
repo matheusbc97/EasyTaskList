@@ -1,12 +1,11 @@
 import React, {useCallback} from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import {RectButton} from 'react-native-gesture-handler';
 import Modal from 'react-native-modal';
 
 import categoryColors from '@assets/categoryColors';
-import {Text} from '@shared/components';
+import {Text, Button} from '@shared/components';
 import {useTranslation} from '@/shared/hooks';
 
 interface Props {
@@ -39,7 +38,7 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
           const color1 = categoryColors[index + j].color1;
           const color2 = categoryColors[index + j].color2;
           subComponents.push(
-            <TouchableOpacity
+            <Button
               key={`${color1}-${color2}`}
               onPress={() => {
                 onColorPress(index + j);
@@ -59,7 +58,7 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
                 end={{x: 1, y: 1}}
                 colors={[color1, color2]}
               />
-            </TouchableOpacity>,
+            </Button>,
           );
         }
       }
@@ -90,14 +89,14 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
           {translation('SELECT_COLOR')}
         </Text>
         {getColors()}
-        <RectButton onPress={onBackButtonPress}>
+        <Button onPress={onBackButtonPress}>
           <Text
             type="title-big"
             secondaryColor
             style={{alignSelf: 'center', marginTop: 5, paddingVertical: 10}}>
             {translation('CANCEL')}
           </Text>
-        </RectButton>
+        </Button>
       </Container>
     </Modal>
   );

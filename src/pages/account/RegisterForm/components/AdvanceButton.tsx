@@ -1,11 +1,10 @@
 import React from 'react';
 import {Animated} from 'react-native';
-import {TouchableRipple} from 'react-native-paper';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import styled from 'styled-components/native';
 
-import {ADVANCE_BTN} from '@assets/images';
-import {Text} from '@shared/components';
+import {ADVANCE_BTN} from '@/assets/images';
+import {Text, Button} from '@/shared/components';
 
 const Container = styled.View`
   position: absolute;
@@ -32,7 +31,7 @@ const AnimatedContainer = Animated.createAnimatedComponent(Container);
 export default function AdvanceButton({style, onPress}: AdvanceButtonProps) {
   return (
     <AnimatedContainer style={style}>
-      <TouchableRipple onPress={onPress}>
+      <Button onPress={onPress}>
         <Background source={ADVANCE_BTN}>
           <Text type="title" style={{paddingLeft: 20, color: '#1fb7c8'}}>
             AVANÇAR
@@ -43,7 +42,7 @@ export default function AdvanceButton({style, onPress}: AdvanceButtonProps) {
             style={{marginLeft: -8, color: '#1fb7c8'}}
           />
         </Background>
-      </TouchableRipple>
+      </Button>
     </AnimatedContainer>
   );
 }

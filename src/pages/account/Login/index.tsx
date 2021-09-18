@@ -1,11 +1,12 @@
 import React, {useRef} from 'react';
 import {Image} from 'react-native';
-import {FormHandles} from '@unform/core';
 
-import {useValidateField, useTranslation} from '@shared/hooks';
-import {ScreenWrapper} from '@shared/components';
+import {useTranslation} from '@/shared/hooks';
+import {ScreenWrapper} from '@/shared/components';
+import {FormHandles} from '@/shared/models';
+import LoginForm from '@/templates/forms/LoginForm';
+import {TRIANGLE_PLAY, PEOPLE_LOGIN} from '@/assets/images';
 
-import TextInput from './components/Input';
 import {Props} from './types';
 import {
   ImageBackground,
@@ -14,78 +15,44 @@ import {
   TopText,
   FormContainer,
   ButtonContainer,
-  LoginForm,
 } from './styles';
 import useHandleSubmit from './hooks/useHandleSubmit';
 
 const Login = ({navigation}: Props) => {
   const {translation} = useTranslation();
   const formRef = useRef<FormHandles>(null);
-  const validateField = useValidateField(formRef);
-
-  const handleRegisterPress = () => navigation.navigate('RegisterForm');
-
-  const handleForgotPasswordPress = () =>
-    navigation.navigate('ForgotPasswordForm');
 
   const userWhithoutConfigurationsCallback = () =>
     navigation.navigate('ChooseUserConfigurations');
 
-  const handleSubmit = useHandleSubmit(
-    formRef,
-    userWhithoutConfigurationsCallback,
-  );
+  const handleSubmit = useHandleSubmit(userWhithoutConfigurationsCallback);
 
   return (
     <ScreenWrapper>
-      <ImageBackground
-        source={require('../../../assets/images/triangulo_play.png')}>
-        <Image source={require('../../../assets/images/imagem_login.png')} />
+      <ImageBackground source={TRIANGLE_PLAY}>
+        <Image source={PEOPLE_LOGIN} />
       </ImageBackground>
       <FormContainer>
         <TopText>{translation('TYPE_YOUR_EMAIL_AND_PASSWORD')}</TopText>
-        <LoginForm ref={formRef} onSubmit={handleSubmit}>
-          <TextInput
-            iconName="user"
-            name="email"
-            placeholder={translation('EMAIL')}
-            textContentType="emailAddress"
-            autoCompleteType="email"
-            validateField={validateField}
-            onSubmitEditing={() =>
-              formRef.current?.getFieldRef('password').focus()
-            }
-            autoCapitalize="none"
-            returnKeyType="next"
+
+        <LoginForm ref={formRef} onSubmitSuccess={handleSubmit} />
+
+        <ButtonContainer>
+          <LoginButton
+            text={translation('LOG_IN')}
+            onPress={() => formRef.current?.submitForm()}
           />
-          <TextInput
-            iconName="lock"
-            name="password"
-            placeholder={translation('PASSWORD')}
-            textContentType="password"
-            validateField={validateField}
-            secureTextEntry
-            autoCapitalize="none"
-            onSubmitEditing={() => formRef.current?.submitForm()}
-            returnKeyType="send"
-          />
-          <ButtonContainer>
-            <LoginButton
-              text={translation('LOG_IN')}
-              onPress={() => formRef.current?.submitForm()}
-            />
-          </ButtonContainer>
-        </LoginForm>
+        </ButtonContainer>
 
         <LoginTextButton
           text={translation('QUESTION_DO_NOT_HAVE_A_REGISTRATION')}
           textInEvidence={translation('REGISTER_HERE')}
-          onPress={handleRegisterPress}
+          onPress={() => navigation.navigate('RegisterForm')}
         />
         <LoginTextButton
           text={translation('QUESTION_FORGOT_PASSWORD')}
           textInEvidence={translation('RECOVER_HERE')}
-          onPress={handleForgotPasswordPress}
+          onPress={() => navigation.navigate('ForgotPasswordForm')}
         />
       </FormContainer>
     </ScreenWrapper>

@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {Animated, ScrollView} from 'react-native';
 
-import {RoundedButton, TextButton} from '@shared/components';
+import {RoundedButton, TextButton} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 import {FormHandles} from '@/shared/models';
 import RegisterForm from '@/templates/forms/RegisterForm';

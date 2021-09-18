@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {TouchableRipple} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {selectAppTheme} from '@store/configs';
+import {Button} from '@/shared/components';
 
 interface Props extends BottomTabBarProps {}
 
@@ -40,9 +40,9 @@ export default function BottonTabNavigator({
         }
 
         return (
-          <TouchableRipple
+          <Button
             key={`botton-button-${index}`}
-            style={[styles.button]}
+            style={styles.button}
             onPress={() => navigation.navigate(routeName)}>
             <View
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -62,7 +62,7 @@ export default function BottonTabNavigator({
                 {descriptorOptions.title}
               </Text>
             </View>
-          </TouchableRipple>
+          </Button>
         );
       })}
     </View>

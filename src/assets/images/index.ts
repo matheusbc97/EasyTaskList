@@ -23,3 +23,6 @@ export const MARKED_LIST = require('./lista-marcada.png');
 export const LEFT_STRIPES = require('./listras-esquerda.png');
 export const LOGO = require('./logo.png');
 export const BOTTOM_RIGHT_DOT = require('./ponto-inferior-direito.png');
+
+export const TRIANGLE_PLAY = require('./triangulo_play.png');
+export const PEOPLE_LOGIN = require('./imagem_login.png');

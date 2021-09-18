@@ -1,11 +1,10 @@
 import React from 'react';
 import {StyleSheet, TextStyle, ViewStyle, View} from 'react-native';
-import {TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {useSelector} from 'react-redux';
 
 import {selectAppTheme} from '@/store/configs';
-
+import Button from './Button';
 import Text from '../Text';
 
 export interface RoundedButtonProps {
@@ -30,7 +29,7 @@ const RoundedButton = ({
   const appTheme = useSelector(selectAppTheme);
 
   return (
-    <TouchableRipple
+    <Button
       disabled={disabled}
       style={[
         styles.container,
@@ -74,7 +73,7 @@ const RoundedButton = ({
           </Text>
         )}
       </View>
-    </TouchableRipple>
+    </Button>
   );
 };
 

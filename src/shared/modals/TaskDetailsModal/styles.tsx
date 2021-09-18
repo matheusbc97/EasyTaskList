@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {Button} from '@/shared/components';
 
 export const Container = styled.View`
   background-color: #fff;
@@ -22,10 +23,10 @@ export const IconContainer = styled.View<IconContainerProps>`
   justify-content: center;
   align-items: center;
 
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${props => props.backgroundColor};
 `;
 
-export const DoneCheckButton = styled.TouchableOpacity`
+export const DoneCheckButton = styled(Button)`
   flex-direction: row;
   align-items: center;
   margin: 5px -10px;
@@ -36,7 +37,7 @@ export const Footer = styled.View`
   margin-top: 10px;
 `;
 
-export const FooterButton = styled.TouchableOpacity`
+export const FooterButton = styled(Button)`
   flex-direction: row;
   align-items: center;
   justify-content: center;

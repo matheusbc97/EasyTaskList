@@ -2,10 +2,9 @@ import React, {useCallback} from 'react';
 import styled from 'styled-components/native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import Modal from 'react-native-modal';
-import {RectButton} from 'react-native-gesture-handler';
 
 import categoryIconNames from '@assets/categoryIconNames';
-import {Text} from '@shared/components';
+import {Text, Button} from '@shared/components';
 
 import {useTranslation} from '@/shared/hooks';
 
@@ -20,7 +19,7 @@ const Container = styled.View`
   padding: 5px 5px;
 `;
 
-const IconButton = styled.TouchableOpacity`
+const IconButton = styled(Button)`
   width: 50px;
   height: 50px;
   justify-content: center;
@@ -80,14 +79,14 @@ const ChooseCategoryIconModal: React.FC<Props> = ({
           {translation('SELECT_ICON')}
         </Title>
         {getIcons()}
-        <RectButton onPress={onBackButtonPress}>
+        <Button onPress={onBackButtonPress}>
           <Text
             type="title-big"
             secondaryColor
             style={{alignSelf: 'center', paddingVertical: 10}}>
             {translation('CANCEL')}
           </Text>
-        </RectButton>
+        </Button>
       </Container>
     </Modal>
   );

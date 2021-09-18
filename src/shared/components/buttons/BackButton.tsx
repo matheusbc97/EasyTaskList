@@ -1,12 +1,11 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {TouchableRipple} from 'react-native-paper';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
 import {useTranslation} from '@/shared/hooks';
-import {Text} from '@shared/components';
+import {Text, Button} from '@shared/components';
 import {selectAppTheme} from '@store/configs';
 
 interface Props {
@@ -24,9 +23,7 @@ const ChooseScreenBackButton: React.FC<Props> = ({
 
   if (showLabel) {
     return (
-      <TouchableRipple
-        style={styles.container}
-        onPress={onPress ?? navigation.goBack}>
+      <Button style={styles.container} onPress={onPress ?? navigation.goBack}>
         <View style={styles.content}>
           <MaterialIcon
             name="arrow-back"
@@ -39,16 +36,16 @@ const ChooseScreenBackButton: React.FC<Props> = ({
             </Text>
           )}
         </View>
-      </TouchableRipple>
+      </Button>
     );
   }
 
   return (
-    <TouchableRipple
+    <Button
       onPress={onPress ?? navigation.goBack}
       style={{alignSelf: 'flex-start'}}>
       <MaterialIcon name="arrow-back" size={24} color={appTheme.primaryColor} />
-    </TouchableRipple>
+    </Button>
   );
 };
 

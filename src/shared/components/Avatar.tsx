@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet} from 'react-native';
-import {TouchableRipple} from 'react-native-paper';
+import {Button} from '@/shared/components';
 
 import {
   AVATAR,
@@ -36,7 +36,7 @@ const ImageAvatar: React.FC<ImageAvatarProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableRipple
+    <Button
       onPress={onPress}
       style={[
         styles.avatarContainer,
@@ -47,7 +47,7 @@ const ImageAvatar: React.FC<ImageAvatarProps> = ({
         resizeMode="contain"
         style={[styles.avatarImage, {width: size, height: size}]}
       />
-    </TouchableRipple>
+    </Button>
   );
 };
 
