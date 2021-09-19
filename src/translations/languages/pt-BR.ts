@@ -68,4 +68,8 @@ export default {
   [tKeys.REQUIRED_ICON]: 'Ícone Obrigatório',
   [tKeys.CANCEL]: 'Cancelar',
   [tKeys.RECOVER_PASSWORD]: 'Recuperar Senha',
+  [tKeys.DONE]: 'Feito',
+  [tKeys.NOT_DONE]: 'Não feito',
+  [tKeys.EDIT]: 'Editar',
+  [tKeys.CLOSE]: 'Fechar',
 };

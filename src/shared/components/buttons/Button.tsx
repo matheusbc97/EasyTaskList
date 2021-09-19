@@ -9,7 +9,11 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({children, ...rest}) => {
-  return <TouchableRipple {...rest}>{children}</TouchableRipple>;
+  return (
+    <TouchableRipple {...rest}>
+      <>{children}</>
+    </TouchableRipple>
+  );
 };
 
 export default Button;

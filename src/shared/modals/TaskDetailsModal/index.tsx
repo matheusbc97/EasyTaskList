@@ -7,18 +7,17 @@ import React, {
 import {View} from 'react-native';
 import Modal from 'react-native-modal';
 import {useSelector, useDispatch} from 'react-redux';
-import {Checkbox} from 'react-native-paper';
 import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-
-import {useCategoryColor, useFormatDate} from '@shared/hooks';
 import {useNavigation} from '@react-navigation/native';
 
-import {Text} from '@shared/components';
+import {useCategoryColor, useFormatDate} from '@shared/hooks';
+import {Text, CheckInput} from '@shared/components';
 import {Task} from '@shared/models';
 import {selectAppTheme} from '@store/configs';
 import {updateTaskStatus} from '@store/tasks/thunkActions';
 import categoryIconNames from '@assets/categoryIconNames';
+import {useTranslation} from '@/shared/hooks';
 
 import {
   Container,
@@ -38,6 +37,7 @@ const TaskDetailsModal: ForwardRefRenderFunction<TaskDetailsModalHandles> = (
   ref,
 ) => {
   const [taskSelected, setTaskSelected] = useState<Task | null>(null);
+  const {translation} = useTranslation();
 
   useImperativeHandle(ref, () => ({
     open: task => {
@@ -98,21 +98,24 @@ const TaskDetailsModal: ForwardRefRenderFunction<TaskDetailsModalHandles> = (
           </IconContainer>
           <View style={{marginLeft: 10}}>
             <Text type="title-medium">{taskSelected?.category?.name}</Text>
-            <Text>Categoria</Text>
+            <Text>{translation('CATEGORY')}</Text>
           </View>
         </CategoryContainer>
 
         <Text>{taskSelected?.description}</Text>
 
         <DoneCheckButton onPress={handleMarkAsDonePress}>
-          <Checkbox status={taskSelected?.done ? 'checked' : 'unchecked'} />
+          <CheckInput
+            value={!!taskSelected?.done}
+            onChange={handleMarkAsDonePress}
+          />
           <Text>{taskSelected?.done ? 'Feito' : 'Não feito'}</Text>
         </DoneCheckButton>
 
         <Footer>
           <FooterButton onPress={navigateToTaskForm}>
             <Text type="title" primaryColor>
-              EDITAR
+              {translation('EDIT')}
             </Text>
             <FontAwesomeIcon
               name="pencil"
@@ -122,7 +125,7 @@ const TaskDetailsModal: ForwardRefRenderFunction<TaskDetailsModalHandles> = (
             />
           </FooterButton>
           <FooterButton onPress={resetSelectedTask}>
-            <Text>FECHAR</Text>
+            <Text> {translation('CLOSE')}</Text>
           </FooterButton>
         </Footer>
       </Container>
