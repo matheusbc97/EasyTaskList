@@ -8,7 +8,7 @@ import {useSelector} from 'react-redux';
 
 import {selectAppTheme} from '../../store/configs';
 
-type TextTypes =
+export type TextTypes =
   | 'title'
   | 'title-big'
   | 'subtitle'

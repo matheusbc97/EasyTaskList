@@ -36,10 +36,3 @@ export const Footer = styled.View`
   flex-direction: row;
   margin-top: 10px;
 `;
-
-export const FooterButton = styled(Button)`
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-`;

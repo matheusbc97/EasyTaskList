@@ -11,9 +11,9 @@ import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 
-import {useCategoryColor, useFormatDate} from '@shared/hooks';
-import {Text, CheckInput} from '@shared/components';
-import {Task} from '@shared/models';
+import {useCategoryColor, useFormatDate} from '@/shared/hooks';
+import {Text, CheckInput, TextButton} from '@/shared/components';
+import {Task} from '@/shared/models';
 import {selectAppTheme} from '@store/configs';
 import {updateTaskStatus} from '@store/tasks/thunkActions';
 import categoryIconNames from '@assets/categoryIconNames';
@@ -25,7 +25,6 @@ import {
   IconContainer,
   DoneCheckButton,
   Footer,
-  FooterButton,
 } from './styles';
 
 export interface TaskDetailsModalHandles {
@@ -98,11 +97,11 @@ const TaskDetailsModal: ForwardRefRenderFunction<TaskDetailsModalHandles> = (
           </IconContainer>
           <View style={{marginLeft: 10}}>
             <Text type="title-medium">{taskSelected?.category?.name}</Text>
-            <Text>{translation('CATEGORY')}</Text>
+            <Text type="subtitle">{translation('CATEGORY')}</Text>
           </View>
         </CategoryContainer>
 
-        <Text>{taskSelected?.description}</Text>
+        <Text style={{marginVertical: 10}}>{taskSelected?.description}</Text>
 
         <DoneCheckButton onPress={handleMarkAsDonePress}>
           <CheckInput
@@ -113,21 +112,27 @@ const TaskDetailsModal: ForwardRefRenderFunction<TaskDetailsModalHandles> = (
         </DoneCheckButton>
 
         <Footer>
-          <FooterButton onPress={navigateToTaskForm}>
-            <Text type="title" primaryColor>
-              {translation('EDIT')}
-            </Text>
-            <FontAwesomeIcon
-              name="pencil"
-              size={18}
-              style={{marginLeft: 10}}
-              color={primaryColor}
-            />
-          </FooterButton>
-          <FooterButton onPress={resetSelectedTask}>
-            <Text> {translation('CLOSE')}</Text>
-          </FooterButton>
+          <TextButton
+            style={{flex: 1}}
+            text={translation('EDIT')}
+            onPress={navigateToTaskForm}
+            textType="title"
+            primaryColor
+            icon={
+              <FontAwesomeIcon name="pencil" size={18} color={primaryColor} />
+            }
+          />
+          <TextButton
+            style={{flex: 1}}
+            text={translation('CLOSE')}
+            onPress={resetSelectedTask}
+          />
         </Footer>
+        <TextButton
+          text={translation('DELETE')}
+          textType="title"
+          onPress={resetSelectedTask}
+        />
       </Container>
     </Modal>
   );

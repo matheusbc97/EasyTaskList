@@ -1,34 +1,37 @@
 import React from 'react';
-import {Text} from '@shared/components';
-import {RectButton, RectButtonProperties} from 'react-native-gesture-handler';
-import {TextStyle, View} from 'react-native';
+import {View} from 'react-native';
 
-export interface TextButtonProps extends RectButtonProperties {
+import Text, {TextTypes} from '../Text';
+import Button, {ButtonProps} from './Button';
+
+export interface TextButtonProps extends ButtonProps {
   text: string;
-  textInEvidence: string;
-  textInEvidenceStyle?: TextStyle;
+  primaryColor?: boolean;
+  icon?: any;
+  textType?: TextTypes;
 }
 
 const TextButton: React.FC<TextButtonProps> = ({
   onPress,
   text,
-  textInEvidence,
-  textInEvidenceStyle,
   style,
+  primaryColor = false,
+  icon,
+  textType,
   ...rest
 }) => (
-  <View
+  <Button
+    onPress={onPress}
     style={[
-      {flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap'},
+      {flexDirection: 'row', justifyContent: 'center', paddingVertical: 5},
       style,
-    ]}>
-    <Text>{text}</Text>
-    <RectButton onPress={onPress} {...rest}>
-      <Text primaryColor style={textInEvidenceStyle}>
-        {textInEvidence}
-      </Text>
-    </RectButton>
-  </View>
+    ]}
+    {...rest}>
+    <Text primaryColor={primaryColor} type={textType}>
+      {text}
+    </Text>
+    {!!icon && <View style={{marginLeft: 10}}>{icon}</View>}
+  </Button>
 );
 
 export default TextButton;

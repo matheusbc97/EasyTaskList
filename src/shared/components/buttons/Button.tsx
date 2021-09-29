@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleProp, ViewStyle} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 
-interface ButtonProps {
+export interface ButtonProps {
   style?: StyleProp<ViewStyle>;
   onPress?: () => void;
   disabled?: boolean;

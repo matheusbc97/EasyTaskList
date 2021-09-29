@@ -150,6 +150,7 @@ const TextInput = (
         </Animated.View>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <RNTextInput
+            pointerEvents={button ? 'none' : 'auto'}
             editable={!button}
             defaultValue={defaultValue}
             ref={inputRef}

@@ -71,4 +71,5 @@ export default {
   [tKeys.NOT_DONE]: 'Não feito',
   [tKeys.EDIT]: 'Editar',
   [tKeys.CLOSE]: 'Fechar',
+  [tKeys.DELETE]: 'Deletar',
 };

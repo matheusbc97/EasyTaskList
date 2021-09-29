@@ -2,7 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 
 import {loaderHandler} from '@shared/components/LoadingHandler';
 import {handleErrorMessage} from '@shared/utils/errorHandler';
-import {setIsLogged, setAppTheme} from '../../configs';
+import {setIsLogged, setAppTheme, resetAll} from '../../configs';
 import {
   createUserProfileDocument,
   signInWithEmailAndPassword,
@@ -145,7 +145,7 @@ export const resetUser = createAsyncThunk(
   async (_, {dispatch}) => {
     try {
       await resetAuthUser();
-      dispatch(setIsLogged(false));
+      dispatch(resetAll());
       return;
     } catch (error) {
       handleErrorMessage(error);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 
-import TextButton from '@shared/components/buttons/TextButton';
+import TextWithButton from '@/shared/components/buttons/TextWithButton';
 import CheckInput from './CheckInput';
 
 interface CheckInputWithButtonTextProps {
@@ -27,7 +27,7 @@ function CheckInputWithButtonText({
       }}>
       <CheckInput value={value} onChange={onChange} />
 
-      <TextButton
+      <TextWithButton
         style={{flex: 1}}
         onPress={onTextInEvidencePress}
         text={text}

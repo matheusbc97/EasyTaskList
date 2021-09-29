@@ -1,9 +1,16 @@
 import {configureStore} from '@reduxjs/toolkit';
 
-import reducer from '../store/reducers';
+import combinedReducer from '../store/reducers';
+
+const rootReducer = (state: any, action: any) => {
+  if (action.type === 'configs/resetAll') {
+    state = undefined;
+  }
+  return combinedReducer(state, action);
+};
 
 const store = configureStore({
-  reducer,
+  reducer: rootReducer,
   middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(),
 });
 

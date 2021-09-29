@@ -17,17 +17,23 @@ const configs = createSlice({
     setAppTheme: (state, action: PayloadAction<AppTheme>) => {
       state.theme = action.payload;
     },
-    resetAppTheme: (state) => {
+    resetAppTheme: state => {
       state.theme = initialTheme;
     },
     setIsLogged: (state, action: PayloadAction<boolean>) => {
       state.isLogged = action.payload;
     },
+    resetAll: () => {},
   },
 });
 
 export default configs.reducer;
-export const {setAppTheme, resetAppTheme, setIsLogged} = configs.actions;
+export const {
+  setAppTheme,
+  resetAppTheme,
+  setIsLogged,
+  resetAll,
+} = configs.actions;
 
 export const selectAppTheme = (state: RootState) => state.configs.theme;
 

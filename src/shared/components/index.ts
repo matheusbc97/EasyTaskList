@@ -19,7 +19,7 @@ import Toast from './Toast';
 import LoadingHandler from './LoadingHandler';
 import CategoryListItem from './list-items/CategoryListItem';
 import FloatingActionButton from './buttons/FloatingActionButton';
-import TextButton, {TextButtonProps} from './buttons/TextButton';
+import TextWithButton, {TextWithButtonProps} from './buttons/TextWithButton';
 import BackButton from './buttons/BackButton';
 import AnimatedBackgroundContent from './AnimatedBackgroundContent';
 import EmailInput from './inputs/EmailInput';
@@ -45,6 +45,7 @@ import ThemeBox from './ThemeBox';
 import NavigateButton from './buttons/NavigateButton';
 import Button from './buttons/Button';
 import ErrorFallback from './ErrorFallback';
+import TextButton from './buttons/TextButton';
 
 export {
   Avatar,
@@ -66,7 +67,7 @@ export {
   LoadingHandler,
   CategoryListItem,
   FloatingActionButton,
-  TextButton,
+  TextWithButton,
   BackButton,
   AnimatedBackgroundContent,
   EmailInput,
@@ -92,6 +93,7 @@ export {
   NavigateButton,
   Button,
   ErrorFallback,
+  TextButton,
 };
 
-export type {TextButtonProps, TextProps, FlatListWithFetchIndicatorProps};
+export type {TextWithButtonProps, TextProps, FlatListWithFetchIndicatorProps};

@@ -69,4 +69,5 @@ export default {
   [tKeys.NOT_DONE]: 'Not Done',
   [tKeys.EDIT]: 'Edit',
   [tKeys.CLOSE]: 'Close',
+  [tKeys.DELETE]: 'Delete',
 };

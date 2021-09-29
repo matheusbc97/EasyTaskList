@@ -66,4 +66,5 @@ export default {
   NOT_DONE: 'NOT_DONE',
   EDIT: 'EDIT',
   CLOSE: 'CLOSE',
+  DELETE: 'DELETE',
 };
