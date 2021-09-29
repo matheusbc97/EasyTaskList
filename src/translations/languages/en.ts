@@ -70,4 +70,5 @@ export default {
   [tKeys.EDIT]: 'Edit',
   [tKeys.CLOSE]: 'Close',
   [tKeys.DELETE]: 'Delete',
+  [tKeys.DETAILS]: 'Details',
 };

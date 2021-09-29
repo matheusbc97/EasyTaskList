@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {useSelector} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 
@@ -10,9 +10,6 @@ import {
 } from '@/shared/components';
 import {selectAppTheme} from '@/store/configs';
 import {AuthenticatedStackParams} from '@/navigation/types';
-import TaskDetailsModal, {
-  TaskDetailsModalHandles,
-} from '@/shared/modals/TaskDetailsModal';
 import useTasks from '@/hooks/useTasks';
 import useFetchTasks from '@/hooks/useFetchTasks';
 import {useTranslation} from '@/shared/hooks';
@@ -29,10 +26,9 @@ interface Props {
   navigation: TaskListNavigationProp;
 }
 
-const TaskListPage: React.FC<Props> = ({}) => {
+const TaskListPage: React.FC<Props> = ({navigation}) => {
   const {translation} = useTranslation();
   const fetchTasks = useFetchTasks();
-  const taskModalRef = useRef<TaskDetailsModalHandles>(null);
 
   const appTheme = useSelector(selectAppTheme);
 
@@ -47,7 +43,7 @@ const TaskListPage: React.FC<Props> = ({}) => {
         <TaskList
           tasks={tasks}
           tasksFetchState={tasksFetchState}
-          onTaskPress={task => taskModalRef.current?.open(task)}
+          onTaskPress={task => navigation.navigate('TaskDetails', {task})}
           onRefresh={fetchTasks}
         />
       </Body>
@@ -55,7 +51,6 @@ const TaskListPage: React.FC<Props> = ({}) => {
       <Footer>
         <CreateNewTaskButton />
       </Footer>
-      <TaskDetailsModal ref={taskModalRef} />
     </ScreenWrapper>
   );
 };

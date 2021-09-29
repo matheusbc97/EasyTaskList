@@ -67,4 +67,5 @@ export default {
   EDIT: 'EDIT',
   CLOSE: 'CLOSE',
   DELETE: 'DELETE',
+  DETAILS: 'DETAILS',
 };

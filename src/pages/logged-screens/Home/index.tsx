@@ -1,13 +1,10 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import {View, FlatList} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {ScreenWrapper, CreateNewTaskButton} from '@shared/components';
+import {ScreenWrapper, CreateNewTaskButton, Section} from '@shared/components';
 import {useTranslation} from '@/shared/hooks';
 import {AuthenticatedStackParams} from '@/navigation/types';
-import TaskDetailsModal, {
-  TaskDetailsModalHandles,
-} from '@shared/modals/TaskDetailsModal';
 import useGetUser from '@/hooks/useGetUser';
 import useTaskNotDone from '@/hooks/useTaskNotDone';
 import useCategories from '@/hooks/useCategories';
@@ -16,7 +13,6 @@ import TasksList from '@/templates/lists/TaskList';
 
 import CategoriesList from './templates/CategoriesList';
 import HomeHeader from './components/HomeHeader';
-import HomeSection from './components/HomeSection';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -42,7 +38,6 @@ const HomeListData = [
 
 const Home: React.FC<Props> = ({navigation}) => {
   const {translation} = useTranslation();
-  const taskModalRef = useRef<TaskDetailsModalHandles>(null);
 
   const user = useGetUser();
   const {lsCategories, lsCategoriesFetchState} = useCategories();
@@ -65,23 +60,30 @@ const Home: React.FC<Props> = ({navigation}) => {
               return <HomeHeader user={user} />;
             case HomeItemEnum.CATEGORIES_LIST:
               return (
-                <CategoriesList
-                  lsCategories={lsCategories}
-                  lsCategoriesFetchState={lsCategoriesFetchState}
-                  onCategoryPress={category =>
-                    navigation.navigate('CategoryDetails', {category})
-                  }
-                />
+                <Section
+                  title={translation('CATEGORIES')}
+                  contentStyle={{height: 143}}>
+                  <CategoriesList
+                    lsCategories={lsCategories}
+                    lsCategoriesFetchState={lsCategoriesFetchState}
+                    onCategoryPress={category =>
+                      navigation.navigate('CategoryDetails', {category})
+                    }
+                  />
+                </Section>
               );
             case HomeItemEnum.TASK_LIST:
               return (
-                <HomeSection title={translation('TASKS_NOT_DONE')}>
+                <Section title={translation('TASKS_NOT_DONE')}>
                   <TasksList
+                    onRefresh={fetchTasks}
                     tasks={tasksNotDone}
                     tasksFetchState={tasksFetchState}
-                    onTaskPress={task => taskModalRef.current?.open(task)}
+                    onTaskPress={task =>
+                      navigation.navigate('TaskDetails', {task})
+                    }
                   />
-                </HomeSection>
+                </Section>
               );
             default:
               return null;
@@ -91,7 +93,6 @@ const Home: React.FC<Props> = ({navigation}) => {
       <View style={{paddingVertical: 5, paddingHorizontal: 20}}>
         <CreateNewTaskButton />
       </View>
-      <TaskDetailsModal ref={taskModalRef} />
     </ScreenWrapper>
   );
 };

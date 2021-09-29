@@ -12,6 +12,9 @@ export type UnauthenticatedStackParams = {
 export type AuthenticatedStackParams = {
   BottomNavigation: undefined;
   CreateTaskForm: undefined;
+  TaskDetails: {
+    task: Task;
+  };
   UpdateTaskForm: {
     task: Task;
   };

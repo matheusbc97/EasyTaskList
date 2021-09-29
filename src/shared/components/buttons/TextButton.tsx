@@ -23,7 +23,7 @@ const TextButton: React.FC<TextButtonProps> = ({
   <Button
     onPress={onPress}
     style={[
-      {flexDirection: 'row', justifyContent: 'center', paddingVertical: 5},
+      {flexDirection: 'row', justifyContent: 'center', paddingVertical: 10},
       style,
     ]}
     {...rest}>

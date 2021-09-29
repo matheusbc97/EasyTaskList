@@ -10,9 +10,7 @@ import {
   Separator,
 } from '@/shared/components';
 import {AuthenticatedStackParams} from '@/navigation/types';
-import TaskDetailsModal, {
-  TaskDetailsModalHandles,
-} from '@/shared/modals/TaskDetailsModal';
+
 import TaskList from '@/templates/lists/TaskList';
 
 import useFetchTasks from '@/hooks/useFetchTasks';
@@ -27,7 +25,6 @@ interface Props {
 }
 
 const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
-  const taskModalRef = useRef<TaskDetailsModalHandles>(null);
   const {translation} = useTranslation();
   const category = route.params.category;
 
@@ -49,7 +46,7 @@ const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
           <TaskList
             onRefresh={fetchTasks}
             tasks={tasks}
-            onTaskPress={task => taskModalRef.current?.open(task)}
+            onTaskPress={task => navigation.navigate('TaskDetails', {task})}
             tasksFetchState={tasksFetchState}
           />
         </Content>
@@ -61,7 +58,6 @@ const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
           onPress={() => navigation.navigate('UpdateCategoryForm', {category})}
         />
       </ScreenWrapper>
-      <TaskDetailsModal ref={taskModalRef} />
     </>
   );
 };

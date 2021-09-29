@@ -17,29 +17,30 @@ import {
 } from './types';
 import {selectIsLogged, selectAppTheme} from '../store/configs';
 
-import Login from '@pages/account/Login';
-import Home from '@pages/logged-screens/Home';
-import Welcome from '@pages/account/Welcome';
-import RegisterForm from '@pages/account/RegisterForm';
-import TaskList from '@pages/logged-screens/TaskList';
-import ChooseUserConfigurations from '@pages/account/ChooseUserConfigurations';
-import More from '@pages/logged-screens/More';
-//import Statistics from '@pages/logged-screens/Statistics';
-//import Calendar from '@pages/logged-screens/Calendar';
-import CategorySearch from '@pages/logged-screens/CategorySearch';
-import CategoryList from '@pages/logged-screens/CategoryList';
-import CategoryDetails from '@pages/logged-screens/CategoryDetails';
-import ChangeNameForm from '@pages/logged-screens/ChangeNameForm';
-import ChangeThemeForm from '@pages/logged-screens/ChangeThemeForm';
-import ChangeAvatar from '@pages/logged-screens/ChangeAvatar';
-import ChangePasswordForm from '@pages/logged-screens/ChangePasswordForm';
-import ForgotPasswordForm from '@pages/account/ForgotPasswordForm';
-import PrivacyPolicy from '@pages/account/PrivacyPolicy';
-import About from '@pages/logged-screens/About';
+import Login from '@/pages/account/Login';
+import Home from '@/pages/logged-screens/Home';
+import Welcome from '@/pages/account/Welcome';
+import RegisterForm from '@/pages/account/RegisterForm';
+import TaskList from '@/pages/logged-screens/TaskList';
+import ChooseUserConfigurations from '@/pages/account/ChooseUserConfigurations';
+import More from '@/pages/logged-screens/More';
+//import Statistics from '@/pages/logged-screens/Statistics';
+//import Calendar from '@/pages/logged-screens/Calendar';
+import CategorySearch from '@/pages/logged-screens/CategorySearch';
+import CategoryList from '@/pages/logged-screens/CategoryList';
+import CategoryDetails from '@/pages/logged-screens/CategoryDetails';
+import ChangeNameForm from '@/pages/logged-screens/ChangeNameForm';
+import ChangeThemeForm from '@/pages/logged-screens/ChangeThemeForm';
+import ChangeAvatar from '@/pages/logged-screens/ChangeAvatar';
+import ChangePasswordForm from '@/pages/logged-screens/ChangePasswordForm';
+import ForgotPasswordForm from '@/pages/account/ForgotPasswordForm';
+import PrivacyPolicy from '@/pages/account/PrivacyPolicy';
+import About from '@/pages/logged-screens/About';
 import CreateTaskForm from '@/pages/logged-screens/CreateTaskForm';
 import UpdateTaskForm from '@/pages/logged-screens/UpdateTaskForm';
 import CreateCategoryForm from '@/pages/logged-screens/CreateCategoryForm';
 import UpdateCategoryForm from '@/pages/logged-screens/UpdateCategoryForm';
+import TaskDetails from '@/pages/logged-screens/TaskDetails';
 
 import BottonTabNavigator from './BottonTabNavigator';
 import {verifyIfUserIsLogged} from '@store/account/user/thunkActions';
@@ -184,6 +185,10 @@ const App = () => {
           <AuthenticatedStack.Screen
             name="ChangePasswordForm"
             component={ChangePasswordForm}
+          />
+          <AuthenticatedStack.Screen
+            name="TaskDetails"
+            component={TaskDetails}
           />
         </AuthenticatedStack.Navigator>
       ) : (

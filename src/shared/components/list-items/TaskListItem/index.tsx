@@ -31,7 +31,7 @@ const TaskListItem: React.FC<Props> = ({task, onPress}) => {
     <ContainerButton onPress={onPress}>
       <IconContainer backgroundColor={color}>
         <FontAwesomeIcon
-          name={categoryIconNames[task.category.iconIndex]}
+          name={categoryIconNames[task.category?.iconIndex]}
           size={25}
           color="#FFF"
           style={{marginLeft: 5}}

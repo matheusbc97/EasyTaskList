@@ -72,4 +72,5 @@ export default {
   [tKeys.EDIT]: 'Editar',
   [tKeys.CLOSE]: 'Fechar',
   [tKeys.DELETE]: 'Deletar',
+  [tKeys.DETAILS]: 'Detalhes',
 };

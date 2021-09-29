@@ -25,5 +25,5 @@ export default StyleSheet.create({
     elevation: 2,
     ...shadow,
   },
-  title: {marginHorizontal: 20, marginTop: 30},
+  title: {marginHorizontal: 20},
 });

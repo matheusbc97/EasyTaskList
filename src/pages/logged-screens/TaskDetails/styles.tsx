@@ -1,15 +1,9 @@
 import styled from 'styled-components/native';
 import {Button} from '@/shared/components';
 
-export const Container = styled.View`
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 5px;
-`;
-
 export const CategoryContainer = styled.View`
   flex-direction: row;
-  padding: 10px 0;
+  margin-top: 10px;
 `;
 
 interface IconContainerProps {
@@ -29,7 +23,8 @@ export const IconContainer = styled.View<IconContainerProps>`
 export const DoneCheckButton = styled(Button)`
   flex-direction: row;
   align-items: center;
-  margin: 5px -10px;
+  justify-content: flex-end;
+  margin: 5px 0;
 `;
 
 export const Footer = styled.View`

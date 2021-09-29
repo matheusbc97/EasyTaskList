@@ -1,5 +1,5 @@
 import React from 'react';
-import {ViewStyle} from 'react-native';
+import {ViewStyle, StyleProp} from 'react-native';
 import styled from 'styled-components/native';
 
 const StyledSeparator = styled.View`
@@ -10,7 +10,7 @@ const StyledSeparator = styled.View`
 `;
 
 interface SeparatorProps {
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
 }
 
 function Separator({style}: SeparatorProps) {

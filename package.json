@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "android:build": "cd android/ && ./gradlew assembleRelease",
-    "android:clean": "cd android/ && ./gradlew clean",
+    "android:build": "cd android/ && ./gradlew assembleRelease && cd ..",
+    "android:clean": "cd android/ && ./gradlew clean && cd ..",
     "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
     "ios": "react-native run-ios",
     "start": "react-native start",
