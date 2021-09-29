@@ -17,9 +17,13 @@ const TextButton: React.FC<TextButtonProps> = ({
   style,
   ...rest
 }) => (
-  <View style={[{flexDirection: 'row', alignItems: 'center'}, style]}>
+  <View
+    style={[
+      {flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap'},
+      style,
+    ]}>
     <Text>{text}</Text>
-    <RectButton style={{marginLeft: 5}} onPress={onPress} {...rest}>
+    <RectButton onPress={onPress} {...rest}>
       <Text primaryColor style={textInEvidenceStyle}>
         {textInEvidence}
       </Text>

@@ -1,6 +1,6 @@
-import {getPrivacyPolicy} from '@/shared/firebase';
+import {getPrivacyPolicy as fbGetPrivacyPolicy} from '@/shared/firebase';
 import {handleErrorMessage} from '@/shared/utils/errorHandler';
-import {useState, useEffect} from 'react';
+import {useState, useCallback} from 'react';
 
 import {FetchState} from '@/shared/models';
 
@@ -11,31 +11,28 @@ const usePrivacyPolicy = () => {
   });
   const [privacyPolicy, setPrivacyPolicy] = useState<string>('');
 
-  useEffect(() => {
-    async function getAsync() {
-      try {
-        const _privacyPolicy = await getPrivacyPolicy();
+  const getPrivacyPolicy = useCallback(async () => {
+    try {
+      const _privacyPolicy = await fbGetPrivacyPolicy();
 
-        setPrivacyPolicy(_privacyPolicy);
-        setFetchState({
-          hasError: false,
-          isLoading: false,
-        });
-      } catch (error) {
-        setFetchState({
-          hasError: false,
-          isLoading: false,
-        });
-        handleErrorMessage(error);
-      }
+      setPrivacyPolicy(_privacyPolicy);
+      setFetchState({
+        hasError: false,
+        isLoading: false,
+      });
+    } catch (error) {
+      setFetchState({
+        hasError: false,
+        isLoading: false,
+      });
+      handleErrorMessage(error);
     }
-
-    getAsync();
   }, []);
 
   return {
     privacyPolicy,
     fetchState,
+    getPrivacyPolicy,
   };
 };
 

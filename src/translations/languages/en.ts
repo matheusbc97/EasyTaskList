@@ -3,7 +3,6 @@ import tKeys from '../keys';
 export default {
   [tKeys.CONFIRM_PASSWORD]: 'Confirm password',
   [tKeys.CONNECT_HERE]: 'Conect here',
-  [tKeys.CREATE_YOUR_USER_ACCOUNT]: 'Create your user account',
   [tKeys.EMAIL]: 'E-mail',
   [tKeys.I_READ_AND_I_AGREE_WITH_THE]: 'I have read and agree with the ',
   [tKeys.TYPE_YOUR_EMAIL_AND_PASSWORD]: 'Type your e-mail and password',

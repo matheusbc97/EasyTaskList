@@ -50,6 +50,7 @@ const Header: React.FC<Props> = ({
           paddingTop: 5,
           paddingBottom: 10,
           paddingHorizontal: 5,
+          ...style,
         }}>
         <View style={{flex: 1}}>
           <BackButton showLabel={false} />

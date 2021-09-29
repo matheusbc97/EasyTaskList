@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {Animated, ScrollView} from 'react-native';
 
-import {RoundedButton, TextButton} from '@/shared/components';
+import {RoundedButton, TextButton, Header} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 import {FormHandles} from '@/shared/models';
 import RegisterForm from '@/templates/forms/RegisterForm';
@@ -10,7 +10,7 @@ import useHandleSubmit from './hooks/useHandleSubmit';
 import useOnRegisterUserSuccessAnimation from './hooks/useOnRegisterUserSuccessAnimation';
 import RegisterFormAnimatedBackground from './components/RegisterFormAnimatedBackground';
 import AdvanceButton from './components/AdvanceButton';
-import {Shadow, Content, FormWrapper, Title, Scroll} from './styles';
+import {Shadow, Content, FormWrapper, Scroll} from './styles';
 import {Props} from './types';
 
 const RegisterFormPage: React.FC<Props> = ({navigation}) => {
@@ -39,7 +39,12 @@ const RegisterFormPage: React.FC<Props> = ({navigation}) => {
     <Scroll ref={scrollViewRef}>
       <RegisterFormAnimatedBackground>
         <Content>
-          <Title type="title">{translation('CREATE_YOUR_USER_ACCOUNT')}</Title>
+          <Header
+            style={{marginTop: 15, paddingHorizontal: 20}}
+            type="secondary"
+            title={translation('CREATE_ACCOUNT')}
+          />
+
           <FormWrapper>
             <RegisterForm ref={formRef} onSubmitSuccess={handleSubmit} />
             <Animated.View style={{width: confirmButtonWidth, marginTop: 10}}>

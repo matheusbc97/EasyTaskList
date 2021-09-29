@@ -65,7 +65,7 @@ const RegisterFormTemplate: FunctionalFormComponent<RegisterFormProps> = (
       ...form,
     };
 
-    onSubmitSuccess(formObject);
+    onSubmitSuccess && onSubmitSuccess(formObject);
   };
 
   const focusInput = (name: string) => () =>

@@ -44,6 +44,7 @@ import Separator from './Separator';
 import ThemeBox from './ThemeBox';
 import NavigateButton from './buttons/NavigateButton';
 import Button from './buttons/Button';
+import ErrorFallback from './ErrorFallback';
 
 export {
   Avatar,
@@ -90,6 +91,7 @@ export {
   ThemeBox,
   NavigateButton,
   Button,
+  ErrorFallback,
 };
 
 export type {TextButtonProps, TextProps, FlatListWithFetchIndicatorProps};
