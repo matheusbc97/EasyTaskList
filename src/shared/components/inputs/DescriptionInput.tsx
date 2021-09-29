@@ -10,7 +10,7 @@ export default function DescriptionInput({
   const {translation} = useTranslation();
 
   if (!label) {
-    label = translation('EMAIL');
+    label = translation('DESCRIPTION');
   }
 
   return <TextInput name={name} label={label} {...rest} />;

@@ -1,8 +1,11 @@
 import React from 'react';
+import {View} from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
-import Text from '../../Text';
-import useCategoryColor from '@shared/hooks/useCategoryColor';
+import {Text} from '@/shared/components';
+import categoryIconNames from '@/assets/categoryIconNames';
+import {useFormatDate, useCategoryColor} from '@/shared/hooks';
+import {Task} from '@shared/models';
 
 import {
   ContainerButton,
@@ -13,10 +16,6 @@ import {
   DateAndMonthText,
   BodyBottom,
 } from './styles';
-import {Task} from '@shared/models';
-import {View} from 'react-native';
-import categoryIconNames from '@assets/categoryIconNames';
-import {useFormatDate} from '@shared/hooks';
 
 interface Props {
   task: Task;
@@ -32,7 +31,7 @@ const TaskListItem: React.FC<Props> = ({task, onPress}) => {
     <ContainerButton onPress={onPress}>
       <IconContainer backgroundColor={color}>
         <FontAwesomeIcon
-          name={categoryIconNames[task.category?.iconIndex]}
+          name={categoryIconNames[task.category.iconIndex]}
           size={25}
           color="#FFF"
           style={{marginLeft: 5}}

@@ -13,7 +13,7 @@ import {useValidateField, useFormHandles} from '@shared/hooks';
 import {Category} from '@shared/models';
 import {validateAll} from '@shared/utils/validations';
 
-import {FunctionalFormComponent, FormProps} from '@/shared/models';
+import {FunctionalFormComponent, FormProps, FormHandles} from '@/shared/models';
 
 interface UnFormObject {
   title: string;
@@ -31,6 +31,7 @@ export interface FormObject {
   category: Category;
 }
 
+export interface TaskFormHandles extends FormHandles {}
 interface TaskFormProps extends FormProps<FormObject> {}
 
 const TaskFormTemplate: FunctionalFormComponent<TaskFormProps> = (
@@ -75,7 +76,7 @@ const TaskFormTemplate: FunctionalFormComponent<TaskFormProps> = (
       category: chosenCategory,
     };
 
-    onSubmitSuccess(formObject);
+    onSubmitSuccess && onSubmitSuccess(formObject);
   };
 
   return (

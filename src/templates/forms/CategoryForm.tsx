@@ -102,11 +102,12 @@ const CategoryForm: FunctionalFormComponent<CategoryFormProps> = (
       return;
     }
 
-    onSubmitSuccess({
-      name: form.name,
-      colorIndex: selectedColorIndex,
-      iconIndex: iconIndex,
-    });
+    onSubmitSuccess &&
+      onSubmitSuccess({
+        name: form.name,
+        colorIndex: selectedColorIndex,
+        iconIndex: iconIndex,
+      });
   };
 
   return (

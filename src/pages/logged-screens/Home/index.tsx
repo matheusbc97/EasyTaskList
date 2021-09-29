@@ -91,7 +91,7 @@ const Home: React.FC<Props> = ({navigation}) => {
       <View style={{paddingVertical: 5, paddingHorizontal: 20}}>
         <CreateNewTaskButton />
       </View>
-      <TaskDetailsModal ref={taskModalRef} onBackButtonPress={() => {}} />
+      <TaskDetailsModal ref={taskModalRef} />
     </ScreenWrapper>
   );
 };

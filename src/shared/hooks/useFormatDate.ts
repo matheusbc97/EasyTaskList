@@ -1,5 +1,5 @@
 import {useCallback} from 'react';
-import formatDate, {FormatTypes} from '@shared/utils/fomatDate';
+import formatDate, {FormatTypes} from '@shared/utils/formatDate';
 
 const useFormatDate = () =>
   useCallback(

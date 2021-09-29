@@ -1,20 +1,16 @@
 import React, {useRef} from 'react';
 
 import {
-  AnimatedBackground,
   Header,
-  FormContainer,
   RoundedSaveButton,
-  Center,
-} from '@shared/components';
-import {useTranslation} from '@shared/hooks';
+  FormScreenWrapper,
+} from '@/shared/components';
+import {useTranslation} from '@/shared/hooks';
+import TaskFormTemplate, {TaskFormHandles} from '@/templates/forms/TaskForm';
 
 import useHandleSubmit from './hooks/useHandleSubmit';
 import getInitialData from './utils/getInitialData';
 import {Props} from './types';
-import TaskFormTemplate, {
-  TaskFormHandles,
-} from '../../../templates/forms/TaskForm';
 
 const UpdateTaskForm: React.FC<Props> = ({route}) => {
   const {task} = route.params;
@@ -26,21 +22,17 @@ const UpdateTaskForm: React.FC<Props> = ({route}) => {
   const handleFormSubmit = useHandleSubmit({task});
 
   return (
-    <AnimatedBackground>
-      <Center>
-        <FormContainer>
-          <Header type="secondary" title={translation('EDIT_TASK')} />
+    <FormScreenWrapper>
+      <Header type="secondary" title={translation('EDIT_TASK')} />
 
-          <TaskFormTemplate
-            ref={formRef}
-            onSubmitSuccess={handleFormSubmit}
-            initialValues={getInitialData(task)}
-          />
+      <TaskFormTemplate
+        ref={formRef}
+        onSubmitSuccess={handleFormSubmit}
+        initialValues={getInitialData(task)}
+      />
 
-          <RoundedSaveButton onPress={() => formRef.current?.submitForm()} />
-        </FormContainer>
-      </Center>
-    </AnimatedBackground>
+      <RoundedSaveButton onPress={() => formRef.current?.submitForm()} />
+    </FormScreenWrapper>
   );
 };
 

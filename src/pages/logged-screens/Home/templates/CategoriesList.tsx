@@ -20,7 +20,7 @@ function CategoriesList({
   const {translation} = useTranslation();
 
   return (
-    <HomeSection title={translation('CATEGORIES')}>
+    <HomeSection title={translation('CATEGORIES')} contentStyle={{height: 143}}>
       <FlatListWithFetchIndicator
         emptyListText={translation('NO_CATEGORIES_FOUND')}
         hasError={lsCategoriesFetchState.hasError}

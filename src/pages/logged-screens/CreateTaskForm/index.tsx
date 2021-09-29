@@ -1,12 +1,6 @@
 import React, {useRef} from 'react';
 
-import {
-  AnimatedBackground,
-  Header,
-  FormContainer,
-  RoundedSaveButton,
-  Center,
-} from '@shared/components';
+import {Header, RoundedSaveButton, FormScreenWrapper} from '@shared/components';
 import {useTranslation} from '@shared/hooks';
 import TaskFormTemplate from '@/templates/forms/TaskForm';
 import {FormHandles} from '@/shared/models';
@@ -22,17 +16,13 @@ const TaskForm: React.FC<Props> = () => {
   const handleFormSubmit = useHandleSubmit();
 
   return (
-    <AnimatedBackground>
-      <Center>
-        <FormContainer>
-          <Header type="secondary" title={translation('CREATE_TASK')} />
+    <FormScreenWrapper>
+      <Header type="secondary" title={translation('CREATE_TASK')} />
 
-          <TaskFormTemplate ref={formRef} onSubmitSuccess={handleFormSubmit} />
+      <TaskFormTemplate ref={formRef} onSubmitSuccess={handleFormSubmit} />
 
-          <RoundedSaveButton onPress={() => formRef.current?.submitForm()} />
-        </FormContainer>
-      </Center>
-    </AnimatedBackground>
+      <RoundedSaveButton onPress={() => formRef.current?.submitForm()} />
+    </FormScreenWrapper>
   );
 };
 

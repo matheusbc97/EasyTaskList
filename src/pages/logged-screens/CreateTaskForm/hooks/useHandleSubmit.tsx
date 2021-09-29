@@ -1,11 +1,14 @@
-import useCreateNewTask from '@/hooks/useCreateNewTask';
+import {useNavigation} from '@react-navigation/native';
 
 import {FormObject} from '@/templates/forms/TaskForm';
-
+import useCreateNewTask from '@/hooks/useCreateNewTask';
 import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
+
+import {CreateTaskFormNavigationProp} from '../types';
 
 const useHandleSubmit = () => {
   const createNewTask = useCreateNewTask();
+  const navigation = useNavigation<CreateTaskFormNavigationProp>();
 
   const handleCreateFormSubmit = async (form: FormObject) => {
     const newTask = {
@@ -15,8 +18,9 @@ const useHandleSubmit = () => {
       description: form.description,
     };
 
-    createNewTask(newTask);
-    return;
+    await createNewTask(newTask);
+
+    navigation.goBack();
   };
 
   return handleCreateFormSubmit;
