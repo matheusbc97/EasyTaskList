@@ -14,14 +14,17 @@ export const updateUserTask = async (
   {id, categoryId, ...rest}: UpdateTaskOnFirebaseDTO,
 ) => {
   try {
-    await firestore()
-      .doc(`users/${userUid}/tasks/${id}`)
-      .update({
-        categoryRef: firestore().doc(
-          `users/${userUid}/categories/${categoryId}`,
-        ),
-        ...rest,
-      });
+    const updateObject: any = {
+      ...rest,
+    };
+
+    if (categoryId) {
+      updateObject.categoryRef = firestore().doc(
+        `users/${userUid}/categories/${categoryId}`,
+      );
+    }
+
+    await firestore().doc(`users/${userUid}/tasks/${id}`).update(updateObject);
 
     return;
   } catch (error) {

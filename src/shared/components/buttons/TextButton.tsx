@@ -1,23 +1,23 @@
 import React from 'react';
-import {View} from 'react-native';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import Text, {TextTypes} from '../Text';
 import Button, {ButtonProps} from './Button';
 
 export interface TextButtonProps extends ButtonProps {
   text: string;
-  primaryColor?: boolean;
-  icon?: any;
+  iconName?: string;
   textType?: TextTypes;
+  color?: string;
 }
 
 const TextButton: React.FC<TextButtonProps> = ({
   onPress,
   text,
   style,
-  primaryColor = false,
-  icon,
+  iconName,
   textType,
+  color,
   ...rest
 }) => (
   <Button
@@ -27,10 +27,17 @@ const TextButton: React.FC<TextButtonProps> = ({
       style,
     ]}
     {...rest}>
-    <Text primaryColor={primaryColor} type={textType}>
+    <Text style={{color}} type={textType}>
       {text}
     </Text>
-    {!!icon && <View style={{marginLeft: 10}}>{icon}</View>}
+    {!!iconName && (
+      <FontAwesomeIcon
+        style={{marginLeft: 10}}
+        name={iconName}
+        size={18}
+        color={color}
+      />
+    )}
   </Button>
 );
 

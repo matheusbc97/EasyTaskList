@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {
   createTask,
@@ -28,6 +28,9 @@ const tasks = createSlice({
   reducers: {
     resetTasks: () => {
       return initialState;
+    },
+    removeTaskById: (state, action: PayloadAction<string>) => {
+      tasksAdapter.removeOne(state, action.payload);
     },
   },
   extraReducers: builder => {
@@ -69,7 +72,7 @@ const tasks = createSlice({
 
 export default tasks.reducer;
 
-export const {resetTasks} = tasks.actions;
+export const {resetTasks, removeTaskById} = tasks.actions;
 
 export {
   tasksListSelectors,

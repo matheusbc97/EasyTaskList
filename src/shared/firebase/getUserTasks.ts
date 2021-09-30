@@ -23,7 +23,7 @@ export async function getUserTasks(): Promise<FirebaseTaskDTO[]> {
       .orderBy('date')
       .get();
 
-    const tasks = tasksCollection.docs.map((taskDoc) => {
+    const tasks = tasksCollection.docs.map(taskDoc => {
       const {categoryRef, date, ...rest} = taskDoc.data();
 
       return {

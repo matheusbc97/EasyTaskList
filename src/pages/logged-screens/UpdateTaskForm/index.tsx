@@ -13,13 +13,13 @@ import getInitialData from './utils/getInitialData';
 import {Props} from './types';
 
 const UpdateTaskForm: React.FC<Props> = ({route}) => {
-  const {task} = route.params;
+  const {task, onTaskUpdatedCallback} = route.params;
 
   const formRef = useRef<TaskFormHandles>(null);
 
   const {translation} = useTranslation();
 
-  const handleFormSubmit = useHandleSubmit({task});
+  const handleFormSubmit = useHandleSubmit(task.id, onTaskUpdatedCallback);
 
   return (
     <FormScreenWrapper>

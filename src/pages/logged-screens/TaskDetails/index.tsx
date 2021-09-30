@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import {RouteProp, useNavigation} from '@react-navigation/native';
+
+import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import {useCategoryColor, useFormatDate} from '@/shared/hooks';
@@ -22,6 +22,7 @@ import {updateTaskStatus} from '@/store/tasks/thunkActions';
 import categoryIconNames from '@/assets/categoryIconNames';
 import {useTranslation} from '@/shared/hooks';
 import {AuthenticatedStackParams} from '@/navigation/types';
+import useDeleteTask from '@/hooks/useDeleteTask';
 
 import {
   CategoryContainer,
@@ -35,10 +36,12 @@ export interface TaskDetailsProps {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'TaskDetails'>;
 }
 
-export default function TaskDetails({route}: TaskDetailsProps) {
+export default function TaskDetails({route, navigation}: TaskDetailsProps) {
   const {translation} = useTranslation();
 
-  const task = route.params.task;
+  const [task, setTask] = useState(route.params.task);
+
+  const deleteTask = useDeleteTask();
 
   const color = useCategoryColor(task.category);
   const {primaryColor} = useSelector(selectAppTheme);
@@ -47,18 +50,23 @@ export default function TaskDetails({route}: TaskDetailsProps) {
   const formatDate = useFormatDate();
 
   const handleMarkAsDonePress = () => {
-    dispatch(updateTaskStatus({id: task!.id, done: !task?.done}));
+    dispatch(
+      updateTaskStatus({
+        id: task.id,
+        done: !task.done,
+      }),
+    );
   };
 
-  const navigation = useNavigation();
-
   const navigateToTaskForm = () => {
-    const navigationOptions = {
+    navigation.navigate('UpdateTaskForm', {
       task: {
         ...task,
       },
-    };
-    navigation.navigate('UpdateTaskForm', navigationOptions);
+      onTaskUpdatedCallback: _task => {
+        setTask(_task);
+      },
+    });
   };
 
   return (
@@ -107,7 +115,14 @@ export default function TaskDetails({route}: TaskDetailsProps) {
             style={{flex: 1}}
             text={translation('DELETE')}
             textType="title"
-            onPress={() => {}}
+            iconName="trash"
+            onPress={async () => {
+              try {
+                await deleteTask(task.id);
+
+                navigation.goBack();
+              } catch (error) {}
+            }}
           />
           <VerticalSeparator />
           <TextButton
@@ -115,10 +130,8 @@ export default function TaskDetails({route}: TaskDetailsProps) {
             text={translation('EDIT')}
             onPress={navigateToTaskForm}
             textType="title"
-            primaryColor
-            icon={
-              <FontAwesomeIcon name="pencil" size={18} color={primaryColor} />
-            }
+            color={primaryColor}
+            iconName="pencil"
           />
         </Footer>
       </Section>

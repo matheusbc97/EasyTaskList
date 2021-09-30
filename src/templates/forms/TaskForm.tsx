@@ -25,7 +25,7 @@ interface UnFormObject {
 
 export interface FormObject {
   title: string;
-  description: string;
+  description?: string;
   date: string;
   time: string;
   category: Category;

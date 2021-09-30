@@ -20,6 +20,9 @@ export const getTasks = createAsyncThunk(
 
       const databaseTasks = await getUserTasks();
 
+      console.log('categories', categories);
+      console.log('databaseTasks', databaseTasks);
+
       return databaseTasks.map(({categoryId, ...rest}) => ({
         category: categories.find(category => category.id === categoryId),
         ...rest,
@@ -33,7 +36,7 @@ export const getTasks = createAsyncThunk(
 
 export interface CreateTaskDTO {
   title: string;
-  description: string;
+  description?: string;
   date: Date;
   category: Category;
 }
@@ -77,7 +80,7 @@ export const createTask = createAsyncThunk(
 export interface UpdateTaskDTO {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   date: Date;
   category: Category;
 }
@@ -121,6 +124,7 @@ interface UpdateTaskStatusDTO {
   id: string;
   done: boolean;
   recursive?: boolean;
+  categoryId?: string;
 }
 
 export const updateTaskStatus = createAsyncThunk(

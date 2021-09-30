@@ -3,10 +3,12 @@ import {ViewStyle, TextStyle, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import styled from 'styled-components/native';
-import {shadowStyledComponents} from '@/shared/styles';
+import {useNavigation} from '@react-navigation/native';
 
-import {selectAppTheme} from '../../store/configs';
-import {Text} from '@shared/components';
+import {shadowStyledComponents} from '@/shared/styles';
+import {selectAppTheme} from '@/store/configs';
+import {Text} from '@/shared/components';
+
 import BackButton from './buttons/BackButton';
 
 interface Props {
@@ -41,6 +43,17 @@ const Header: React.FC<Props> = ({
 }) => {
   const appTheme = useSelector(selectAppTheme);
 
+  const navigation = useNavigation();
+
+  const handleBackPress = () => {
+    if (onBackPress) {
+      onBackPress();
+      return;
+    }
+
+    navigation.goBack();
+  };
+
   if (type === 'secondary') {
     return (
       <View
@@ -70,7 +83,7 @@ const Header: React.FC<Props> = ({
         size={30}
         color={appTheme.textColor}
         style={{marginRight: 10}}
-        onPress={onBackPress}
+        onPress={handleBackPress}
       />
       <Text type="title-big" style={textStyle}>
         {title}

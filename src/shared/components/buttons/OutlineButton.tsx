@@ -7,14 +7,14 @@ import {useSelector} from 'react-redux';
 import Text from '../Text';
 import {selectAppTheme} from '@/store/configs';
 
-interface Props {
+export interface OutlineButtonProps {
   text: string;
   onPress?(): void;
   iconName: string;
   style?: ViewStyle;
 }
 
-const OutlineButton: React.FC<Props> = ({
+const OutlineButton: React.FC<OutlineButtonProps> = ({
   text = 'Atividades Fisícas',
   onPress,
   iconName,

@@ -4,18 +4,23 @@ import {useDispatch, useSelector} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 
-import {AuthenticatedStackParams} from '@navigation/types';
-import {ScreenWrapper, Header} from '@shared/components';
-import {Category} from '@shared/models';
+import {AuthenticatedStackParams} from '@/navigation/types';
+import {
+  ScreenWrapper,
+  Header,
+  Section,
+  CreateNewCategoryButton,
+  Separator,
+} from '@/shared/components';
+import {Category} from '@/shared/models';
 import {
   selectCategoriesFetchState,
   getUserCategories,
   categoryListSelectors,
-} from '@store/categories';
-import {selectAppTheme} from '@store/configs';
+} from '@/store/categories';
 
 import CategorySearchListItem from './CategorySearchListItem';
-import {SearchInput, SearchList, Container} from './styles';
+import {SearchInput, SearchList} from './styles';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategorySearch'>;
@@ -29,7 +34,6 @@ const CategorySearch: React.FC<Props> = ({navigation, route}) => {
 
   const fetchState = useSelector(selectCategoriesFetchState);
   const categoryListRedux = useSelector(categoryListSelectors.selectAll);
-  const appTheme = useSelector(selectAppTheme);
 
   const inputRef = useRef<TextInput>(null);
 
@@ -63,7 +67,7 @@ const CategorySearch: React.FC<Props> = ({navigation, route}) => {
     <ScreenWrapper>
       <Header title="Selecionar Categoria" onBackPress={handleBackPress} />
 
-      <Container backgroundColor={appTheme.aboveBackground}>
+      <Section style={{flex: 1, marginTop: 10}} contentStyle={{flex: 1}}>
         <SearchInput
           ref={inputRef}
           value={search}
@@ -84,7 +88,9 @@ const CategorySearch: React.FC<Props> = ({navigation, route}) => {
             />
           )}
         />
-      </Container>
+      </Section>
+      <Separator style={{marginTop: 5, marginBottom: 5}} />
+      <CreateNewCategoryButton />
     </ScreenWrapper>
   );
 };

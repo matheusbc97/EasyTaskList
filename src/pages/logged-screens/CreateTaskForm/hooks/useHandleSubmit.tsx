@@ -5,13 +5,14 @@ import useCreateNewTask from '@/hooks/useCreateNewTask';
 import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
 
 import {CreateTaskFormNavigationProp} from '../types';
+import {CreateTaskDTO} from '@/store/tasks';
 
 const useHandleSubmit = () => {
   const createNewTask = useCreateNewTask();
   const navigation = useNavigation<CreateTaskFormNavigationProp>();
 
   const handleCreateFormSubmit = async (form: FormObject) => {
-    const newTask = {
+    const newTask: CreateTaskDTO = {
       title: form.title,
       category: form.category,
       date: getDateByDateAndTime(form.date, form.time),

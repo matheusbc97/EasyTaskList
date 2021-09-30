@@ -13,13 +13,12 @@ export async function getFirestoreUser(
     const userRef = firestore().doc(`users/${uid}`);
 
     const response = await userRef.get();
+    const userData = response.data();
 
     let user: UserBeforeIsLoggedDTO = {
       uid,
       email,
     };
-
-    const userData = response.data();
 
     Object.assign(user, {
       avatar: userData?.avatar,

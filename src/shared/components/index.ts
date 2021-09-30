@@ -13,7 +13,7 @@ import ErrorMessage from './ErrorMessage';
 import Avatar from './Avatar';
 import TaskListItem from './list-items/TaskListItem';
 import Header from './Header';
-import OutlineButton from './buttons/OutlineButton';
+import OutlineButton, {OutlineButtonProps} from './buttons/OutlineButton';
 import AnimatedBackground from './AnimatedBackground';
 import Toast from './Toast';
 import LoadingHandler from './LoadingHandler';
@@ -48,6 +48,7 @@ import ErrorFallback from './ErrorFallback';
 import TextButton from './buttons/TextButton';
 import VerticalSeparator from './VerticalSeparator';
 import Section from './Section';
+import CreateNewCategoryButton from './buttons/CreateNewCategoryButton';
 
 export {
   Avatar,
@@ -98,6 +99,12 @@ export {
   TextButton,
   VerticalSeparator,
   Section,
+  CreateNewCategoryButton,
 };
 
-export type {TextWithButtonProps, TextProps, FlatListWithFetchIndicatorProps};
+export type {
+  TextWithButtonProps,
+  TextProps,
+  FlatListWithFetchIndicatorProps,
+  OutlineButtonProps,
+};

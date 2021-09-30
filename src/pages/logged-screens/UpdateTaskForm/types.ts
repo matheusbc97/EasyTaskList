@@ -10,7 +10,16 @@ export interface FormObject {
   category: string;
 }
 
+export type UpdateTaskFormRoute = RouteProp<
+  AuthenticatedStackParams,
+  'UpdateTaskForm'
+>;
+export type UpdateTaskFormNavigation = StackNavigationProp<
+  AuthenticatedStackParams,
+  'UpdateTaskForm'
+>;
+
 export interface Props {
-  route: RouteProp<AuthenticatedStackParams, 'UpdateTaskForm'>;
-  navigation: StackNavigationProp<AuthenticatedStackParams, 'UpdateTaskForm'>;
+  route: UpdateTaskFormRoute;
+  navigation: UpdateTaskFormNavigation;
 }

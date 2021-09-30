@@ -2,7 +2,12 @@ import React, {useEffect} from 'react';
 import {View, FlatList} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {ScreenWrapper, CreateNewTaskButton, Section} from '@shared/components';
+import {
+  ScreenWrapper,
+  CreateNewTaskButton,
+  Section,
+  Separator,
+} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 import {AuthenticatedStackParams} from '@/navigation/types';
 import useGetUser from '@/hooks/useGetUser';
@@ -90,6 +95,7 @@ const Home: React.FC<Props> = ({navigation}) => {
           }
         }}
       />
+      <Separator style={{marginTop: 5}} />
       <View style={{paddingVertical: 5, paddingHorizontal: 20}}>
         <CreateNewTaskButton />
       </View>

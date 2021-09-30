@@ -87,6 +87,12 @@ export function validateField(
       }
 
       return null;
+    case 'time':
+      if (!value) {
+        return 'Campo Obrigatório';
+      }
+
+      return null;
 
     case 'address.cep':
       if (!value) {

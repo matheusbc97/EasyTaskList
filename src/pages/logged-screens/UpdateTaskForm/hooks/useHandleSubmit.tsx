@@ -1,28 +1,30 @@
+import {useNavigation} from '@react-navigation/native';
+
 import useUpdateTask from '@/hooks/useUpdateTask';
-import {Task} from '@shared/models';
 import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
-
 import {FormObject} from '@/templates/forms/TaskForm';
+import {getUserTaskById} from '@/shared/firebase/getUserTaskById';
+import {Task} from '@/shared/models';
 
-interface Params {
-  task: Task;
-}
+import {UpdateTaskFormNavigation} from '../types';
 
-const useHandleSubmit = ({task}: Params) => {
+const useHandleSubmit = (taskId: string, callback: (task: Task) => void) => {
   const updateNewTask = useUpdateTask();
+  const navigation = useNavigation<UpdateTaskFormNavigation>();
 
   const handleUpdateFormSubmit = async (form: FormObject) => {
-    const updatedTask = {
-      id: task.id,
+    await updateNewTask({
+      id: taskId,
       title: form.title,
       description: form.description,
       category: form.category,
       date: getDateByDateAndTime(form.date, form.time),
-    };
+    });
 
-    updateNewTask(updatedTask);
+    const task = await getUserTaskById(taskId);
 
-    return;
+    navigation.goBack();
+    callback(task);
   };
 
   return handleUpdateFormSubmit;
