@@ -9,8 +9,8 @@ import {Text, UnformInput as TextInput} from '@/shared/components';
 import {useFormHandles, useTranslation, useValidateField} from '@/shared/hooks';
 import {validateAll} from '@/shared/utils/validations';
 import {showToast} from '@/shared/components/Toast';
-import ChooseCategoryColorModal from '@/shared/components/ChooseCategoryColorModal';
-import ChooseCategoryIconModal from '@/shared/components/ChooseCategoryIconModal';
+import ChooseCategoryColorModal from '@shared/components/modals/ChooseCategoryColorModal';
+import ChooseCategoryIconModal from '@shared/components/modals/ChooseCategoryIconModal';
 import CategoryColorBox from '@/shared/components/CategoryColorBox';
 import {FunctionalFormComponent, FormProps, FormHandles} from '@shared/models';
 

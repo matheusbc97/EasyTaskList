@@ -1,5 +1,5 @@
 import RoundedButton from './buttons/RoundedButton';
-import ScreenWrapper from './ScreenWrapper';
+import ScreenWrapper from './containers/ScreenWrapper';
 import Text, {TextProps} from './Text';
 import Shadow from './Shadow';
 import TextInput from './inputs/TextInput';
@@ -9,19 +9,19 @@ import FlatListWithFetchIndicator, {
   FlatListWithFetchIndicatorProps,
 } from './FlatListWithFetchIndicator';
 import LoadingIndicator from './LoadingIndicator';
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from './fallbacks/ErrorMessage';
 import Avatar from './Avatar';
 import TaskListItem from './list-items/TaskListItem';
 import Header from './Header';
 import OutlineButton, {OutlineButtonProps} from './buttons/OutlineButton';
-import AnimatedBackground from './AnimatedBackground';
+import AnimatedBackground from './containers/AnimatedBackground';
 import Toast from './Toast';
 import LoadingHandler from './LoadingHandler';
 import CategoryListItem from './list-items/CategoryListItem';
 import FloatingActionButton from './buttons/FloatingActionButton';
 import TextWithButton, {TextWithButtonProps} from './buttons/TextWithButton';
 import BackButton from './buttons/BackButton';
-import AnimatedBackgroundContent from './AnimatedBackgroundContent';
+import AnimatedBackgroundContent from './containers/AnimatedBackgroundContent';
 import EmailInput from './inputs/EmailInput';
 import ConfirmNewPasswordInput from './inputs/ConfirmNewPasswordInput';
 import NewPasswordInput from './inputs/NewPasswordInput';
@@ -30,28 +30,28 @@ import CheckInputWithButtonText from './inputs/CheckInputWithButtonText';
 import DateInput from './inputs/DateInput';
 import TimeInput from './inputs/TimeInput';
 import CategoryInput from './inputs/CategoryInput';
-import FormContainer from './FormContainer';
+import FormContainer from './containers/FormContainer';
 import DescriptionInput from './inputs/DescriptionInput';
 import TitleInput from './inputs/TitleInput';
 import RoundedSaveButton from './buttons/rounded-buttons/RoundedSaveButton';
-import Center from './Center';
+import Center from './containers/Center';
 import NameInput from './inputs/NameInput';
-import FormScreenWrapper from './FormScreenWrapper';
-import ShowFallbackComponent from './ShowFallbackComponent';
-import LoadingFallback from './LoadingFallback';
+import FormScreenWrapper from './containers/FormScreenWrapper';
+import ShowFallbackComponent from './fallbacks/ShowFallbackComponent';
+import LoadingFallback from './fallbacks/LoadingFallback';
 import CreateNewTaskButton from './buttons/outline-buttons/CreateNewTaskButton';
 import Separator from './Separator';
 import ThemeBox from './ThemeBox';
 import NavigateButton from './buttons/NavigateButton';
 import Button from './buttons/Button';
-import ErrorFallback from './ErrorFallback';
+import ErrorFallback from './fallbacks/ErrorFallback';
 import TextButton from './buttons/TextButton';
 import VerticalSeparator from './VerticalSeparator';
 import Section from './Section';
 import CreateNewCategoryButton from './buttons/outline-buttons/CreateNewCategoryButton';
 import EditButton from './buttons/text-buttons/EditButton';
 import DeleteButton from './buttons/text-buttons/DeleteButton';
-import SectionRowButtonsContainer from './SectionRowButtonsContainer';
+import SectionRowButtonsContainer from './containers/SectionRowButtonsContainer';
 
 export {
   Avatar,

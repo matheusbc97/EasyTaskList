@@ -1,9 +1,7 @@
 import React, {useEffect, useMemo} from 'react';
 import {View, Animated, Image, StyleSheet} from 'react-native';
 import {useDimensions} from '@react-native-community/hooks';
-import {useSelector} from 'react-redux';
 
-import {selectAppTheme} from '../../store/configs';
 import {
   MARKED_LIST,
   CALENDAR,
@@ -11,8 +9,9 @@ import {
   LEFT_STRIPES,
   GRAPH_2,
   BOTTOM_RIGHT_DOT,
-} from '../../assets/images';
+} from '@/assets/images';
 import {AppTheme} from '@shared/models';
+import useAppTheme from '@/hooks/useAppTheme';
 
 interface Props {
   theme?: AppTheme;
@@ -31,7 +30,7 @@ const AnimatedBackground: React.FC<Props> = ({children, theme}) => {
     outputRange: [-screenHeightDividedBy2, 0],
   });
 
-  const appThemeFromMemory = useSelector(selectAppTheme);
+  const appThemeFromMemory = useAppTheme();
   const appTheme = theme ?? appThemeFromMemory;
 
   useEffect(() => {

@@ -6,9 +6,9 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import ShowFallbackComponent from './ShowFallbackComponent';
+import ShowFallbackComponent from './fallbacks/ShowFallbackComponent';
 import EmptyListText from './EmptyListText';
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from './fallbacks/ErrorMessage';
 import ActivityIndicator from './ActivityIndicator';
 
 export interface FlatListWithFetchIndicatorProps<T> extends FlatListProps<T> {

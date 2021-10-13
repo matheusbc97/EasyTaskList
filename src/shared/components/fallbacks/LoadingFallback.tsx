@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ShowFallbackComponent from './ShowFallbackComponent';
-import LoadingIndicator from './LoadingIndicator';
+import LoadingIndicator from '../LoadingIndicator';
 
 interface LoadingFallbackProps {
   isLoading: boolean;
