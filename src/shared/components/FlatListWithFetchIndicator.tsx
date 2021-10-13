@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import ShowFallbackComponent from './ShowFallbackComponent';
 import EmptyListText from './EmptyListText';
 import ErrorMessage from './ErrorMessage';
 import ActivityIndicator from './ActivityIndicator';
@@ -37,48 +38,50 @@ function FlatListWithFetchIndicator<T>({
 }: FlatListWithFetchIndicatorProps<T>) {
   const [firstLoading, setFirstLoading] = useState(true);
 
-  if (hasError || (showActivityIndicator && isLoading && firstLoading)) {
-    return (
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        {showListHeaderWhenListIsNotShown && ListHeaderComponent}
-        {hasError ? (
-          <ErrorMessage onTryAgainPress={onRefresh} />
-        ) : (
-          <ActivityIndicator />
-        )}
-      </ScrollView>
-    );
-  }
-
   return (
-    <FlatList<T>
-      ListEmptyComponent={<EmptyListText text={emptyListText} />}
-      ListHeaderComponent={ListHeaderComponent}
-      refreshControl={
-        refreshControlEnabled && onRefresh ? (
-          <RefreshControl
-            colors={['#d50006', '#ab2b3f', '#a1001a']}
-            onRefresh={() => {
-              if (firstLoading && showActivityIndicator) {
-                setFirstLoading(false);
-              }
-
-              if (onRefresh) {
-                onRefresh();
-              }
-            }}
-            refreshing={isLoading}
-          />
-        ) : undefined
+    <ShowFallbackComponent
+      fallback={
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          {showListHeaderWhenListIsNotShown && ListHeaderComponent}
+          <ErrorMessage onTryAgainPress={onRefresh} />
+        </ScrollView>
       }
-      style={[styles.list, style]}
-      contentContainerStyle={[
-        contentContainerStyle,
-        data && data.length === 0 && styles.contentContainerStyle,
-      ]}
-      data={data}
-      {...rest}
-    />
+      showFallback={hasError && !isLoading}>
+      <FlatList<T>
+        ListEmptyComponent={
+          isLoading && firstLoading ? (
+            <ActivityIndicator />
+          ) : (
+            <EmptyListText text={emptyListText} />
+          )
+        }
+        ListHeaderComponent={ListHeaderComponent}
+        refreshControl={
+          refreshControlEnabled && onRefresh ? (
+            <RefreshControl
+              colors={['#d50006', '#ab2b3f', '#a1001a']}
+              onRefresh={() => {
+                if (firstLoading && showActivityIndicator) {
+                  setFirstLoading(false);
+                }
+
+                if (onRefresh) {
+                  onRefresh();
+                }
+              }}
+              refreshing={isLoading && !firstLoading}
+            />
+          ) : undefined
+        }
+        style={[styles.list, style]}
+        contentContainerStyle={[
+          contentContainerStyle,
+          data && data.length === 0 && styles.contentContainerStyle,
+        ]}
+        data={data}
+        {...rest}
+      />
+    </ShowFallbackComponent>
   );
 }
 

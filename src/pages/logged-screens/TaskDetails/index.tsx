@@ -1,26 +1,25 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {useCategoryColor, useFormatDate} from '@/shared/hooks';
 import {
   Text,
   CheckInput,
-  TextButton,
   Header,
   ScreenWrapper,
   Separator,
   VerticalSeparator,
   Section,
+  EditButton,
+  DeleteButton,
 } from '@/shared/components';
-import {selectAppTheme} from '@/store/configs';
 import {updateTaskStatus} from '@/store/tasks/thunkActions';
 import categoryIconNames from '@/assets/categoryIconNames';
-import {useTranslation} from '@/shared/hooks';
+import {useTranslation, useCategoryColor, useFormatDate} from '@/shared/hooks';
 import {AuthenticatedStackParams} from '@/navigation/types';
 import useDeleteTask from '@/hooks/useDeleteTask';
 
@@ -44,7 +43,6 @@ export default function TaskDetails({route, navigation}: TaskDetailsProps) {
   const deleteTask = useDeleteTask();
 
   const color = useCategoryColor(task.category);
-  const {primaryColor} = useSelector(selectAppTheme);
   const dispatch = useDispatch();
 
   const formatDate = useFormatDate();
@@ -111,11 +109,8 @@ export default function TaskDetails({route, navigation}: TaskDetailsProps) {
 
       <Section style={{marginTop: 5}} contentStyle={{paddingTop: 0}}>
         <Footer>
-          <TextButton
+          <DeleteButton
             style={{flex: 1}}
-            text={translation('DELETE')}
-            textType="title"
-            iconName="trash"
             onPress={async () => {
               try {
                 await deleteTask(task.id);
@@ -125,14 +120,7 @@ export default function TaskDetails({route, navigation}: TaskDetailsProps) {
             }}
           />
           <VerticalSeparator />
-          <TextButton
-            style={{flex: 1}}
-            text={translation('EDIT')}
-            onPress={navigateToTaskForm}
-            textType="title"
-            color={primaryColor}
-            iconName="pencil"
-          />
+          <EditButton style={{flex: 1}} onPress={navigateToTaskForm} />
         </Footer>
       </Section>
     </ScreenWrapper>

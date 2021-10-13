@@ -1,9 +1,23 @@
 import React from 'react';
-import {View, StyleProp, ViewStyle} from 'react-native';
+import {View, StyleProp, ViewStyle, StyleSheet} from 'react-native';
+
+import {shadow} from '@/shared/styles';
 
 import Text from './Text';
 
-import styles from '../../pages/logged-screens/Home/styles';
+const styles = StyleSheet.create({
+  contentWrapper: {
+    marginHorizontal: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 10,
+    marginVertical: 5,
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    elevation: 2,
+    ...shadow,
+  },
+  title: {marginHorizontal: 20},
+});
 
 interface Section {
   title?: string;

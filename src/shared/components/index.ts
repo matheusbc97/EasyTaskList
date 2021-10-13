@@ -49,6 +49,9 @@ import TextButton from './buttons/TextButton';
 import VerticalSeparator from './VerticalSeparator';
 import Section from './Section';
 import CreateNewCategoryButton from './buttons/CreateNewCategoryButton';
+import EditButton from './buttons/EditButton';
+import DeleteButton from './buttons/DeleteButton';
+import SectionRowButtonsContainer from './SectionRowButtonsContainer';
 
 export {
   Avatar,
@@ -100,6 +103,9 @@ export {
   VerticalSeparator,
   Section,
   CreateNewCategoryButton,
+  EditButton,
+  DeleteButton,
+  SectionRowButtonsContainer,
 };
 
 export type {
