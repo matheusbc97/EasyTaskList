@@ -1,4 +1,4 @@
-import useRegisterUser from '../../../../hooks/useRegisterUser';
+import useRegisterUser from '@/hooks/useRegisterUser';
 
 import {FormDetails} from '../types';
 
