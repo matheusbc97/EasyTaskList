@@ -33,13 +33,13 @@ import CategoryInput from './inputs/CategoryInput';
 import FormContainer from './FormContainer';
 import DescriptionInput from './inputs/DescriptionInput';
 import TitleInput from './inputs/TitleInput';
-import RoundedSaveButton from './buttons/RoundedSaveButton';
+import RoundedSaveButton from './buttons/rounded-buttons/RoundedSaveButton';
 import Center from './Center';
 import NameInput from './inputs/NameInput';
 import FormScreenWrapper from './FormScreenWrapper';
 import ShowFallbackComponent from './ShowFallbackComponent';
 import LoadingFallback from './LoadingFallback';
-import CreateNewTaskButton from './buttons/CreateNewTaskButton';
+import CreateNewTaskButton from './buttons/outline-buttons/CreateNewTaskButton';
 import Separator from './Separator';
 import ThemeBox from './ThemeBox';
 import NavigateButton from './buttons/NavigateButton';
@@ -48,9 +48,9 @@ import ErrorFallback from './ErrorFallback';
 import TextButton from './buttons/TextButton';
 import VerticalSeparator from './VerticalSeparator';
 import Section from './Section';
-import CreateNewCategoryButton from './buttons/CreateNewCategoryButton';
-import EditButton from './buttons/EditButton';
-import DeleteButton from './buttons/DeleteButton';
+import CreateNewCategoryButton from './buttons/outline-buttons/CreateNewCategoryButton';
+import EditButton from './buttons/text-buttons/EditButton';
+import DeleteButton from './buttons/text-buttons/DeleteButton';
 import SectionRowButtonsContainer from './SectionRowButtonsContainer';
 
 export {

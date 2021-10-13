@@ -6,7 +6,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import {Text} from '@shared/components';
 import {selectAppTheme} from '@store/configs';
-import {RectButton} from 'react-native-gesture-handler';
+import Button from './Button';
 
 type IconType = 'FontAwesome' | 'FontAwesome5';
 
@@ -26,7 +26,7 @@ const OptionButton: React.FC<OptionButtonProps> = ({
   const appTheme = useSelector(selectAppTheme);
 
   return (
-    <RectButton
+    <Button
       onPress={onPress}
       style={{
         paddingVertical: 5,
@@ -63,7 +63,7 @@ const OptionButton: React.FC<OptionButtonProps> = ({
       )}
       <Text style={{marginHorizontal: 10, flex: 1}}>{title}</Text>
       <MaterialIcon name="keyboard-arrow-right" size={30} />
-    </RectButton>
+    </Button>
   );
 };
 

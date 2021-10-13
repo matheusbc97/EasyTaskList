@@ -5,18 +5,16 @@ import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
 import {useTranslation} from '@/shared/hooks';
-import {Text, Button} from '@shared/components';
 import {selectAppTheme} from '@store/configs';
+import Button from './Button';
+import Text from '../Text';
 
 interface Props {
   onPress?: (() => void) | undefined;
   showLabel?: boolean;
 }
 
-const ChooseScreenBackButton: React.FC<Props> = ({
-  onPress,
-  showLabel = true,
-}) => {
+const BackButton: React.FC<Props> = ({onPress, showLabel = true}) => {
   const navigation = useNavigation();
   const appTheme = useSelector(selectAppTheme);
   const {translation} = useTranslation();
@@ -49,7 +47,7 @@ const ChooseScreenBackButton: React.FC<Props> = ({
   );
 };
 
-export default ChooseScreenBackButton;
+export default BackButton;
 
 const styles = StyleSheet.create({
   container: {

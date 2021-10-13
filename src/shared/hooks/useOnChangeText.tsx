@@ -13,14 +13,14 @@ const useOnChangeText = (
     (text: string) => void | undefined
   >(
     _.debounce(
-      (text) => validateField && validateField(fieldName, text, error),
+      text => validateField && validateField(fieldName, text, error),
       750,
     ),
     [validateField],
   );
 
   const onChangeText = useCallback(
-    (text) => {
+    text => {
       if (validateField) {
         error
           ? validateField(fieldName, text, error)

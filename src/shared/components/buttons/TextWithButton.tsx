@@ -1,9 +1,10 @@
 import React from 'react';
 import {Text} from '@shared/components';
-import {RectButton, RectButtonProperties} from 'react-native-gesture-handler';
 import {TextStyle, View} from 'react-native';
 
-export interface TextWithButtonProps extends RectButtonProperties {
+import Button, {ButtonProps} from './Button';
+
+export interface TextWithButtonProps extends ButtonProps {
   text: string;
   textInEvidence: string;
   textInEvidenceStyle?: TextStyle;
@@ -23,11 +24,11 @@ const TextWithButton: React.FC<TextWithButtonProps> = ({
       style,
     ]}>
     <Text>{text}</Text>
-    <RectButton onPress={onPress} {...rest}>
+    <Button onPress={onPress} {...rest}>
       <Text primaryColor style={textInEvidenceStyle}>
         {textInEvidence}
       </Text>
-    </RectButton>
+    </Button>
   </View>
 );
 

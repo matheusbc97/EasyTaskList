@@ -2,7 +2,7 @@ import React from 'react';
 
 import {useTranslation} from '@/shared/hooks';
 
-import RoundedButton, {RoundedButtonProps} from './RoundedButton';
+import RoundedButton, {RoundedButtonProps} from '../RoundedButton';
 
 export default function SaveRoundedButton({
   text = '',

@@ -5,8 +5,8 @@ const useMaskedOnChangeText = (
   inputRef: any,
   onChangeText: any,
 ) => {
-  const maskeOnChangeText = useCallback(
-    (text) => {
+  const maskedOnChangeText = useCallback(
+    text => {
       const _text = mask(text, inputRef.current?.value);
       inputRef.current?.setNativeProps({text: _text});
       onChangeText(_text);
@@ -14,7 +14,7 @@ const useMaskedOnChangeText = (
     [inputRef, onChangeText, mask],
   );
 
-  return maskeOnChangeText;
+  return maskedOnChangeText;
 };
 
 export default useMaskedOnChangeText;

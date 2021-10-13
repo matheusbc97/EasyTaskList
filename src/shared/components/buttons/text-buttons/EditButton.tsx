@@ -2,7 +2,8 @@ import React from 'react';
 import {StyleProp, ViewStyle} from 'react-native';
 
 import TextButton from '@/shared/components/buttons/TextButton';
-import {useTranslation, useAppTheme} from '@/shared/hooks';
+import useAppTheme from '@/hooks/useAppTheme';
+import {useTranslation} from '@/shared/hooks';
 
 export interface EditButtonProps {
   onPress: () => void;

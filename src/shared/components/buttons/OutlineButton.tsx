@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, ViewStyle} from 'react-native';
-import {RectButton} from 'react-native-gesture-handler';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
-import {useSelector} from 'react-redux';
+
+import useAppTheme from '@/hooks/useAppTheme';
 
 import Text from '../Text';
-import {selectAppTheme} from '@/store/configs';
+import Button from './Button';
 
 export interface OutlineButtonProps {
   text: string;
@@ -20,10 +20,10 @@ const OutlineButton: React.FC<OutlineButtonProps> = ({
   iconName,
   style,
 }) => {
-  const appTheme = useSelector(selectAppTheme);
+  const appTheme = useAppTheme();
 
   return (
-    <RectButton
+    <Button
       onPress={onPress}
       style={[
         {
@@ -75,7 +75,7 @@ const OutlineButton: React.FC<OutlineButtonProps> = ({
           />
         </View>
       </View>
-    </RectButton>
+    </Button>
   );
 };
 

@@ -1,6 +1,7 @@
 import {useMemo} from 'react';
-import {Category} from '@shared/models';
-import categoryColors from '@assets/categoryColors';
+
+import {Category} from '@/shared/models';
+import categoryColors from '@/assets/categoryColors';
 
 const useCategoryColor = (category: Category | undefined) =>
   useMemo(
