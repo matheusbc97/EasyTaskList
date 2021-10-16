@@ -1,5 +1,5 @@
 import React from 'react';
-import UnformInput, {AppTextInputProps} from './UnformInput';
+import UnformInput, {AppTextInputProps} from '../UnformInput';
 import {useTranslation} from '@/shared/hooks';
 
 export default function NewPasswordInput({

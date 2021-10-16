@@ -1,16 +1,16 @@
 import React from 'react';
-import TextInput, {AppTextInputProps} from './UnformInput';
+import TextInput, {AppTextInputProps} from '../UnformInput';
 import {useTranslation} from '@/shared/hooks';
 
 export default function DescriptionInput({
   label = '',
-  name = 'title',
+  name = 'description',
   ...rest
 }: AppTextInputProps) {
   const {translation} = useTranslation();
 
   if (!label) {
-    label = translation('TITLE');
+    label = translation('DESCRIPTION');
   }
 
   return <TextInput name={name} label={label} {...rest} />;

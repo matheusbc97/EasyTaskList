@@ -1,6 +1,6 @@
 import React, {useMemo, useCallback} from 'react';
 import {FlatList, View} from 'react-native';
-
+import {StackNavigationProp} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 
 import {categoryListSelectors} from '@store/categories';
@@ -9,7 +9,7 @@ import {
   CategoryListItem,
   FloatingActionButton,
 } from '@shared/components';
-import {StackNavigationProp} from '@react-navigation/stack';
+
 import {AuthenticatedStackParams} from '@navigation/types';
 
 type CategoryListNavigationProp = StackNavigationProp<
