@@ -4,9 +4,7 @@ import {
   TextProps as RNTextProps,
   TextStyle,
 } from 'react-native';
-import {useSelector} from 'react-redux';
-
-import {selectAppTheme} from '../../store/configs';
+import useAppTheme from '@/hooks/useAppTheme';
 
 export type TextTypes =
   | 'title'
@@ -31,8 +29,9 @@ const Text = ({
   primaryColor = false,
   secondaryColor = false,
   centerText = false,
+  testID,
 }: TextProps) => {
-  const theme = useSelector(selectAppTheme);
+  const theme = useAppTheme();
 
   const getColor = useCallback(
     defaultColor => {
@@ -111,7 +110,11 @@ const Text = ({
     return textStyle;
   }, [theme, type, getColor, centerText]);
 
-  return <RNText style={[getStyle(), style]}>{children}</RNText>;
+  return (
+    <RNText style={[getStyle(), style]} testID={testID}>
+      {children}
+    </RNText>
+  );
 };
 
 export default Text;

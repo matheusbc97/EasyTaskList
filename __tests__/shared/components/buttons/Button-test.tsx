@@ -36,8 +36,6 @@ describe('Button Component', () => {
 
     const element = await findByTestId('button-base');
 
-    console.log(JSON.stringify(style));
-
     expect(JSON.stringify(element.props.style)).toContain(
       JSON.stringify(style),
     );
