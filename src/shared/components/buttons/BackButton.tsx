@@ -30,7 +30,7 @@ const BackButton: React.FC<Props> = ({onPress, showLabel = true}) => {
         />
         {showLabel && (
           <Text
-            testID="back-button-title"
+            testID="back-button-label"
             type="title"
             primaryColor
             style={styles.text}>

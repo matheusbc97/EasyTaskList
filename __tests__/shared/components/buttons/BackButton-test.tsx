@@ -63,15 +63,13 @@ describe('Button Component', () => {
   it('Should show label', async () => {
     const {findByTestId} = render(<BackButton />);
 
-    const element = await findByTestId('back-button-title');
-
-    expect(element).toBeTruthy();
+    await findByTestId('back-button-label');
   });
 
   it('Should not show label', () => {
     const {queryByTestId} = render(<BackButton showLabel={false} />);
 
-    const element = queryByTestId('back-button-title');
+    const element = queryByTestId('back-button-label');
 
     expect(element).toBeNull();
   });
