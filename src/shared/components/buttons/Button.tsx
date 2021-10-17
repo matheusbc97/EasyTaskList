@@ -8,9 +8,18 @@ export interface ButtonProps {
   disabled?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({children, ...rest}) => {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  disabled,
+  onPress,
+  style,
+}) => {
   return (
-    <TouchableRipple {...rest}>
+    <TouchableRipple
+      testID="button-base"
+      style={style}
+      disabled={disabled}
+      onPress={onPress}>
       <>{children}</>
     </TouchableRipple>
   );

@@ -28,7 +28,7 @@ const TaskListItem: React.FC<Props> = ({task, onPress}) => {
   const formatDate = useFormatDate();
 
   return (
-    <ContainerButton onPress={onPress}>
+    <ContainerButton onPress={() => console.log('teste')} disabled>
       <IconContainer backgroundColor={color}>
         <FontAwesomeIcon
           name={categoryIconNames[task.category?.iconIndex]}

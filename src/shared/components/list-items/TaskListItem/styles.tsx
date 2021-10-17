@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
-import {RectButton} from 'react-native-gesture-handler';
+import Button from '../../buttons/Button';
 import Text from '../../Text';
 
-export const ContainerButton = styled(RectButton)`
+export const ContainerButton = styled(Button)`
   height: 60px;
   background-color: #fff;
   margin: 5px;
