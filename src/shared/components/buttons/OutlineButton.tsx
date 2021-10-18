@@ -52,7 +52,10 @@ const OutlineButton: React.FC<OutlineButtonProps> = ({
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text type="title-medium" style={{padding: 5}}>
+          <Text
+            testID="OutlineButton-text"
+            type="title-medium"
+            style={{padding: 5}}>
             {text}
           </Text>
         </View>

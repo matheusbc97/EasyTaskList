@@ -35,7 +35,7 @@ jest.mock('@/shared/hooks', () => {
   };
 });
 
-describe('Button Component', () => {
+describe('BackButton Component', () => {
   it('Should render a button', () => {
     render(<BackButton />);
   });

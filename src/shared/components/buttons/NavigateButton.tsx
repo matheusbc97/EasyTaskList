@@ -1,29 +1,28 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import {Text} from '@shared/components';
-import {selectAppTheme} from '@store/configs';
+import useAppTheme from '@/hooks/useAppTheme';
 import Button from './Button';
 
 type IconType = 'FontAwesome' | 'FontAwesome5';
 
-interface OptionButtonProps {
+interface NavigateButtonProps {
   title: string;
   iconName: string;
   type?: IconType;
   onPress?(): void;
 }
 
-const OptionButton: React.FC<OptionButtonProps> = ({
+const NavigateButton: React.FC<NavigateButtonProps> = ({
   title,
   iconName,
   type = 'FontAwesome',
   onPress,
 }) => {
-  const appTheme = useSelector(selectAppTheme);
+  const appTheme = useAppTheme();
 
   return (
     <Button
@@ -61,10 +60,14 @@ const OptionButton: React.FC<OptionButtonProps> = ({
           style={{paddingHorizontal: 5}}
         />
       )}
-      <Text style={{marginHorizontal: 10, flex: 1}}>{title}</Text>
+      <Text
+        testID="NavigateButton-title"
+        style={{marginHorizontal: 10, flex: 1}}>
+        {title}
+      </Text>
       <MaterialIcon name="keyboard-arrow-right" size={30} />
     </Button>
   );
 };
 
-export default OptionButton;
+export default NavigateButton;

@@ -1,8 +1,7 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
-import {selectAppTheme} from '@store/configs';
+import useAppTheme from '@/hooks/useAppTheme';
 import Button from './Button';
 
 interface Props {
@@ -10,7 +9,7 @@ interface Props {
 }
 
 const FloatingActionButton: React.FC<Props> = ({onPress}) => {
-  const {secondaryColor, background} = useSelector(selectAppTheme);
+  const {secondaryColor, background} = useAppTheme();
 
   return (
     <Button
