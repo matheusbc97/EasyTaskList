@@ -32,9 +32,9 @@ In this project was used firebase to work as backend.
 - [x] Portuguese Translation
 - [x] User Avatar
 - [x] Themes
+- [x] English Translation
 - [ ] Automated testing
 - [ ] Dark Mode
-- [ ] English Translation
 - [ ] Spanish Translation
 - [ ] PWA
 - [ ] Optimized for Tablets
