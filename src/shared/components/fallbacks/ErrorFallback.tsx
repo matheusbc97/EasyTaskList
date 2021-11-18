@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ShowFallbackComponent from './ShowFallbackComponent';
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 
 export interface ErrorFallbackProps {
   hasError: boolean;

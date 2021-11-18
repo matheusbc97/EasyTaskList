@@ -1,4 +1,4 @@
-import React, {memo, useMemo} from 'react';
+import React, {memo} from 'react';
 import styled from 'styled-components/native';
 
 import {Text} from '@shared/components';
@@ -10,13 +10,13 @@ const Container = styled.View`
 `;
 
 interface ContentProps {
-  paddingLeft: string;
-  paddingRight: string;
+  paddingLeft: number;
+  paddingRight: number;
 }
 
 const Content = styled.View<ContentProps>`
-  padding-left: ${(props) => props.paddingLeft};
-  padding-right: ${(props) => props.paddingRight};
+  padding-left: ${props => props.paddingLeft}px;
+  padding-right: ${props => props.paddingRight}px;
   margin-top: -2px;
   flex: 1;
 `;
@@ -33,32 +33,45 @@ interface Props {
   index: number;
 }
 
+interface AboutListItemContentProps {
+  item: AboutItem;
+  paddingLeft: number;
+  paddingRight: number;
+}
+
+const AboutListItemContent = ({
+  paddingLeft,
+  paddingRight,
+  item,
+}: AboutListItemContentProps) => {
+  return (
+    <Content paddingLeft={paddingLeft} paddingRight={paddingRight}>
+      <Text type="title">{item.title}</Text>
+      <Text>{item.text}</Text>
+    </Content>
+  );
+};
+
 const AboutListItem: React.FC<Props> = ({item, index}) => {
-  const content = useMemo(() => {
+  const getContent = () => {
     if (index % 2 === 0) {
       return (
         <>
           <ImageCircle />
-          <Content paddingLeft={'15px'} paddingRight={'6px'}>
-            <Text type="title">{item.title}</Text>
-            <Text>{item.text}</Text>
-          </Content>
+          <AboutListItemContent paddingLeft={15} paddingRight={6} item={item} />
         </>
       );
     }
 
     return (
       <>
-        <Content paddingLeft={'6px'} paddingRight={'15px'}>
-          <Text type="title">{item.title}</Text>
-          <Text>{item.text}</Text>
-        </Content>
+        <AboutListItemContent item={item} paddingLeft={6} paddingRight={15} />
         <ImageCircle />
       </>
     );
-  }, [item, index]);
+  };
 
-  return <Container>{content}</Container>;
+  return <Container>{getContent()}</Container>;
 };
 
 export default memo(AboutListItem);

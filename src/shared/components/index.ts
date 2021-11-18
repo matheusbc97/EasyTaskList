@@ -9,7 +9,7 @@ import FlatListWithFetchIndicator, {
   FlatListWithFetchIndicatorProps,
 } from './FlatListWithFetchIndicator';
 import LoadingIndicator from './LoadingIndicator';
-import ErrorMessage from './fallbacks/ErrorMessage';
+import ErrorMessage from './ErrorMessage';
 import Avatar from './Avatar';
 import TaskListItem from './list-items/TaskListItem';
 import Header from './Header';

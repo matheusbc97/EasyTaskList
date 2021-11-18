@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import ShowFallbackComponent from './fallbacks/ShowFallbackComponent';
 import EmptyListText from './EmptyListText';
-import ErrorMessage from './fallbacks/ErrorMessage';
+import ErrorMessage from './ErrorMessage';
 import ActivityIndicator from './ActivityIndicator';
 
 export interface FlatListWithFetchIndicatorProps<T> extends FlatListProps<T> {
