@@ -42,6 +42,9 @@ In this project was used firebase to work as backend.
 
 ## Organization
 
+### src/pages
+Where all pages are.
+
 ### src/shared/components
 Where all reusable components are.
 
@@ -101,3 +104,15 @@ function MyComponent() {
   </View>
 }
 ```
+
+### src/shared/components/inputs/
+All inputs are in here, that makes easy to find a button when you need one.
+
+### src/shared/components/list-items/
+All list-items are in here, that makes easy to find a button when you need one.
+
+### src/shared/components/modals/
+All modals are in here, that makes easy to find a button when you need one.
+
+### src/shared/hooks
+Where all reusable hooks are.
