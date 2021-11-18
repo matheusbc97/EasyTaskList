@@ -49,7 +49,7 @@ Where all pages are.
 Where all reusable components are.
 
 #### src/shared/components/*/filled/*
-The filled folder means that is not added nothing new to the component, but some or all props are filled. This is usefull when you have to change the label or the icon of a button that is used in more than one place.
+The filled folder means that is not added nothing new to the component, but some or all props are filled. This is usefull for example, when you only have to change a prop but you have to do in more than one place, like when you have to change the label or the icon of a button that is used in more than one place.
 
 ### src/shared/components/buttons/
 All buttons are in here, that makes easy to find a button when you need one.
