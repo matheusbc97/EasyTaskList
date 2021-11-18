@@ -39,3 +39,65 @@ In this project was used firebase to work as backend.
 - [ ] PWA
 - [ ] Optimized for Tablets
 - [ ] User picture
+
+## Organization
+
+### src/shared/components
+Where all reusable components are.
+
+#### src/shared/components/*/filled/*
+The filled folder means that is not added nothing new to the component, but some or all props are filled. This is usefull when you have to change the label or the icon of a button that is used in more than one place.
+
+### src/shared/components/buttons/
+All buttons are in here, that makes easy to find a button when you need one.
+
+### src/shared/components/containers/
+All containers are in here, that is views with some common style, backgrounds, and every visual component that serves like a container.
+
+### src/shared/components/fallbacks/
+All fallbacks are in here, fallbacks are component to maintain the code declaritive. 
+Example:
+When you have to load something instead make something like that: 
+```
+function MyComponent() {
+  const renderLoading = () => {
+    return(
+      <ActivityIndicator />
+    )
+  }
+  
+  const renderPage = () => {
+    return(
+      <>
+        {/* Page Code... */}
+      </>
+    )
+  }
+
+  <View>
+    {isLoading ? renderLoading() : renderPage()}
+  </View>
+}
+```
+
+ You make something like that: 
+  
+```
+function LoadingFallback({children}) {
+   if(isLoading){
+     return(
+        <ActivityIndicator />
+     )
+   }
+   
+   return children;
+}
+
+function MyComponent() {
+  <View>
+    <LoadingFallback isLoading={isLoading}>
+      {/* Page Code... */}
+    </LoadingFallback>
+  </View>
+}
+```
