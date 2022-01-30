@@ -88,6 +88,7 @@ const RegisterFormTemplate: FunctionalFormComponent<RegisterFormProps> = (
       <ConfirmNewPasswordInput validateField={validateField} />
 
       <CheckInputWithButtonText
+        testID='IHaveReadPrivacyPolicyCheckInput'
         value={privacyPolicyIsChecked}
         onChange={value => setPrivacyPolicyIsChecked(value)}
         text={translation('I_READ_AND_I_AGREE_WITH_THE')}

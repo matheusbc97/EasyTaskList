@@ -8,6 +8,7 @@ export default function EmailInput({
   textContentType = 'emailAddress',
   autoCapitalize = 'none',
   autoCompleteType = 'email',
+  testID = 'EmailInput',
   ...rest
 }: AppTextInputProps) {
   const {translation} = useTranslation();
@@ -18,6 +19,7 @@ export default function EmailInput({
 
   return (
     <UnformInput
+      testID={testID}
       label={label}
       name={name}
       textContentType={textContentType}

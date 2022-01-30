@@ -15,6 +15,7 @@ export interface RoundedButtonProps {
   inverted?: boolean;
   icon?: string | null;
   disabled?: boolean;
+  testID?: string;
 }
 
 const RoundedButton = ({
@@ -25,11 +26,13 @@ const RoundedButton = ({
   inverted,
   icon,
   disabled = false,
+  testID
 }: RoundedButtonProps) => {
   const appTheme = useAppTheme();
 
   return (
     <Button
+      testID={testID}
       disabled={disabled}
       style={[
         styles.container,

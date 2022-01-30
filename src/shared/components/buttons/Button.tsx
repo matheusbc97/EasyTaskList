@@ -6,6 +6,7 @@ export interface ButtonProps {
   style?: StyleProp<ViewStyle>;
   onPress?: () => void;
   disabled?: boolean;
+  testID?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -13,10 +14,11 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   onPress,
   style,
+  testID = "button-base"
 }) => {
   return (
     <TouchableRipple
-      testID="button-base"
+      testID={testID}
       style={style}
       disabled={disabled}
       onPress={onPress}>

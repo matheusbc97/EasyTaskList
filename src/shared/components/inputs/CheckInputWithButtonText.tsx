@@ -10,6 +10,7 @@ interface CheckInputWithButtonTextProps {
   onTextInEvidencePress: () => void;
   text: string;
   textInEvidence: string;
+  testID?: string;
 }
 
 function CheckInputWithButtonText({
@@ -18,6 +19,7 @@ function CheckInputWithButtonText({
   onTextInEvidencePress,
   text,
   textInEvidence,
+  testID,
 }: CheckInputWithButtonTextProps) {
   return (
     <View
@@ -25,7 +27,7 @@ function CheckInputWithButtonText({
         flexDirection: 'row',
         alignItems: 'center',
       }}>
-      <CheckInput value={value} onChange={onChange} />
+      <CheckInput testID={testID} value={value} onChange={onChange} />
 
       <TextWithButton
         style={{flex: 1}}

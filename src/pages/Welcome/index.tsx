@@ -21,7 +21,7 @@ const Welcome = ({navigation}: Props) => {
   const {translation} = useTranslation();
 
   return (
-    <ScreenWrapper style={styles.screen}>
+    <ScreenWrapper style={styles.screen} testID='WelcomeScreenWrapper'>
       <ImageBackground
         source={welcomeBackground}
         imageStyle={styles.imageBackgroundImage}
@@ -50,6 +50,7 @@ const Welcome = ({navigation}: Props) => {
             {translation('REGISTER_BELOW')}
           </Text>
           <RoundedButton
+            testID={'WelcomeCreateAccountButton'}
             onPress={() => navigation.navigate('RegisterForm')}
             text={translation('CREATE_ACCOUNT').toUpperCase()}
             style={styles.buttonInverted}

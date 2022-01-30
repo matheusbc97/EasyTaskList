@@ -8,6 +8,7 @@ export default function NewPasswordInput({
   secureTextEntry = true,
   textContentType = 'newPassword',
   autoCapitalize = 'none',
+  testID = 'newPasswordInput',
   ...rest
 }: AppTextInputProps) {
   const {translation} = useTranslation();
@@ -18,6 +19,7 @@ export default function NewPasswordInput({
 
   return (
     <UnformInput
+      testID={testID}
       label={label}
       name={name}
       secureTextEntry={secureTextEntry}

@@ -36,7 +36,7 @@ const RegisterFormPage: React.FC<Props> = ({navigation}) => {
   } = useOnRegisterUserSuccessAnimation(isConfirmed);
 
   return (
-    <Scroll ref={scrollViewRef}>
+    <Scroll testID='CreateAccountScreenScroll' ref={scrollViewRef}>
       <RegisterFormAnimatedBackground>
         <Content>
           <Header
@@ -49,6 +49,7 @@ const RegisterFormPage: React.FC<Props> = ({navigation}) => {
             <RegisterForm ref={formRef} onSubmitSuccess={handleSubmit} />
             <Animated.View style={{width: confirmButtonWidth, marginTop: 10}}>
               <RoundedButton
+                testID='RegisterSendButton'
                 inverted
                 disabled={isConfirmed}
                 text={isConfirmed ? '' : translation('SEND')}

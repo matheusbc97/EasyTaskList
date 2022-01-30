@@ -7,8 +7,6 @@ import {ADVANCE_BTN} from '@/assets/images';
 import {Text, Button} from '@/shared/components';
 
 const Container = styled.View`
-  position: absolute;
-  bottom: -15px;
   z-index: 3;
   elevation: 3;
 `;
@@ -31,7 +29,7 @@ const AnimatedContainer = Animated.createAnimatedComponent(Container);
 export default function AdvanceButton({style, onPress}: AdvanceButtonProps) {
   return (
     <AnimatedContainer style={style}>
-      <Button onPress={onPress}>
+      <Button onPress={onPress} testID='RegisterAdvanceButton'>
         <Background source={ADVANCE_BTN}>
           <Text type="title" style={{paddingLeft: 20, color: '#1fb7c8'}}>
             AVANÇAR
