@@ -1,5 +1,6 @@
-
+// prettier-ignore
 {
+  "extends": "@tsconfig/react-native/tsconfig.json",     /* Recommended React Native TSConfig base */
   "compilerOptions": {
     /* Basic Options */
     "target": "esnext",                       /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
@@ -65,7 +66,8 @@
     // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     "resolveJsonModule": true,
-    "jsx": "react-native"
+    "jsx": "react-native",
+    "skipLibCheck": true    
   },
   "exclude": [
     "node_modules", "babel.config.js", "metro.config.js", "jest.config.js"
