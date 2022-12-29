@@ -6,13 +6,16 @@ import './translations';
 
 import store from './store';
 import {LoadingHandler, Toast} from './shared/components';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <AppNavigator />
-      <LoadingHandler />
-      <Toast />
+      <SafeAreaProvider>
+        <AppNavigator />
+        <LoadingHandler />
+        <Toast />
+      </SafeAreaProvider>
     </Provider>
   );
 };

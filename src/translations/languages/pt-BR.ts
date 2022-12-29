@@ -7,10 +7,10 @@ export default {
   [tKeys.I_READ_AND_I_AGREE_WITH_THE]: 'Li e concordo com a ',
   [tKeys.TYPE_YOUR_EMAIL_AND_PASSWORD]: 'Type your e-mail and password',
   [tKeys.EASY_TASK_LIST]: 'Minha Agenda',
-  [tKeys.ENTER_WITH_YOUR_ACCOUNT]:
-    'Entre com a sua conta para acessar o aplicativo',
+  [tKeys.WELCOME_INSTRUCTIONS]:
+    'Crie um novo usuário para começar a utilizar o app',
   [tKeys.I_READ_AND_I_AGREE_WITH_THE]: 'Li e concordo com a',
-  [tKeys.LOG_IN]: 'Entrar',
+  [tKeys.CREATE_NEW_USER]: 'Criar usuário',
   [tKeys.PASSWORD]: 'Senha',
   [tKeys.PRIVACY_POLICY]: 'Política de Privacidade',
   [tKeys.QUESTION_ALREADY_HAVE_AN_ACCOUNT]: 'Já possui uma conta?',

@@ -34,6 +34,8 @@ export type AuthenticatedStackParams = {
   ChangeAvatar: undefined;
   ChangePasswordForm: undefined;
   About: undefined;
+  Welcome: undefined;
+  ChooseUserConfigurations: undefined;
 };
 
 export type BottomNavigatorStackParams = {
