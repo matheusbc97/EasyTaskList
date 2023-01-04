@@ -19,15 +19,7 @@ const SaveUserConfiguration: React.FC<Props> = ({onChangePress}) => {
   const {translation} = useTranslation();
 
   const handleFinishRegistrationPress = async () => {
-    try {
-      await updateUser({
-        name: user?.name,
-        avatar: user?.avatar,
-        theme: user?.theme,
-      });
-
-      setUserLogged(true);
-    } catch (error) {}
+    setUserLogged(true);
   };
 
   return (

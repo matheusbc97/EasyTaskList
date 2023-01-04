@@ -10,7 +10,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import {lighten, shade} from 'polished';
 
 import {BottomNavigatorStackParams, AuthenticatedStackParams} from './types';
-import {selectAppTheme} from '../store/configs';
+import {selectAppTheme, selectIsLogged} from '../store/configs';
 
 import Home from '@/pages/Home';
 import Welcome from '@/pages/Welcome';
@@ -110,63 +110,83 @@ function MyTabs() {
 
 const AuthenticatedStack = createStackNavigator<AuthenticatedStackParams>();
 
+type UnauthenticatedStackParams = {
+  Home: undefined;
+  ChooseUserConfigurations: undefined;
+};
+
+const UnauthenticatedStack = createStackNavigator<UnauthenticatedStackParams>();
+
 const App = () => {
+  const isLogged = useSelector(selectIsLogged);
+
   return (
     <NavigationContainer>
-      <AuthenticatedStack.Navigator screenOptions={{headerShown: false}}>
-        <AuthenticatedStack.Screen name="Welcome" component={Welcome} />
-        <AuthenticatedStack.Screen name="BottomNavigation" component={MyTabs} />
-        <AuthenticatedStack.Screen
-          name="CreateTaskForm"
-          component={CreateTaskForm}
-        />
-        <AuthenticatedStack.Screen
-          name="UpdateTaskForm"
-          component={UpdateTaskForm}
-          initialParams={{}}
-        />
-        <AuthenticatedStack.Screen
-          name="CategorySearch"
-          component={CategorySearch}
-        />
-        <AuthenticatedStack.Screen name="About" component={About} />
-        <AuthenticatedStack.Screen
-          name="CreateCategoryForm"
-          component={CreateCategoryForm}
-        />
-        <AuthenticatedStack.Screen
-          name="UpdateCategoryForm"
-          component={UpdateCategoryForm}
-        />
-        <AuthenticatedStack.Screen
-          name="CategoryDetails"
-          component={CategoryDetails}
-        />
-        <AuthenticatedStack.Screen
-          name="ChangeNameForm"
-          component={ChangeNameForm}
-        />
-        <AuthenticatedStack.Screen
-          name="ChangeThemeForm"
-          component={ChangeThemeForm}
-        />
-        <AuthenticatedStack.Screen
-          name="ChangeAvatar"
-          component={ChangeAvatar}
-        />
-        <AuthenticatedStack.Screen
-          name="ChangePasswordForm"
-          component={ChangePasswordForm}
-        />
-        <AuthenticatedStack.Screen name="TaskDetails" component={TaskDetails} />
-        <AuthenticatedStack.Screen
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-          name="ChooseUserConfigurations"
-          component={ChooseUserConfigurations}
-        />
-      </AuthenticatedStack.Navigator>
+      {isLogged ? (
+        <AuthenticatedStack.Navigator screenOptions={{headerShown: false}}>
+          <AuthenticatedStack.Screen
+            name="BottomNavigation"
+            component={MyTabs}
+          />
+          <AuthenticatedStack.Screen
+            name="CreateTaskForm"
+            component={CreateTaskForm}
+          />
+          <AuthenticatedStack.Screen
+            name="UpdateTaskForm"
+            component={UpdateTaskForm}
+            initialParams={{}}
+          />
+          <AuthenticatedStack.Screen
+            name="CategorySearch"
+            component={CategorySearch}
+          />
+          <AuthenticatedStack.Screen name="About" component={About} />
+          <AuthenticatedStack.Screen
+            name="CreateCategoryForm"
+            component={CreateCategoryForm}
+          />
+          <AuthenticatedStack.Screen
+            name="UpdateCategoryForm"
+            component={UpdateCategoryForm}
+          />
+          <AuthenticatedStack.Screen
+            name="CategoryDetails"
+            component={CategoryDetails}
+          />
+          <AuthenticatedStack.Screen
+            name="ChangeNameForm"
+            component={ChangeNameForm}
+          />
+          <AuthenticatedStack.Screen
+            name="ChangeThemeForm"
+            component={ChangeThemeForm}
+          />
+          <AuthenticatedStack.Screen
+            name="ChangeAvatar"
+            component={ChangeAvatar}
+          />
+          <AuthenticatedStack.Screen
+            name="ChangePasswordForm"
+            component={ChangePasswordForm}
+          />
+          <AuthenticatedStack.Screen
+            name="TaskDetails"
+            component={TaskDetails}
+          />
+        </AuthenticatedStack.Navigator>
+      ) : (
+        <UnauthenticatedStack.Navigator>
+          <UnauthenticatedStack.Screen name="Welcome" component={Welcome} />
+          <UnauthenticatedStack.Screen
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+            name="ChooseUserConfigurations"
+            component={ChooseUserConfigurations}
+          />
+        </UnauthenticatedStack.Navigator>
+      )}
     </NavigationContainer>
   );
 };
