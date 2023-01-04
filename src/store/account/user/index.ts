@@ -10,29 +10,23 @@ import {
 } from './thunkActions';
 import {selectUser, selectUserName} from './selectors';
 
-type State = User | null;
+type State = User;
 
 const user = createSlice({
   name: 'account/user',
-  initialState: null as State,
+  initialState: {name: '', email: '', theme: null, uid: ''} as State,
   reducers: {
     setUserName: (state, action: PayloadAction<string>) => {
-      if (state) {
-        state.name = action.payload;
-      }
+      state.name = action.payload;
     },
     setUserAvatar: (state, action: PayloadAction<number>) => {
-      if (state) {
-        state.avatar = action.payload;
-      }
+      state.avatar = action.payload;
     },
     setUserTheme: (state, action: PayloadAction<AppThemeName>) => {
-      if (state) {
-        state.theme = action.payload;
-      }
+      state.theme = action.payload;
     },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(authenticateUser.fulfilled, (state, action) => {
       return action.payload.user as User;
     });

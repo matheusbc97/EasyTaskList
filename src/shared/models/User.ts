@@ -6,5 +6,5 @@ export type User = {
   name: string;
   avatar?: number;
   image?: string;
-  theme: AppThemeName;
+  theme: AppThemeName | null;
 };
