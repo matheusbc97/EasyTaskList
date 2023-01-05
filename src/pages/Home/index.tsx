@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, FlatList} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
@@ -49,10 +49,6 @@ const Home: React.FC<Props> = ({navigation}) => {
 
   const fetchTasks = useFetchTasks();
   const {tasksFetchState, tasksNotDone} = useTaskNotDone();
-
-  useEffect(() => {
-    fetchTasks();
-  }, [fetchTasks]);
 
   return (
     <ScreenWrapper>

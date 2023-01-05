@@ -8,20 +8,26 @@ import {
 import {selectCategoriesFetchState, categoryListSelectors} from './selectors';
 import {categoryAdapter} from './adapters';
 import {Category} from '@shared/models';
+import {categoriesInitialState} from '@/initialStates/categoriesInitialState';
 
-const initialState = categoryAdapter.getInitialState({
+const defaultState = categoryAdapter.getInitialState({
   fetchState: {
     isLoading: false,
     hasError: false,
   },
 });
 
+const filledState = categoryAdapter.setAll(
+  defaultState,
+  categoriesInitialState,
+);
+
 const categories = createSlice({
   name: 'account/categories',
-  initialState,
+  initialState: filledState,
   reducers: {
     resetCategories: () => {
-      return initialState;
+      return filledState;
     },
     setCategoriesLoading: (state, action: PayloadAction<boolean>) => {
       state.fetchState.isLoading = action.payload;
@@ -30,8 +36,8 @@ const categories = createSlice({
       categoryAdapter.setAll(state, action.payload);
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(getUserCategories.pending, (state) => {
+  extraReducers: builder => {
+    builder.addCase(getUserCategories.pending, state => {
       state.fetchState.hasError = false;
       state.fetchState.isLoading = true;
     });
@@ -41,7 +47,7 @@ const categories = createSlice({
       state.fetchState.isLoading = false;
     });
 
-    builder.addCase(getUserCategories.rejected, (state) => {
+    builder.addCase(getUserCategories.rejected, state => {
       state.fetchState.isLoading = false;
       state.fetchState.hasError = true;
     });

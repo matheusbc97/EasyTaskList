@@ -14,7 +14,13 @@ type State = User;
 
 const user = createSlice({
   name: 'account/user',
-  initialState: {name: '', email: '', theme: null, uid: ''} as State,
+  initialState: {
+    name: 'Teste',
+    email: 'teste@teste.com',
+    theme: 'BLUE_GREEN',
+    uid: '1',
+    avatar: 1,
+  } as State,
   reducers: {
     setUserName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;

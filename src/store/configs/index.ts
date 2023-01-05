@@ -7,7 +7,7 @@ const initialTheme = BLUE_GREEN;
 
 const initialState = {
   theme: initialTheme,
-  isLogged: false,
+  isLogged: true,
 };
 
 const configs = createSlice({
@@ -28,12 +28,8 @@ const configs = createSlice({
 });
 
 export default configs.reducer;
-export const {
-  setAppTheme,
-  resetAppTheme,
-  setIsLogged,
-  resetAll,
-} = configs.actions;
+export const {setAppTheme, resetAppTheme, setIsLogged, resetAll} =
+  configs.actions;
 
 export const selectAppTheme = (state: RootState) => state.configs.theme;
 
