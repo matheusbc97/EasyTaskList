@@ -7,7 +7,7 @@ const initialTheme = BLUE_GREEN;
 
 const initialState = {
   theme: initialTheme,
-  isLogged: true,
+  isLogged: false,
 };
 
 const configs = createSlice({
@@ -23,7 +23,9 @@ const configs = createSlice({
     setIsLogged: (state, action: PayloadAction<boolean>) => {
       state.isLogged = action.payload;
     },
-    resetAll: () => {},
+    resetAll: () => {
+      return initialState;
+    },
   },
 });
 

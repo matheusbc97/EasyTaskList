@@ -1,11 +1,11 @@
 import {useDispatch} from 'react-redux';
-import {resetUser} from '@/store/account/user';
+import {resetAll} from '@store/configs';
 
 const useSignOut = () => {
   const dispatch = useDispatch();
 
   const logOut = () => {
-    dispatch(resetUser());
+    dispatch(resetAll());
   };
 
   return logOut;

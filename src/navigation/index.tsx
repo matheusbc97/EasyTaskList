@@ -24,7 +24,6 @@ import CategoryDetails from '@/pages/CategoryDetails';
 import ChangeNameForm from '@/pages/ChangeNameForm';
 import ChangeThemeForm from '@/pages/ChangeThemeForm';
 import ChangeAvatar from '@/pages/ChangeAvatar';
-import ChangePasswordForm from '@/pages/ChangePasswordForm';
 import About from '@pages/About';
 import CreateTaskForm from '@/pages/CreateTaskForm';
 import UpdateTaskForm from '@/pages/UpdateTaskForm';
@@ -165,10 +164,6 @@ const App = () => {
           <AuthenticatedStack.Screen
             name="ChangeAvatar"
             component={ChangeAvatar}
-          />
-          <AuthenticatedStack.Screen
-            name="ChangePasswordForm"
-            component={ChangePasswordForm}
           />
           <AuthenticatedStack.Screen
             name="TaskDetails"

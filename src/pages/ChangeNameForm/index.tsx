@@ -13,7 +13,7 @@ import {
   FormContainer,
 } from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
-import {selectUserName, updateUser} from '@/store/account/user';
+import {selectUserName, setUserName, updateUser} from '@/store/account/user';
 import {showToast} from '@/shared/components/Toast';
 import NameForm from '@/templates/forms/NameForm';
 import {FormHandles} from '@/shared/models';
@@ -27,24 +27,15 @@ function ChangeNameForm({navigation}: Props) {
   const dispatch = useDispatch();
   const {translation} = useTranslation();
 
-  const handleSaveName = useCallback(
-    async (name: string) => {
-      const payloadAction = await dispatch(
-        updateUser({
-          name,
-        }),
-      );
+  const handleSaveName = (name: string) => {
+    dispatch(setUserName(name));
 
-      if (payloadAction.payload) {
-        navigation.navigate('BottomNavigation');
-        showToast({
-          text: 'Nome alterado com sucesso',
-          type: 'success',
-        });
-      }
-    },
-    [dispatch, navigation],
-  );
+    navigation.navigate('BottomNavigation');
+    showToast({
+      text: 'Nome alterado com sucesso',
+      type: 'success',
+    });
+  };
 
   const formRef = useRef<FormHandles>(null);
   const userName = useSelector(selectUserName);

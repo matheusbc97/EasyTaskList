@@ -1,5 +1,5 @@
-import React, {useEffect, useCallback} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React from 'react';
+import {useSelector} from 'react-redux';
 
 import {
   ScreenWrapper,
@@ -10,10 +10,8 @@ import {AuthenticatedStackParams} from '@navigation/types';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import {
-  getAboutItems,
   selectAboutItemsFetchState,
   aboutItemsListSelectors,
-  resetAboutItems,
 } from '@store/about';
 
 import AboutListItem from './AboutListItem';
@@ -24,18 +22,6 @@ interface Props {
 }
 
 const About: React.FC<Props> = ({navigation}) => {
-  const dispatch = useDispatch();
-
-  const getAboutList = useCallback(() => dispatch(getAboutItems()), [dispatch]);
-
-  useEffect(() => {
-    getAboutList();
-
-    return () => {
-      dispatch(resetAboutItems());
-    };
-  }, [dispatch, getAboutList]);
-
   const aboutItems = useSelector(aboutItemsListSelectors.selectAll);
   const fetchState = useSelector(selectAboutItemsFetchState);
 
@@ -48,7 +34,6 @@ const About: React.FC<Props> = ({navigation}) => {
       <Content>
         <FlatListWithFetchIndicator
           keyExtractor={item => item.id}
-          onRefresh={getAboutList}
           data={aboutItems}
           isLoading={fetchState.isLoading}
           hasError={fetchState.hasError}

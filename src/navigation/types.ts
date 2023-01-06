@@ -32,7 +32,6 @@ export type AuthenticatedStackParams = {
   ChangeNameForm: undefined;
   ChangeThemeForm: undefined;
   ChangeAvatar: undefined;
-  ChangePasswordForm: undefined;
   About: undefined;
   Welcome: undefined;
   ChooseUserConfigurations: undefined;

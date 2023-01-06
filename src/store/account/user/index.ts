@@ -4,7 +4,6 @@ import {User, AppThemeName} from '@shared/models';
 import {
   authenticateUser,
   registerUser,
-  verifyIfUserIsLogged,
   resetUser,
   updateUser,
 } from './thunkActions';
@@ -31,30 +30,6 @@ const user = createSlice({
     setUserTheme: (state, action: PayloadAction<AppThemeName>) => {
       state.theme = action.payload;
     },
-  },
-  extraReducers: builder => {
-    builder.addCase(authenticateUser.fulfilled, (state, action) => {
-      return action.payload.user as User;
-    });
-
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      return action.payload as User;
-    });
-
-    builder.addCase(verifyIfUserIsLogged.fulfilled, (state, action) => {
-      return action.payload as User;
-    });
-
-    builder.addCase(resetUser.fulfilled, () => {
-      return null;
-    });
-
-    builder.addCase(updateUser.fulfilled, (state, action) => {
-      return {
-        ...state,
-        ...action.payload,
-      } as State;
-    });
   },
 });
 

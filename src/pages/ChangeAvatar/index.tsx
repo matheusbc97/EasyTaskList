@@ -14,7 +14,7 @@ import {
   FormContainer,
 } from '@shared/components';
 import AvatarList from '@/templates/AvatarGrid';
-import {selectUser, updateUser} from '@store/account/user';
+import {selectUser, setUserAvatar} from '@store/account/user';
 import {showToast} from '@shared/components/Toast';
 
 import {Header, AvatarListContainer} from './styles';
@@ -33,11 +33,7 @@ function ChangeAvatar({navigation}: Props) {
 
   const handleSaveAvatar = useCallback(
     async (avatarIndex: number) => {
-      const payloadAction = await dispatch(
-        updateUser({
-          avatar: avatarIndex,
-        }),
-      );
+      const payloadAction = dispatch(setUserAvatar(avatarIndex));
 
       if (payloadAction.payload) {
         navigation.navigate('BottomNavigation');

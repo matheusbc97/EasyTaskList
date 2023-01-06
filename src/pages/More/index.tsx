@@ -40,12 +40,6 @@ export default function More({navigation}: Props) {
         onPress={() => navigation.navigate('ChangeThemeForm')}
       />
       <NavigateButton
-        title={translation('CHANGE_PASSWORD')}
-        iconName="key"
-        type="FontAwesome5"
-        onPress={() => navigation.navigate('ChangePasswordForm')}
-      />
-      <NavigateButton
         title={translation('ABOUT')}
         iconName="info-circle"
         type="FontAwesome5"
