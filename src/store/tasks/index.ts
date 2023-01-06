@@ -1,12 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {
-  createTask,
-  getTasks,
-  updateTask,
-  updateTaskStatus,
-  CreateTaskDTO,
-} from './thunkActions';
+import {createTask, getTasks, CreateTaskDTO} from './thunkActions';
 import {
   tasksListSelectors,
   selectTasksFetchState,
@@ -49,54 +43,33 @@ const tasks = createSlice({
     addOneTask: (state, action: PayloadAction<Task>) => {
       tasksAdapter.addOne(state, action.payload);
     },
-  },
-  extraReducers: builder => {
-    builder.addCase(createTask.fulfilled, (state, action) => {
-      tasksAdapter.addOne(state, action.payload);
-    });
-
-    builder.addCase(
-      updateTask.fulfilled,
-      (state, {payload: {id, ...changes}}) => {
-        tasksAdapter.updateOne(state, {id, changes});
-      },
-    );
-
-    builder.addCase(
-      updateTaskStatus.fulfilled,
-      (state, {payload: {id, ...changes}}) => {
-        tasksAdapter.updateOne(state, {id, changes});
-      },
-    );
-
-    builder.addCase(getTasks.pending, state => {
-      state.fetchState.isLoading = true;
-      state.fetchState.hasError = false;
-    });
-
-    builder.addCase(getTasks.fulfilled, (state, action) => {
-      tasksAdapter.setAll(state, action.payload);
-      state.fetchState.isLoading = false;
-      state.fetchState.hasError = false;
-    });
-
-    builder.addCase(getTasks.rejected, state => {
-      state.fetchState.isLoading = false;
-      state.fetchState.hasError = true;
-    });
+    updateTask: (
+      state,
+      {
+        payload: {id, changes},
+      }: PayloadAction<{id: string; changes: Partial<Task>}>,
+    ) => {
+      tasksAdapter.updateOne(state, {
+        id,
+        changes,
+      });
+    },
+    deleteTask: (state, action: PayloadAction<{id: string}>) => {
+      tasksAdapter.removeOne(state, action.payload.id);
+    },
   },
 });
 
 export default tasks.reducer;
 
-export const {resetTasks, removeTaskById, addOneTask} = tasks.actions;
+export const {resetTasks, removeTaskById, addOneTask, updateTask, deleteTask} =
+  tasks.actions;
 
 export {
   tasksListSelectors,
   createTask,
   selectTasksFetchState,
   getTasks,
-  updateTask,
   selectTaskOfCategory,
   selectTasksNotDone,
 };

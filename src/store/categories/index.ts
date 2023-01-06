@@ -1,10 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {
-  getUserCategories,
-  createCategory,
-  updateCategory,
-} from './thunkActions';
+import {getUserCategories} from './thunkActions';
 import {selectCategoriesFetchState, categoryListSelectors} from './selectors';
 import {categoryAdapter} from './adapters';
 import {Category} from '@shared/models';
@@ -35,44 +31,23 @@ const categories = createSlice({
     setCategories: (state, action: PayloadAction<Category[]>) => {
       categoryAdapter.setAll(state, action.payload);
     },
-  },
-  extraReducers: builder => {
-    builder.addCase(getUserCategories.pending, state => {
-      state.fetchState.hasError = false;
-      state.fetchState.isLoading = true;
-    });
-
-    builder.addCase(getUserCategories.fulfilled, (state, action) => {
-      categoryAdapter.setAll(state, action.payload);
-      state.fetchState.isLoading = false;
-    });
-
-    builder.addCase(getUserCategories.rejected, state => {
-      state.fetchState.isLoading = false;
-      state.fetchState.hasError = true;
-    });
-
-    builder.addCase(createCategory.fulfilled, (state, action) => {
+    createCategory: (state, action: PayloadAction<Category>) => {
       categoryAdapter.addOne(state, action.payload);
-    });
-
-    builder.addCase(
-      updateCategory.fulfilled,
-      (state, {payload: {id, ...changes}}) => {
-        categoryAdapter.updateOne(state, {id, changes});
-      },
-    );
+    },
+    updateCategory: (
+      state,
+      {
+        payload: {id, changes},
+      }: PayloadAction<{id: string; changes: Partial<Category>}>,
+    ) => {
+      categoryAdapter.updateOne(state, {id, changes});
+    },
   },
 });
 
 export default categories.reducer;
 
-export const {resetCategories, setCategories} = categories.actions;
+export const {resetCategories, setCategories, createCategory, updateCategory} =
+  categories.actions;
 
-export {
-  getUserCategories,
-  selectCategoriesFetchState,
-  categoryListSelectors,
-  createCategory,
-  updateCategory,
-};
+export {getUserCategories, selectCategoriesFetchState, categoryListSelectors};

@@ -17,11 +17,10 @@ import {
   EditButton,
   DeleteButton,
 } from '@/shared/components';
-import {updateTaskStatus} from '@/store/tasks/thunkActions';
 import categoryIconNames from '@/assets/categoryIconNames';
 import {useTranslation, useCategoryColor, useFormatDate} from '@/shared/hooks';
 import {AuthenticatedStackParams} from '@/navigation/types';
-import useDeleteTask from '@/hooks/useDeleteTask';
+//import useDeleteTask from '@/hooks/useDeleteTask';
 
 import {
   CategoryContainer,
@@ -29,6 +28,7 @@ import {
   DoneCheckButton,
   Footer,
 } from './styles';
+import {deleteTask, updateTask} from '@store/tasks';
 
 export interface TaskDetailsProps {
   route: RouteProp<AuthenticatedStackParams, 'TaskDetails'>;
@@ -40,7 +40,7 @@ export default function TaskDetails({route, navigation}: TaskDetailsProps) {
 
   const [task, setTask] = useState(route.params.task);
 
-  const deleteTask = useDeleteTask();
+  //const deleteTask = useDeleteTask();
 
   const color = useCategoryColor(task.category);
   const dispatch = useDispatch();
@@ -49,11 +49,24 @@ export default function TaskDetails({route, navigation}: TaskDetailsProps) {
 
   const handleMarkAsDonePress = () => {
     dispatch(
-      updateTaskStatus({
+      updateTask({
         id: task.id,
-        done: !task.done,
+        changes: {
+          done: !task.done,
+        },
       }),
     );
+
+    setTask(oldState => ({
+      ...oldState,
+      done: !task.done,
+    }));
+  };
+
+  const handleDeleteTask = () => {
+    dispatch(deleteTask({id: task.id}));
+
+    navigation.goBack();
   };
 
   const navigateToTaskForm = () => {
@@ -109,16 +122,7 @@ export default function TaskDetails({route, navigation}: TaskDetailsProps) {
 
       <Section style={{marginTop: 5}} contentStyle={{paddingTop: 0}}>
         <Footer>
-          <DeleteButton
-            style={{flex: 1}}
-            onPress={async () => {
-              try {
-                await deleteTask(task.id);
-
-                navigation.goBack();
-              } catch (error) {}
-            }}
-          />
+          <DeleteButton style={{flex: 1}} onPress={handleDeleteTask} />
           <VerticalSeparator />
           <EditButton style={{flex: 1}} onPress={navigateToTaskForm} />
         </Footer>

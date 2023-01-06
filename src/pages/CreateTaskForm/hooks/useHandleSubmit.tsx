@@ -1,5 +1,4 @@
 import {useNavigation} from '@react-navigation/native';
-import uuid from 'react-native-uuid';
 
 import {FormObject} from '@/templates/forms/TaskForm';
 import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
@@ -8,6 +7,7 @@ import {CreateTaskFormNavigationProp} from '../types';
 import {addOneTask} from '@/store/tasks';
 import {Task} from '@shared/models';
 import {useDispatch} from 'react-redux';
+import {createId} from '@shared/utils/createId';
 
 const useHandleSubmit = () => {
   const navigation = useNavigation<CreateTaskFormNavigationProp>();
@@ -20,7 +20,7 @@ const useHandleSubmit = () => {
       date: getDateByDateAndTime(form.date, form.time).toISOString(),
       description: form.description,
       done: false,
-      id: String(uuid.v4()),
+      id: createId(),
     };
 
     dispatch(addOneTask(newTask));
