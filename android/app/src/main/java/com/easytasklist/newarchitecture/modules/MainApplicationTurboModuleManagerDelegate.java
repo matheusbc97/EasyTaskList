@@ -1,4 +1,4 @@
-package br.com.devaneio.easytasklist.newarchitecture.modules;
+package com.easytasklist.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

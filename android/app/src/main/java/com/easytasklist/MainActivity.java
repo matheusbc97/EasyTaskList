@@ -1,4 +1,4 @@
-package br.com.devaneio.easytasklist;
+package com.easytasklist;
 import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;

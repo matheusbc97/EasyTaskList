@@ -1,4 +1,4 @@
-package br.com.devaneio.easytasklist.newarchitecture;
+package com.easytasklist.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import br.com.devaneio.easytasklist.BuildConfig;
-import br.com.devaneio.easytasklist.newarchitecture.components.MainComponentsRegistry;
-import br.com.devaneio.easytasklist.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.easytasklist.BuildConfig;
+import com.easytasklist.newarchitecture.components.MainComponentsRegistry;
+import com.easytasklist.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
