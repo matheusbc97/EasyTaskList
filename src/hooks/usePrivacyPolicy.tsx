@@ -1,4 +1,3 @@
-import {getPrivacyPolicy as fbGetPrivacyPolicy} from '@/shared/firebase';
 import {handleErrorMessage} from '@/shared/utils/errorHandler';
 import {useState, useCallback} from 'react';
 
@@ -13,7 +12,7 @@ const usePrivacyPolicy = () => {
 
   const getPrivacyPolicy = useCallback(async () => {
     try {
-      const _privacyPolicy = await fbGetPrivacyPolicy();
+      const _privacyPolicy = 'teste';
 
       setPrivacyPolicy(_privacyPolicy);
       setFetchState({

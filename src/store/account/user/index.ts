@@ -1,12 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {User, AppThemeName} from '@shared/models';
-import {
-  authenticateUser,
-  registerUser,
-  resetUser,
-  updateUser,
-} from './thunkActions';
 import {selectUser, selectUserName} from './selectors';
 
 type State = User;
@@ -37,11 +31,4 @@ export default user.reducer;
 
 export const {setUserName, setUserAvatar, setUserTheme} = user.actions;
 
-export {
-  authenticateUser,
-  selectUser,
-  registerUser,
-  selectUserName,
-  resetUser,
-  updateUser,
-};
+export {selectUser, selectUserName};

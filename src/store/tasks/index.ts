@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {createTask, getTasks, CreateTaskDTO} from './thunkActions';
 import {
   tasksListSelectors,
   selectTasksFetchState,
@@ -67,11 +66,7 @@ export const {resetTasks, removeTaskById, addOneTask, updateTask, deleteTask} =
 
 export {
   tasksListSelectors,
-  createTask,
   selectTasksFetchState,
-  getTasks,
   selectTaskOfCategory,
   selectTasksNotDone,
 };
-
-export type {CreateTaskDTO};

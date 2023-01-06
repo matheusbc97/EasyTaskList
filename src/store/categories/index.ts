@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {getUserCategories} from './thunkActions';
 import {selectCategoriesFetchState, categoryListSelectors} from './selectors';
 import {categoryAdapter} from './adapters';
 import {Category} from '@shared/models';
@@ -50,4 +49,4 @@ export default categories.reducer;
 export const {resetCategories, setCategories, createCategory, updateCategory} =
   categories.actions;
 
-export {getUserCategories, selectCategoriesFetchState, categoryListSelectors};
+export {selectCategoriesFetchState, categoryListSelectors};
