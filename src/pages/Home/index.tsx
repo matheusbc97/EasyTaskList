@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, FlatList} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
@@ -18,6 +18,8 @@ import TasksList from '@/templates/lists/TaskList';
 
 import CategoriesList from './templates/CategoriesList';
 import HomeHeader from './components/HomeHeader';
+import {database} from '../../database';
+import PostModel from '@/database/model/PostModel';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -49,6 +51,23 @@ const Home: React.FC<Props> = ({navigation}) => {
 
   const fetchTasks = useFetchTasks();
   const {tasksFetchState, tasksNotDone} = useTaskNotDone();
+
+  useEffect(() => {
+    (async () => {
+      const postsCollection = await database
+        .get<PostModel>('posts')
+        .query()
+        .fetchCount();
+
+      console.log('postsCollection', postsCollection);
+
+      await database.write(async () => {
+        await database.get<PostModel>('posts').create(data => {
+          data.name = 'teste';
+        });
+      });
+    })();
+  }, []);
 
   return (
     <ScreenWrapper>

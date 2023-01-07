@@ -7,7 +7,7 @@ const initialTheme = BLUE_GREEN;
 
 const initialState = {
   theme: initialTheme,
-  isLogged: false,
+  isLogged: true,
 };
 
 const configs = createSlice({

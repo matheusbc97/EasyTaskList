@@ -7,6 +7,12 @@ install! 'cocoapods', :deterministic_uuids => false
 target 'EasyTaskList' do
   config = use_native_modules!
 
+  # wmelon NOTE: Do not remove, needed to keep WatermelonDB compiling:
+  pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi', :modular_headers => true
+
+  # wmelon NOTE: This is required as of v0.23
+  pod 'simdjson', path: '../node_modules/@nozbe/simdjson'
+
   # Flags change depending on the env values.
   flags = get_default_flags()
 
@@ -15,7 +21,7 @@ target 'EasyTaskList' do
     # Hermes is now enabled by default. Disable by setting this flag to false.
     # Upcoming versions of React Native may rely on get_default_flags(), but
     # we make it explicit here to aid in the React Native upgrade process.
-    :hermes_enabled => true,
+    :hermes_enabled => false,
     :fabric_enabled => flags[:fabric_enabled],
     # Enables Flipper.
     #

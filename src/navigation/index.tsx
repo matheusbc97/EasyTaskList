@@ -45,14 +45,16 @@ function MyTabs() {
   return (
     <Tab.Navigator
       tabBar={props => <BottonTabNavigator {...props} />}
-      tabBarOptions={{
-        activeBackgroundColor: appTheme.primaryColor,
+      screenOptions={
+        {
+          /*activeBackgroundColor: appTheme.primaryColor,
         inactiveBackgroundColor: appTheme.primaryColor,
         inactiveTintColor: appTheme.dark
           ? lighten(0.3, appTheme.primaryColor)
           : shade(0.5, appTheme.primaryColor),
-        activeTintColor: '#FAFAFA',
-      }}>
+        activeTintColor: '#FAFAFA',*/
+        }
+      }>
       <Tab.Screen
         name="Home"
         component={Home}
