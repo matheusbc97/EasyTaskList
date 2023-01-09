@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 import {StyleProp, ViewStyle} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 
@@ -9,13 +9,13 @@ export interface ButtonProps {
   testID?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({
+function Button({
   children,
   disabled,
   onPress,
   style,
-  testID = "button-base"
-}) => {
+  testID = 'button-base',
+}: PropsWithChildren<ButtonProps>) {
   return (
     <TouchableRipple
       testID={testID}
@@ -25,6 +25,6 @@ const Button: React.FC<ButtonProps> = ({
       <>{children}</>
     </TouchableRipple>
   );
-};
+}
 
 export default Button;

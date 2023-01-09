@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
-
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {selectAppTheme} from '@store/configs';
+
+import {selectAppTheme} from '@/store/configs';
 import {Button} from '@/shared/components';
 
 interface Props extends BottomTabBarProps {}

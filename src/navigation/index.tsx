@@ -5,19 +5,15 @@ import {useSelector} from 'react-redux';
 
 import {selectIsLogged} from '@/store/configs';
 
-import AuthenticatedStackNavigator from './navigators/AuthenticatedStackNavigator';
-import UnauthenticatedStackNavigator from './navigators/UnauthenticatedStackNavigator';
+import LoggedStackNavigator from './navigators/LoggedStackNavigator';
+import UnLoggedStackNavigator from './navigators/UnLoggedStackNavigator';
 
 const AppNavigator = () => {
   const isLogged = useSelector(selectIsLogged);
 
   return (
     <NavigationContainer>
-      {isLogged ? (
-        <AuthenticatedStackNavigator />
-      ) : (
-        <UnauthenticatedStackNavigator />
-      )}
+      {isLogged ? <LoggedStackNavigator /> : <UnLoggedStackNavigator />}
     </NavigationContainer>
   );
 };

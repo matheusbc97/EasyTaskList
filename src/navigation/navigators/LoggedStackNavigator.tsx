@@ -15,7 +15,7 @@ import UpdateTaskForm from '@/pages/UpdateTaskForm';
 import CreateCategoryForm from '@/pages/CreateCategoryForm';
 import UpdateCategoryForm from '@/pages/UpdateCategoryForm';
 import TaskDetails from '@/pages/TaskDetails';
-import {TabNavigator} from './TabNavigator';
+import {BottomTabsNavigator} from './BottomTabsNavigator';
 
 const AuthenticatedStack = createStackNavigator<AuthenticatedStackParams>();
 
@@ -24,7 +24,7 @@ function AuthenticatedStackNavigator() {
     <AuthenticatedStack.Navigator screenOptions={{headerShown: false}}>
       <AuthenticatedStack.Screen
         name="BottomNavigation"
-        component={TabNavigator}
+        component={BottomTabsNavigator}
       />
       <AuthenticatedStack.Screen
         name="CreateTaskForm"

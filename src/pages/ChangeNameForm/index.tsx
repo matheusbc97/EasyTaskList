@@ -1,4 +1,4 @@
-import React, {useCallback, useRef} from 'react';
+import React, {useRef} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthenticatedStackParams} from '@navigation/types';
 import {RouteProp} from '@react-navigation/native';
@@ -13,7 +13,7 @@ import {
   FormContainer,
 } from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
-import {selectUserName, setUserName, updateUser} from '@/store/account/user';
+import {selectUserName, setUserName} from '@/store/account/user';
 import {showToast} from '@/shared/components/Toast';
 import NameForm from '@/templates/forms/NameForm';
 import {FormHandles} from '@/shared/models';

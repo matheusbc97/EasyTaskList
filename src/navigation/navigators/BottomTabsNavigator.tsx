@@ -10,21 +10,22 @@ import TaskList from '@/pages/TaskList';
 import More from '@/pages/More';
 import CategoryList from '@/pages/CategoryList';
 
-import BottonTabNavigator from './BottonTabNavigator';
+import BottomTabs from '../components/BottomTabs';
 
 import {useTranslation} from '@/shared/hooks';
 
 const Tab = createBottomTabNavigator<BottomNavigatorStackParams>();
 
-export function TabNavigator() {
+export function BottomTabsNavigator() {
   const {translation} = useTranslation();
   //const appTheme = useSelector(selectAppTheme);
 
   return (
     <Tab.Navigator
-      tabBar={props => <BottonTabNavigator {...props} />}
+      tabBar={props => <BottomTabs {...props} />}
       screenOptions={{
         headerShown: false,
+
         /*activeBackgroundColor: appTheme.primaryColor,
         inactiveBackgroundColor: appTheme.primaryColor,
         inactiveTintColor: appTheme.dark
