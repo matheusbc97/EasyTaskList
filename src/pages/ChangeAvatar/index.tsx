@@ -21,8 +21,8 @@ import {Header, AvatarListContainer} from './styles';
 import {useTranslation} from '@/shared/hooks';
 
 interface Props {
-  navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryDetails'>;
-  route: RouteProp<AuthenticatedStackParams, 'CategoryDetails'>;
+  navigation: StackNavigationProp<AuthenticatedStackParams, 'ChangeAvatar'>;
+  route: RouteProp<AuthenticatedStackParams, 'ChangeAvatar'>;
 }
 
 function ChangeAvatar({navigation}: Props) {

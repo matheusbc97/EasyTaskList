@@ -1,9 +1,6 @@
-import React, {useMemo, useCallback} from 'react';
-import {FlatList, View} from 'react-native';
+import React from 'react';
+import {FlatList} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useSelector} from 'react-redux';
-
-import {categoryListSelectors} from '@store/categories';
 import {
   ScreenWrapper,
   CategoryListItem,
@@ -11,6 +8,7 @@ import {
 } from '@shared/components';
 
 import {AuthenticatedStackParams} from '@navigation/types';
+import {useGetCategories} from './hooks/useGetCategories';
 
 type CategoryListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -21,58 +19,24 @@ interface Props {
   navigation: CategoryListNavigationProp;
 }
 
-const rows = 3;
-
 const CategoryList: React.FC<Props> = ({navigation}) => {
-  const lsCategories = useSelector(categoryListSelectors.selectAll);
-
-  const array = useMemo(
-    () => [...Array(Math.ceil(lsCategories.length / rows)).keys()],
-    [lsCategories],
-  );
-
-  const getCategoriesBoard = useCallback(
-    ({index: i}) => {
-      const lsCategoryListItems = [];
-
-      for (let j = 0; j < rows; j++) {
-        const indice = i * rows + j;
-        if (indice > lsCategories.length - 1) {
-          lsCategoryListItems.push(
-            <View style={{width: 115}} key={indice + 'empty'} />,
-          );
-
-          continue;
-        }
-
-        const category = lsCategories[i * 3 + j];
-
-        lsCategoryListItems.push(
-          <CategoryListItem
-            key={category.id}
-            category={category}
-            onPress={() => navigation.navigate('CategoryDetails', {category})}
-          />,
-        );
-      }
-
-      return (
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          {lsCategoryListItems}
-        </View>
-      );
-    },
-    [lsCategories, navigation],
-  );
+  const {categories} = useGetCategories();
 
   return (
     <ScreenWrapper>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
-        data={array}
+        data={categories}
+        numColumns={3}
         style={{paddingHorizontal: 5}}
         contentContainerStyle={{paddingBottom: 80}}
-        renderItem={getCategoriesBoard}
+        renderItem={({item: category}) => (
+          <CategoryListItem
+            key={category.id}
+            category={category}
+            onPress={() => navigation.navigate('CategoryDetails', {category})}
+          />
+        )}
       />
       <FloatingActionButton
         onPress={() => navigation.navigate('CreateCategoryForm')}

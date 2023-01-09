@@ -3,7 +3,7 @@ import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 
 import schema from './model/schema';
 //import migrations from './model/migrations'; ⬅️ You'll import your Models here
-import PostModel from './model/PostModel';
+import PostModel from './model/CategoryModel';
 
 // First, create the adapter to the underlying database:
 const adapter = new SQLiteAdapter({
