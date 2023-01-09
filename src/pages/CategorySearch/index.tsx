@@ -19,7 +19,7 @@ import {
   categoryListSelectors,
 } from '@/store/categories';
 
-import CategorySearchListItem from './CategorySearchListItem';
+import CategorySearchListItem from './components/CategorySearchListItem';
 import {SearchInput, SearchList} from './styles';
 
 interface Props {
@@ -57,9 +57,10 @@ const CategorySearch: React.FC<Props> = ({navigation, route}) => {
     navigation.pop();
   };
 
-  const handleRefresh = useCallback(() => dispatch(getUserCategories()), [
-    dispatch,
-  ]);
+  const handleRefresh = useCallback(
+    () => dispatch(getUserCategories()),
+    [dispatch],
+  );
 
   const handleBackPress = useCallback(() => navigation.pop(), [navigation]);
 

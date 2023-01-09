@@ -14,7 +14,7 @@ import {
   aboutItemsListSelectors,
 } from '@store/about';
 
-import AboutListItem from './AboutListItem';
+import AboutListItem from './components/AboutListItem';
 import {Content} from './styles';
 
 interface Props {

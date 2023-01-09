@@ -23,16 +23,15 @@ export function TabNavigator() {
   return (
     <Tab.Navigator
       tabBar={props => <BottonTabNavigator {...props} />}
-      screenOptions={
-        {
-          /*activeBackgroundColor: appTheme.primaryColor,
+      screenOptions={{
+        headerShown: false,
+        /*activeBackgroundColor: appTheme.primaryColor,
         inactiveBackgroundColor: appTheme.primaryColor,
         inactiveTintColor: appTheme.dark
           ? lighten(0.3, appTheme.primaryColor)
           : shade(0.5, appTheme.primaryColor),
         activeTintColor: '#FAFAFA',*/
-        }
-      }>
+      }}>
       <Tab.Screen
         name="Home"
         component={Home}
