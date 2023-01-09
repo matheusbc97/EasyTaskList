@@ -11,7 +11,7 @@ import {
 } from '@/shared/components';
 import {AuthenticatedStackParams} from '@/navigation/types';
 
-import TaskList from '@/templates/lists/TaskList';
+import TaskList from '@/shared/templates/lists/TaskList';
 
 import {useTranslation} from '@/shared/hooks';
 

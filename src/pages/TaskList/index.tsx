@@ -13,7 +13,7 @@ import {AuthenticatedStackParams} from '@/navigation/types';
 import useTasks from '@/hooks/useTasks';
 import useFetchTasks from '@/hooks/useFetchTasks';
 import {useTranslation} from '@/shared/hooks';
-import TaskList from '@/templates/lists/TaskList';
+import TaskList from '@/shared/templates/lists/TaskList';
 
 import {Header, Body, Footer} from './styles';
 

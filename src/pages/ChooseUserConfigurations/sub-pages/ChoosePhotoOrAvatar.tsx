@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 
 import {Text, BackButton} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
-import AvatarGrid from '@/templates/AvatarGrid';
+import AvatarGrid from '@/shared/templates/AvatarGrid';
 
 interface Props {
   onBackPress(): void;

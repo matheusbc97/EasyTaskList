@@ -8,7 +8,7 @@ import {
 import {useTranslation} from '@/shared/hooks';
 import CategoryForm, {
   CategoryFormHandles,
-} from '@/templates/forms/CategoryForm';
+} from '@/shared/templates/forms/CategoryForm';
 
 import {Props} from './types';
 import useHandleSubmit from './hooks/useHandleSubmit';

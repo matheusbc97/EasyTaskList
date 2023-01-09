@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 
-import {FormObject} from '@/templates/forms/TaskForm';
+import {FormObject} from '@/shared/templates/forms/TaskForm';
 import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
 
 import {CreateTaskFormNavigationProp} from '../types';

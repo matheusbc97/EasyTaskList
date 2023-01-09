@@ -4,7 +4,7 @@ import {Animated, ScrollView} from 'react-native';
 import {RoundedButton, TextButton, Header} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 import {FormHandles} from '@/shared/models';
-import RegisterForm from '@/templates/forms/RegisterForm';
+import RegisterForm from '@/shared/templates/forms/RegisterForm';
 
 import useHandleSubmit from './hooks/useHandleSubmit';
 import useOnRegisterUserSuccessAnimation from './hooks/useOnRegisterUserSuccessAnimation';

@@ -3,7 +3,7 @@ import {Category} from '@shared/models';
 import {createCategory} from '@store/categories';
 import {useDispatch} from 'react-redux';
 
-import {FormObject} from '@/templates/forms/CategoryForm';
+import {FormObject} from '@/shared/templates/forms/CategoryForm';
 import {createId} from '@shared/utils/createId';
 import {database} from '@/database';
 import CategoryModel from '@/database/model/CategoryModel';

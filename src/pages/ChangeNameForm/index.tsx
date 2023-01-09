@@ -15,7 +15,7 @@ import {
 import {useTranslation} from '@/shared/hooks';
 import {selectUserName, setUserName} from '@/store/account/user';
 import {showToast} from '@/shared/components/Toast';
-import NameForm from '@/templates/forms/NameForm';
+import NameForm from '@/shared/templates/forms/NameForm';
 import {FormHandles} from '@/shared/models';
 
 interface Props {

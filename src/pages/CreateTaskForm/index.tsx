@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 
 import {Header, RoundedSaveButton, FormScreenWrapper} from '@shared/components';
 import {useTranslation} from '@shared/hooks';
-import TaskFormTemplate from '@/templates/forms/TaskForm';
+import TaskFormTemplate from '@/shared/templates/forms/TaskForm';
 import {FormHandles} from '@/shared/models';
 
 import useHandleSubmit from './hooks/useHandleSubmit';

@@ -8,7 +8,7 @@ import {Text, RoundedButton} from '@shared/components';
 import * as appThemes from '@/assets/themes';
 import {AppTheme, AppThemeName} from '@/shared/models';
 import {useTranslation} from '@/shared/hooks';
-import ChooseTheme from '@/templates/ChooseTheme';
+import ChooseTheme from '@/shared/templates/ChooseTheme';
 
 interface Props {
   onAdvancePress(theme: AppThemeName): void;

@@ -13,7 +13,7 @@ import {
   Center,
   FormContainer,
 } from '@shared/components';
-import AvatarList from '@/templates/AvatarGrid';
+import AvatarList from '@/shared/templates/AvatarGrid';
 import {setUserAvatar} from '@store/account/user';
 import {showToast} from '@shared/components/Toast';
 

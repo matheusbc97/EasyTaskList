@@ -9,7 +9,7 @@ import {
 import {AppTheme} from '@/shared/models';
 import {useTranslation} from '@/shared/hooks';
 import useAppTheme from '@/hooks/useAppTheme';
-import ChooseTheme from '@/templates/ChooseTheme';
+import ChooseTheme from '@/shared/templates/ChooseTheme';
 
 import useHandleSaveTheme from './hooks/useHandleSaveTheme';
 

@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {Category} from '@shared/models';
 import {useDispatch} from 'react-redux';
 
-import {FormObject} from '@/templates/forms/CategoryForm';
+import {FormObject} from '@/shared/templates/forms/CategoryForm';
 import {updateCategory} from '@store/categories';
 
 const useHandleSubmit = (category: Category) => {

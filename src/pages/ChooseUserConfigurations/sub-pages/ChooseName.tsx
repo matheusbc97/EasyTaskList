@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 import {RoundedButton, Text, BackButton} from '@shared/components';
 import {selectUserName} from '@store/account/user';
 import {useTranslation} from '@/shared/hooks';
-import NameForm from '@/templates/forms/NameForm';
+import NameForm from '@/shared/templates/forms/NameForm';
 
 interface Props {
   onAdvancePress(name: string): void;

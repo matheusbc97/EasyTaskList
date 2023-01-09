@@ -14,7 +14,7 @@ import useGetUser from '@/hooks/useGetUser';
 import useTaskNotDone from '@/hooks/useTaskNotDone';
 import useCategories from '@/hooks/useCategories';
 import useFetchTasks from '@/hooks/useFetchTasks';
-import TasksList from '@/templates/lists/TaskList';
+import TasksList from '@/shared/templates/lists/TaskList';
 
 import CategoriesList from './templates/CategoriesList';
 import HomeHeader from './components/HomeHeader';

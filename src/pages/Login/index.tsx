@@ -4,7 +4,7 @@ import {Image} from 'react-native';
 import {useTranslation} from '@/shared/hooks';
 import {ScreenWrapper} from '@/shared/components';
 import {FormHandles} from '@/shared/models';
-import LoginForm from '@/templates/forms/LoginForm';
+import LoginForm from '@/shared/templates/forms/LoginForm';
 import {TRIANGLE_PLAY, PEOPLE_LOGIN} from '@/assets/images';
 
 import {Props} from './types';

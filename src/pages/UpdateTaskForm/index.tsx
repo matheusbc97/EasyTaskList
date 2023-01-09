@@ -6,7 +6,7 @@ import {
   FormScreenWrapper,
 } from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
-import TaskFormTemplate, {TaskFormHandles} from '@/templates/forms/TaskForm';
+import TaskFormTemplate, {TaskFormHandles} from '@/shared/templates/forms/TaskForm';
 
 import useHandleSubmit from './hooks/useHandleSubmit';
 import getInitialData from './utils/getInitialData';
