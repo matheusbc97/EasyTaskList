@@ -1,20 +1,16 @@
-import React from 'react';
+import React, {PropsWithChildren, ReactElement} from 'react';
 
 interface ShowFallbackComponentProps {
   showFallback: boolean;
-  fallback: React.ReactNode;
+  fallback: ReactElement;
 }
 
-const ShowFallbackComponent: React.FC<ShowFallbackComponentProps> = ({
+function ShowFallbackComponent({
   showFallback,
   fallback,
   children,
-}) => {
-  if (showFallback) {
-    return fallback;
-  }
-
-  return children;
-};
+}: PropsWithChildren<ShowFallbackComponentProps>) {
+  return <>{showFallback ? fallback : children}</>;
+}
 
 export default ShowFallbackComponent;

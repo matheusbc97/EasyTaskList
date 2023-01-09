@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 import {View} from 'react-native';
 
-const TaskFormWrapper: React.FC = ({children}) => {
+function TaskFormWrapper({children}: PropsWithChildren) {
   return (
     <View
       style={{
@@ -12,6 +12,6 @@ const TaskFormWrapper: React.FC = ({children}) => {
       {children}
     </View>
   );
-};
+}
 
 export default TaskFormWrapper;

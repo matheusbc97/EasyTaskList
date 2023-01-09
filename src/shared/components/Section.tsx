@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 import {View, StyleProp, ViewStyle, StyleSheet} from 'react-native';
 
 import {shadow} from '@/shared/styles';
@@ -19,13 +19,18 @@ const styles = StyleSheet.create({
   title: {marginHorizontal: 20},
 });
 
-interface Section {
+interface SectionProps {
   title?: string;
   style?: StyleProp<ViewStyle>;
   contentStyle?: StyleProp<ViewStyle>;
 }
 
-const Section: React.FC<Section> = ({title, children, style, contentStyle}) => {
+function Section({
+  title,
+  children,
+  style,
+  contentStyle,
+}: PropsWithChildren<SectionProps>) {
   return (
     <View style={[{marginTop: 30}, style]}>
       {!!title && (
@@ -36,6 +41,6 @@ const Section: React.FC<Section> = ({title, children, style, contentStyle}) => {
       <View style={[styles.contentWrapper, contentStyle]}>{children}</View>
     </View>
   );
-};
+}
 
 export default Section;

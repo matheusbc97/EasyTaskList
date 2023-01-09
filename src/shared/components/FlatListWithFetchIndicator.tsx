@@ -9,7 +9,7 @@ import {
 import ShowFallbackComponent from './fallbacks/ShowFallbackComponent';
 import EmptyListText from './EmptyListText';
 import ErrorMessage from './ErrorMessage';
-import ActivityIndicator from './ActivityIndicator';
+import ActivityIndicator from './loadings/ActivityIndicator';
 
 export interface FlatListWithFetchIndicatorProps<T> extends FlatListProps<T> {
   isLoading: boolean;
@@ -42,8 +42,10 @@ function FlatListWithFetchIndicator<T>({
     <ShowFallbackComponent
       fallback={
         <ScrollView contentContainerStyle={styles.scrollView}>
-          {showListHeaderWhenListIsNotShown && ListHeaderComponent}
-          <ErrorMessage onTryAgainPress={onRefresh} />
+          <>
+            {showListHeaderWhenListIsNotShown && ListHeaderComponent}
+            <ErrorMessage onTryAgainPress={onRefresh} />
+          </>
         </ScrollView>
       }
       showFallback={hasError && !isLoading}>

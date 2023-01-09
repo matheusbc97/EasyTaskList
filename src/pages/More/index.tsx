@@ -9,8 +9,8 @@ import {useTranslation} from '@/shared/hooks';
 import useSignOut from '@/hooks/useSignOut';
 
 interface Props {
-  navigation: StackNavigationProp<AuthenticatedStackParams, 'ChangeNameForm'>;
-  route: RouteProp<AuthenticatedStackParams, 'ChangeNameForm'>;
+  navigation: StackNavigationProp<AuthenticatedStackParams, 'BottomNavigation'>;
+  route: RouteProp<AuthenticatedStackParams, 'BottomNavigation'>;
 }
 
 export default function More({navigation}: Props) {

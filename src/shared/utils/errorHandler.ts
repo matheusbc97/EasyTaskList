@@ -1,6 +1,6 @@
 //import {Toast} from 'native-base';
 
-import {loaderHandler} from '@shared/components/LoadingHandler';
+import {loaderHandler} from '@shared/components/loadings/LoadingHandler';
 import {showToast} from '@shared/components/Toast';
 
 const getErrorMessage = (code: string) => {

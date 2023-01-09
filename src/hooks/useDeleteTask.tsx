@@ -2,7 +2,7 @@ import {useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 
 import {removeTaskById} from '@/store/tasks';
-import {loaderHandler} from '@/shared/components/LoadingHandler';
+import {loaderHandler} from '@shared/components/loadings/LoadingHandler';
 import {handleErrorMessage} from '@shared/utils/errorHandler';
 import {showToast} from '@shared/components/Toast';
 

@@ -1,21 +1,23 @@
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 
 import ShowFallbackComponent from './ShowFallbackComponent';
-import LoadingIndicator from '../LoadingIndicator';
+import LoadingIndicator from '../loadings/LoadingIndicator';
 
 interface LoadingFallbackProps {
   isLoading: boolean;
 }
 
-const LoadingFallback: React.FC<LoadingFallbackProps> = ({
+function LoadingFallback({
   isLoading,
   children,
-}) => (
-  <ShowFallbackComponent
-    showFallback={isLoading}
-    fallback={<LoadingIndicator />}>
-    {children}
-  </ShowFallbackComponent>
-);
+}: PropsWithChildren<LoadingFallbackProps>) {
+  return (
+    <ShowFallbackComponent
+      showFallback={isLoading}
+      fallback={<LoadingIndicator />}>
+      {children}
+    </ShowFallbackComponent>
+  );
+}
 
 export default LoadingFallback;

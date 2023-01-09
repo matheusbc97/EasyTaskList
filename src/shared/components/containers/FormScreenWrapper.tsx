@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 import {ViewStyle} from 'react-native';
 
 import {AnimatedBackground, Center, FormContainer} from '@/shared/components';
@@ -10,12 +10,12 @@ interface FormScreenWrapperProps {
   theme?: AppTheme;
 }
 
-const FormScreenWrapper: React.FC<FormScreenWrapperProps> = ({
+function FormScreenWrapper({
   children,
   contentStyle,
   alignCenter = false,
   theme,
-}) => {
+}: PropsWithChildren<FormScreenWrapperProps>) {
   return (
     <AnimatedBackground theme={theme}>
       <Center>
@@ -29,6 +29,6 @@ const FormScreenWrapper: React.FC<FormScreenWrapperProps> = ({
       </Center>
     </AnimatedBackground>
   );
-};
+}
 
 export default FormScreenWrapper;

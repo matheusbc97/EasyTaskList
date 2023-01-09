@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {useBackHandler} from '@react-native-community/hooks';
 
-import colors from '../../assets/colors';
+import colors from '../../../assets/colors';
 
 export const loaderHandler = {
   hideLoader() {
@@ -28,7 +28,7 @@ const LoadingHandler = () => {
   useEffect(() => {
     const emitter = DeviceEventEmitter.addListener(
       'changeLoadingEffect',
-      (data) => {
+      data => {
         if (data.isVisible) {
           timeoutId.current = setTimeout(() => {
             timeoutId.current = -1;

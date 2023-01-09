@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {PropsWithChildren, useEffect, useMemo} from 'react';
 import {View, Animated, Image, StyleSheet} from 'react-native';
 import {useDimensions} from '@react-native-community/hooks';
 
@@ -17,13 +17,14 @@ interface Props {
   theme?: AppTheme;
 }
 
-const AnimatedBackground: React.FC<Props> = ({children, theme}) => {
+function AnimatedBackground({children, theme}: PropsWithChildren<Props>) {
   const firstAnimationValue = useMemo(() => new Animated.Value(0), []);
 
   const screenHeight = useDimensions().window.height;
-  const screenHeightDividedBy2 = useMemo(() => screenHeight / 2, [
-    screenHeight,
-  ]);
+  const screenHeightDividedBy2 = useMemo(
+    () => screenHeight / 2,
+    [screenHeight],
+  );
 
   const animatedBackgroundOffset = firstAnimationValue.interpolate({
     inputRange: [0, 1],
@@ -75,7 +76,7 @@ const AnimatedBackground: React.FC<Props> = ({children, theme}) => {
       </Animated.View>
     </View>
   );
-};
+}
 
 export default AnimatedBackground;
 

@@ -8,7 +8,7 @@ import EmptyListText from './EmptyListText';
 import FlatListWithFetchIndicator, {
   FlatListWithFetchIndicatorProps,
 } from './FlatListWithFetchIndicator';
-import LoadingIndicator from './LoadingIndicator';
+import LoadingIndicator from './loadings/LoadingIndicator';
 import ErrorMessage from './ErrorMessage';
 import Avatar from './Avatar';
 import TaskListItem from './list-items/TaskListItem';
@@ -16,7 +16,7 @@ import Header from './Header';
 import OutlineButton, {OutlineButtonProps} from './buttons/OutlineButton';
 import AnimatedBackground from './containers/AnimatedBackground';
 import Toast from './Toast';
-import LoadingHandler from './LoadingHandler';
+import LoadingHandler from './loadings/LoadingHandler';
 import CategoryListItem from './list-items/CategoryListItem';
 import FloatingActionButton from './buttons/FloatingActionButton';
 import TextWithButton, {TextWithButtonProps} from './buttons/TextWithButton';
