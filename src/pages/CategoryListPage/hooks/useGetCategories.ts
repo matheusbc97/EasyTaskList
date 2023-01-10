@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 
 import {database} from '@/database';
 import CategoryModel from '@/database/model/CategoryModel';
-import {Category} from '@shared/models';
+import {Category} from '@/shared/models';
 
 export function useGetCategories() {
   const [categories, setCategories] = useState<Category[]>([]);

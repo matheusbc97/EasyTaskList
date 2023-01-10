@@ -10,6 +10,7 @@ import {
 import {AuthenticatedStackParams} from '@/navigation/types';
 
 import {useGetCategories} from './hooks/useGetCategories';
+import {doesListItemNeedsMoreMargin} from '@/shared/utils/doesListItemNeedsMoreMargin';
 
 type CategoryListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -20,19 +21,25 @@ interface Props {
   navigation: CategoryListNavigationProp;
 }
 
-const CategoryListPage: React.FC<Props> = ({navigation}) => {
+function CategoryListPage({navigation}: Props) {
   const {categories} = useGetCategories();
 
   return (
     <ScreenWrapper>
       <FlatList
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={item => item.id}
         data={categories}
         numColumns={3}
         style={{paddingHorizontal: 5}}
         contentContainerStyle={{paddingBottom: 80}}
-        renderItem={({item: category}) => (
+        renderItem={({item: category, index}) => (
           <CategoryListItem
+            style={{
+              flex: 0.3333,
+              marginRight: doesListItemNeedsMoreMargin(index, categories.length)
+                ? 20
+                : undefined,
+            }}
             key={category.id}
             category={category}
             onPress={() => navigation.navigate('CategoryDetails', {category})}
@@ -44,6 +51,6 @@ const CategoryListPage: React.FC<Props> = ({navigation}) => {
       />
     </ScreenWrapper>
   );
-};
+}
 
 export default CategoryListPage;

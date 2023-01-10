@@ -15,7 +15,7 @@ type UnauthenticatedStackParams = {
 
 const UnauthenticatedStack = createStackNavigator<UnauthenticatedStackParams>();
 
-const App = () => {
+function App() {
   return (
     <UnauthenticatedStack.Navigator>
       <UnauthenticatedStack.Screen name="Welcome" component={WelcomePage} />
@@ -28,6 +28,6 @@ const App = () => {
       />
     </UnauthenticatedStack.Navigator>
   );
-};
+}
 
 export default App;
