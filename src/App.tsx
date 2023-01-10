@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import './translations';
 
 import store from './store';
-import {LoadingHandler, Toast} from './shared/components';
+import {FullScreenLoader, Toast} from './shared/components';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
     <Provider store={store}>
       <SafeAreaProvider>
         <AppNavigator />
-        <LoadingHandler />
+        <FullScreenLoader />
         <Toast />
       </SafeAreaProvider>
     </Provider>

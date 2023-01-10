@@ -16,7 +16,7 @@ import Header from './Header';
 import OutlineButton, {OutlineButtonProps} from './buttons/OutlineButton';
 import AnimatedBackground from './containers/AnimatedBackground';
 import Toast from './Toast';
-import LoadingHandler from './loadings/LoadingHandler';
+import FullScreenLoader from './loadings/FullScreenLoader';
 import CategoryListItem from './list-items/CategoryListItem';
 import FloatingActionButton from './buttons/FloatingActionButton';
 import TextWithButton, {TextWithButtonProps} from './buttons/TextWithButton';
@@ -70,7 +70,7 @@ export {
   OutlineButton,
   AnimatedBackground,
   Toast,
-  LoadingHandler,
+  FullScreenLoader,
   CategoryListItem,
   FloatingActionButton,
   TextWithButton,

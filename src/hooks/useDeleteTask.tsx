@@ -2,9 +2,9 @@ import {useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 
 import {removeTaskById} from '@/store/tasks';
-import {loaderHandler} from '@shared/components/loadings/LoadingHandler';
-import {handleErrorMessage} from '@shared/utils/errorHandler';
-import {showToast} from '@shared/components/Toast';
+import {fullScreenLoader} from '@/shared/components/loadings/FullScreenLoader';
+import {handleErrorMessage} from '@/shared/utils/errorHandler';
+import {showToast} from '@/shared/components/Toast';
 
 const useDeleteTask = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const useDeleteTask = () => {
   const deleteTask = useCallback(
     async (taskId: string) => {
       try {
-        loaderHandler.showLoader();
+        fullScreenLoader.showLoader();
 
         dispatch(removeTaskById(taskId));
 
@@ -24,7 +24,7 @@ const useDeleteTask = () => {
         handleErrorMessage(error);
       }
 
-      loaderHandler.hideLoader();
+      fullScreenLoader.hideLoader();
     },
     [dispatch],
   );

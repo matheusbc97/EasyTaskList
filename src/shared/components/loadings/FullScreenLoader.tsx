@@ -10,7 +10,7 @@ import {useBackHandler} from '@react-native-community/hooks';
 
 import colors from '../../../assets/colors';
 
-export const loaderHandler = {
+export const fullScreenLoader = {
   hideLoader() {
     DeviceEventEmitter.emit('changeLoadingEffect', {isVisible: false});
   },
@@ -19,7 +19,7 @@ export const loaderHandler = {
   },
 };
 
-const LoadingHandler = () => {
+const FullScreenLoader = () => {
   const [isVisible, setIsVisible] = useState(false);
   const timeoutId = useRef(-1);
 
@@ -71,7 +71,7 @@ const LoadingHandler = () => {
   );
 };
 
-export default LoadingHandler;
+export default FullScreenLoader;
 
 const styles = StyleSheet.create({
   container: {position: 'absolute', width: '100%', height: '100%'},
