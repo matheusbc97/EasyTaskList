@@ -2,19 +2,19 @@ import React from 'react';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {AuthenticatedStackParams} from '../types';
+import CategorySearchPage from '@/pages/CategorySearchPage';
+import CategoryDetailsPage from '@/pages/CategoryDetailsPage';
+import ChangeNameFormPage from '@/pages/ChangeNameFormPage';
+import ChangeThemeFormPage from '@/pages/ChangeThemeFormPage';
+import ChangeAvatarPage from '@/pages/ChangeAvatarPage';
+import AboutPage from '@/pages/AboutPage';
+import CreateTaskFormPage from '@/pages/CreateTaskFormPage';
+import UpdateTaskFormPage from '@/pages/UpdateTaskFormPage';
+import CreateCategoryForm from '@/pages/CreateCategoryFormPage';
+import UpdateCategoryFormPage from '@/pages/UpdateCategoryFormPage';
+import TaskDetails from '@/pages/TaskDetailsPage';
 
-import CategorySearch from '@/pages/CategorySearch';
-import CategoryDetails from '@/pages/CategoryDetails';
-import ChangeNameForm from '@/pages/ChangeNameForm';
-import ChangeThemeForm from '@/pages/ChangeThemeForm';
-import ChangeAvatar from '@/pages/ChangeAvatar';
-import About from '@pages/About';
-import CreateTaskForm from '@/pages/CreateTaskForm';
-import UpdateTaskForm from '@/pages/UpdateTaskForm';
-import CreateCategoryForm from '@/pages/CreateCategoryForm';
-import UpdateCategoryForm from '@/pages/UpdateCategoryForm';
-import TaskDetails from '@/pages/TaskDetails';
+import {AuthenticatedStackParams} from '../types';
 import {BottomTabsNavigator} from './BottomTabsNavigator';
 
 const AuthenticatedStack = createStackNavigator<AuthenticatedStackParams>();
@@ -28,39 +28,42 @@ function AuthenticatedStackNavigator() {
       />
       <AuthenticatedStack.Screen
         name="CreateTaskForm"
-        component={CreateTaskForm}
+        component={CreateTaskFormPage}
       />
       <AuthenticatedStack.Screen
         name="UpdateTaskForm"
-        component={UpdateTaskForm}
+        component={UpdateTaskFormPage}
         initialParams={{}}
       />
       <AuthenticatedStack.Screen
         name="CategorySearch"
-        component={CategorySearch}
+        component={CategorySearchPage}
       />
-      <AuthenticatedStack.Screen name="About" component={About} />
+      <AuthenticatedStack.Screen name="About" component={AboutPage} />
       <AuthenticatedStack.Screen
         name="CreateCategoryForm"
         component={CreateCategoryForm}
       />
       <AuthenticatedStack.Screen
         name="UpdateCategoryForm"
-        component={UpdateCategoryForm}
+        component={UpdateCategoryFormPage}
       />
       <AuthenticatedStack.Screen
         name="CategoryDetails"
-        component={CategoryDetails}
+        component={CategoryDetailsPage}
       />
       <AuthenticatedStack.Screen
         name="ChangeNameForm"
-        component={ChangeNameForm}
+        component={ChangeNameFormPage}
       />
       <AuthenticatedStack.Screen
         name="ChangeThemeForm"
-        component={ChangeThemeForm}
+        component={ChangeThemeFormPage}
       />
-      <AuthenticatedStack.Screen name="ChangeAvatar" component={ChangeAvatar} />
+      <AuthenticatedStack.Screen
+        name="ChangeAvatar"
+        component={ChangeAvatarPage}
+      />
       <AuthenticatedStack.Screen name="TaskDetails" component={TaskDetails} />
     </AuthenticatedStack.Navigator>
   );

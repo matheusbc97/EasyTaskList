@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 
 import ShowFallbackComponent from './ShowFallbackComponent';
 import ErrorMessage from '../ErrorMessage';
@@ -8,16 +8,18 @@ export interface ErrorFallbackProps {
   onTryAgainPress?: () => void;
 }
 
-const ErrorFallback: React.FC<ErrorFallbackProps> = ({
+function ErrorFallback({
   hasError,
   children,
   onTryAgainPress,
-}) => (
-  <ShowFallbackComponent
-    showFallback={hasError}
-    fallback={<ErrorMessage onTryAgainPress={onTryAgainPress} />}>
-    {children}
-  </ShowFallbackComponent>
-);
+}: PropsWithChildren<ErrorFallbackProps>) {
+  return (
+    <ShowFallbackComponent
+      showFallback={hasError}
+      fallback={<ErrorMessage onTryAgainPress={onTryAgainPress} />}>
+      {children}
+    </ShowFallbackComponent>
+  );
+}
 
 export default ErrorFallback;

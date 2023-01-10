@@ -4,8 +4,8 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 
-import Welcome from '@/pages/Welcome';
-import ChooseUserConfigurations from '@pages/ChooseUserConfigurations';
+import WelcomePage from '@/pages/WelcomePage';
+import ChooseUserConfigurationsPage from '@/pages/ChooseUserConfigurationsPage';
 
 type UnauthenticatedStackParams = {
   Home: undefined;
@@ -18,13 +18,13 @@ const UnauthenticatedStack = createStackNavigator<UnauthenticatedStackParams>();
 const App = () => {
   return (
     <UnauthenticatedStack.Navigator>
-      <UnauthenticatedStack.Screen name="Welcome" component={Welcome} />
+      <UnauthenticatedStack.Screen name="Welcome" component={WelcomePage} />
       <UnauthenticatedStack.Screen
         options={{
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
         name="ChooseUserConfigurations"
-        component={ChooseUserConfigurations}
+        component={ChooseUserConfigurationsPage}
       />
     </UnauthenticatedStack.Navigator>
   );

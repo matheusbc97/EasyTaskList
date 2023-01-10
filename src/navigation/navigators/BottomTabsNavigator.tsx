@@ -5,10 +5,10 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import {BottomNavigatorStackParams} from '../types';
 //import {selectAppTheme} from '../store/configs';
 
-import Home from '@/pages/Home';
-import TaskList from '@/pages/TaskList';
-import More from '@/pages/More';
-import CategoryList from '@/pages/CategoryList';
+import HomePage from '@/pages/HomePage';
+import TaskListPage from '@/pages/TaskListPage';
+import MorePage from '@/pages/MorePage';
+import CategoryListPage from '@/pages/CategoryListPage';
 
 import BottomTabs from '../components/BottomTabs';
 
@@ -35,7 +35,7 @@ export function BottomTabsNavigator() {
       }}>
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomePage}
         options={{
           title: translation('HOME'),
           tabBarIcon: ({color}) => (
@@ -45,7 +45,7 @@ export function BottomTabsNavigator() {
       />
       <Tab.Screen
         name="TaskList"
-        component={TaskList}
+        component={TaskListPage}
         options={{
           title: translation('TASKS'),
           tabBarIcon: ({color}) => (
@@ -53,19 +53,9 @@ export function BottomTabsNavigator() {
           ),
         }}
       />
-      {/*<Tab.Screen
-        name="Calendar"
-        component={Calendar}
-        options={{
-          title: 'Calendário',
-          tabBarIcon: ({color}) => (
-            <FontAwesomeIcon name="calendar" size={22} color={color} />
-          ),
-        }}
-      />*/}
       <Tab.Screen
         name="CategoryList"
-        component={CategoryList}
+        component={CategoryListPage}
         options={{
           title: translation('CATEGORIES'),
           tabBarIcon: ({color}) => (
@@ -75,7 +65,7 @@ export function BottomTabsNavigator() {
       />
       <Tab.Screen
         name="More"
-        component={More}
+        component={MorePage}
         options={{
           title: translation('MORE'),
           tabBarIcon: ({color}) => (
