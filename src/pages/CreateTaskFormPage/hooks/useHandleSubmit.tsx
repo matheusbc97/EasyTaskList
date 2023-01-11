@@ -1,13 +1,13 @@
+import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
 import {FormObject} from '@/shared/templates/forms/TaskForm';
 import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
+import {addOneTask} from '@/store/tasks';
+import {Task} from '@/shared/models';
+import {createId} from '@/shared/utils/createId';
 
 import {CreateTaskFormNavigationProp} from '../types';
-import {addOneTask} from '@/store/tasks';
-import {Task} from '@shared/models';
-import {useDispatch} from 'react-redux';
-import {createId} from '@shared/utils/createId';
 
 const useHandleSubmit = () => {
   const navigation = useNavigation<CreateTaskFormNavigationProp>();

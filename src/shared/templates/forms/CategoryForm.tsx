@@ -71,14 +71,11 @@ const CategoryForm: FunctionalFormComponent<CategoryFormProps> = (
     name: initialValuesProp?.name,
   }).current;
 
-  const [categoryIconModalIsVisible, setCategoryIconModalIsVisible] = useState(
-    false,
-  );
+  const [categoryIconModalIsVisible, setCategoryIconModalIsVisible] =
+    useState(false);
 
-  const [
-    categoryColorModalIsVisible,
-    setCategoryColorModalIsVisible,
-  ] = useState(false);
+  const [categoryColorModalIsVisible, setCategoryColorModalIsVisible] =
+    useState(false);
 
   const onSubmit = (form: UnFormObject) => {
     const [formErrors, isValid] = validateAll(form);

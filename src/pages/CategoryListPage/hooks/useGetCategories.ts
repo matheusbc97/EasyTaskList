@@ -1,41 +1,9 @@
-import {useCallback, useState} from 'react';
-
-import {database} from '@/database';
-import CategoryModel from '@/database/model/CategoryModel';
-import {Category} from '@/shared/models';
-import {useFocusEffect} from '@react-navigation/native';
-
-async function fetchCategories() {
-  const categoriesCollection = await database
-    .get<CategoryModel>('categories')
-    .query()
-    .fetch();
-
-  const newCategories = categoriesCollection.map(
-    categoryItem =>
-      ({
-        colorIndex: categoryItem.colorIndex,
-        iconIndex: categoryItem.iconIndex,
-        id: categoryItem.id,
-        name: categoryItem.name,
-      } as Category),
-  );
-
-  return newCategories;
-}
+import {useQuery} from 'react-query';
+import {QUERY_KEYS} from '@/shared/constants/queryKeys';
+import {fetchCategories} from '@/database/functions/dbFetchCategories';
 
 export function useGetCategories() {
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  useFocusEffect(
-    useCallback(() => {
-      (async () => {
-        const newCategories = await fetchCategories();
-
-        setCategories(newCategories);
-      })();
-    }, []),
-  );
+  const {data: categories} = useQuery(QUERY_KEYS.CATEGORIES, fetchCategories);
 
   return {categories};
 }
