@@ -15,7 +15,7 @@ import CategoryForm, {
 
 import {Props} from './types';
 import useHandleSubmit from './hooks/useHandleSubmit';
-import {Category} from '@shared/models';
+import {Category} from '@/shared/models';
 
 const getInitialData = (category: Category) => {
   const initialData: FormObject = {

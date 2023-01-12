@@ -1,5 +1,5 @@
 import {Model} from '@nozbe/watermelondb';
-import {field} from '@nozbe/watermelondb/decorators';
+import {field, writer} from '@nozbe/watermelondb/decorators';
 
 export default class CategoryModel extends Model {
   static table = 'categories';
@@ -16,4 +16,10 @@ export default class CategoryModel extends Model {
 
   @field('iconIndex')
   iconIndex!: number;
+
+  @writer async updateT() {
+    await this.update(comment => {
+      comment.isSpam = true
+    })
+  }
 }

@@ -12,12 +12,12 @@ import {useTranslation} from '@/shared/hooks';
 import {AuthenticatedStackParams} from '@/navigation/types';
 import useGetUser from '@/hooks/useGetUser';
 import useTaskNotDone from '@/hooks/useTaskNotDone';
-import useCategories from '@/hooks/useCategories';
 import useFetchTasks from '@/hooks/useFetchTasks';
 import TasksList from '@/shared/templates/lists/TaskList';
 
 import CategoriesList from './templates/CategoriesList';
 import HomeHeader from './components/HomeHeader';
+import {useQueryCategories} from '../CategoryListPage/hooks/useGetCategories';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -45,7 +45,7 @@ function HomePage({navigation}: Props) {
   const {translation} = useTranslation();
 
   const user = useGetUser();
-  const {lsCategories, lsCategoriesFetchState} = useCategories();
+  const {categories, hasError, isLoading} = useQueryCategories();
 
   const fetchTasks = useFetchTasks();
   const {tasksFetchState, tasksNotDone} = useTaskNotDone();
@@ -65,8 +65,8 @@ function HomePage({navigation}: Props) {
                   title={translation('CATEGORIES')}
                   contentStyle={{height: 143}}>
                   <CategoriesList
-                    lsCategories={lsCategories}
-                    lsCategoriesFetchState={lsCategoriesFetchState}
+                    lsCategories={categories}
+                    lsCategoriesFetchState={{hasError, isLoading}}
                     onCategoryPress={category =>
                       navigation.navigate('CategoryDetails', {category})
                     }
