@@ -33,7 +33,7 @@ const CategoryFormScreen: React.FC<Props> = ({route}) => {
 
   const formRef = useRef<CategoryFormHandles>(null);
 
-  const handleFormSubmit = useHandleSubmit(category);
+  const handleFormSubmit = useHandleSubmit(category.id);
 
   const initialData = getInitialData(category);
 

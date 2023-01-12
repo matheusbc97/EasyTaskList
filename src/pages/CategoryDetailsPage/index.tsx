@@ -16,7 +16,7 @@ import TaskList from '@/shared/templates/lists/TaskList';
 import {useTranslation} from '@/shared/hooks';
 
 import {Content} from './styles';
-import {useGetTasksOfCategory} from './hooks/useGetTasksOfCategory';
+import {useTasks} from '@/hooks';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryDetails'>;
@@ -27,9 +27,7 @@ const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
   const {translation} = useTranslation();
   const category = route.params.category;
 
-  const {tasks, tasksFetchState, fetchTasks} = useGetTasksOfCategory(
-    category.id,
-  );
+  const {tasks, hasError, isLoading, refetchTasks} = useTasks();
 
   return (
     <ScreenWrapper style={{marginHorizontal: 5}}>
@@ -39,10 +37,11 @@ const CategoryDetails: React.FC<Props> = ({route, navigation}) => {
       />
       <Content>
         <TaskList
-          onRefresh={fetchTasks}
+          onRefresh={refetchTasks}
           tasks={tasks}
           onTaskPress={task => navigation.navigate('TaskDetails', {task})}
-          tasksFetchState={tasksFetchState}
+          hasError={hasError}
+          isLoading={isLoading}
         />
       </Content>
       <Separator />

@@ -1,26 +1,29 @@
 import {useNavigation} from '@react-navigation/native';
-import {Category} from '@/shared/models';
-import {useDispatch} from 'react-redux';
 
 import {FormObject} from '@/shared/templates/forms/CategoryForm';
+import {dbUpdateCategory} from '@/database';
+import {QUERY_KEYS} from '@/shared/constants/queryKeys';
+import {useQueryClient, useMutation} from 'react-query';
 
-const useHandleSubmit = (category: Category) => {
-  const dispatch = useDispatch();
+const useHandleSubmit = (categoryId: string) => {
   const navigation = useNavigation();
 
-  const handleFormSubmit = (form: FormObject) => {
-    dispatch(
-      updateCategory({
-        id: category.id,
-        changes: {
-          colorIndex: form.colorIndex,
-          name: form.name,
-          iconIndex: form.iconIndex,
-        },
-      }),
-    );
+  const queryClient = useQueryClient();
 
-    navigation.goBack();
+  const mutation = useMutation(dbUpdateCategory, {
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries(QUERY_KEYS.CATEGORIES);
+      navigation.goBack();
+    },
+    onError: () => {},
+  });
+
+  const handleFormSubmit = (form: FormObject) => {
+    mutation.mutate({
+      categoryId,
+      ...form,
+    });
   };
 
   return handleFormSubmit;
