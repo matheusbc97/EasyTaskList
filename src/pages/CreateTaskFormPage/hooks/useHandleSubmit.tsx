@@ -1,31 +1,36 @@
-import {useDispatch} from 'react-redux';
+import {useQueryClient, useMutation} from 'react-query';
 import {useNavigation} from '@react-navigation/native';
 
 import {FormObject} from '@/shared/templates/forms/TaskForm';
 import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
-import {addOneTask} from '@/store/tasks';
-import {Task} from '@/shared/models';
-import {createId} from '@/shared/utils/createId';
+import {QUERY_KEYS} from '@/shared/constants/queryKeys';
+import {dbCreateTask} from '@/database';
+import {handleErrorMessage} from '@/shared/utils/errorHandler';
 
 import {CreateTaskFormNavigationProp} from '../types';
 
 const useHandleSubmit = () => {
   const navigation = useNavigation<CreateTaskFormNavigationProp>();
-  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
-  const handleCreateFormSubmit = async (form: FormObject) => {
-    const newTask: Task = {
-      title: form.title,
-      category: form.category,
+  const mutation = useMutation(dbCreateTask, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QUERY_KEYS.TASKS);
+      navigation.goBack();
+    },
+    onError: error => {
+      handleErrorMessage(error);
+    },
+  });
+
+  const handleCreateFormSubmit = (form: FormObject) => {
+    console.log('form', form);
+    mutation.mutate({
+      categoryId: form.category.id,
       date: getDateByDateAndTime(form.date, form.time).toISOString(),
+      title: form.title,
       description: form.description,
-      done: false,
-      id: createId(),
-    };
-
-    dispatch(addOneTask(newTask));
-
-    navigation.goBack();
+    });
   };
 
   return handleCreateFormSubmit;

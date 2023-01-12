@@ -1,10 +1,15 @@
 import {Category} from '@/shared/models';
-import {Model} from '@nozbe/watermelondb';
+import {Model, Relation} from '@nozbe/watermelondb';
 import {field, relation} from '@nozbe/watermelondb/decorators';
 import {TABLE_KEYS} from '../constants/tableKeys';
+import CategoryModel from './CategoryModel';
 
 export default class TaskModel extends Model {
   static table = TABLE_KEYS.TASKS;
+
+  /*static associations = {
+    category: {type: 'belongs_to', key: 'category_id'},
+  } as const;*/
 
   @field('title')
   title!: string;
@@ -13,10 +18,11 @@ export default class TaskModel extends Model {
   date!: string;
 
   @field('description')
-  description!: string;
+  description?: string;
 
   @field('done')
   done!: boolean;
 
-  @relation(TABLE_KEYS.CATEGORIES, 'category_id') category!: Category;
+  @relation(TABLE_KEYS.CATEGORIES, 'category_id')
+  category!: Relation<CategoryModel>;
 }

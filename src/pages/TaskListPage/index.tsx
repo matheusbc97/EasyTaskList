@@ -10,8 +10,7 @@ import {
 } from '@/shared/components';
 import {selectAppTheme} from '@/store/configs';
 import {AuthenticatedStackParams} from '@/navigation/types';
-import useTasks from '@/hooks/useTasks';
-import useFetchTasks from '@/hooks/useFetchTasks';
+import {useTasks} from '@/hooks';
 import {useTranslation} from '@/shared/hooks';
 import TaskList from '@/shared/templates/lists/TaskList';
 
@@ -28,11 +27,10 @@ interface Props {
 
 const TaskListPage: React.FC<Props> = ({navigation}) => {
   const {translation} = useTranslation();
-  const fetchTasks = useFetchTasks();
 
   const appTheme = useSelector(selectAppTheme);
 
-  const {tasks, tasksFetchState} = useTasks();
+  const {tasks, refetchTasks, hasError, isLoading} = useTasks();
 
   return (
     <ScreenWrapper>
@@ -42,9 +40,10 @@ const TaskListPage: React.FC<Props> = ({navigation}) => {
       <Body backgroundColor={appTheme.aboveBackground}>
         <TaskList
           tasks={tasks}
-          tasksFetchState={tasksFetchState}
+          hasError={hasError}
+          isLoading={isLoading}
           onTaskPress={task => navigation.navigate('TaskDetails', {task})}
-          onRefresh={fetchTasks}
+          onRefresh={refetchTasks}
         />
       </Body>
       <Separator />

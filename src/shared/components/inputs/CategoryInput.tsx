@@ -1,9 +1,10 @@
 import React from 'react';
+import {useNavigation} from '@react-navigation/core';
+
+import {useTranslation} from '@/shared/hooks';
+import {Category} from '@/shared/models';
 
 import TextInput from './UnformInput';
-import {useTranslation} from '@/shared/hooks';
-import {useNavigation} from '@react-navigation/core';
-import {Category} from '@shared/models';
 
 interface Props {
   onCategoryChange: (category: Category) => void;

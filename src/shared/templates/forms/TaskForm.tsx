@@ -8,10 +8,10 @@ import {
   CategoryInput,
   DescriptionInput,
   TitleInput,
-} from '@shared/components';
-import {useValidateField, useFormHandles} from '@shared/hooks';
-import {Category} from '@shared/models';
-import {validateAll} from '@shared/utils/validations';
+} from '@/shared/components';
+import {useValidateField, useFormHandles} from '@/shared/hooks';
+import {Category} from '@/shared/models';
+import {validateAll} from '@/shared/utils/validations';
 
 import {FunctionalFormComponent, FormProps, FormHandles} from '@/shared/models';
 

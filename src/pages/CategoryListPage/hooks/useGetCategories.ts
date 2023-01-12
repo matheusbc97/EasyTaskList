@@ -1,9 +1,19 @@
 import {useQuery} from 'react-query';
 import {QUERY_KEYS} from '@/shared/constants/queryKeys';
-import {fetchCategories} from '@/database/functions/dbFetchCategories';
+import {dbQueryCategories} from '@/database';
 
-export function useGetCategories() {
-  const {data: categories} = useQuery(QUERY_KEYS.CATEGORIES, fetchCategories);
+export function useQueryCategories() {
+  const {
+    data,
+    refetch,
+    isError: hasError,
+    isLoading,
+  } = useQuery(QUERY_KEYS.CATEGORIES, dbQueryCategories);
 
-  return {categories};
+  return {
+    categories: data ?? [],
+    refetchCategories: refetch,
+    hasError,
+    isLoading,
+  };
 }

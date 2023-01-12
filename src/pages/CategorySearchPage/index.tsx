@@ -1,6 +1,5 @@
-import React, {useState, useEffect, useCallback, useRef} from 'react';
+import React, {useState, useCallback, useRef} from 'react';
 import {TextInput} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 
@@ -13,14 +12,10 @@ import {
   Separator,
 } from '@/shared/components';
 import {Category} from '@/shared/models';
-import {
-  selectCategoriesFetchState,
-  getUserCategories,
-  categoryListSelectors,
-} from '@/store/categories';
 
 import CategorySearchListItem from './components/CategorySearchListItem';
 import {SearchInput, SearchList} from './styles';
+import {useQueryCategories} from '../CategoryListPage/hooks/useGetCategories';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategorySearch'>;
@@ -29,38 +24,18 @@ interface Props {
 
 const CategorySearchPage: React.FC<Props> = ({navigation, route}) => {
   const [search, setSearch] = useState('');
-  const [lsCategories, setLsCategories] = useState<Category[]>([]);
-  const dispatch = useDispatch();
-
-  const fetchState = useSelector(selectCategoriesFetchState);
-  const categoryListRedux = useSelector(categoryListSelectors.selectAll);
 
   const inputRef = useRef<TextInput>(null);
 
   const {onCategoryChange} = route.params;
 
-  useEffect(() => {
-    dispatch(getUserCategories());
-    setTimeout(() => inputRef.current?.focus());
-  }, [dispatch]);
-
-  useEffect(() => {
-    const newCategoryList = categoryListRedux.filter(category =>
-      new RegExp(search, 'i').test(category.name),
-    );
-
-    setLsCategories(newCategoryList);
-  }, [search, categoryListRedux]);
+  const {categories, refetchCategories, hasError, isLoading} =
+    useQueryCategories();
 
   const handleChosenCategory = (chosenCategory: Category) => {
     onCategoryChange(chosenCategory);
     navigation.pop();
   };
-
-  const handleRefresh = useCallback(
-    () => dispatch(getUserCategories()),
-    [dispatch],
-  );
 
   const handleBackPress = useCallback(() => navigation.pop(), [navigation]);
 
@@ -76,12 +51,12 @@ const CategorySearchPage: React.FC<Props> = ({navigation, route}) => {
           placeholder="Buscar Categoria..."
         />
         <SearchList
-          onRefresh={handleRefresh}
+          onRefresh={refetchCategories}
           emptyListText="Nenhuma Categoria Encontrada"
-          hasError={fetchState.hasError}
-          isLoading={fetchState.isLoading}
+          hasError={hasError}
+          isLoading={isLoading}
           keyExtractor={(category: Category) => category.id}
-          data={lsCategories}
+          data={categories}
           renderItem={({item}) => (
             <CategorySearchListItem
               category={item as Category}

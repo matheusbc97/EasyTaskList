@@ -1,10 +1,12 @@
 import {tableSchema} from '@nozbe/watermelondb';
 
 export const tasksSchema = tableSchema({
-  name: 'categories',
+  name: 'tasks',
   columns: [
-    {name: 'name', type: 'string'},
-    {name: 'colorIndex', type: 'number'},
-    {name: 'iconIndex', type: 'number'},
+    {name: 'title', type: 'string'},
+    {name: 'date', type: 'string'},
+    {name: 'description', type: 'string'},
+    {name: 'done', type: 'boolean'},
+    {name: 'category_id', type: 'string'},
   ],
 });

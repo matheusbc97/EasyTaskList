@@ -2,7 +2,7 @@ import {database} from '@/database/config';
 import CategoryModel from '@/database/models/CategoryModel';
 import {Category} from '@/shared/models';
 
-export async function dbFetchCategories() {
+export async function dbQueryCategories() {
   const categoriesCollection = await database
     .get<CategoryModel>('categories')
     .query()

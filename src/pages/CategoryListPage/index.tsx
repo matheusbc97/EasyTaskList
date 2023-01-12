@@ -9,7 +9,7 @@ import {
 } from '@/shared/components';
 import {AuthenticatedStackParams} from '@/navigation/types';
 
-import {useGetCategories} from './hooks/useGetCategories';
+import {useQueryCategories} from './hooks/useGetCategories';
 import {doesListItemNeedsMoreMargin} from '@/shared/utils/doesListItemNeedsMoreMargin';
 
 type CategoryListNavigationProp = StackNavigationProp<
@@ -22,7 +22,7 @@ interface Props {
 }
 
 function CategoryListPage({navigation}: Props) {
-  const {categories} = useGetCategories();
+  const {categories} = useQueryCategories();
 
   return (
     <ScreenWrapper>

@@ -6,14 +6,16 @@ import {Task, FetchState} from '@/shared/models';
 
 interface TasksListProps {
   tasks: Task[];
-  tasksFetchState: FetchState;
+  isLoading: boolean;
+  hasError: boolean;
   onTaskPress: (task: Task) => void;
   onRefresh?: () => void;
 }
 
 function TasksList({
   tasks,
-  tasksFetchState,
+  isLoading,
+  hasError,
   onTaskPress,
   onRefresh,
 }: TasksListProps) {
@@ -23,8 +25,8 @@ function TasksList({
     <FlatListWithFetchIndicator
       onRefresh={onRefresh}
       data={tasks}
-      isLoading={tasksFetchState.isLoading}
-      hasError={tasksFetchState.hasError}
+      isLoading={isLoading}
+      hasError={hasError}
       emptyListText={translation('NO_TASK_TO_DO')}
       keyExtractor={task => task.id}
       renderItem={({item: task}) => (

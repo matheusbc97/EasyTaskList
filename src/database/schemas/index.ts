@@ -3,6 +3,6 @@ import {categoriesSchema} from './categoriesSchema';
 import {tasksSchema} from './tasksSchema';
 
 export default appSchema({
-  version: 3,
+  version: 9,
   tables: [categoriesSchema, tasksSchema],
 });
