@@ -13,6 +13,10 @@ export async function dbGetUser() {
 
   console.log('userCollection', userCollection);
 
+  if (userCollection.length === 0) {
+    throw Error('USER NOT LOGGED');
+  }
+
   const userModel = userCollection[0];
 
   const user = {

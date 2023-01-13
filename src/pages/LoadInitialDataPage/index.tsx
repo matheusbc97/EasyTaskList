@@ -9,10 +9,14 @@ export default function LoadInitialDataPage() {
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
-    dbGetUser().then(user => {
-      dispatch(setUser(user));
-      dispatch(setIsLogged(true));
-    });
+    dbGetUser()
+      .then(user => {
+        dispatch(setUser(user));
+        dispatch(setIsLogged(true));
+      })
+      .catch(() => {
+        dispatch(setIsLogged(false));
+      });
   }, [dispatch]);
 
   return <LoadingIndicator />;
