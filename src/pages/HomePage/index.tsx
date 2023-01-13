@@ -11,13 +11,12 @@ import {
 import {useTranslation} from '@/shared/hooks';
 import {AuthenticatedStackParams} from '@/navigation/types';
 import useGetUser from '@/hooks/useGetUser';
-import useTaskNotDone from '@/hooks/useTaskNotDone';
-import useFetchTasks from '@/hooks/useFetchTasks';
 import TasksList from '@/shared/templates/lists/TaskList';
 
 import CategoriesList from './templates/CategoriesList';
 import HomeHeader from './components/HomeHeader';
-import {useQueryCategories} from '../CategoryListPage/hooks/useGetCategories';
+import {useQueryCategories} from '../../shared/hooks/useGetCategories';
+import {useTaskNotDone, useTasks} from '@/hooks';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,
@@ -47,8 +46,12 @@ function HomePage({navigation}: Props) {
   const user = useGetUser();
   const {categories, hasError, isLoading} = useQueryCategories();
 
-  const fetchTasks = useFetchTasks();
-  const {tasksFetchState, tasksNotDone} = useTaskNotDone();
+  const {
+    tasksNotDone,
+    hasError: hasTasksError,
+    isLoading: isTasksLoading,
+    refetchTasksNotDone,
+  } = useTaskNotDone();
 
   return (
     <ScreenWrapper>
@@ -77,9 +80,10 @@ function HomePage({navigation}: Props) {
               return (
                 <Section title={translation('TASKS_NOT_DONE')}>
                   <TasksList
-                    onRefresh={fetchTasks}
+                    onRefresh={refetchTasksNotDone}
                     tasks={tasksNotDone}
-                    tasksFetchState={tasksFetchState}
+                    isLoading={isTasksLoading}
+                    hasError={hasTasksError}
                     onTaskPress={task =>
                       navigation.navigate('TaskDetails', {task})
                     }

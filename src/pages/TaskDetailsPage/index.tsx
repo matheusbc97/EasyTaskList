@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-import {useDispatch} from 'react-redux';
 import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 
 import {RouteProp} from '@react-navigation/native';
@@ -18,7 +17,12 @@ import {
   DeleteButton,
 } from '@/shared/components';
 import categoryIconNames from '@/assets/categoryIconNames';
-import {useTranslation, useCategoryColor, useFormatDate} from '@/shared/hooks';
+import {
+  useTranslation,
+  useCategoryColor,
+  useFormatDate,
+  useUpdateTask,
+} from '@/shared/hooks';
 import {AuthenticatedStackParams} from '@/navigation/types';
 //import useDeleteTask from '@/hooks/useDeleteTask';
 
@@ -28,7 +32,9 @@ import {
   DoneCheckButton,
   Footer,
 } from './styles';
-import {deleteTask, updateTask} from '@store/tasks';
+import {dbDeleteTask, dbUpdateTask} from '@/database';
+import {QUERY_KEYS} from '@/shared/constants/queryKeys';
+import {useQueryClient, useMutation} from 'react-query';
 
 export interface TaskDetailsProps {
   route: RouteProp<AuthenticatedStackParams, 'TaskDetails'>;
@@ -40,22 +46,28 @@ export default function TaskDetails({route, navigation}: TaskDetailsProps) {
 
   const [task, setTask] = useState(route.params.task);
 
-  //const deleteTask = useDeleteTask();
-
   const color = useCategoryColor(task.category);
-  const dispatch = useDispatch();
-
   const formatDate = useFormatDate();
 
+  const queryClient = useQueryClient();
+
+  const updateTask = useUpdateTask(() => {
+    navigation.goBack();
+  });
+
+  const deleteMutation = useMutation(dbDeleteTask, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QUERY_KEYS.TASKS);
+      navigation.goBack();
+    },
+    onError: () => {},
+  });
+
   const handleMarkAsDonePress = () => {
-    dispatch(
-      updateTask({
-        id: task.id,
-        changes: {
-          done: !task.done,
-        },
-      }),
-    );
+    updateTask({
+      taskId: task.id,
+      done: !task.done,
+    });
 
     setTask(oldState => ({
       ...oldState,
@@ -64,7 +76,7 @@ export default function TaskDetails({route, navigation}: TaskDetailsProps) {
   };
 
   const handleDeleteTask = () => {
-    dispatch(deleteTask({id: task.id}));
+    deleteMutation.mutate(task.id);
 
     navigation.goBack();
   };

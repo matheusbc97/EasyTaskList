@@ -1,10 +1,8 @@
 import {AppThemeName} from './AppThemeName';
 
 export type User = {
-  uid: string;
-  email: string;
+  id: string;
   name: string;
-  avatar?: number;
-  image?: string;
-  theme: AppThemeName | null;
+  avatar: number;
+  theme: AppThemeName;
 };

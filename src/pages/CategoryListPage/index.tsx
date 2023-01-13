@@ -9,7 +9,7 @@ import {
 } from '@/shared/components';
 import {AuthenticatedStackParams} from '@/navigation/types';
 
-import {useQueryCategories} from './hooks/useGetCategories';
+import {useQueryCategories} from '../../shared/hooks/useGetCategories';
 import {doesListItemNeedsMoreMargin} from '@/shared/utils/doesListItemNeedsMoreMargin';
 
 type CategoryListNavigationProp = StackNavigationProp<

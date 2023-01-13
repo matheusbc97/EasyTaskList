@@ -13,3 +13,6 @@ export {
   useTranslation,
   useFormHandles,
 };
+
+export * from './useGetCategories';
+export * from './useUpdateTask';

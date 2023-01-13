@@ -5,6 +5,7 @@ import schema from './schemas';
 //import migrations from './model/migrations'; ⬅️ You'll import your Models here
 import PostModel from './models/CategoryModel';
 import TaskModel from './models/TaskModel';
+import UserModel from './models/UserModel';
 
 // First, create the adapter to the underlying database:
 const adapter = new SQLiteAdapter({
@@ -25,5 +26,5 @@ const adapter = new SQLiteAdapter({
 // Then, make a Watermelon database from it!
 export const database = new Database({
   adapter,
-  modelClasses: [PostModel, TaskModel],
+  modelClasses: [PostModel, TaskModel, UserModel],
 });

@@ -1,15 +1,20 @@
-import {useSelector} from 'react-redux';
+import {useQuery} from 'react-query';
 
-import {selectTasksNotDone, selectTasksFetchState} from '@store/tasks';
+import {dbGetTasksNotDone} from '@/database/functions/dbGetTasksNotDone';
+import {QUERY_KEYS} from '@/shared/constants/queryKeys';
 
-const useTaskNotDone = () => {
-  const tasksNotDone = useSelector(selectTasksNotDone);
-  const tasksFetchState = useSelector(selectTasksFetchState);
+export function useTaskNotDone() {
+  const {
+    data,
+    refetch: refetchTasksNotDone,
+    isError,
+    isLoading,
+  } = useQuery(QUERY_KEYS.TASKS, dbGetTasksNotDone);
 
   return {
-    tasksNotDone,
-    tasksFetchState,
+    tasksNotDone: data ?? [],
+    refetchTasksNotDone,
+    hasError: isError,
+    isLoading,
   };
-};
-
-export default useTaskNotDone;
+}

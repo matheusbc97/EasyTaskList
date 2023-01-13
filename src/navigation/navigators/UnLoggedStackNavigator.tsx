@@ -17,7 +17,7 @@ const UnauthenticatedStack = createStackNavigator<UnauthenticatedStackParams>();
 
 function App() {
   return (
-    <UnauthenticatedStack.Navigator>
+    <UnauthenticatedStack.Navigator screenOptions={{headerShown: false}}>
       <UnauthenticatedStack.Screen name="Welcome" component={WelcomePage} />
       <UnauthenticatedStack.Screen
         options={{

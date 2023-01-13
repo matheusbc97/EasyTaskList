@@ -15,7 +15,7 @@ import {Category} from '@/shared/models';
 
 import CategorySearchListItem from './components/CategorySearchListItem';
 import {SearchInput, SearchList} from './styles';
-import {useQueryCategories} from '../CategoryListPage/hooks/useGetCategories';
+import {useQueryCategories} from '../../shared/hooks/useGetCategories';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategorySearch'>;

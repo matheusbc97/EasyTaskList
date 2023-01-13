@@ -1,17 +1,10 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {FlatList} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {
-  ScreenWrapper,
-  Header,
-  FlatListWithFetchIndicator,
-} from '@/shared/components';
-import {
-  selectAboutItemsFetchState,
-  aboutItemsListSelectors,
-} from '@/store/about';
+import {ScreenWrapper, Header} from '@/shared/components';
 import {AuthenticatedStackParams} from '@/navigation/types';
+import {ABOUT} from '@/shared/constants/about';
 
 import AboutListItem from './components/AboutListItem';
 import {Content} from './styles';
@@ -21,9 +14,6 @@ interface Props {
 }
 
 const AboutPage: React.FC<Props> = ({navigation}) => {
-  const aboutItems = useSelector(aboutItemsListSelectors.selectAll);
-  const fetchState = useSelector(selectAboutItemsFetchState);
-
   return (
     <ScreenWrapper>
       <Header
@@ -31,12 +21,9 @@ const AboutPage: React.FC<Props> = ({navigation}) => {
         onBackPress={() => navigation.navigate('BottomNavigation')}
       />
       <Content>
-        <FlatListWithFetchIndicator
+        <FlatList
           keyExtractor={item => item.id}
-          data={aboutItems}
-          isLoading={fetchState.isLoading}
-          hasError={fetchState.hasError}
-          emptyListText="Nenhum Item Encontrado"
+          data={ABOUT}
           renderItem={({item, index}) => (
             <AboutListItem item={item} index={index} />
           )}

@@ -1,11 +1,12 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import useGetUser from '@hooks/useGetUser';
-import useUpdateUser from '@hooks/useUpdateUser';
-import useSetUserLogged from '@hooks/useSetUserLogged';
+import useGetUser from '@/hooks/useGetUser';
+import useSetUserLogged from '@/hooks/useSetUserLogged';
 
-import {Avatar, Text, RoundedButton, ThemeBox} from '@shared/components';
+import {Avatar, Text, RoundedButton, ThemeBox} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
+import {dbCreateUser} from '@/database';
+import {handleErrorMessage} from '@/shared/utils/errorHandler';
 
 interface Props {
   onChangePress(index: number): void;
@@ -13,13 +14,22 @@ interface Props {
 
 const SaveUserConfiguration: React.FC<Props> = ({onChangePress}) => {
   const user = useGetUser();
-  const updateUser = useUpdateUser();
   const setUserLogged = useSetUserLogged();
 
   const {translation} = useTranslation();
 
   const handleFinishRegistrationPress = async () => {
-    setUserLogged(true);
+    console.log('te');
+    try {
+      await dbCreateUser({
+        avatar: user?.avatar,
+        name: user?.name,
+        theme: user?.theme,
+      });
+      setUserLogged(true);
+    } catch (error) {
+      handleErrorMessage(error);
+    }
   };
 
   return (

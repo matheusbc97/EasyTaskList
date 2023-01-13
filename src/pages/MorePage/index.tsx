@@ -3,10 +3,9 @@ import {View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 
-import {ScreenWrapper, Text, NavigateButton} from '@shared/components';
-import {AuthenticatedStackParams} from '@navigation/types';
+import {ScreenWrapper, Text, NavigateButton} from '@/shared/components';
+import {AuthenticatedStackParams} from '@/navigation/types';
 import {useTranslation} from '@/shared/hooks';
-import useSignOut from '@/hooks/useSignOut';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'BottomNavigation'>;
@@ -15,7 +14,6 @@ interface Props {
 
 export default function MorePage({navigation}: Props) {
   const {translation} = useTranslation();
-  const signOut = useSignOut();
 
   return (
     <ScreenWrapper>
@@ -44,11 +42,6 @@ export default function MorePage({navigation}: Props) {
         iconName="info-circle"
         type="FontAwesome5"
         onPress={() => navigation.navigate('About')}
-      />
-      <NavigateButton
-        title={translation('LOG_OUT')}
-        iconName="sign-out"
-        onPress={signOut}
       />
     </ScreenWrapper>
   );

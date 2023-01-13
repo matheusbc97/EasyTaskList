@@ -6,13 +6,16 @@ import {selectIsLogged} from '@/store/configs';
 
 import LoggedStackNavigator from './navigators/LoggedStackNavigator';
 import UnLoggedStackNavigator from './navigators/UnLoggedStackNavigator';
+import LoadInitialDataPage from '@/pages/LoadInitialDataPage';
 
 const AppNavigator = () => {
   const isLogged = useSelector(selectIsLogged);
 
   return (
     <NavigationContainer>
-      {isLogged ? <LoggedStackNavigator /> : <UnLoggedStackNavigator />}
+      {isLogged === null && <LoadInitialDataPage />}
+      {isLogged && <LoggedStackNavigator />}
+      {isLogged === false && <UnLoggedStackNavigator />}
     </NavigationContainer>
   );
 };

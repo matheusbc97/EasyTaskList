@@ -1,4 +1,3 @@
-import {Category} from '@/shared/models';
 import {Model, Relation} from '@nozbe/watermelondb';
 import {field, relation} from '@nozbe/watermelondb/decorators';
 import {TABLE_KEYS} from '../constants/tableKeys';

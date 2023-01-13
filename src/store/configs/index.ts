@@ -5,9 +5,14 @@ import {BLUE_GREEN} from '@/assets/themes';
 
 const initialTheme = BLUE_GREEN;
 
-const initialState = {
+interface ConfigsInitialState {
+  theme: AppTheme;
+  isLogged: boolean | null;
+}
+
+const initialState: ConfigsInitialState = {
   theme: initialTheme,
-  isLogged: true,
+  isLogged: null,
 };
 
 const configs = createSlice({
@@ -24,7 +29,9 @@ const configs = createSlice({
       state.isLogged = action.payload;
     },
     resetAll: () => {
-      return initialState;
+      return {
+        ...initialState,
+      };
     },
   },
 });
