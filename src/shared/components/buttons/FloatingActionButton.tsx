@@ -1,7 +1,7 @@
 import React from 'react';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
-import useAppTheme from '@/hooks/useAppTheme';
+import useAppTheme from '@/shared/hooks/useAppTheme';
 import Button from './Button';
 
 interface Props {

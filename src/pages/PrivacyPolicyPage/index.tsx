@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {ScrollView} from 'react-native';
 
-import usePrivacyPolicy from '@/hooks/usePrivacyPolicy';
+import usePrivacyPolicy from '@/shared/hooks/usePrivacyPolicy';
 import {useTranslation} from '@/shared/hooks';
 import {
   Text,

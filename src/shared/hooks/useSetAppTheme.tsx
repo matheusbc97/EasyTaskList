@@ -2,7 +2,7 @@ import {useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 
 import {setAppTheme as setAppThemeAction} from '@/store/configs';
-import {AppTheme} from '@shared/models';
+import {AppTheme} from '@/shared/models';
 
 const useSetAppTheme = () => {
   const dispatch = useDispatch();

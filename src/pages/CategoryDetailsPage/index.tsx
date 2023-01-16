@@ -16,7 +16,7 @@ import TaskList from '@/shared/templates/lists/TaskList';
 import {useTranslation} from '@/shared/hooks';
 
 import {Content} from './styles';
-import {useTasks} from '@/hooks';
+import {useTasks} from '@/shared/hooks';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryDetails'>;

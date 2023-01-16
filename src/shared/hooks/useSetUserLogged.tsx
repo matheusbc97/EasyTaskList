@@ -1,5 +1,5 @@
 import {useDispatch} from 'react-redux';
-import {setIsLogged} from '@store/configs';
+import {setIsLogged} from '@/store/configs';
 
 const useSetUserLogged = () => {
   const dispatch = useDispatch();

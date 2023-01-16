@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import useGetUser from '@/hooks/useGetUser';
-import useSetUserLogged from '@/hooks/useSetUserLogged';
+import useGetUser from '@/shared/hooks/useGetUser';
+import useSetUserLogged from '@/shared/hooks/useSetUserLogged';
 
 import {Avatar, Text, RoundedButton, ThemeBox} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';

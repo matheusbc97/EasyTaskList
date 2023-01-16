@@ -10,7 +10,7 @@ import {
 } from '@/shared/components';
 import {selectAppTheme} from '@/store/configs';
 import {AuthenticatedStackParams} from '@/navigation/types';
-import {useTasks} from '@/hooks';
+import {useTasks} from '@/shared/hooks';
 import {useTranslation} from '@/shared/hooks';
 import TaskList from '@/shared/templates/lists/TaskList';
 

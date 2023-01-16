@@ -11,7 +11,7 @@ import {
   BOTTOM_RIGHT_DOT,
 } from '@/assets/images';
 import {AppTheme} from '@shared/models';
-import useAppTheme from '@/hooks/useAppTheme';
+import useAppTheme from '@/shared/hooks/useAppTheme';
 
 interface Props {
   theme?: AppTheme;

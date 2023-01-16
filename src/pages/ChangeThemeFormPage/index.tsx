@@ -8,7 +8,7 @@ import {
 } from '@/shared/components';
 import {AppTheme} from '@/shared/models';
 import {useTranslation} from '@/shared/hooks';
-import useAppTheme from '@/hooks/useAppTheme';
+import useAppTheme from '@/shared/hooks/useAppTheme';
 import ChooseTheme from '@/shared/templates/ChooseTheme';
 
 import useHandleSaveTheme from './hooks/useHandleSaveTheme';

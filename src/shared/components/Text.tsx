@@ -4,7 +4,7 @@ import {
   TextProps as RNTextProps,
   TextStyle,
 } from 'react-native';
-import useAppTheme from '@/hooks/useAppTheme';
+import useAppTheme from '@/shared/hooks/useAppTheme';
 
 export type TextTypes =
   | 'title'
