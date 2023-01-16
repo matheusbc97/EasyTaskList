@@ -26,7 +26,6 @@ describe('Create Account Test', () => {
     await element(by.id('newPasswordInput')).tap();
     await element(by.id('newPasswordInput')).typeText('123456');
 
-
     await element(by.id('confirmNewPasswordInput')).tap();
     await element(by.id('confirmNewPasswordInput')).typeText('123456');
 
@@ -35,7 +34,7 @@ describe('Create Account Test', () => {
     await element(by.id('RegisterSendButton')).tap();
 
     //await new Promise((resolve) => setTimeout(resolve, 4000))
-   /// await element(by.id('RegisterAdvanceButton')).tap();
+    /// await element(by.id('RegisterAdvanceButton')).tap();
   });
 
   /*
