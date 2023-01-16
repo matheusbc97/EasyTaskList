@@ -16,3 +16,4 @@ export {
 
 export * from './useGetCategories';
 export * from './useUpdateTask';
+export * from './useDeleteTask';

@@ -16,7 +16,7 @@ import TasksList from '@/shared/templates/lists/TaskList';
 import CategoriesList from './templates/CategoriesList';
 import HomeHeader from './components/HomeHeader';
 import {useQueryCategories} from '../../shared/hooks/useGetCategories';
-import {useTaskNotDone, useTasks} from '@/hooks';
+import {useTaskNotDone} from '@/hooks';
 
 type TaskListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,

@@ -15,8 +15,8 @@ import {FormObject} from '@/shared/templates/forms/TaskForm';
 import {Props} from './types';
 import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
 
-const UpdateTaskForm: React.FC<Props> = ({route, navigation}) => {
-  const {task, onTaskUpdatedCallback} = route.params;
+function UpdateTaskFormPage({route, navigation}: Props) {
+  const {task} = route.params;
 
   const formRef = useRef<TaskFormHandles>(null);
 
@@ -29,9 +29,10 @@ const UpdateTaskForm: React.FC<Props> = ({route, navigation}) => {
       taskId: task.id,
       title: form.title,
       description: form.description,
-      //category: form.category,
+      categoryId: form.category.id,
       date: getDateByDateAndTime(form.date, form.time).toISOString(),
     });
+    navigation.goBack();
   };
 
   return (
@@ -47,6 +48,6 @@ const UpdateTaskForm: React.FC<Props> = ({route, navigation}) => {
       <RoundedSaveButton onPress={() => formRef.current?.submitForm()} />
     </FormScreenWrapper>
   );
-};
+}
 
-export default UpdateTaskForm;
+export default UpdateTaskFormPage;

@@ -9,7 +9,10 @@ export function useTaskNotDone() {
     refetch: refetchTasksNotDone,
     isError,
     isLoading,
-  } = useQuery(QUERY_KEYS.TASKS, dbGetTasksNotDone);
+  } = useQuery(
+    [QUERY_KEYS.TASKS, QUERY_KEYS.TASKS_NOT_DONE],
+    dbGetTasksNotDone,
+  );
 
   return {
     tasksNotDone: data ?? [],

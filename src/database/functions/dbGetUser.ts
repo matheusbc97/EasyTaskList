@@ -11,8 +11,6 @@ export async function dbGetUser() {
     .query(Q.take(1))
     .fetch();
 
-  console.log('userCollection', userCollection);
-
   if (userCollection.length === 0) {
     throw Error('USER NOT LOGGED');
   }

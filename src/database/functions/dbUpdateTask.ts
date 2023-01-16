@@ -8,9 +8,14 @@ export interface DbUpdateTaskParams {
   date?: string;
   description?: string;
   done?: boolean;
+  categoryId?: string;
 }
 
-export async function dbUpdateTask({taskId, ...updates}: DbUpdateTaskParams) {
+export async function dbUpdateTask({
+  taskId,
+  categoryId,
+  ...updates
+}: DbUpdateTaskParams) {
   await database.write(async () => {
     const taskModel = await database
       .get<TaskModel>(TABLE_KEYS.TASKS)
@@ -20,6 +25,10 @@ export async function dbUpdateTask({taskId, ...updates}: DbUpdateTaskParams) {
       Object.keys(updates).forEach(key => {
         (task as any)[key] = (updates as any)[key];
       });
+
+      if (categoryId) {
+        task.category.id = categoryId;
+      }
     });
   });
 }

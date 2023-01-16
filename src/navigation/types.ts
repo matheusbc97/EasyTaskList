@@ -1,4 +1,4 @@
-import {Category, Task} from '@shared/models';
+import {Category, Task} from '@/shared/models';
 
 export type UnauthenticatedStackParams = {
   Login: undefined;
@@ -17,7 +17,6 @@ export type AuthenticatedStackParams = {
   };
   UpdateTaskForm: {
     task: Task;
-    onTaskUpdatedCallback: (task: Task) => void;
   };
   CategorySearch: {
     onCategoryChange: (category: Category) => void;

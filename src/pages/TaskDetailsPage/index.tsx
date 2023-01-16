@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 
@@ -22,9 +22,13 @@ import {
   useCategoryColor,
   useFormatDate,
   useUpdateTask,
+  useDeleteTask,
 } from '@/shared/hooks';
 import {AuthenticatedStackParams} from '@/navigation/types';
-//import useDeleteTask from '@/hooks/useDeleteTask';
+import {QUERY_KEYS} from '@/shared/constants/queryKeys';
+import {useQuery} from 'react-query';
+import {dbGetTaskById} from '@/database/functions/dbGetTaskById';
+import {Task} from '@/shared/models';
 
 import {
   CategoryContainer,
@@ -32,9 +36,6 @@ import {
   DoneCheckButton,
   Footer,
 } from './styles';
-import {dbDeleteTask, dbUpdateTask} from '@/database';
-import {QUERY_KEYS} from '@/shared/constants/queryKeys';
-import {useQueryClient, useMutation} from 'react-query';
 
 export interface TaskDetailsProps {
   route: RouteProp<AuthenticatedStackParams, 'TaskDetails'>;
@@ -44,50 +45,32 @@ export interface TaskDetailsProps {
 export default function TaskDetails({route, navigation}: TaskDetailsProps) {
   const {translation} = useTranslation();
 
-  const [task, setTask] = useState(route.params.task);
+  const {data: task} = useQuery([QUERY_KEYS.TASKS, route.params.task.id], () =>
+    dbGetTaskById(route.params.task.id),
+  );
 
-  const color = useCategoryColor(task.category);
+  const color = useCategoryColor(task?.category);
   const formatDate = useFormatDate();
-
-  const queryClient = useQueryClient();
 
   const updateTask = useUpdateTask(() => {
     navigation.goBack();
   });
 
-  const deleteMutation = useMutation(dbDeleteTask, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(QUERY_KEYS.TASKS);
-      navigation.goBack();
-    },
-    onError: () => {},
+  const deleteTask = useDeleteTask(() => {
+    navigation.goBack();
   });
 
-  const handleMarkAsDonePress = () => {
+  const handleMarkAsDonePress = (_task: Task) => {
     updateTask({
-      taskId: task.id,
-      done: !task.done,
+      taskId: _task.id,
+      done: !_task.done,
     });
-
-    setTask(oldState => ({
-      ...oldState,
-      done: !task.done,
-    }));
   };
 
-  const handleDeleteTask = () => {
-    deleteMutation.mutate(task.id);
-
-    navigation.goBack();
-  };
-
-  const navigateToTaskForm = () => {
+  const navigateToTaskForm = (_task: Task) => {
     navigation.navigate('UpdateTaskForm', {
       task: {
-        ...task,
-      },
-      onTaskUpdatedCallback: _task => {
-        setTask(_task);
+        ..._task,
       },
     });
   };
@@ -96,49 +79,66 @@ export default function TaskDetails({route, navigation}: TaskDetailsProps) {
     <ScreenWrapper>
       <Header title={translation('TASKS')} />
 
-      <Section
-        style={{marginTop: 10, flex: 1}}
-        contentStyle={{paddingHorizontal: 20, paddingVertical: 15, flex: 1}}>
-        <Text type="title-big" primaryColor>
-          {task.title}
-        </Text>
+      {task && (
+        <>
+          <Section
+            style={{marginTop: 10, flex: 1}}
+            contentStyle={{
+              paddingHorizontal: 20,
+              paddingVertical: 15,
+              flex: 1,
+            }}>
+            <Text type="title-big" primaryColor>
+              {task.title}
+            </Text>
 
-        <Text type="subtitle">{formatDate(task.date, 'dateAndTime')}</Text>
+            <Text type="subtitle">{formatDate(task.date, 'dateAndTime')}</Text>
 
-        <CategoryContainer>
-          <IconContainer backgroundColor={color}>
-            <FontAwesomeIcon5
-              name={categoryIconNames[task.category?.iconIndex]}
-              size={25}
-              color="#FFF"
-              style={{marginLeft: 5}}
-            />
-          </IconContainer>
-          <View style={{marginLeft: 10}}>
-            <Text type="subtitle">{translation('CATEGORY')}:</Text>
-            <Text type="title-medium">{task.category?.name}</Text>
-          </View>
-        </CategoryContainer>
+            <CategoryContainer>
+              <IconContainer backgroundColor={color}>
+                <FontAwesomeIcon5
+                  name={categoryIconNames[task.category?.iconIndex]}
+                  size={25}
+                  color="#FFF"
+                  style={{marginLeft: 5}}
+                />
+              </IconContainer>
+              <View style={{marginLeft: 10}}>
+                <Text type="subtitle">{translation('CATEGORY')}:</Text>
+                <Text type="title-medium">{task.category?.name}</Text>
+              </View>
+            </CategoryContainer>
 
-        <View style={{flex: 1}}>
-          <Text style={{marginVertical: 10}}>{task.description}</Text>
-        </View>
+            <View style={{flex: 1}}>
+              <Text style={{marginVertical: 10}}>{task.description}</Text>
+            </View>
 
-        <DoneCheckButton onPress={handleMarkAsDonePress}>
-          <Text>{task.done ? 'Feito' : 'Não feito'}</Text>
-          <CheckInput value={task.done} onChange={handleMarkAsDonePress} />
-        </DoneCheckButton>
-      </Section>
+            <DoneCheckButton onPress={() => handleMarkAsDonePress(task)}>
+              <Text>{task.done ? 'Feito' : 'Não feito'}</Text>
+              <CheckInput
+                value={task.done}
+                onChange={() => handleMarkAsDonePress(task)}
+              />
+            </DoneCheckButton>
+          </Section>
 
-      <Separator style={{marginTop: 5}} />
+          <Separator style={{marginTop: 5}} />
 
-      <Section style={{marginTop: 5}} contentStyle={{paddingTop: 0}}>
-        <Footer>
-          <DeleteButton style={{flex: 1}} onPress={handleDeleteTask} />
-          <VerticalSeparator />
-          <EditButton style={{flex: 1}} onPress={navigateToTaskForm} />
-        </Footer>
-      </Section>
+          <Section style={{marginTop: 5}} contentStyle={{paddingTop: 0}}>
+            <Footer>
+              <DeleteButton
+                style={{flex: 1}}
+                onPress={() => deleteTask(task.id)}
+              />
+              <VerticalSeparator />
+              <EditButton
+                style={{flex: 1}}
+                onPress={() => navigateToTaskForm(task)}
+              />
+            </Footer>
+          </Section>
+        </>
+      )}
     </ScreenWrapper>
   );
 }
