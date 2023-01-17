@@ -26,7 +26,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({user}) => {
         <Text testID="HeaderUserNameText" type="title-medium">
           {translation('HELLO')}, {user?.name}
         </Text>
-        <Text>{formatDate(new Date(), 'dateOfMotnhAndYear')}</Text>
+        <Text>{formatDate(new Date(), 'dateOfMonthAndYear')}</Text>
       </View>
     </View>
   );

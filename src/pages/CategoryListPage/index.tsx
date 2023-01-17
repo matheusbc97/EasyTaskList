@@ -36,7 +36,11 @@ function CategoryListPage({navigation}: Props) {
           <CategoryListItem
             style={{
               flex: 0.3333,
-              marginRight: doesListItemNeedsMoreMargin(index, categories.length)
+              marginRight: doesListItemNeedsMoreMargin({
+                arrayLength: categories.length,
+                index,
+                columns: 3,
+              })
                 ? 20
                 : undefined,
             }}
