@@ -56,20 +56,34 @@ describe('RoundedButton Component', () => {
     expect(element).toHaveStyle(style);
   });
 
+  it('Should have text', async () => {
+    const text = 'testing';
+
+    const {findByTestId} = render(<RoundedButton text={text} />);
+
+    const element = await findByTestId('text-base');
+
+    expect(element).toHaveTextContent(text);
+  });
+
   it('Should invert the colors', async () => {
     const onPress = jest.fn();
 
     const {findByTestId, container} = render(
-      <RoundedButton onPress={onPress} inverted />,
+      <RoundedButton onPress={onPress} text="testing" inverted />,
     );
 
     expect(container.props.inverted).toBeTruthy();
 
-    const element = await findByTestId('button-base');
+    const buttonBaseElement = await findByTestId('button-base');
 
-    expect(JSON.stringify(element.props.style)).toContain(
-      mockAppTheme.primaryColor,
-    );
+    expect(buttonBaseElement).toHaveStyle({
+      borderColor: mockAppTheme.primaryColor,
+    });
+
+    const textBaseElement = await findByTestId('text-base');
+
+    expect(textBaseElement).toHaveStyle({color: mockAppTheme.primaryColor});
   });
 
   it('backgroundColor Should be secondary color ', async () => {

@@ -27,7 +27,7 @@ const Text = ({
   primaryColor = false,
   secondaryColor = false,
   centerText = false,
-  testID,
+  testID = 'text-base',
 }: PropsWithChildren<TextProps>) => {
   const theme = useAppTheme();
 

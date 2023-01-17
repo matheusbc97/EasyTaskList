@@ -15,7 +15,7 @@ export interface OutlineButtonProps {
 }
 
 const OutlineButton: React.FC<OutlineButtonProps> = ({
-  text = 'Atividades Fisícas',
+  text,
   onPress,
   iconName,
   style,

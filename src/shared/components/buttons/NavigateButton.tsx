@@ -54,6 +54,7 @@ const NavigateButton: React.FC<NavigateButtonProps> = ({
         />
       ) : (
         <FontAwesomeIcon5
+          testID="FontAwesomeIcon5"
           color={appTheme.textColor}
           name={iconName}
           size={18}

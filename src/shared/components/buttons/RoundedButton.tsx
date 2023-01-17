@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, TextStyle, ViewStyle, View} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import useAppTheme from '@/shared/hooks/useAppTheme';
 
@@ -13,7 +12,6 @@ export interface RoundedButtonProps {
   style?: ViewStyle;
   textStyle?: TextStyle;
   inverted?: boolean;
-  icon?: string | null;
   disabled?: boolean;
   testID?: string;
 }
@@ -24,9 +22,8 @@ const RoundedButton = ({
   style,
   textStyle,
   inverted,
-  icon,
   disabled = false,
-  testID
+  testID,
 }: RoundedButtonProps) => {
   const appTheme = useAppTheme();
 
@@ -54,16 +51,6 @@ const RoundedButton = ({
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        {Boolean(icon) && (
-          <Icon
-            name="check"
-            style={
-              inverted
-                ? [styles.invertedText, {color: appTheme.primaryColor}]
-                : styles.text
-            }
-          />
-        )}
         {Boolean(text) && (
           <Text
             style={[

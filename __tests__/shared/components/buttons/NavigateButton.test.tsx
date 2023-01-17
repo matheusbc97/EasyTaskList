@@ -18,14 +18,14 @@ jest.mock('@/shared/hooks/useAppTheme', () => {
 describe('NavigateButton Component', () => {
   it('Should render a button', () => {
     render(
-      <NavigateButton title="Teste" iconName="pencil" onPress={() => {}} />,
+      <NavigateButton title="Testing" iconName="pencil" onPress={() => {}} />,
     );
   });
 
   it('Should press a button', async () => {
     const onPress = jest.fn();
     const {findByTestId} = render(
-      <NavigateButton title="Teste" iconName="pencil" onPress={onPress} />,
+      <NavigateButton title="Testing" iconName="pencil" onPress={onPress} />,
     );
 
     const element = await findByTestId('button-base');
@@ -43,6 +43,21 @@ describe('NavigateButton Component', () => {
 
     const element = await findByTestId('NavigateButton-title');
 
-    expect(element.children[0]).toBe(title);
+    expect(element).toHaveTextContent(title);
+  });
+
+  it('Should render a FontAwesome5', async () => {
+    const {findByTestId} = render(
+      <NavigateButton
+        title="testing"
+        type="FontAwesome5"
+        iconName="pencil"
+        onPress={() => {}}
+      />,
+    );
+
+    const element = await findByTestId('FontAwesomeIcon5');
+
+    expect(element).toBeVisible();
   });
 });
