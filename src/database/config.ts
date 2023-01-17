@@ -1,6 +1,7 @@
 import {Database} from '@nozbe/watermelondb';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 import LokiJSAdapter from '@nozbe/watermelondb/adapters/lokijs';
+import logger from '@nozbe/watermelondb/utils/common/logger';
 
 import schema from './schemas';
 //import migrations from './model/migrations'; ⬅️ You'll import your Models here
@@ -11,6 +12,7 @@ import UserModel from './models/UserModel';
 let adapter: any = null;
 
 if (process.env.JEST_WORKER_ID) {
+  logger.silence();
   adapter = new LokiJSAdapter({
     schema,
     useWebWorker: false,
