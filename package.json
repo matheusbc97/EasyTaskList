@@ -37,7 +37,6 @@
     "react-native-paper": "5.1.1",
     "react-native-safe-area-context": "4.4.1",
     "react-native-screens": "3.18.2",
-    "react-native-uuid": "2.0.1",
     "react-native-vector-icons": "9.2.0",
     "react-query": "3.39.2",
     "react-redux": "8.0.5",
@@ -81,6 +80,9 @@
     ],
     "transformIgnorePatterns": [
       "node_modules/(?!@react-native|react-native|@react-navigation/.*)"
+    ],
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
     ],
     "setupFilesAfterEnv": [
       "@testing-library/jest-native/extend-expect"
