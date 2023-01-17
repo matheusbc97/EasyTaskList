@@ -19,14 +19,12 @@ import Toast from './Toast';
 import FullScreenLoader from './loadings/FullScreenLoader';
 import CategoryListItem from './list-items/CategoryListItem';
 import FloatingActionButton from './buttons/FloatingActionButton';
-import TextWithButton, {TextWithButtonProps} from './buttons/TextWithButton';
 import BackButton from './buttons/BackButton';
 import AnimatedBackgroundContent from './containers/AnimatedBackgroundContent';
 import EmailInput from './inputs/filled/EmailInput';
 import ConfirmNewPasswordInput from './inputs/filled/ConfirmNewPasswordInput';
 import NewPasswordInput from './inputs/filled/NewPasswordInput';
 import CheckInput from './inputs/CheckInput';
-import CheckInputWithButtonText from './inputs/CheckInputWithButtonText';
 import DateInput from './inputs/DateInput';
 import TimeInput from './inputs/TimeInput';
 import CategoryInput from './inputs/CategoryInput';
@@ -73,14 +71,12 @@ export {
   FullScreenLoader,
   CategoryListItem,
   FloatingActionButton,
-  TextWithButton,
   BackButton,
   AnimatedBackgroundContent,
   EmailInput,
   ConfirmNewPasswordInput,
   NewPasswordInput,
   CheckInput,
-  CheckInputWithButtonText,
   DateInput,
   TimeInput,
   CategoryInput,
@@ -108,9 +104,4 @@ export {
   SectionRowButtonsContainer,
 };
 
-export type {
-  TextWithButtonProps,
-  TextProps,
-  FlatListWithFetchIndicatorProps,
-  OutlineButtonProps,
-};
+export type {TextProps, FlatListWithFetchIndicatorProps, OutlineButtonProps};
