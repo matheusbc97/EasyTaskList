@@ -33,6 +33,7 @@ const TextButton: React.FC<TextButtonProps> = ({
     </Text>
     {!!iconName && (
       <FontAwesomeIcon
+        testID="TextButtonIcon"
         style={{marginLeft: 10}}
         name={iconName}
         size={18}
