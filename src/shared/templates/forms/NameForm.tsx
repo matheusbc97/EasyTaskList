@@ -2,9 +2,9 @@ import React, {useRef, forwardRef} from 'react';
 
 import {Form} from '@unform/mobile';
 
-import {NameInput} from '@shared/components';
-import {useValidateField, useFormHandles} from '@shared/hooks';
-import {validateAll} from '@shared/utils/validations';
+import {NameInput} from '@/shared/components';
+import {useValidateField, useFormHandles} from '@/shared/hooks';
+import {validateAll} from '@/shared/utils/validations';
 
 import {FunctionalFormComponent} from '@/shared/models';
 

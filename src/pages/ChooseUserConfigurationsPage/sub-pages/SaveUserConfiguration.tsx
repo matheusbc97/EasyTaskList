@@ -65,6 +65,7 @@ const SaveUserConfiguration: React.FC<Props> = ({onChangePress}) => {
         onPress={() => onChangePress(0)}
       />
       <RoundedButton
+        testID="SaveUserConfigurationSaveButton"
         text={translation('FINISH_REGISTRATION')}
         style={styles.finalizeRegisterBtn}
         onPress={handleFinishRegistrationPress}

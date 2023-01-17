@@ -1,21 +1,22 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import {AppTheme, AppThemeName} from '@shared/models';
+import {AppTheme, AppThemeName} from '@/shared/models';
 import {Button} from '@/shared/components';
-import * as themes from '@assets/themes';
+import * as themes from '@/assets/themes';
 
 interface ThemeBoxProps {
   theme: AppThemeName;
   selected?: boolean;
   onPress?(arg0: AppTheme): void;
+  testID?: string;
 }
 
-const ThemeBox: React.FC<ThemeBoxProps> = ({theme, onPress}) => {
+const ThemeBox: React.FC<ThemeBoxProps> = ({theme, onPress, testID}) => {
   const appTheme = themes[theme];
 
   return (
-    <Button onPress={() => onPress && onPress(appTheme)}>
+    <Button testID={testID} onPress={() => onPress && onPress(appTheme)}>
       <View style={styles.container}>
         <View style={[styles.half, {backgroundColor: appTheme.primaryColor}]} />
         <View

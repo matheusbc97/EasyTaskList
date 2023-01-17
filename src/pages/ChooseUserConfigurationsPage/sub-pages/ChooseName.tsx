@@ -3,8 +3,8 @@ import {View, StyleSheet} from 'react-native';
 import {FormHandles} from '@unform/core';
 import {useSelector} from 'react-redux';
 
-import {RoundedButton, Text, BackButton} from '@shared/components';
-import {selectUserName} from '@store/account/user';
+import {RoundedButton, Text, BackButton} from '@/shared/components';
+import {selectUserName} from '@/store/account/user';
 import {useTranslation} from '@/shared/hooks';
 import NameForm from '@/shared/templates/forms/NameForm';
 
@@ -38,6 +38,7 @@ const ChooseName: React.FC<Props> = ({
       />
 
       <RoundedButton
+        testID="ChooseNameAdvanceButton"
         text={translation('ADVANCE')}
         onPress={() => formRef.current?.submitForm()}
         style={styles.button}

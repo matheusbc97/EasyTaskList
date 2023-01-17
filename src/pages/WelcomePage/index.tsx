@@ -40,6 +40,7 @@ function WelcomePage({navigation}: Props) {
         </View>
         <View style={styles.actionsContainer}>
           <RoundedButton
+            testID="CreateNewUserButton"
             onPress={() => navigation.navigate('ChooseUserConfigurations')}
             text={translation('CREATE_NEW_USER').toUpperCase()}
             style={styles.button}

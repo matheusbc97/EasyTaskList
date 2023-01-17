@@ -1,4 +1,4 @@
-import {AppTheme} from '@shared/models';
+import {AppTheme} from '@/shared/models';
 
 export const BLUE_GREEN: AppTheme = {
   primaryColor: '#21B9C7',
@@ -21,7 +21,7 @@ export const BLUE_RED: AppTheme = {
   dark: false,
   name: 'BLUE_RED',
 };
-
+/*
 export const DARK: AppTheme = {
   primaryColor: '#212121',
   secondaryColor: '#616161',
@@ -31,4 +31,4 @@ export const DARK: AppTheme = {
   aboveBackground: '#828282',
   dark: true,
   name: 'DARK',
-};
+};*/

@@ -1,5 +1,5 @@
-import {ThemeBox} from '@shared/components';
-import {AppTheme} from '@shared/models';
+import {ThemeBox} from '@/shared/components';
+import {AppTheme} from '@/shared/models';
 import React from 'react';
 import {View, ViewStyle} from 'react-native';
 
@@ -22,8 +22,16 @@ function ChooseTheme({onThemePress, style}: ChooseThemeProps) {
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <ThemeBox theme={'BLUE_GREEN'} onPress={onThemePress} />
-        <ThemeBox theme={'BLUE_RED'} onPress={onThemePress} />
+        <ThemeBox
+          testID="ThemeBox-BLUE_GREEN"
+          theme="BLUE_GREEN"
+          onPress={onThemePress}
+        />
+        <ThemeBox
+          testID="ThemeBox-BLUE_RED"
+          theme="BLUE_RED"
+          onPress={onThemePress}
+        />
       </View>
     </View>
   );

@@ -1,11 +1,11 @@
 import React from 'react';
 import {View} from 'react-native';
 
-import {Avatar, Text} from '@shared/components';
+import {Avatar, Text} from '@/shared/components';
+import {useFormatDate, useTranslation} from '@/shared/hooks';
+import {User} from '@/shared/models';
 
 import styles from '../styles';
-import {useFormatDate, useTranslation} from '@shared/hooks';
-import {User} from '@shared/models';
 
 interface HomeHeaderProps {
   user: User | null;
@@ -23,7 +23,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({user}) => {
     <View style={styles.header}>
       <Avatar avatarNumber={user?.avatar} size={50} />
       <View style={styles.headerContent}>
-        <Text type="title-medium">
+        <Text testID="HeaderUserNameText" type="title-medium">
           {translation('HELLO')}, {user?.name}
         </Text>
         <Text>{formatDate(new Date(), 'dateOfMotnhAndYear')}</Text>

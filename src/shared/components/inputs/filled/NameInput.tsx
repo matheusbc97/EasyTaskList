@@ -5,6 +5,7 @@ import {useTranslation} from '@/shared/hooks';
 export default function NewPasswordInput({
   label = '',
   name = 'name',
+  testID = 'NewPasswordInput',
   ...rest
 }: AppTextInputProps) {
   const {translation} = useTranslation();
@@ -13,5 +14,5 @@ export default function NewPasswordInput({
     label = translation('NAME');
   }
 
-  return <TextInput label={label} name={name} {...rest} />;
+  return <TextInput testID={testID} label={label} name={name} {...rest} />;
 }

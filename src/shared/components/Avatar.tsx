@@ -28,16 +28,19 @@ interface ImageAvatarProps {
   onPress?(): void;
   avatarNumber?: number;
   size?: number;
+  testId?: string;
 }
 
 const ImageAvatar: React.FC<ImageAvatarProps> = ({
   avatarNumber = -1,
   size = 55,
   onPress,
+  testId = 'ImageAvatar',
 }) => {
   return (
     <Button
       onPress={onPress}
+      testID={testId}
       style={[
         styles.avatarContainer,
         {width: size, height: size, borderRadius: size / 2},

@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 
 import {setAppTheme} from '@/store/configs';
 import {setUserTheme} from '@/store/account/user';
-import {Text, RoundedButton} from '@shared/components';
+import {Text, RoundedButton} from '@/shared/components';
 import * as appThemes from '@/assets/themes';
 import {AppTheme, AppThemeName} from '@/shared/models';
 import {useTranslation} from '@/shared/hooks';
@@ -38,6 +38,7 @@ const ChooseThemeSubPage: React.FC<Props> = ({
         <ChooseTheme onThemePress={handleThemeChoose} />
       </View>
       <RoundedButton
+        testID="ChooseThemeAdvanceButton"
         text={advanceButtonText ?? translation('ADVANCE')}
         onPress={() => onAdvancePress(appThemeState.name)}
       />
