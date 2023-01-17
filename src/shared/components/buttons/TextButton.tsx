@@ -1,14 +1,17 @@
 import React from 'react';
+import {StyleProp, ViewStyle} from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import Text, {TextTypes} from '../Text';
-import Button, {ButtonProps} from './Button';
+import Button from './Button';
 
-export interface TextButtonProps extends ButtonProps {
+export interface TextButtonProps {
   text: string;
   iconName?: string;
   textType?: TextTypes;
   color?: string;
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
 }
 
 const TextButton: React.FC<TextButtonProps> = ({
@@ -18,15 +21,13 @@ const TextButton: React.FC<TextButtonProps> = ({
   iconName,
   textType,
   color,
-  ...rest
 }) => (
   <Button
     onPress={onPress}
     style={[
       {flexDirection: 'row', justifyContent: 'center', paddingVertical: 10},
       style,
-    ]}
-    {...rest}>
+    ]}>
     <Text style={{color}} type={textType}>
       {text}
     </Text>

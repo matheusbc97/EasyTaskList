@@ -4,7 +4,6 @@ import {BackButton} from '@/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
 
 const mockedGoBack = jest.fn();
-const mockedTranslate = jest.fn(() => 'teste');
 
 jest.mock('@react-navigation/native', () => {
   return {
@@ -14,26 +13,8 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
-jest.mock('@/shared/hooks/useAppTheme', () => {
-  return () => ({
-    primaryColor: '#21B9C7',
-    secondaryColor: '#4ADDB5',
-    textColor: '#424242',
-    secondaryTextColor: '#bdbdbd',
-    background: '#fafafa',
-    aboveBackground: '#FFF',
-    dark: false,
-    name: 'BLUE_GREEN',
-  });
-});
-
-jest.mock('@/shared/hooks', () => {
-  return {
-    useTranslation: () => ({
-      translation: mockedTranslate,
-    }),
-  };
-});
+jest.mock('@/shared/hooks/useAppTheme');
+jest.mock('@/shared/hooks/useTranslation');
 
 describe('BackButton Component', () => {
   it('Should render a button', () => {

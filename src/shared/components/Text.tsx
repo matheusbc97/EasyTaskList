@@ -1,9 +1,5 @@
 import React, {PropsWithChildren, useCallback} from 'react';
-import {
-  Text as RNText,
-  TextProps as RNTextProps,
-  TextStyle,
-} from 'react-native';
+import {StyleProp, Text as RNText, TextStyle} from 'react-native';
 import useAppTheme from '@/shared/hooks/useAppTheme';
 
 export type TextTypes =
@@ -15,11 +11,13 @@ export type TextTypes =
   | 'title-medium'
   | 'title-inverse';
 
-export interface TextProps extends RNTextProps, PropsWithChildren<Text> {
+export interface TextProps {
   type?: TextTypes;
   primaryColor?: boolean;
   secondaryColor?: boolean;
   centerText?: boolean;
+  testID?: string;
+  style?: StyleProp<TextStyle>;
 }
 
 const Text = ({
@@ -30,11 +28,11 @@ const Text = ({
   secondaryColor = false,
   centerText = false,
   testID,
-}: TextProps) => {
+}: PropsWithChildren<TextProps>) => {
   const theme = useAppTheme();
 
   const getColor = useCallback(
-    defaultColor => {
+    (defaultColor: string) => {
       if (primaryColor) {
         return theme.primaryColor;
       }
