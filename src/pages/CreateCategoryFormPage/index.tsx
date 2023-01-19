@@ -11,26 +11,27 @@ import CategoryForm, {
 } from '@/shared/templates/forms/CategoryForm';
 
 import {Props} from './types';
-import useHandleSubmit from './hooks/useHandleSubmit';
+import {useCreateCategory} from '@/shared/hooks';
 
-const CategoryFormPage: React.FC<Props> = ({}) => {
+function CategoryFormPage({navigation}: Props) {
   const {translation} = useTranslation();
 
   const formRef = useRef<CategoryFormHandles>(null);
 
-  const handleFormSubmit = useHandleSubmit();
+  const createCategory = useCreateCategory({
+    onSuccess: () => {
+      navigation.goBack();
+    },
+  });
 
   return (
     <FormScreenWrapper>
       <Header type="secondary" title={translation('CREATE_CATEGORY')} />
 
-      <CategoryForm
-        ref={formRef}
-        onSubmitSuccess={form => handleFormSubmit(form)}
-      />
+      <CategoryForm ref={formRef} onSubmitSuccess={createCategory} />
       <RoundedSaveButton onPress={() => formRef.current?.submitForm()} />
     </FormScreenWrapper>
   );
-};
+}
 
 export default CategoryFormPage;
