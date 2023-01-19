@@ -8,7 +8,7 @@ interface Props {
 
 const ErrorMessage = ({onTryAgainPress}: Props) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="error-message">
       <Icon name={'frown'} style={styles.icon} />
       <Button
         onPress={onTryAgainPress ?? (() => {})}

@@ -7,7 +7,13 @@ interface Props {
 }
 
 const ActivityIndicator = ({size = 40, color = '#a1001a'}: Props) => {
-  return <RNActivityIndicator color={color} size={size} />;
+  return (
+    <RNActivityIndicator
+      testID="loading-indicator-base"
+      color={color}
+      size={size}
+    />
+  );
 };
 
 export default ActivityIndicator;
