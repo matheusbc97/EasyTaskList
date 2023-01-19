@@ -6,6 +6,7 @@ import {Text, ScreenWrapper, RoundedButton} from '@/shared/components';
 import {welcomeBackground} from '@/assets/images';
 import {AuthenticatedStackParams} from '@/navigation/types';
 import {useTranslation} from '@/shared/hooks';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 import styles from './styles';
 
@@ -21,7 +22,9 @@ function WelcomePage({navigation}: Props) {
   const {translation} = useTranslation();
 
   return (
-    <ScreenWrapper style={styles.screen} testID="WelcomeScreenWrapper">
+    <ScreenWrapper
+      style={styles.screen}
+      testID={TEST_IDS.WELCOME_SCREEN_WRAPPER}>
       <ImageBackground
         source={welcomeBackground}
         imageStyle={styles.imageBackgroundImage}
@@ -40,7 +43,7 @@ function WelcomePage({navigation}: Props) {
         </View>
         <View style={styles.actionsContainer}>
           <RoundedButton
-            testID="CreateNewUserButton"
+            testID={TEST_IDS.CREATE_NEW_USER_BUTTON}
             onPress={() => navigation.navigate('ChooseUserConfigurations')}
             text={translation('CREATE_NEW_USER').toUpperCase()}
             style={styles.button}

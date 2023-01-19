@@ -1,11 +1,13 @@
 import React from 'react';
-import TextInput, {AppTextInputProps} from '../UnformInput';
 import {useTranslation} from '@/shared/hooks';
+import {TEST_IDS} from '@/shared/constants/testIds';
+
+import TextInput, {AppTextInputProps} from '../UnformInput';
 
 export default function NewPasswordInput({
   label = '',
   name = 'name',
-  testID = 'NewPasswordInput',
+  testID = TEST_IDS.NEW_PASSWORD_INPUT,
   ...rest
 }: AppTextInputProps) {
   const {translation} = useTranslation();

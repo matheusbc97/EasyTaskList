@@ -21,7 +21,6 @@ import CategoryListItem from './list-items/CategoryListItem';
 import FloatingActionButton from './buttons/FloatingActionButton';
 import BackButton from './buttons/BackButton';
 import AnimatedBackgroundContent from './containers/AnimatedBackgroundContent';
-import EmailInput from './inputs/filled/EmailInput';
 import ConfirmNewPasswordInput from './inputs/filled/ConfirmNewPasswordInput';
 import NewPasswordInput from './inputs/filled/NewPasswordInput';
 import CheckInput from './inputs/CheckInput';
@@ -73,7 +72,6 @@ export {
   FloatingActionButton,
   BackButton,
   AnimatedBackgroundContent,
-  EmailInput,
   ConfirmNewPasswordInput,
   NewPasswordInput,
   CheckInput,

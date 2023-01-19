@@ -3,8 +3,10 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-import {Text} from '@shared/components';
+import {Text} from '@/shared/components';
 import useAppTheme from '@/shared/hooks/useAppTheme';
+import {TEST_IDS} from '@/shared/constants/testIds';
+
 import Button from './Button';
 
 type IconType = 'FontAwesome' | 'FontAwesome5';
@@ -54,7 +56,7 @@ const NavigateButton: React.FC<NavigateButtonProps> = ({
         />
       ) : (
         <FontAwesomeIcon5
-          testID="FontAwesomeIcon5"
+          testID={TEST_IDS.FONT_AWESOME_ICON_5}
           color={appTheme.textColor}
           name={iconName}
           size={18}
@@ -62,7 +64,7 @@ const NavigateButton: React.FC<NavigateButtonProps> = ({
         />
       )}
       <Text
-        testID="NavigateButton-title"
+        testID={TEST_IDS.NAVIGATE_BUTTON_TITLE}
         style={{marginHorizontal: 10, flex: 1}}>
         {title}
       </Text>

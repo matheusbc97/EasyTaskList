@@ -6,6 +6,7 @@ import useAppTheme from '@/shared/hooks/useAppTheme';
 
 import Text from '../Text';
 import Button from './Button';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 export interface OutlineButtonProps {
   text: string;
@@ -53,7 +54,7 @@ const OutlineButton: React.FC<OutlineButtonProps> = ({
             alignItems: 'center',
           }}>
           <Text
-            testID="OutlineButton-text"
+            testID={TEST_IDS.OUTLINE_BUTTON_TEXT}
             type="title-medium"
             style={{padding: 5}}>
             {text}

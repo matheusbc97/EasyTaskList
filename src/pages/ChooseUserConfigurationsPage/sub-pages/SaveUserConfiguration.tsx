@@ -7,6 +7,7 @@ import {Avatar, Text, RoundedButton, ThemeBox} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 import {dbCreateUser} from '@/database';
 import {handleErrorMessage} from '@/shared/utils/errorHandler';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 interface Props {
   onChangePress(index: number): void;
@@ -65,7 +66,7 @@ const SaveUserConfiguration: React.FC<Props> = ({onChangePress}) => {
         onPress={() => onChangePress(0)}
       />
       <RoundedButton
-        testID="SaveUserConfigurationSaveButton"
+        testID={TEST_IDS.SAVE_USER_CONFIGURATIONS_BUTTON}
         text={translation('FINISH_REGISTRATION')}
         style={styles.finalizeRegisterBtn}
         onPress={handleFinishRegistrationPress}

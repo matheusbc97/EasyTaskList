@@ -1,6 +1,7 @@
 import React from 'react';
 import UnformInput, {AppTextInputProps} from '../UnformInput';
 import {useTranslation} from '@/shared/hooks';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 export default function ConfirmNewPasswordInput({
   label = '',
@@ -8,7 +9,7 @@ export default function ConfirmNewPasswordInput({
   secureTextEntry = true,
   textContentType = 'newPassword',
   autoCapitalize = 'none',
-  testID = 'confirmNewPasswordInput',
+  testID = TEST_IDS.CONFIRM_NEW_PASSWORD_INPUT,
   ...rest
 }: AppTextInputProps) {
   const {translation} = useTranslation();

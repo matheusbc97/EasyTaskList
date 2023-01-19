@@ -7,6 +7,7 @@ import {RoundedButton, Text, BackButton} from '@/shared/components';
 import {selectUserName} from '@/store/account/user';
 import {useTranslation} from '@/shared/hooks';
 import NameForm from '@/shared/templates/forms/NameForm';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 interface Props {
   onAdvancePress(name: string): void;
@@ -38,7 +39,7 @@ const ChooseName: React.FC<Props> = ({
       />
 
       <RoundedButton
-        testID="ChooseNameAdvanceButton"
+        testID={TEST_IDS.CHOOSE_NAME_ADVANCE_BUTTON}
         text={translation('ADVANCE')}
         onPress={() => formRef.current?.submitForm()}
         style={styles.button}

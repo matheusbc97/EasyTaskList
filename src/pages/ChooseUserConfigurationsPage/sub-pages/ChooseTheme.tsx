@@ -9,6 +9,7 @@ import * as appThemes from '@/assets/themes';
 import {AppTheme, AppThemeName} from '@/shared/models';
 import {useTranslation} from '@/shared/hooks';
 import ChooseTheme from '@/shared/templates/ChooseTheme';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 interface Props {
   onAdvancePress(theme: AppThemeName): void;
@@ -38,7 +39,7 @@ const ChooseThemeSubPage: React.FC<Props> = ({
         <ChooseTheme onThemePress={handleThemeChoose} />
       </View>
       <RoundedButton
-        testID="ChooseThemeAdvanceButton"
+        testID={TEST_IDS.CHOOSE_THEME_ADVANCE_BUTTON}
         text={advanceButtonText ?? translation('ADVANCE')}
         onPress={() => onAdvancePress(appThemeState.name)}
       />

@@ -1,14 +1,16 @@
+import {TEST_IDS} from '@/shared/constants/testIds';
 import React from 'react';
 import {StyleProp, ViewStyle} from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-import Text, {TextTypes} from '../Text';
+import Text from '../Text';
+import {TextType} from '../Text/types/TextType';
 import Button from './Button';
 
 export interface TextButtonProps {
   text: string;
   iconName?: string;
-  textType?: TextTypes;
+  textType?: TextType;
   color?: string;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
@@ -33,7 +35,7 @@ const TextButton: React.FC<TextButtonProps> = ({
     </Text>
     {!!iconName && (
       <FontAwesomeIcon
-        testID="TextButtonIcon"
+        testID={TEST_IDS.TEXT_BUTTON_ICON}
         style={{marginLeft: 10}}
         name={iconName}
         size={18}

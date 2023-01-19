@@ -6,6 +6,7 @@ import {useFormatDate, useTranslation} from '@/shared/hooks';
 import {User} from '@/shared/models';
 
 import styles from '../styles';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 interface HomeHeaderProps {
   user: User | null;
@@ -23,7 +24,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({user}) => {
     <View style={styles.header}>
       <Avatar avatarNumber={user?.avatar} size={50} />
       <View style={styles.headerContent}>
-        <Text testID="HeaderUserNameText" type="title-medium">
+        <Text testID={TEST_IDS.HEADER_USER_NAME_TEXT} type="title-medium">
           {translation('HELLO')}, {user?.name}
         </Text>
         <Text>{formatDate(new Date(), 'dateOfMonthAndYear')}</Text>

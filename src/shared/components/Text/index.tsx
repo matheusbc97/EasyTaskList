@@ -5,6 +5,7 @@ import useAppTheme from '@/shared/hooks/useAppTheme';
 
 import {TextType} from './types/TextType';
 import {getTextStyle} from './utils/getTextStyle';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 export interface TextProps {
   type?: TextType;
@@ -22,7 +23,7 @@ const Text = ({
   primaryColor = false,
   secondaryColor = false,
   centerText = false,
-  testID = 'text-base',
+  testID = TEST_IDS.CHOOSE_THEME_ADVANCE_BUTTON,
 }: PropsWithChildren<TextProps>) => {
   const theme = useAppTheme();
 
