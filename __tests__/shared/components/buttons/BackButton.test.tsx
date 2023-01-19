@@ -13,7 +13,7 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
-jest.mock('@/shared/hooks/useAppTheme');
+jest.mock('@/shared/hooks/data/useAppTheme');
 jest.mock('@/shared/hooks/useTranslation');
 
 describe('BackButton Component', () => {

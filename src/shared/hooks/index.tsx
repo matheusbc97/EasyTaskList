@@ -1,21 +1,11 @@
-import useValidateField from './useValidateField';
-import useCategoryColor from './useCategoryColor';
-import useFormatDate from './useFormatDate';
-import useSwitchState from './useSwitchState';
-import useTranslation from './useTranslation';
-import useFormHandles from './useFormHandles';
-
-export {
-  useValidateField,
-  useCategoryColor,
-  useFormatDate,
-  useSwitchState,
-  useTranslation,
-  useFormHandles,
-};
-
-export * from './useGetCategories';
+export * from './useTranslation';
+export * from './useValidateField';
+export * from './useCategoryColor';
+export * from './useFormatDate';
+export * from './useFormHandles';
+export * from './data/useGetCategories';
 export * from './useUpdateTask';
-export * from './useDeleteTask';
-export * from './useTasks';
-export * from './useTaskNotDone';
+export * from './data/useDeleteTask';
+export * from './data/useTasks';
+export * from './data/useTaskNotDone';
+export * from './data/useAppTheme';

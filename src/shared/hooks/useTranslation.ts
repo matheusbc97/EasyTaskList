@@ -5,12 +5,10 @@ import {tKeys} from '@/translations';
 
 type Translation = (key: keyof typeof tKeys) => string;
 
-const useTranslation = () => {
+export function useTranslation() {
   const {t} = useI18NextTranslation();
 
   const translation: Translation = useCallback(key => t(key), [t]);
 
   return {translation};
-};
-
-export default useTranslation;
+}

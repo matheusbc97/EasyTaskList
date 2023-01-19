@@ -1,5 +1,5 @@
 const mockedTranslate = jest.fn(() => 'teste');
 
-export default () => ({
+export const useTranslation = () => ({
   translation: mockedTranslate,
 });

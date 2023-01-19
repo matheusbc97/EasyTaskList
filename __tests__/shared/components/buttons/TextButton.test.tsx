@@ -2,7 +2,7 @@ import React from 'react';
 import {TextButton} from '@/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
 
-jest.mock('@/shared/hooks/useAppTheme');
+jest.mock('@/shared/hooks/data/useAppTheme');
 
 describe('TextButton Component', () => {
   it('Should render a TextButton', () => {

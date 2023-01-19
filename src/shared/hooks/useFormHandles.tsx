@@ -2,7 +2,7 @@ import {useImperativeHandle, ForwardedRef, useRef} from 'react';
 import {FormHandles as UnFormHandles} from '@unform/core';
 import {FormHandles} from '@/shared/models';
 
-const useFormHandles = (ref: ForwardedRef<FormHandles>) => {
+export const useFormHandles = (ref: ForwardedRef<FormHandles>) => {
   const formRef = useRef<UnFormHandles>(null);
 
   useImperativeHandle(
@@ -17,5 +17,3 @@ const useFormHandles = (ref: ForwardedRef<FormHandles>) => {
 
   return formRef;
 };
-
-export default useFormHandles;

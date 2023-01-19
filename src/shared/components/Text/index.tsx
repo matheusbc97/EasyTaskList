@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 import {StyleProp, Text as RNText, TextStyle} from 'react-native';
 
-import useAppTheme from '@/shared/hooks/useAppTheme';
+import {useAppTheme} from '@/shared/hooks';
 
 import {TextType} from './types/TextType';
 import {getTextStyle} from './utils/getTextStyle';
@@ -23,7 +23,7 @@ const Text = ({
   primaryColor = false,
   secondaryColor = false,
   centerText = false,
-  testID = TEST_IDS.CHOOSE_THEME_ADVANCE_BUTTON,
+  testID = TEST_IDS.TEXT_BASE,
 }: PropsWithChildren<TextProps>) => {
   const theme = useAppTheme();
 

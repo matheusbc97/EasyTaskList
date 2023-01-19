@@ -3,8 +3,8 @@ import {View, StyleSheet} from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 
-import {useTranslation} from '@/shared/hooks';
-import useAppTheme from '@/shared/hooks/useAppTheme';
+import {useTranslation, useAppTheme} from '@/shared/hooks';
+
 import Button from './Button';
 import Text from '../Text';
 

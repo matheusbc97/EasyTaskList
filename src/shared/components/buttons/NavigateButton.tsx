@@ -4,7 +4,7 @@ import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import {Text} from '@/shared/components';
-import useAppTheme from '@/shared/hooks/useAppTheme';
+import {useAppTheme} from '@/shared/hooks';
 import {TEST_IDS} from '@/shared/constants/testIds';
 
 import Button from './Button';

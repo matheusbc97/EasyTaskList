@@ -2,7 +2,7 @@ import React from 'react';
 import {View, ViewStyle} from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
-import useAppTheme from '@/shared/hooks/useAppTheme';
+import {useAppTheme} from '@/shared/hooks';
 
 import Text from '../Text';
 import Button from './Button';

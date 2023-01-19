@@ -2,18 +2,7 @@ import React from 'react';
 import {NavigateButton} from '@/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
 
-jest.mock('@/shared/hooks/useAppTheme', () => {
-  return () => ({
-    primaryColor: '#21B9C7',
-    secondaryColor: '#4ADDB5',
-    textColor: '#424242',
-    secondaryTextColor: '#bdbdbd',
-    background: '#fafafa',
-    aboveBackground: '#FFF',
-    dark: false,
-    name: 'BLUE_GREEN',
-  });
-});
+jest.mock('@/shared/hooks/data/useAppTheme');
 
 describe('NavigateButton Component', () => {
   it('Should render a button', () => {

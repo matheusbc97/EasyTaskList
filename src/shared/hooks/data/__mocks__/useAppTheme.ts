@@ -11,4 +11,4 @@ export const useAppThemeReturnMock = {
   name: 'BLUE_GREEN',
 } as AppTheme;
 
-export default () => useAppThemeReturnMock;
+export const useAppTheme = () => useAppThemeReturnMock;

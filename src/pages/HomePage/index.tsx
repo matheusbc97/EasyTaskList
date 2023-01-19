@@ -10,12 +10,12 @@ import {
 } from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 import {AuthenticatedStackParams} from '@/navigation/types';
-import useGetUser from '@/shared/hooks/useGetUser';
+import useGetUser from '@/shared/hooks/data/useGetUser';
 import TasksList from '@/shared/templates/lists/TaskList';
 
 import CategoriesList from './templates/CategoriesList';
 import HomeHeader from './components/HomeHeader';
-import {useQueryCategories} from '../../shared/hooks/useGetCategories';
+import {useQueryCategories} from '../../shared/hooks/data/useGetCategories';
 import {useTaskNotDone} from '@/shared/hooks';
 
 type TaskListNavigationProp = StackNavigationProp<

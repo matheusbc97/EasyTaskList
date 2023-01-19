@@ -1,7 +1,7 @@
-import {useAppThemeReturnMock} from '@/shared/hooks/__mocks__/useAppTheme';
+import {useAppThemeReturnMock} from '@/shared/hooks/data/__mocks__/useAppTheme';
 import {getTextStyle} from '@/shared/components/Text/utils/getTextStyle';
 
-jest.mock('@/shared/hooks/useAppTheme');
+jest.mock('@/shared/hooks/data/useAppTheme');
 
 describe('Text getTextStyle Util', () => {
   it('Should return textAlign: center', () => {

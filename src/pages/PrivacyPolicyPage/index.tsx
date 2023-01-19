@@ -1,23 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {ScrollView} from 'react-native';
 
-import usePrivacyPolicy from '@/shared/hooks/usePrivacyPolicy';
 import {useTranslation} from '@/shared/hooks';
-import {
-  Text,
-  BackButton,
-  FormScreenWrapper,
-  LoadingFallback,
-  ErrorFallback,
-} from '@/shared/components';
+import {Text, BackButton, FormScreenWrapper} from '@/shared/components';
+import {PRIVACY_POLICE} from '@/shared/constants/privacyPolice';
 
 function PrivacyPolicyPage() {
-  const {fetchState, privacyPolicy, getPrivacyPolicy} = usePrivacyPolicy();
   const {translation} = useTranslation();
-
-  useEffect(() => {
-    getPrivacyPolicy();
-  }, [getPrivacyPolicy]);
 
   return (
     <FormScreenWrapper>
@@ -26,15 +15,9 @@ function PrivacyPolicyPage() {
       <Text type="title-big" centerText style={{marginVertical: 10}}>
         {translation('PRIVACY_POLICY')}
       </Text>
-      <LoadingFallback isLoading={fetchState.isLoading}>
-        <ErrorFallback
-          hasError={fetchState.hasError}
-          onTryAgainPress={getPrivacyPolicy}>
-          <ScrollView>
-            <Text style={{paddingHorizontal: 10}}>{privacyPolicy}</Text>
-          </ScrollView>
-        </ErrorFallback>
-      </LoadingFallback>
+      <ScrollView>
+        <Text style={{paddingHorizontal: 10}}>{PRIVACY_POLICE}</Text>
+      </ScrollView>
     </FormScreenWrapper>
   );
 }

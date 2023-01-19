@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleProp, ViewStyle} from 'react-native';
 
 import TextButton from '@/shared/components/buttons/TextButton';
-import useAppTheme from '@/shared/hooks/useAppTheme';
+import {useAppTheme} from '@/shared/hooks';
 import {useTranslation} from '@/shared/hooks';
 
 export interface EditButtonProps {

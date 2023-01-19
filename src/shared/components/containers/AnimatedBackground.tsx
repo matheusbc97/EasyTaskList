@@ -10,8 +10,8 @@ import {
   GRAPH_2,
   BOTTOM_RIGHT_DOT,
 } from '@/assets/images';
-import {AppTheme} from '@shared/models';
-import useAppTheme from '@/shared/hooks/useAppTheme';
+import {AppTheme} from '@/shared/models';
+import {useAppTheme} from '@/shared/hooks';
 
 interface Props {
   theme?: AppTheme;

@@ -1,21 +1,9 @@
 import React from 'react';
 import {RoundedButton} from '@/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
+import {useAppThemeReturnMock} from '@/shared/hooks/data/__mocks__/useAppTheme';
 
-const mockAppTheme = {
-  primaryColor: '#21B9C7',
-  secondaryColor: '#4ADDB5',
-  textColor: '#424242',
-  secondaryTextColor: '#bdbdbd',
-  background: '#fafafa',
-  aboveBackground: '#FFF',
-  dark: false,
-  name: 'BLUE_GREEN',
-};
-
-jest.mock('@/shared/hooks/useAppTheme', () => {
-  return () => mockAppTheme;
-});
+jest.mock('@/shared/hooks/data/useAppTheme');
 
 describe('RoundedButton Component', () => {
   it('Should render a button', () => {
@@ -78,12 +66,14 @@ describe('RoundedButton Component', () => {
     const buttonBaseElement = await findByTestId('button-base');
 
     expect(buttonBaseElement).toHaveStyle({
-      borderColor: mockAppTheme.primaryColor,
+      borderColor: useAppThemeReturnMock.primaryColor,
     });
 
     const textBaseElement = await findByTestId('text-base');
 
-    expect(textBaseElement).toHaveStyle({color: mockAppTheme.primaryColor});
+    expect(textBaseElement).toHaveStyle({
+      color: useAppThemeReturnMock.primaryColor,
+    });
   });
 
   it('backgroundColor Should be secondary color ', async () => {
@@ -94,7 +84,7 @@ describe('RoundedButton Component', () => {
     const element = await findByTestId('button-base');
 
     const style = {
-      backgroundColor: mockAppTheme.secondaryColor,
+      backgroundColor: useAppThemeReturnMock.secondaryColor,
     };
 
     const jsonStyle = JSON.stringify(style);
