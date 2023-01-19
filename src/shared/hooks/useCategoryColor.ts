@@ -3,7 +3,7 @@ import {useMemo} from 'react';
 import {Category} from '@/shared/models';
 import categoryColors from '@/assets/categoryColors';
 
-const useCategoryColor = (category: Category | undefined) =>
+export const useCategoryColor = (category: Category | undefined) =>
   useMemo(
     () =>
       category?.colorIndex
@@ -11,5 +11,3 @@ const useCategoryColor = (category: Category | undefined) =>
         : categoryColors[0].color1,
     [category],
   );
-
-export default useCategoryColor;
