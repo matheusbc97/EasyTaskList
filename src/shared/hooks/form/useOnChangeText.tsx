@@ -1,6 +1,6 @@
 import {useCallback, MutableRefObject} from 'react';
 import _ from 'lodash';
-import {ValidateField} from '../models/ValidateField';
+import {ValidateField} from '../../models/ValidateField';
 
 const useOnChangeText = (
   inputRef: MutableRefObject<any>,

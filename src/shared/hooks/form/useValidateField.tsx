@@ -3,7 +3,7 @@ import {RefObject} from 'react';
 import {FormHandles} from '@unform/core';
 
 import {ValidateField} from '@/shared/models';
-import {validateField} from '../utils/validations';
+import {validateField} from '../../utils/validations';
 
 export const useValidateField = (
   formRef: RefObject<FormHandles>,

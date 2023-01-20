@@ -10,9 +10,9 @@ import {useField} from '@unform/core';
 import TextInput from './TextInput';
 
 import Text from '../Text';
-import useOnChangeText from '../../hooks/useOnChangeText';
+import useOnChangeText from '../../hooks/form/useOnChangeText';
 import {ValidateField} from '../../models/ValidateField';
-import useMaskedOnChangeText from '../../hooks/useMaskedOnChangeText';
+import useMaskedOnChangeText from '../../hooks/form/useMaskedOnChangeText';
 
 export interface AppTextInputProps extends TextInputProps {
   label?: string;

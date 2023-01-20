@@ -14,6 +14,7 @@ export interface RoundedButtonProps {
   inverted?: boolean;
   disabled?: boolean;
   testID?: string;
+  center?: boolean;
 }
 
 const RoundedButton = ({
@@ -23,6 +24,7 @@ const RoundedButton = ({
   textStyle,
   inverted,
   disabled = false,
+  center = false,
   testID,
 }: RoundedButtonProps) => {
   const appTheme = useAppTheme();
@@ -42,6 +44,9 @@ const RoundedButton = ({
               ...styles.normalContainer,
               backgroundColor: appTheme.secondaryColor,
             },
+        {
+          alignSelf: center ? 'center' : undefined,
+        },
         style,
       ]}
       onPress={onPress}>
