@@ -34,6 +34,8 @@ export type AuthenticatedStackParams = {
   About: undefined;
   Welcome: undefined;
   ChooseUserConfigurations: undefined;
+  Timer: undefined;
+  Stopwatch: undefined;
 };
 
 export type BottomNavigatorStackParams = {

@@ -73,4 +73,9 @@ export default {
   [tKeys.CLOSE]: 'Fechar',
   [tKeys.DELETE]: 'Deletar',
   [tKeys.DETAILS]: 'Detalhes',
+  [tKeys.TIMER]: 'Temporizador',
+  [tKeys.STOPWATCH]: 'Cronômetro',
+  [tKeys.START_TIMER]: 'Iniciar Temporizador',
+  [tKeys.STOP_TIMER]: 'Parar Temporizador',
+  [tKeys.STOP_STOPWATCH]: 'Parar Cronômetro',
 };

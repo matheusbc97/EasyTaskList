@@ -71,4 +71,10 @@ export default {
   [tKeys.CLOSE]: 'Close',
   [tKeys.DELETE]: 'Delete',
   [tKeys.DETAILS]: 'Details',
+  [tKeys.TIMER]: 'Timer',
+  [tKeys.START_TIMER]: 'Start Timer',
+  [tKeys.STOP_TIMER]: 'Stop Timer',
+  [tKeys.STOPWATCH]: 'Stopwatch',
+  [tKeys.START_STOPWATCH]: 'Start Stopwatch',
+  [tKeys.STOP_STOPWATCH]: 'Stop Stopwatch',
 };

@@ -38,6 +38,18 @@ export default function MorePage({navigation}: Props) {
         onPress={() => navigation.navigate('ChangeThemeForm')}
       />
       <NavigateButton
+        title={translation('STOPWATCH')}
+        iconName="palette"
+        type="FontAwesome5"
+        onPress={() => navigation.navigate('Stopwatch')}
+      />
+      <NavigateButton
+        title={translation('TIMER')}
+        iconName="palette"
+        type="FontAwesome5"
+        onPress={() => navigation.navigate('Timer')}
+      />
+      <NavigateButton
         title={translation('ABOUT')}
         iconName="info-circle"
         type="FontAwesome5"
