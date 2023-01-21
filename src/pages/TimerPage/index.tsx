@@ -4,7 +4,7 @@ import {Header, RoundedButton, Text} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 import {AuthenticateStackPageProps} from '@/shared/types/AuthenticateStackPageProps';
 
-import useTimer from './hooks/useTimer';
+import {useTimer} from '@/shared/hooks';
 
 export default function TimerPage({
   navigation,
