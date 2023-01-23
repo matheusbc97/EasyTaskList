@@ -4,8 +4,8 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import Modal from 'react-native-modal';
 
-import categoryColors from '@assets/categoryColors';
-import {Text, Button} from '@shared/components';
+import categoryColors from '@/assets/categoryColors';
+import {Text, Button} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 
 interface Props {

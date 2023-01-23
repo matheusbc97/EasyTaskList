@@ -1,6 +1,5 @@
 import React, {useRef} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {FormHandles} from '@unform/core';
 import {useSelector} from 'react-redux';
 
 import {RoundedButton, Text, BackButton} from '@/shared/components';
@@ -8,6 +7,7 @@ import {selectUserName} from '@/store/account/user';
 import {useTranslation} from '@/shared/hooks';
 import NameForm from '@/shared/templates/forms/NameForm';
 import {TEST_IDS} from '@/shared/constants/testIds';
+import {FormHandles} from '@/shared/models';
 
 interface Props {
   onAdvancePress(name: string): void;

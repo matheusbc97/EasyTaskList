@@ -1,8 +1,9 @@
-import {forwardRef, useImperativeHandle} from 'react';
+import {ForwardedRef, forwardRef, useImperativeHandle} from 'react';
 import {View} from 'react-native';
 import {useForm} from 'react-hook-form';
 
 import {NameInput} from '@/shared/components';
+import {FormHandles} from '@/shared/models';
 
 export interface NameFormObject {
   name: string;
@@ -15,7 +16,7 @@ interface NameFormProps {
 
 function NameFormTemplate(
   {onSubmitSuccess, initialValues: initialValuesProp}: NameFormProps,
-  ref: any,
+  ref: ForwardedRef<FormHandles>,
 ) {
   const {control, handleSubmit} = useForm({
     defaultValues: initialValuesProp,

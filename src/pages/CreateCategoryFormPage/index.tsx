@@ -5,13 +5,12 @@ import {
   RoundedSaveButton,
   FormScreenWrapper,
 } from '@/shared/components';
-import {useTranslation} from '@/shared/hooks';
+import {useTranslation, useCreateCategory} from '@/shared/hooks';
 import CategoryForm, {
   CategoryFormHandles,
 } from '@/shared/templates/forms/CategoryForm';
 
 import {Props} from './types';
-import {useCreateCategory} from '@/shared/hooks';
 
 function CategoryFormPage({navigation}: Props) {
   const {translation} = useTranslation();
