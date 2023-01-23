@@ -1,4 +1,4 @@
-import React, {useRef, useState, forwardRef} from 'react';
+import React, {useRef, useState, forwardRef, useImperativeHandle} from 'react';
 import styled from 'styled-components/native';
 import {RectButton} from 'react-native-gesture-handler';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
@@ -6,13 +6,14 @@ import {Form} from '@unform/mobile';
 
 import categoryIconNames from '@/assets/categoryIconNames';
 import {Text, UnformInput as TextInput} from '@/shared/components';
-import {useFormHandles, useTranslation, useValidateField} from '@/shared/hooks';
+import {useFormHandles, useTranslation} from '@/shared/hooks';
 import {validateAll} from '@/shared/utils/validations';
 import {showToast} from '@/shared/components/Toast';
-import ChooseCategoryColorModal from '@shared/components/modals/ChooseCategoryColorModal';
-import ChooseCategoryIconModal from '@shared/components/modals/ChooseCategoryIconModal';
+import ChooseCategoryColorModal from '@/shared/components/modals/ChooseCategoryColorModal';
+import ChooseCategoryIconModal from '@/shared/components/modals/ChooseCategoryIconModal';
 import CategoryColorBox from '@/shared/components/CategoryColorBox';
-import {FunctionalFormComponent, FormProps, FormHandles} from '@shared/models';
+import {FormProps, FormHandles} from '@/shared/models';
+import {useForm} from 'react-hook-form';
 
 const ColorAndIconContainer = styled.View`
   flex-direction: row;
@@ -52,13 +53,16 @@ export interface CategoryFormHandles extends FormHandles {}
 
 interface CategoryFormProps extends FormProps<FormObject> {}
 
-const CategoryForm: FunctionalFormComponent<CategoryFormProps> = (
-  {initialValues: initialValuesProp, onSubmitSuccess},
+function CategoryForm(
+  {initialValues: initialValuesProp, onSubmitSuccess}: CategoryFormProps,
   ref,
-) => {
+) {
   const formRef = useFormHandles(ref);
   const {translation} = useTranslation();
-  const validateField = useValidateField(formRef);
+
+  const {control, handleSubmit} = useForm({
+    defaultValues: initialValuesProp,
+  });
 
   const [selectedColorIndex, setSelectedColorIndex] = useState(
     initialValuesProp?.colorIndex ?? -1,
@@ -99,22 +103,21 @@ const CategoryForm: FunctionalFormComponent<CategoryFormProps> = (
       return;
     }
 
-    onSubmitSuccess &&
-      onSubmitSuccess({
-        name: form.name,
-        colorIndex: selectedColorIndex,
-        iconIndex: iconIndex,
-      });
+    onSubmitSuccess?.({
+      name: form.name,
+      colorIndex: selectedColorIndex,
+      iconIndex: iconIndex,
+    });
   };
+
+  useImperativeHandle(ref, () => ({
+    submitForm: handleSubmit(onSubmit),
+  }));
 
   return (
     <>
       <Form onSubmit={onSubmit} ref={formRef} initialData={initialValues}>
-        <TextInput
-          name="name"
-          label={translation('NAME')}
-          validateField={validateField}
-        />
+        <TextInput control={control} name="name" label={translation('NAME')} />
         <ColorAndIconContainer>
           <SelectColorOrIconButton
             onPress={() => setCategoryColorModalIsVisible(true)}>
@@ -158,6 +161,6 @@ const CategoryForm: FunctionalFormComponent<CategoryFormProps> = (
       />
     </>
   );
-};
+}
 
 export default forwardRef(CategoryForm);

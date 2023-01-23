@@ -4,7 +4,7 @@ import {TEST_IDS} from '@/shared/constants/testIds';
 
 import TextInput, {AppTextInputProps} from '../UnformInput';
 
-export default function NewPasswordInput({
+export default function NameInput({
   label = '',
   name = 'name',
   testID = TEST_IDS.NEW_PASSWORD_INPUT,

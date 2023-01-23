@@ -23,9 +23,8 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import {selectAppTheme} from '../../../store/configs';
 import Button from '../buttons/Button';
 
-const AnimatedFontAwesomeIcon = Animated.createAnimatedComponent(
-  FontAwesomeIcon,
-);
+const AnimatedFontAwesomeIcon =
+  Animated.createAnimatedComponent(FontAwesomeIcon);
 
 interface TextInputProps extends RNTextInputProps {
   label: string;
@@ -43,11 +42,11 @@ const TextInput = (
     onBlur,
     onFocus,
     style,
-    defaultValue,
     error,
     button = false,
     onPress,
     inputRef,
+    value,
     ...rest
   }: TextInputProps,
   ref: any,
@@ -55,14 +54,17 @@ const TextInput = (
   const appTheme = useSelector(selectAppTheme);
   const [labelLeftOffset, setLabelLeftOffset] = useState(0);
 
-  const labelIsOnTop = useMemo(() => new Animated.Value(defaultValue ? 1 : 0), [
-    defaultValue,
-  ]);
+  const defaultValue = useRef(value).current;
+
+  const labelIsOnTop = useMemo(
+    () => new Animated.Value(value ? 1 : 0),
+    [value],
+  );
 
   const isFocused = useMemo(() => new Animated.Value(1), []);
 
   const textRef = useRef<{isValueNotEmpty: boolean}>({
-    isValueNotEmpty: Boolean(defaultValue),
+    isValueNotEmpty: Boolean(value),
   });
 
   const labelTop = labelIsOnTop.interpolate({
@@ -121,7 +123,7 @@ const TextInput = (
 
   return (
     <Button disabled={!button} onPress={onPress}>
-      <Animated.View style={[styles.container, {borderColor: borderColor}]}>
+      <Animated.View style={[styles.container, {borderColor}]}>
         <Animated.View
           style={[
             styles.textContainer,
@@ -156,26 +158,27 @@ const TextInput = (
             ref={inputRef}
             style={[styles.input, style]}
             returnKeyType="next"
+            value={value}
             onFocus={e => {
               if (!textRef.current.isValueNotEmpty) {
                 animation(true);
               }
               !error && borderColorAnimation(0);
 
-              onFocus && onFocus(e);
+              onFocus?.(e);
             }}
             onBlur={e => {
               !textRef.current.isValueNotEmpty && animation(false);
 
               !error && borderColorAnimation(1);
 
-              onBlur && onBlur(e);
+              onBlur?.(e);
             }}
             onChangeText={text => {
               if ((!text || text.length === 1) && textRef.current) {
                 textRef.current.isValueNotEmpty = Boolean(text);
               }
-              onChangeText && onChangeText(text);
+              onChangeText?.(text);
             }}
             {...rest}
           />

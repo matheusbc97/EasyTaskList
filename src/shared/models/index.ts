@@ -10,6 +10,7 @@ import {FetchState} from './FetchState';
 import {FormHandles} from './FormHandles';
 import {FunctionalFormComponent} from './FunctionalFormComponent';
 import {FormProps} from './FormProps';
+import {FormControl} from './FormControl';
 
 export type {
   AppTheme,
@@ -24,4 +25,5 @@ export type {
   FormHandles,
   FunctionalFormComponent,
   FormProps,
+  FormControl,
 };

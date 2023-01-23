@@ -24,9 +24,12 @@ function getDateFormat(formatType: FormatTypes) {
 }
 
 export default function formatDate(
-  value: string | Date,
+  value: string | Date | undefined | null,
   format: FormatTypes = 'date',
 ) {
+  if (!value) {
+    return '';
+  }
   if (typeof value === 'string') {
     return DateFNSFormat(new Date(value), getDateFormat(format), {
       locale: ptBR,

@@ -1,10 +1,18 @@
-import formatDate from '@/shared/utils/formatDate';
-import React, {useRef, useState} from 'react';
-import TextInput from './UnformInput';
+import {useRef, useState} from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {useTranslation} from '@shared/hooks';
 
-function DateInput() {
+import {useTranslation} from '@/shared/hooks';
+import formatDate from '@/shared/utils/formatDate';
+import {FormControl} from '@/shared/models';
+
+import TextInput from './UnformInput';
+
+interface DateInputProps {
+  control: FormControl;
+  setDateValue(value: string): void;
+}
+
+function DateInput({control, setDateValue}: DateInputProps) {
   const {translation} = useTranslation();
   const datePickerRef = useRef<any>(null);
   const [datePickerIsVisible, setDatePickerIsVisible] = useState(false);
@@ -12,6 +20,7 @@ function DateInput() {
   return (
     <>
       <TextInput
+        control={control}
         ref={datePickerRef}
         mask={value => formatDate(value)}
         name="date"
@@ -23,7 +32,7 @@ function DateInput() {
         isVisible={datePickerIsVisible}
         mode="date"
         onConfirm={date => {
-          datePickerRef.current?.setValue(String(date));
+          setDateValue(String(date));
           setDatePickerIsVisible(false);
         }}
         onCancel={() => setDatePickerIsVisible(false)}

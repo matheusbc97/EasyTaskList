@@ -1,10 +1,18 @@
-import formatDate from '@shared/utils/formatDate';
 import React, {useRef, useState} from 'react';
-import TextInput from './UnformInput';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {useTranslation} from '@/shared/hooks';
 
-function TimeInput() {
+import formatDate from '@/shared/utils/formatDate';
+import {useTranslation} from '@/shared/hooks';
+import {FormControl} from '@/shared/models';
+
+import TextInput from './UnformInput';
+
+interface DateInputProps {
+  control: FormControl;
+  setTimeValue(value: string): void;
+}
+
+function TimeInput({control, setTimeValue}: DateInputProps) {
   const {translation} = useTranslation();
   const timePickerRef = useRef<any>(null);
   const [timePickerIsVisible, setTimePickerIsVisible] = useState(false);
@@ -12,6 +20,7 @@ function TimeInput() {
   return (
     <>
       <TextInput
+        control={control}
         ref={timePickerRef}
         name="time"
         label={translation('HOUR')}
@@ -24,7 +33,7 @@ function TimeInput() {
         isVisible={timePickerIsVisible}
         mode="time"
         onConfirm={time => {
-          timePickerRef.current?.setValue(String(time));
+          setTimeValue(String(time));
           setTimePickerIsVisible(false);
         }}
         is24Hour

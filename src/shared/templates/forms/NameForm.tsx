@@ -1,60 +1,41 @@
-import React, {useRef, forwardRef} from 'react';
-
-import {Form} from '@unform/mobile';
+import {forwardRef, useImperativeHandle} from 'react';
+import {View} from 'react-native';
+import {useForm} from 'react-hook-form';
 
 import {NameInput} from '@/shared/components';
-import {useValidateField, useFormHandles} from '@/shared/hooks';
-import {validateAll} from '@/shared/utils/validations';
 
-import {FunctionalFormComponent} from '@/shared/models';
-
-interface UnFormObject {
-  name: string;
-}
-
-export interface FormObject {
+export interface NameFormObject {
   name: string;
 }
 
 interface NameFormProps {
-  onSubmitSuccess: (form: FormObject) => void;
-  initialValues?: Partial<FormObject>;
+  onSubmitSuccess: (form: any) => void;
+  initialValues?: Partial<NameFormObject>;
 }
 
-const NameFormTemplate: FunctionalFormComponent<NameFormProps> = (
-  {onSubmitSuccess, initialValues: initialValuesProp},
-  ref,
-) => {
-  const formRef = useFormHandles(ref);
+function NameFormTemplate(
+  {onSubmitSuccess, initialValues: initialValuesProp}: NameFormProps,
+  ref: any,
+) {
+  const {control, handleSubmit} = useForm({
+    defaultValues: initialValuesProp,
+  });
 
-  const initialValues = useRef(initialValuesProp).current;
+  useImperativeHandle(ref, () => ({
+    submitForm: handleSubmit(form => {
+      const formObject: NameFormObject = {
+        name: form.name!,
+      };
 
-  const validateField = useValidateField(formRef);
-
-  const handleFormSubmit = (form: UnFormObject) => {
-    const [formErrors, isValid] = validateAll(form);
-
-    if (!isValid) {
-      formRef.current?.setErrors(formErrors);
-      return;
-    }
-
-    const formObject: FormObject = {
-      name: form.name,
-    };
-
-    onSubmitSuccess(formObject);
-  };
+      onSubmitSuccess(formObject);
+    }),
+  }));
 
   return (
-    <Form
-      onSubmit={handleFormSubmit}
-      ref={formRef}
-      initialData={initialValues}
-      style={{width: '100%'}}>
-      <NameInput validateField={validateField} />
-    </Form>
+    <View>
+      <NameInput control={control} />
+    </View>
   );
-};
+}
 
 export default forwardRef(NameFormTemplate);

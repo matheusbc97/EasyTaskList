@@ -1,6 +1,7 @@
-import React, {useRef, forwardRef} from 'react';
+import React, {useRef, forwardRef, useImperativeHandle} from 'react';
 
-import {Form} from '@unform/mobile';
+import {useForm} from 'react-hook-form';
+import {View} from 'react-native';
 
 import {
   DateInput,
@@ -9,18 +10,15 @@ import {
   DescriptionInput,
   TitleInput,
 } from '@/shared/components';
-import {useValidateField, useFormHandles} from '@/shared/hooks';
 import {Category} from '@/shared/models';
-import {validateAll} from '@/shared/utils/validations';
-
 import {FunctionalFormComponent, FormProps, FormHandles} from '@/shared/models';
 
-interface UnFormObject {
+interface _FormObject {
   title: string;
-  description: string;
+  description?: string;
   date: string;
   time: string;
-  category: string;
+  categoryName: string;
 }
 
 export interface FormObject {
@@ -32,70 +30,67 @@ export interface FormObject {
 }
 
 export interface TaskFormHandles extends FormHandles {}
-interface TaskFormProps extends FormProps<FormObject> {}
+interface TaskFormProps extends FormProps<FormObject> {
+  initialValues: FormObject;
+}
 
 const TaskFormTemplate: FunctionalFormComponent<TaskFormProps> = (
   {onSubmitSuccess, initialValues: initialValuesProp},
   ref,
 ) => {
-  const formRef = useFormHandles(ref);
+  const {control, handleSubmit, setValue, setFocus} = useForm<_FormObject>({
+    defaultValues: {
+      ...initialValuesProp,
+      categoryName: initialValuesProp?.category.name ?? '',
+    },
+  });
+
+  useImperativeHandle(ref, () => ({
+    submitForm: handleSubmit(form => {
+      if (!chosenCategory) {
+        return;
+      }
+
+      const formObject: FormObject = {
+        ...form,
+        category: chosenCategory,
+      };
+
+      onSubmitSuccess?.(formObject);
+    }),
+  }));
 
   let chosenCategory: Category | null | undefined = useRef(
     initialValuesProp?.category,
   ).current;
 
   const onCategoryChange = (category: Category) => {
-    if (category) {
-      formRef.current?.setFieldValue('category', category.name);
-    }
+    setValue('categoryName', category.name);
 
     chosenCategory = category;
   };
 
-  const initialValues = useRef({
-    ...initialValuesProp,
-    category: initialValuesProp?.category?.name,
-  }).current;
-
-  const validateField = useValidateField(formRef);
-
-  const handleFormSubmit = (form: UnFormObject) => {
-    const [formErrors, isValid] = validateAll(form);
-
-    if (!isValid) {
-      formRef.current?.setErrors(formErrors);
-      return;
-    }
-
-    if (!chosenCategory) {
-      return;
-    }
-
-    const formObject: FormObject = {
-      ...form,
-      category: chosenCategory,
-    };
-
-    onSubmitSuccess && onSubmitSuccess(formObject);
-  };
-
   return (
-    <Form onSubmit={handleFormSubmit} ref={formRef} initialData={initialValues}>
+    <View>
       <TitleInput
-        validateField={validateField}
-        onSubmitEditing={() =>
-          formRef.current?.getFieldRef('description').focus()
-        }
+        control={control}
+        onSubmitEditing={() => setFocus('description')}
       />
 
-      <DescriptionInput />
+      <DescriptionInput control={control} />
 
-      <DateInput />
+      <DateInput
+        setDateValue={date => setValue('date', date)}
+        control={control}
+      />
 
-      <TimeInput />
+      <TimeInput
+        setTimeValue={time => setValue('time', time)}
+        control={control}
+      />
 
-      <CategoryInput onCategoryChange={onCategoryChange} />
-    </Form>
+      <CategoryInput control={control} onCategoryChange={onCategoryChange} />
+    </View>
   );
 };
 
