@@ -1,126 +1,40 @@
-import {RefObject} from 'react';
-import {FormHandles} from '../models';
-
-export function validateField(
-  fieldName: string,
-  value: string,
-  formRef?: RefObject<FormHandles>,
-) {
+export function validateField(fieldName: string, value: string) {
   switch (fieldName) {
     case 'name':
       if (!value) {
         return emptyText('nome');
       }
 
-      return null;
-    case 'password':
-      if (!value) {
-        return 'Campo Obrigatório';
-      }
+      return;
 
-      if (value.length < 6) {
-        return 'A senha deve conter ao menos 6 caracteres';
-      }
-
-      return null;
-    case 'newPassword':
-      if (!value) {
-        return 'Campo Obrigatório';
-      }
-
-      if (value.length < 6) {
-        return 'A senha deve conter ao menos 6 caracteres';
-      }
-
-      if (
-        formRef?.current?.getFieldValue('confirmPassword') &&
-        formRef.current.getFieldValue('confirmPassword') !== value
-      ) {
-        return 'As senhas não coincidem';
-      } else {
-        if (
-          formRef?.current?.getFieldError('confirmPassword') ===
-          'As senhas não coincidem'
-        ) {
-          formRef?.current?.setFieldError('confirmPassword', '');
-        }
-      }
-
-      return null;
-    case 'confirmNewPassword':
-      if (!value) {
-        return 'Campo Obrigatório';
-      }
-
-      if (value.length < 6) {
-        return 'A senha deve conter ao menos 6 caracteres';
-      }
-
-      if (
-        formRef?.current?.getFieldValue('newPassword') &&
-        formRef.current?.getFieldValue('newPassword') !== value
-      ) {
-        return 'As senhas não coincidem';
-      } else {
-        if (
-          formRef?.current?.getFieldError('newPassword') ===
-          'As senhas não coincidem'
-        ) {
-          formRef?.current?.setFieldError('newPassword', '');
-        }
-      }
-
-      return null;
-    case 'email':
-      if (!value) {
-        return 'Campo Email obrigatório.';
-      }
-
-      if (!validateEmail(value)) {
-        return 'Email inválido';
-      }
-
-      return null;
     case 'date':
       if (!value) {
         return 'Campo Obrigatório';
       }
 
-      return null;
+      return;
     case 'time':
       if (!value) {
         return 'Campo Obrigatório';
       }
 
-      return null;
+      return;
 
-    case 'address.cep':
-      if (!value) {
-        return 'Campo Obrigatório';
-      }
-
-      return null;
-    case 'address.street':
-      if (!value) {
-        return 'Campo Obrigatório';
-      }
-
-      return null;
     case 'title':
       if (!value) {
         return 'Campo Obrigatório';
       }
 
-      return null;
+      return;
     case 'category':
       if (!value) {
         return 'Campo Obrigatório';
       }
 
-      return null;
+      return;
 
     default:
-      return null;
+      return;
   }
 }
 

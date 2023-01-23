@@ -6,6 +6,7 @@ import {FormControl} from '@/shared/models';
 
 import TextInput from './TextInput';
 import Text from '../Text';
+import {validateField} from '@/shared/utils/validations';
 
 export interface AppTextInputProps extends TextInputProps {
   label?: string;
@@ -56,19 +57,16 @@ const FloatingLabelInput = (
       <Controller
         control={control}
         rules={{
-          required: true,
+          required: false,
+          validate: value => validateField(name, value),
         }}
-        render={({
-          field: {onChange, onBlur, value, ref},
-          fieldState: {error},
-        }) => (
+        render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
           <>
             <TextInput
               onPress={onPress}
               button={button}
               label={label}
               error={Boolean(error?.type)}
-              inputRef={ref}
               onBlur={onBlur}
               onChangeText={onChange}
               value={mask ? mask(value, '') : value}
@@ -77,7 +75,7 @@ const FloatingLabelInput = (
             />
             <View style={styles.errorWrapper}>
               {Boolean(error) && (
-                <Text style={styles.error}>{error?.type}</Text>
+                <Text style={styles.error}>{error?.message}</Text>
               )}
             </View>
           </>
