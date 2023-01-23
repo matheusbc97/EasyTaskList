@@ -9,19 +9,23 @@ import {FullScreenLoader, Toast} from './shared/components';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
+import ErrorBoundary from './ErrorBoundary';
+
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <SafeAreaProvider>
-        <QueryClientProvider client={queryClient}>
-          <AppNavigator />
-          <FullScreenLoader />
-          <Toast />
-        </QueryClientProvider>
-      </SafeAreaProvider>
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <SafeAreaProvider>
+          <QueryClientProvider client={queryClient}>
+            <AppNavigator />
+            <FullScreenLoader />
+            <Toast />
+          </QueryClientProvider>
+        </SafeAreaProvider>
+      </Provider>
+    </ErrorBoundary>
   );
 };
 
