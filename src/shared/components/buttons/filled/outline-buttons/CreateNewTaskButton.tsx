@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {OutlineButton} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 import {useNavigation} from '@react-navigation/native';
+import OutlineButton from '../../OutlineButton';
 
 export default function CreateNewTaskButton() {
   const {translation} = useTranslation();

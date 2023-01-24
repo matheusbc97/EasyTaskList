@@ -3,11 +3,11 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import FontAwesomeIcon5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-import {Text} from '@/shared/components';
 import {useAppTheme} from '@/shared/hooks';
 import {TEST_IDS} from '@/shared/constants/testIds';
 
 import Button from './Button';
+import Text from '../Text';
 
 type IconType = 'FontAwesome' | 'FontAwesome5';
 

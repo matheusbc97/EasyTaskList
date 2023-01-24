@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
 import {AppTheme, AppThemeName} from '@/shared/models';
-import {Button} from '@/shared/components';
+import Button from './buttons/Button';
 import * as themes from '@/assets/themes';
 
 interface ThemeBoxProps {

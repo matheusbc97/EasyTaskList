@@ -1,8 +1,8 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 
-import {OutlineButton} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
+import OutlineButton from '../../OutlineButton';
 
 export default function CreateNewCategoryButton() {
   const {translation} = useTranslation();

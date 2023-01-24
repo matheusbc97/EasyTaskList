@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet} from 'react-native';
-import {Button} from '@/shared/components';
+
+import Button from './buttons/Button';
 
 import {
   AVATAR,

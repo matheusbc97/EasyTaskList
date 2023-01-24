@@ -7,9 +7,9 @@ import {useNavigation} from '@react-navigation/native';
 
 import {shadowStyledComponents} from '@/shared/styles';
 import {selectAppTheme} from '@/store/configs';
-import {Text} from '@/shared/components';
 
 import BackButton from './buttons/BackButton';
+import Text from './Text';
 
 interface Props {
   title: string;
