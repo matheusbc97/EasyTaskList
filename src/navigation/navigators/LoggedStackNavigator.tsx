@@ -18,6 +18,7 @@ import {AuthenticatedStackParams} from '../types';
 import {BottomTabsNavigator} from './BottomTabsNavigator';
 import TimerPage from '@/pages/TimerPage';
 import StopwatchPage from '@/pages/StopwatchPage';
+import StorybookPage from '@/pages/StorybookPage';
 
 const AuthenticatedStack = createStackNavigator<AuthenticatedStackParams>();
 
@@ -69,6 +70,7 @@ function AuthenticatedStackNavigator() {
       <AuthenticatedStack.Screen name="TaskDetails" component={TaskDetails} />
       <AuthenticatedStack.Screen name="Timer" component={TimerPage} />
       <AuthenticatedStack.Screen name="Stopwatch" component={StopwatchPage} />
+      <AuthenticatedStack.Screen name="Storybook" component={StorybookPage} />
     </AuthenticatedStack.Navigator>
   );
 }

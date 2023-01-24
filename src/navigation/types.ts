@@ -36,6 +36,7 @@ export type AuthenticatedStackParams = {
   ChooseUserConfigurations: undefined;
   Timer: undefined;
   Stopwatch: undefined;
+  Storybook: undefined;
 };
 
 export type BottomNavigatorStackParams = {

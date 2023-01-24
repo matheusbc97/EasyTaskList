@@ -50,6 +50,12 @@ export default function MorePage({navigation}: Props) {
         onPress={() => navigation.navigate('Timer')}
       />
       <NavigateButton
+        title={translation('TIMER')}
+        iconName="book"
+        type="FontAwesome5"
+        onPress={() => navigation.navigate('Storybook')}
+      />
+      <NavigateButton
         title={translation('ABOUT')}
         iconName="info-circle"
         type="FontAwesome5"
