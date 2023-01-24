@@ -49,6 +49,7 @@ import CreateNewCategoryButton from './buttons/filled/outline-buttons/CreateNewC
 import EditButton from './buttons/filled/text-buttons/EditButton';
 import DeleteButton from './buttons/filled/text-buttons/DeleteButton';
 import SectionRowButtonsContainer from './containers/SectionRowButtonsContainer';
+import Timer, {TimerHandles} from './Timer';
 
 export {
   Avatar,
@@ -100,6 +101,8 @@ export {
   EditButton,
   DeleteButton,
   SectionRowButtonsContainer,
+  Timer,
+  TimerHandles,
 };
 
 export type {TextProps, FlatListWithFetchIndicatorProps, OutlineButtonProps};

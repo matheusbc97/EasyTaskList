@@ -1,14 +1,42 @@
+import {useRef, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
+import {PickerIOS} from '@react-native-picker/picker';
 
-import {Header, RoundedButton, Text} from '@/shared/components';
-import {useTranslation, useTimer} from '@/shared/hooks';
+import {Header, RoundedButton, Timer, TimerHandles} from '@/shared/components';
+import {useTranslation} from '@/shared/hooks';
 import {AuthenticateStackPageProps} from '@/shared/types/AuthenticateStackPageProps';
+
+const pickerItems = Array.from({length: 60}, (_, index) => {
+  const value = index + 1;
+  return (
+    <PickerIOS.Item
+      key={value}
+      label={value.toString().padStart(2, '0')}
+      value={value}
+    />
+  );
+});
 
 export default function TimerPage({
   navigation,
 }: AuthenticateStackPageProps<'Timer'>) {
   const {translation} = useTranslation();
-  const {seconds, minutes, isTimerRunning, startTimer, stopTimer} = useTimer();
+
+  const [pickerValue, setPickerValue] = useState(3);
+
+  const timerRef = useRef<TimerHandles>(null);
+
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+
+  const startTimer = () => {
+    setIsTimerRunning(true);
+    timerRef.current?.startTimer();
+  };
+
+  const stopTimer = () => {
+    setIsTimerRunning(false);
+    timerRef.current?.stopTimer();
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -17,9 +45,15 @@ export default function TimerPage({
         onBackPress={() => navigation.navigate('BottomNavigation')}
       />
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text type="title-big">
-          {minutes} : {seconds}
-        </Text>
+        <PickerIOS
+          selectedValue={pickerValue}
+          style={{width: 90}}
+          onValueChange={itemValue =>
+            setPickerValue(itemValue.valueOf() as number)
+          }>
+          {pickerItems}
+        </PickerIOS>
+        <Timer ref={timerRef} />
       </View>
       <RoundedButton
         center

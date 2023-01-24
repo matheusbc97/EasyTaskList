@@ -77,5 +77,6 @@ export default {
   [tKeys.STOPWATCH]: 'Cronômetro',
   [tKeys.START_TIMER]: 'Iniciar Temporizador',
   [tKeys.STOP_TIMER]: 'Parar Temporizador',
+  [tKeys.START_STOPWATCH]: 'Iniciar Cronômetro',
   [tKeys.STOP_STOPWATCH]: 'Parar Cronômetro',
 };

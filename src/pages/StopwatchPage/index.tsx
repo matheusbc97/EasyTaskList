@@ -25,8 +25,8 @@ export default function StopwatchPage({
         center
         text={
           isTimerRunning
-            ? translation('STOP_TIMER')
-            : translation('START_TIMER')
+            ? translation('STOP_STOPWATCH')
+            : translation('START_STOPWATCH')
         }
         onPress={isTimerRunning ? stopTimer : startTimer}
       />
