@@ -1,4 +1,4 @@
-import {Category} from '@shared/models';
+import {Category} from '@/shared/models';
 
 export const categoriesInitialState = [
   {

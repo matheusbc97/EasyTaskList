@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {FlatListWithFetchIndicator, TaskListItem} from '@shared/components';
+import {FlatListWithFetchIndicator, TaskListItem} from '@/shared/components';
 import {useTranslation} from '@/shared/hooks';
 import {Task, FetchState} from '@/shared/models';
 

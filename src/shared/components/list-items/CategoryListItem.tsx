@@ -2,10 +2,10 @@ import React, {memo, useMemo} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
-import categoryColors from '@assets/categoryColors';
-import {Text, Button} from '@shared/components';
-import {Category} from '@shared/models';
-import categoryIconNames from '@assets/categoryIconNames';
+import categoryColors from '@/assets/categoryColors';
+import {Text, Button} from '@/shared/components';
+import {Category} from '@/shared/models';
+import categoryIconNames from '@/assets/categoryIconNames';
 import {ViewStyle} from 'react-native';
 
 interface Props {

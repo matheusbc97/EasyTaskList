@@ -10,7 +10,7 @@ interface UseCounterParams {
 
 export function useCounter({
   onLimitReached,
-  isCountdown, // if you are decrementing you have to set isCountdown to true
+  isCountdown,
   initialValue = 0,
   maxValue,
   minValue,
@@ -18,7 +18,7 @@ export function useCounter({
   const [counter, setCounter] = useState(initialValue);
 
   useEffect(() => {
-    //setCounter(initialValue);
+    setCounter(initialValue);
   }, [initialValue]);
 
   const addToCounter = (numToAdd: number) => {
@@ -26,7 +26,7 @@ export function useCounter({
       const isCountdownMinReached =
         isCountdown &&
         typeof minValue === 'number' &&
-        oldState + numToAdd < minValue;
+        oldState - numToAdd - 1 <= minValue;
 
       const isMaxReached =
         !isCountdown &&

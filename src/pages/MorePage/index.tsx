@@ -39,13 +39,13 @@ export default function MorePage({navigation}: Props) {
       />
       <NavigateButton
         title={translation('STOPWATCH')}
-        iconName="palette"
+        iconName="stopwatch"
         type="FontAwesome5"
         onPress={() => navigation.navigate('Stopwatch')}
       />
       <NavigateButton
         title={translation('TIMER')}
-        iconName="palette"
+        iconName="clock"
         type="FontAwesome5"
         onPress={() => navigation.navigate('Timer')}
       />

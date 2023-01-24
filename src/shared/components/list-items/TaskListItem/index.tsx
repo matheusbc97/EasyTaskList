@@ -5,7 +5,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import {Text} from '@/shared/components';
 import categoryIconNames from '@/assets/categoryIconNames';
 import {useFormatDate, useCategoryColor} from '@/shared/hooks';
-import {Task} from '@shared/models';
+import {Task} from '@/shared/models';
 
 import {
   ContainerButton,

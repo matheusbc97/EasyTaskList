@@ -1,4 +1,4 @@
-import {AppThemeName} from '@shared/models/AppThemeName';
+import {AppThemeName} from '@/shared/models/AppThemeName';
 export type AppTheme = {
   primaryColor: string;
   secondaryColor: string;

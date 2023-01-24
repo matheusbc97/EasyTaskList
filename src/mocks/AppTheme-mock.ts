@@ -1,4 +1,4 @@
-import {AppTheme} from '@shared/models';
+import {AppTheme} from '@/shared/models';
 
 const appThemeMock: AppTheme = {
   primaryColor: '#21B9C7',

@@ -3,11 +3,11 @@ import {RectButton} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
-import {Text} from '@shared/components';
-import {Category} from '@shared/models';
-import categoryIconNames from '@assets/categoryIconNames';
+import {Text} from '@/shared/components';
+import {Category} from '@/shared/models';
+import categoryIconNames from '@/assets/categoryIconNames';
 import LinearGradient from 'react-native-linear-gradient';
-import categoryColors from '@assets/categoryColors';
+import categoryColors from '@/assets/categoryColors';
 
 interface Props {
   category: Category;

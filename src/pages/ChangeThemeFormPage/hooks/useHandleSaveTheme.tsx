@@ -1,7 +1,7 @@
-import {showToast} from '@shared/components/Toast';
-import {AppTheme} from '@shared/models';
-import {updateUser} from '@store/account/user';
-import {setAppTheme} from '@store/configs';
+import {showToast} from '@/shared/components/Toast';
+import {AppTheme} from '@/shared/models';
+import {updateUser} from '@/store/account/user';
+import {setAppTheme} from '@/store/configs';
 import {useNavigation} from '@react-navigation/native';
 
 const useHandleSaveTheme = () => {

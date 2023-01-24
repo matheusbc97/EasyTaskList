@@ -2,7 +2,7 @@ import React, {PropsWithChildren} from 'react';
 import {ViewStyle} from 'react-native';
 
 import {AnimatedBackground, Center, FormContainer} from '@/shared/components';
-import {AppTheme} from '@shared/models';
+import {AppTheme} from '@/shared/models';
 
 interface FormScreenWrapperProps {
   contentStyle?: ViewStyle;

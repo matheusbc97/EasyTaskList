@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {FlatListWithFetchIndicator, CategoryListItem} from '@shared/components';
-import {useTranslation} from '@shared/hooks';
+import {FlatListWithFetchIndicator, CategoryListItem} from '@/shared/components';
+import {useTranslation} from '@/shared/hooks';
 import {Category, FetchState} from '@/shared/models';
 
 interface CategoriesListProps {

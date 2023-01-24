@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import categoryColors from '@assets/categoryColors';
+import categoryColors from '@/assets/categoryColors';
 import LinearGradient from 'react-native-linear-gradient';
 
 interface CategoryColorBoxProps {

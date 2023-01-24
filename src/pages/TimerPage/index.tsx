@@ -1,10 +1,8 @@
 import {SafeAreaView, View} from 'react-native';
 
 import {Header, RoundedButton, Text} from '@/shared/components';
-import {useTranslation} from '@/shared/hooks';
+import {useTranslation, useTimer} from '@/shared/hooks';
 import {AuthenticateStackPageProps} from '@/shared/types/AuthenticateStackPageProps';
-
-import {useTimer} from '@/shared/hooks';
 
 export default function TimerPage({
   navigation,

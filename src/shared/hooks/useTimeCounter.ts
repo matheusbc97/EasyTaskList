@@ -1,9 +1,19 @@
 import {useCounter} from './useCounter';
 
-export function useTimeCounter(isCountdown: boolean = false) {
+interface UseTimeCounterProps {
+  isCountdown?: boolean;
+  initialMinutes?: number;
+  initialSeconds?: number;
+}
+
+export function useTimeCounter({
+  isCountdown = false,
+  initialMinutes = 0,
+  initialSeconds = 0,
+}: UseTimeCounterProps = {}) {
   const [minutes, addMinutes] = useCounter({
     isCountdown,
-    initialValue: 59,
+    initialValue: initialMinutes,
   });
 
   const [seconds, addSeconds] = useCounter({
@@ -11,7 +21,7 @@ export function useTimeCounter(isCountdown: boolean = false) {
     maxValue: 59,
     onLimitReached: () => addMinutes(isCountdown ? -1 : 1),
     isCountdown,
-    initialValue: 5,
+    initialValue: initialSeconds,
   });
 
   return {

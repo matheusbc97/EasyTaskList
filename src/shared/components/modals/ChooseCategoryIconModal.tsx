@@ -3,8 +3,8 @@ import styled from 'styled-components/native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import Modal from 'react-native-modal';
 
-import categoryIconNames from '@assets/categoryIconNames';
-import {Text, Button} from '@shared/components';
+import categoryIconNames from '@/assets/categoryIconNames';
+import {Text, Button} from '@/shared/components';
 
 import {useTranslation} from '@/shared/hooks';
 

@@ -1,19 +1,35 @@
-import {useCounter} from '@/shared/hooks';
-import {useEffect} from 'react';
-import {Text, SafeAreaView} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 
-export default function StopwatchPage() {
-  const [counter, addToCounter] = useCounter();
+import {Header, RoundedButton, Text} from '@/shared/components';
+import {useTranslation, useTimer} from '@/shared/hooks';
+import {AuthenticateStackPageProps} from '@/shared/types/AuthenticateStackPageProps';
 
-  useEffect(() => {
-    addToCounter(1);
-  }, []);
-
-  console.log(counter);
+export default function StopwatchPage({
+  navigation,
+}: AuthenticateStackPageProps<'Stopwatch'>) {
+  const {translation} = useTranslation();
+  const {seconds, minutes, isTimerRunning, startTimer, stopTimer} = useTimer();
 
   return (
-    <SafeAreaView>
-      <Text>Stopwatch</Text>
+    <SafeAreaView style={{flex: 1}}>
+      <Header
+        title={translation('STOPWATCH')}
+        onBackPress={() => navigation.navigate('BottomNavigation')}
+      />
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text type="title-big">
+          {minutes} : {seconds}
+        </Text>
+      </View>
+      <RoundedButton
+        center
+        text={
+          isTimerRunning
+            ? translation('STOP_TIMER')
+            : translation('START_TIMER')
+        }
+        onPress={isTimerRunning ? stopTimer : startTimer}
+      />
     </SafeAreaView>
   );
 }

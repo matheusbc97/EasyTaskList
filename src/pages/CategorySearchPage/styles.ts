@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {FlatListWithFetchIndicator} from '@shared/components';
+import {FlatListWithFetchIndicator} from '@/shared/components';
 
 export const SearchInput = styled.TextInput`
   border-bottom-color: #e6e6e6;
