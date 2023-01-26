@@ -24,7 +24,7 @@ describe('ErrorBoundary', () => {
     expect(element).toBeVisible();
   });
 
-  it('Should render errorPage', async () => {
+  it('Should render ErrorPage', async () => {
     const TroubleMaker = () => {
       throw new Error('Error');
     };
