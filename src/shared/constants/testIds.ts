@@ -18,4 +18,5 @@ export const TEST_IDS = {
   ERROR_PAGE_CONTAINER: 'ErrorPageContainer',
   IMAGE_AVATAR: 'ImageAvatar',
   BUTTON_BASE: 'ButtonBase',
+  RELOAD_APP_BUTTON: 'ReloadAppButton',
 };

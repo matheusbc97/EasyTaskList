@@ -12,7 +12,12 @@ function ErrorPage({restartApp}: ErrorPageProps) {
         <Text style={{fontSize: 18}}>Ops, something went wrong</Text>
       </View>
 
-      <Button title="Reiniciar App" color={'red'} onPress={restartApp} />
+      <Button
+        testID={TEST_IDS.RELOAD_APP_BUTTON}
+        title="Reiniciar App"
+        color={'red'}
+        onPress={restartApp}
+      />
     </SafeAreaView>
   );
 }

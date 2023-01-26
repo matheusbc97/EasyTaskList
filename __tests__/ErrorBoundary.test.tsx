@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import {render} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
 
 import ErrorBoundary from '@/ErrorBoundary';
 import {TEST_IDS} from '@/shared/constants/testIds';
@@ -24,18 +24,38 @@ describe('ErrorBoundary', () => {
     expect(element).toBeVisible();
   });
 
-  it('Should render ErrorPage', async () => {
+  it('Should render ErrorPage and Reload App', async () => {
     const TroubleMaker = () => {
       throw new Error('Error');
     };
 
-    const {findByTestId} = render(
+    const fakeViewTestId = 'fake-view-test-id';
+
+    const {findByTestId, rerender} = render(
       <ErrorBoundary>
-        <TroubleMaker />
+        <View testID={fakeViewTestId}>
+          <TroubleMaker />
+        </View>
       </ErrorBoundary>,
     );
 
-    const element = await findByTestId(TEST_IDS.ERROR_PAGE_CONTAINER);
-    expect(element).toBeVisible();
+    const errorPageContainer = await findByTestId(
+      TEST_IDS.ERROR_PAGE_CONTAINER,
+    );
+    expect(errorPageContainer).toBeVisible();
+
+    const reloadAppButton = await findByTestId(TEST_IDS.RELOAD_APP_BUTTON);
+
+    rerender(
+      <ErrorBoundary>
+        <View testID={fakeViewTestId} />
+      </ErrorBoundary>,
+    );
+
+    fireEvent(reloadAppButton, 'press');
+
+    const fakeViewElement = await findByTestId(fakeViewTestId);
+
+    expect(fakeViewElement).toBeVisible();
   });
 });
