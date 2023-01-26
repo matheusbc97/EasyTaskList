@@ -23,15 +23,13 @@ export function useCounter({
 
   const addToCounter = (numToAdd: number) => {
     setCounter(oldState => {
+      const newValue = oldState + numToAdd;
+
       const isCountdownMinReached =
-        isCountdown &&
-        typeof minValue === 'number' &&
-        oldState - numToAdd - 1 <= minValue;
+        isCountdown && typeof minValue === 'number' && newValue < minValue;
 
       const isMaxReached =
-        !isCountdown &&
-        typeof maxValue === 'number' &&
-        oldState + numToAdd > maxValue;
+        !isCountdown && typeof maxValue === 'number' && newValue > maxValue;
 
       if (isMaxReached || isCountdownMinReached) {
         onLimitReached?.();
@@ -40,16 +38,14 @@ export function useCounter({
           if (typeof maxValue === 'number') {
             return maxValue;
           }
-        } else {
-          if (typeof minValue === 'number') {
-            return minValue;
-          }
+        } else if (typeof minValue === 'number') {
+          return minValue;
         }
 
         return 0;
       }
 
-      return oldState + numToAdd;
+      return newValue;
     });
   };
 
