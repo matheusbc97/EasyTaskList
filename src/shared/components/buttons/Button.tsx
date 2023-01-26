@@ -1,3 +1,4 @@
+import {TEST_IDS} from '@/shared/constants/testIds';
 import React, {PropsWithChildren} from 'react';
 import {StyleProp, ViewStyle} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
@@ -14,7 +15,7 @@ function Button({
   disabled,
   onPress,
   style,
-  testID = 'button-base',
+  testID = TEST_IDS.BUTTON_BASE,
 }: PropsWithChildren<ButtonProps>) {
   return (
     <TouchableRipple

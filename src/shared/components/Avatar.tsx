@@ -13,6 +13,7 @@ import {
   AVATAR_7,
   AVATAR_8,
 } from '../../assets/images';
+import {TEST_IDS} from '../constants/testIds';
 
 const avatarSources = [
   AVATAR,
@@ -36,7 +37,7 @@ const ImageAvatar: React.FC<ImageAvatarProps> = ({
   avatarNumber = -1,
   size = 55,
   onPress,
-  testId = 'ImageAvatar',
+  testId = TEST_IDS.IMAGE_AVATAR,
 }) => {
   return (
     <Button

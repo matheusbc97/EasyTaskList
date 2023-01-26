@@ -16,4 +16,6 @@ export const TEST_IDS = {
   TEXT_BUTTON_ICON: 'TextButtonIcon',
   OUTLINE_BUTTON_TEXT: 'OutlineButton-text',
   ERROR_PAGE_CONTAINER: 'ErrorPageContainer',
+  IMAGE_AVATAR: 'ImageAvatar',
+  BUTTON_BASE: 'ButtonBase',
 };
