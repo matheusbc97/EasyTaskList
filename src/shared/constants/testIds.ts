@@ -15,4 +15,5 @@ export const TEST_IDS = {
   NAVIGATE_BUTTON_TITLE: 'NavigateButton-title',
   TEXT_BUTTON_ICON: 'TextButtonIcon',
   OUTLINE_BUTTON_TEXT: 'OutlineButton-text',
+  ERROR_PAGE_CONTAINER: 'ErrorPageContainer',
 };

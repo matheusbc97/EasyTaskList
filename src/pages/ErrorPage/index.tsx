@@ -1,3 +1,4 @@
+import {TEST_IDS} from '@/shared/constants/testIds';
 import {SafeAreaView, Text, Button, View} from 'react-native';
 
 interface ErrorPageProps {
@@ -6,7 +7,7 @@ interface ErrorPageProps {
 
 function ErrorPage({restartApp}: ErrorPageProps) {
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView testID={TEST_IDS.ERROR_PAGE_CONTAINER} style={{flex: 1}}>
       <View style={{flex: 1, padding: 20}}>
         <Text style={{fontSize: 18}}>Ops, something went wrong</Text>
       </View>
