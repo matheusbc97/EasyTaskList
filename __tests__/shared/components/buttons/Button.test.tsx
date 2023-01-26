@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from '@/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 describe('Button Component', () => {
   it('Should render a button', () => {
@@ -11,7 +12,7 @@ describe('Button Component', () => {
     const onPress = jest.fn();
     const {findByTestId} = render(<Button onPress={onPress} />);
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
     fireEvent.press(element);
 
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -21,7 +22,7 @@ describe('Button Component', () => {
     const onPress = jest.fn();
     const {findByTestId} = render(<Button onPress={onPress} disabled />);
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
     fireEvent.press(element);
 
     expect(onPress).toHaveBeenCalledTimes(0);
@@ -34,7 +35,7 @@ describe('Button Component', () => {
 
     const {findByTestId} = render(<Button onPress={onPress} style={style} />);
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
 
     expect(element).toHaveStyle(style);
   });

@@ -2,6 +2,7 @@ import React from 'react';
 import {RoundedButton} from '@/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
 import {useAppThemeReturnMock} from '@/shared/hooks/data/__mocks__/useAppTheme';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 
@@ -14,7 +15,7 @@ describe('RoundedButton Component', () => {
     const onPress = jest.fn();
     const {findByTestId} = render(<RoundedButton onPress={onPress} />);
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
     fireEvent.press(element);
 
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -24,7 +25,7 @@ describe('RoundedButton Component', () => {
     const onPress = jest.fn();
     const {findByTestId} = render(<RoundedButton onPress={onPress} disabled />);
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
     fireEvent.press(element);
 
     expect(onPress).toHaveBeenCalledTimes(0);
@@ -39,7 +40,7 @@ describe('RoundedButton Component', () => {
       <RoundedButton onPress={onPress} style={style} />,
     );
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
 
     expect(element).toHaveStyle(style);
   });
@@ -63,7 +64,7 @@ describe('RoundedButton Component', () => {
 
     expect(container.props.inverted).toBeTruthy();
 
-    const buttonBaseElement = await findByTestId('button-base');
+    const buttonBaseElement = await findByTestId(TEST_IDS.BUTTON_BASE);
 
     expect(buttonBaseElement).toHaveStyle({
       borderColor: useAppThemeReturnMock.primaryColor,
@@ -81,7 +82,7 @@ describe('RoundedButton Component', () => {
 
     const {findByTestId} = render(<RoundedButton onPress={onPress} />);
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
 
     const style = {
       backgroundColor: useAppThemeReturnMock.secondaryColor,

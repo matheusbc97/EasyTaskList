@@ -1,6 +1,7 @@
 import React from 'react';
 import {OutlineButton} from '@/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 
@@ -15,7 +16,7 @@ describe('OutlineButton Component', () => {
       <OutlineButton iconName="pen" text="teste" onPress={onPress} />,
     );
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
     fireEvent.press(element);
 
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -35,7 +36,7 @@ describe('OutlineButton Component', () => {
       />,
     );
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
 
     expect(element).toHaveStyle(style);
   });

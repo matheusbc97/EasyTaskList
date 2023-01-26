@@ -1,6 +1,7 @@
 import React from 'react';
 import {TextButton} from '@/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 
@@ -15,7 +16,7 @@ describe('TextButton Component', () => {
       <TextButton text="testing" onPress={onPress} />,
     );
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
     fireEvent.press(element);
 
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -30,7 +31,7 @@ describe('TextButton Component', () => {
       <TextButton text="testing" onPress={onPress} style={style} />,
     );
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
 
     expect(element).toHaveStyle(style);
   });

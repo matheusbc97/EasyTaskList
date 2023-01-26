@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigateButton} from '@/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 
@@ -17,7 +18,7 @@ describe('NavigateButton Component', () => {
       <NavigateButton title="Testing" iconName="pencil" onPress={onPress} />,
     );
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
     fireEvent.press(element);
 
     expect(onPress).toHaveBeenCalledTimes(1);

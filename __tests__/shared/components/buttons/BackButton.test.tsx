@@ -2,6 +2,7 @@ import React from 'react';
 import {BackButton} from '@/shared/components';
 
 import {render, fireEvent} from '@testing-library/react-native';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 const mockedGoBack = jest.fn();
 
@@ -25,7 +26,7 @@ describe('BackButton Component', () => {
     const onPress = jest.fn();
     const {findByTestId} = render(<BackButton onPress={onPress} />);
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
     fireEvent.press(element);
 
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -35,7 +36,7 @@ describe('BackButton Component', () => {
     mockedGoBack.mockReset();
     const {findByTestId} = render(<BackButton />);
 
-    const element = await findByTestId('button-base');
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
     fireEvent.press(element);
 
     expect(mockedGoBack).toHaveBeenCalledTimes(1);
