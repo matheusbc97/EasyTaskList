@@ -1,6 +1,7 @@
 import {View} from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
+import {TEST_IDS} from '@/shared/constants/testIds';
 import {useAppTheme} from '@/shared/hooks';
 
 import Text from '../../Text';
@@ -16,6 +17,7 @@ function SecondaryHeader({
 
   return (
     <View
+      testID={TEST_IDS.SECONDARY_HEADER_CONTAINER}
       style={{
         flexDirection: 'row',
         alignItems: 'center',
@@ -26,6 +28,7 @@ function SecondaryHeader({
       }}>
       <View style={{flex: 1}}>
         <MaterialIcon
+          testID={TEST_IDS.SECONDARY_HEADER_BACK_BUTTON}
           name="arrow-back"
           size={30}
           color={appTheme.primaryColor}

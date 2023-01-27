@@ -6,6 +6,7 @@ import {shadowStyledComponents} from '@/shared/styles';
 import Text from '../../Text';
 import {useAppTheme} from '../../../hooks';
 import {HeaderProps} from '../types/HeaderProps';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 interface ContainerProps {
   backgroundColor: string;
@@ -31,13 +32,17 @@ function PrimaryHeader({
   const appTheme = useAppTheme();
 
   return (
-    <Container backgroundColor={appTheme.aboveBackground} style={style}>
+    <Container
+      testID={TEST_IDS.PRIMARY_HEADER_CONTAINER}
+      backgroundColor={appTheme.aboveBackground}
+      style={style}>
       <MaterialIcon
         name="arrow-back"
         size={30}
         color={appTheme.textColor}
         style={{marginRight: 10}}
         onPress={onBackPress}
+        testID={TEST_IDS.PRIMARY_HEADER_BACK_BUTTON}
       />
       <Text type="title-big" style={textStyle}>
         {title}

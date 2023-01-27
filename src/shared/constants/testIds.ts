@@ -28,4 +28,8 @@ export const TEST_IDS = {
     'FlatListWithFetchIndicatorFlatList',
   FLAT_LIST_WITH_FETCH_INDICATOR_REFRESH_CONTROL:
     'FlatListWithFetchIndicatorRefreshControl',
+  PRIMARY_HEADER_CONTAINER: 'PrimaryHeaderContainer',
+  SECONDARY_HEADER_CONTAINER: 'SecondaryHeaderContainer',
+  PRIMARY_HEADER_BACK_BUTTON: 'PrimaryHeaderBackButton',
+  SECONDARY_HEADER_BACK_BUTTON: 'SecondaryHeaderBackButton',
 };
