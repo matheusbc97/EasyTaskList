@@ -21,4 +21,11 @@ export const TEST_IDS = {
   RELOAD_APP_BUTTON: 'ReloadAppButton',
   CATEGORY_COLOR_BOX_TRANSPARENT_VIEW: 'CategoryColorBoxTransparentView',
   CATEGORY_COLOR_BOX_LINEAR_GRADIENT: 'CategoryColorBoxLinearGradient',
+  LOADING_INDICATOR_BASE: 'loading-indicator-base',
+  ACTIVITY_INDICATOR_BASE: 'activity-indicator-base',
+  ERROR_MESSAGE: 'ErrorMessage',
+  FLAT_LIST_WITH_FETCH_INDICATOR_FLAT_LIST:
+    'FlatListWithFetchIndicatorFlatList',
+  FLAT_LIST_WITH_FETCH_INDICATOR_REFRESH_CONTROL:
+    'FlatListWithFetchIndicatorRefreshControl',
 };

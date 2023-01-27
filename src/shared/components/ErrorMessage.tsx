@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Button, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {TEST_IDS} from '../constants/testIds';
 
 interface Props {
   onTryAgainPress?: (() => void) | undefined | null;
@@ -8,7 +9,7 @@ interface Props {
 
 const ErrorMessage = ({onTryAgainPress}: Props) => {
   return (
-    <View style={styles.container} testID="error-message">
+    <View style={styles.container} testID={TEST_IDS.ERROR_MESSAGE}>
       <Icon name={'frown'} style={styles.icon} />
       <Button
         onPress={onTryAgainPress ?? (() => {})}

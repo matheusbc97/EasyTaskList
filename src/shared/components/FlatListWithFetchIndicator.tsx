@@ -10,6 +10,7 @@ import ShowFallbackComponent from './fallbacks/ShowFallbackComponent';
 import EmptyListText from './EmptyListText';
 import ErrorMessage from './ErrorMessage';
 import ActivityIndicator from './loadings/ActivityIndicator';
+import {TEST_IDS} from '../constants/testIds';
 
 export interface FlatListWithFetchIndicatorProps<T> extends FlatListProps<T> {
   isLoading: boolean;
@@ -23,10 +24,10 @@ export interface FlatListWithFetchIndicatorProps<T> extends FlatListProps<T> {
 }
 
 function FlatListWithFetchIndicator<T>({
-  isLoading = false,
-  data = [],
-  hasError = false,
-  emptyListText = '',
+  isLoading,
+  data,
+  hasError,
+  emptyListText,
   style,
   ListHeaderComponent,
   refreshControlEnabled = true,
@@ -37,6 +38,14 @@ function FlatListWithFetchIndicator<T>({
   ...rest
 }: FlatListWithFetchIndicatorProps<T>) {
   const [firstLoading, setFirstLoading] = useState(true);
+
+  const handleRefresh = () => {
+    if (showActivityIndicator) {
+      setFirstLoading(false);
+    }
+
+    onRefresh?.();
+  };
 
   return (
     <ShowFallbackComponent
@@ -62,16 +71,9 @@ function FlatListWithFetchIndicator<T>({
           refreshControlEnabled && onRefresh ? (
             <RefreshControl
               colors={['#d50006', '#ab2b3f', '#a1001a']}
-              onRefresh={() => {
-                if (firstLoading && showActivityIndicator) {
-                  setFirstLoading(false);
-                }
-
-                if (onRefresh) {
-                  onRefresh();
-                }
-              }}
+              onRefresh={handleRefresh}
               refreshing={isLoading && !firstLoading}
+              testID={TEST_IDS.FLAT_LIST_WITH_FETCH_INDICATOR_REFRESH_CONTROL}
             />
           ) : undefined
         }
@@ -81,6 +83,7 @@ function FlatListWithFetchIndicator<T>({
           data && data.length === 0 && styles.contentContainerStyle,
         ]}
         data={data}
+        testID={TEST_IDS.FLAT_LIST_WITH_FETCH_INDICATOR_FLAT_LIST}
         {...rest}
       />
     </ShowFallbackComponent>

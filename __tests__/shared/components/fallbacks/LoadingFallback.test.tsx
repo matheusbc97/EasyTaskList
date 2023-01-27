@@ -3,6 +3,7 @@ import {Text} from 'react-native';
 import {render} from '@testing-library/react-native';
 
 import {LoadingFallback} from '@/shared/components';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 describe('LoadingFallbackComponent Component', () => {
   it('Should render a LoadingFallbackComponent', () => {
@@ -12,7 +13,7 @@ describe('LoadingFallbackComponent Component', () => {
   it('Should render the error fallback component as children', async () => {
     const {findByTestId} = render(<LoadingFallback isLoading />);
 
-    const textElement = await findByTestId('loading-indicator-base');
+    const textElement = await findByTestId(TEST_IDS.ACTIVITY_INDICATOR_BASE);
 
     expect(textElement).toBeVisible();
   });

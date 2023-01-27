@@ -2,6 +2,7 @@ import React from 'react';
 import {ErrorFallback} from '@/shared/components';
 import {render} from '@testing-library/react-native';
 import {Text} from 'react-native';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 describe('ErrorFallbackComponent Component', () => {
   it('Should render a ErrorFallbackComponent', () => {
@@ -11,7 +12,7 @@ describe('ErrorFallbackComponent Component', () => {
   it('Should render the error fallback component as children', async () => {
     const {findByTestId} = render(<ErrorFallback hasError />);
 
-    const textElement = await findByTestId('error-message');
+    const textElement = await findByTestId(TEST_IDS.ERROR_MESSAGE);
 
     expect(textElement).toBeVisible();
   });
