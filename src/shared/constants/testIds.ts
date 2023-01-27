@@ -19,4 +19,6 @@ export const TEST_IDS = {
   IMAGE_AVATAR: 'ImageAvatar',
   BUTTON_BASE: 'ButtonBase',
   RELOAD_APP_BUTTON: 'ReloadAppButton',
+  CATEGORY_COLOR_BOX_TRANSPARENT_VIEW: 'CategoryColorBoxTransparentView',
+  CATEGORY_COLOR_BOX_LINEAR_GRADIENT: 'CategoryColorBoxLinearGradient',
 };

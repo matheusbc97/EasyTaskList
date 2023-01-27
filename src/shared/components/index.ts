@@ -50,6 +50,7 @@ import EditButton from './buttons/filled/text-buttons/EditButton';
 import DeleteButton from './buttons/filled/text-buttons/DeleteButton';
 import SectionRowButtonsContainer from './containers/SectionRowButtonsContainer';
 import Timer, {TimerHandles} from './Timer';
+export {default as CategoryColorBox} from './CategoryColorBox';
 
 export {
   Avatar,
