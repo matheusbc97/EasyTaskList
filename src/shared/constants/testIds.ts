@@ -32,4 +32,6 @@ export const TEST_IDS = {
   SECONDARY_HEADER_CONTAINER: 'SecondaryHeaderContainer',
   PRIMARY_HEADER_BACK_BUTTON: 'PrimaryHeaderBackButton',
   SECONDARY_HEADER_BACK_BUTTON: 'SecondaryHeaderBackButton',
+  SECTION_CONTAINER: 'SectionContainer',
+  SECTION_CONTENT_CONTAINER: 'SectionContentContainer',
 };

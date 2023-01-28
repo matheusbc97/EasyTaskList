@@ -4,6 +4,7 @@ import {View, StyleProp, ViewStyle, StyleSheet} from 'react-native';
 import {shadow} from '@/shared/styles';
 
 import Text from './Text';
+import {TEST_IDS} from '../constants/testIds';
 
 const styles = StyleSheet.create({
   contentWrapper: {
@@ -32,13 +33,17 @@ function Section({
   contentStyle,
 }: PropsWithChildren<SectionProps>) {
   return (
-    <View style={[{marginTop: 30}, style]}>
+    <View style={[{marginTop: 30}, style]} testID={TEST_IDS.SECTION_CONTAINER}>
       {!!title && (
         <Text type="title-medium" style={styles.title}>
           {title}
         </Text>
       )}
-      <View style={[styles.contentWrapper, contentStyle]}>{children}</View>
+      <View
+        testID={TEST_IDS.SECTION_CONTENT_CONTAINER}
+        style={[styles.contentWrapper, contentStyle]}>
+        {children}
+      </View>
     </View>
   );
 }
