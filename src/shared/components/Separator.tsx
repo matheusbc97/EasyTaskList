@@ -1,6 +1,7 @@
 import React from 'react';
 import {ViewStyle, StyleProp} from 'react-native';
 import styled from 'styled-components/native';
+import {TEST_IDS} from '../constants/testIds';
 
 const StyledSeparator = styled.View`
   height: 1px;
@@ -14,7 +15,7 @@ interface SeparatorProps {
 }
 
 function Separator({style}: SeparatorProps) {
-  return <StyledSeparator style={style} />;
+  return <StyledSeparator testID={TEST_IDS.SEPARATOR} style={style} />;
 }
 
 export default Separator;

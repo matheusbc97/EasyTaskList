@@ -1,5 +1,6 @@
 import React, {PropsWithChildren} from 'react';
 import {TouchableOpacityProps, StyleSheet, ViewStyle, View} from 'react-native';
+import {TEST_IDS} from '../constants/testIds';
 
 interface Props extends PropsWithChildren<any>, TouchableOpacityProps {
   style?: ViewStyle | ViewStyle[];
@@ -7,7 +8,7 @@ interface Props extends PropsWithChildren<any>, TouchableOpacityProps {
 
 const Shadow = ({children, style = {}, ...rest}: Props) => {
   return (
-    <View style={[styles.shadow, style]} {...rest}>
+    <View testID={TEST_IDS.SHADOW} style={[styles.shadow, style]} {...rest}>
       {children}
     </View>
   );

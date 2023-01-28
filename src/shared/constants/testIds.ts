@@ -34,4 +34,6 @@ export const TEST_IDS = {
   SECONDARY_HEADER_BACK_BUTTON: 'SecondaryHeaderBackButton',
   SECTION_CONTAINER: 'SectionContainer',
   SECTION_CONTENT_CONTAINER: 'SectionContentContainer',
+  SEPARATOR: 'Separator',
+  SHADOW: 'Shadow',
 };
