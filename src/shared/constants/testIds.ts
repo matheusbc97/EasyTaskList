@@ -36,4 +36,5 @@ export const TEST_IDS = {
   SECTION_CONTENT_CONTAINER: 'SectionContentContainer',
   SEPARATOR: 'Separator',
   SHADOW: 'Shadow',
+  TOAST: 'Toast',
 };

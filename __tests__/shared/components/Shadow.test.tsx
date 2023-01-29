@@ -4,7 +4,7 @@ import {TEST_IDS} from '@/shared/constants/testIds';
 import {TextStyle} from 'react-native';
 
 describe('Separator Component', () => {
-  it('Should render an Separator', () => {
+  it('Should render a Separator', () => {
     render(<Shadow />);
   });
 
