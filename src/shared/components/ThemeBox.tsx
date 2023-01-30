@@ -4,6 +4,7 @@ import {View, StyleSheet} from 'react-native';
 import {AppTheme, AppThemeName} from '@/shared/models';
 import Button from './buttons/Button';
 import * as themes from '@/assets/themes';
+import {TEST_IDS} from '../constants/testIds';
 
 interface ThemeBoxProps {
   theme: AppThemeName;
@@ -18,8 +19,12 @@ const ThemeBox: React.FC<ThemeBoxProps> = ({theme, onPress, testID}) => {
   return (
     <Button testID={testID} onPress={() => onPress && onPress(appTheme)}>
       <View style={styles.container}>
-        <View style={[styles.half, {backgroundColor: appTheme.primaryColor}]} />
         <View
+          testID={TEST_IDS.THEME_BOX_VIEW_PRIMARY_COLOR}
+          style={[styles.half, {backgroundColor: appTheme.primaryColor}]}
+        />
+        <View
+          testID={TEST_IDS.THEME_BOX_VIEW_SECONDARY_COLOR}
           style={[styles.half, {backgroundColor: appTheme.secondaryColor}]}
         />
       </View>

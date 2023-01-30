@@ -1,1 +1,3 @@
-export type AppThemeName = 'BLUE_GREEN' | 'BLUE_RED' | 'DARK';
+import * as themes from '@/assets/themes';
+
+export type AppThemeName = keyof typeof themes;
