@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 import {View} from 'react-native';
 
-function TaskFormWrapper({children}: PropsWithChildren) {
+function Center({children}: PropsWithChildren) {
   return (
     <View
       style={{
@@ -14,4 +14,4 @@ function TaskFormWrapper({children}: PropsWithChildren) {
   );
 }
 
-export default TaskFormWrapper;
+export default Center;

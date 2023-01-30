@@ -40,4 +40,7 @@ export const TEST_IDS = {
   THEME_BOX_VIEW_PRIMARY_COLOR: 'ThemeBoxViewPrimaryColor',
   THEME_BOX_VIEW_SECONDARY_COLOR: 'ThemeBoxViewSecondaryColor',
   VERTICAL_SEPARATOR: 'VerticalSeparator',
+  ANIMATED_BACKGROUND_CONTENT: 'AnimatedBackgroundContent',
+  FORM_CONTAINER: 'FormContainer',
+  SCREEN_WRAPPER: 'ScreenWrapper',
 };

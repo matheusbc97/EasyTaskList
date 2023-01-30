@@ -1,3 +1,4 @@
+import {TEST_IDS} from '@/shared/constants/testIds';
 import React from 'react';
 import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
@@ -15,7 +16,11 @@ interface Props {
 }
 
 const AnimatedBackgroundContent: React.FC<Props> = ({children, style}) => {
-  return <Content style={style}>{children}</Content>;
+  return (
+    <Content testID={TEST_IDS.ANIMATED_BACKGROUND_CONTENT} style={style}>
+      {children}
+    </Content>
+  );
 };
 
 export default AnimatedBackgroundContent;

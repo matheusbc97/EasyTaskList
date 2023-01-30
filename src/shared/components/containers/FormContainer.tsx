@@ -1,3 +1,4 @@
+import {TEST_IDS} from '@/shared/constants/testIds';
 import React from 'react';
 import {View, ViewProps} from 'react-native';
 
@@ -14,6 +15,7 @@ const FormContainer: React.FC<FormContainerProps> = ({
 }) => {
   return (
     <View
+      testID={TEST_IDS.FORM_CONTAINER}
       style={[
         {
           paddingVertical: 15,
