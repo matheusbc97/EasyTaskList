@@ -60,15 +60,15 @@ describe('TaskListItem Component', () => {
 
     const fakeTaskDone: Task = {
       ...fakeTask,
-      done: true,
+      done: false,
     };
 
-    const {findByTestId} = render(
+    const {queryByTestId} = render(
       <TaskListItem onPress={onPress} task={fakeTaskDone} />,
     );
 
-    const element = await findByTestId(TEST_IDS.TASK_STATUS);
+    const element = queryByTestId(TEST_IDS.TASK_STATUS);
 
-    expect(element).toBeVisible();
+    expect(element).toBe(null);
   });
 });
