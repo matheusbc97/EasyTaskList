@@ -56,32 +56,13 @@ jest.mock('@/shared/components/Toast/toastEventListener', () => {
 
 describe('Toast Component', () => {
   it('Should render a Toast', () => {
-    render(<Toast />);
-  });
-
-  /*it('Should show the toast', async () => {
-    const mockedFun = jest.fn();
-
-    let renderer: any;
-
-    const {findByTestId, rerender} = render(<Toast fun={mockedFun} />);
-
-    await waitFor(() => expect(mockedFun).toHaveBeenCalledTimes(1));
-
-    expect(mockedToastEventListener).toHaveBeenCalledTimes(2);
-
-    rerender(
+    render(
       <SafeAreaProvider>
-        <Toast fun={mockedFun} />
+        <Toast />
       </SafeAreaProvider>,
     );
+  });
 
-    showToast({text: 'Test'});
-
-    const element = await findByTestId(TEST_IDS.TOAST);
-
-    expect(element).not.toBeVisible();
-  });*/
   it('Should show the toast', async () => {
     mockedUseToastOptions.mockReturnValue({
       toastOptions: {

@@ -2,7 +2,7 @@ import useToastOptions, {
   showToast,
 } from '@/shared/components/Toast/hooks/useToastOptions';
 import {ShowToastOptions} from '@/shared/components/Toast/types/ShowToastOptions';
-import {act, renderHook, waitFor} from '@testing-library/react-native';
+import {act, renderHook} from '@testing-library/react-native';
 
 let mockedToastEventListener: jest.Mock<any, any>;
 let mockedShowToast: jest.Mock<any, any>;

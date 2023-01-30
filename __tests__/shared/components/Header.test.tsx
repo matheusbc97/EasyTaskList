@@ -16,6 +16,10 @@ jest.mock('@react-navigation/native', () => {
 });
 
 describe('Header Component', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('Should render an Header', () => {
     render(<Header title="Testing" />);
   });
@@ -57,7 +61,7 @@ describe('Header Component', () => {
 
     fireEvent.press(secondaryHeaderBackButton);
 
-    expect(mockedNavigationGoBack).toHaveBeenCalledTimes(2);
+    expect(mockedNavigationGoBack).toHaveBeenCalledTimes(1);
   });
 
   it('Should fire PrimaryHeader onBackPress', async () => {
