@@ -39,4 +39,5 @@ export const TEST_IDS = {
   TOAST: 'Toast',
   THEME_BOX_VIEW_PRIMARY_COLOR: 'ThemeBoxViewPrimaryColor',
   THEME_BOX_VIEW_SECONDARY_COLOR: 'ThemeBoxViewSecondaryColor',
+  VERTICAL_SEPARATOR: 'VerticalSeparator',
 };

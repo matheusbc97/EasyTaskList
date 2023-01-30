@@ -1,6 +1,7 @@
 import React from 'react';
 import {ViewStyle, StyleProp} from 'react-native';
 import styled from 'styled-components/native';
+import {TEST_IDS} from '../constants/testIds';
 
 const StyledVerticalSeparator = styled.View`
   width: 1px;
@@ -13,7 +14,12 @@ interface VerticalSeparatorProps {
 }
 
 function VerticalSeparator({style}: VerticalSeparatorProps) {
-  return <StyledVerticalSeparator style={style} />;
+  return (
+    <StyledVerticalSeparator
+      testID={TEST_IDS.VERTICAL_SEPARATOR}
+      style={style}
+    />
+  );
 }
 
 export default VerticalSeparator;
