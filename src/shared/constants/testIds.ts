@@ -43,4 +43,5 @@ export const TEST_IDS = {
   ANIMATED_BACKGROUND_CONTENT: 'AnimatedBackgroundContent',
   FORM_CONTAINER: 'FormContainer',
   SCREEN_WRAPPER: 'ScreenWrapper',
+  TASK_STATUS: 'TaskStatus',
 };

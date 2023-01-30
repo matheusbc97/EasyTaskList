@@ -17,10 +17,21 @@ import {
   DateAndMonthText,
   BodyBottom,
 } from './styles';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 interface Props {
   task: Task;
   onPress?(): void;
+}
+
+function TaskStatus() {
+  return (
+    <TaskStatusContainer testID={TEST_IDS.TASK_STATUS}>
+      <Text type="title-inverse" style={{fontSize: 12.5}}>
+        Feita
+      </Text>
+    </TaskStatusContainer>
+  );
 }
 
 const TaskListItem: React.FC<Props> = ({task, onPress}) => {
@@ -44,13 +55,7 @@ const TaskListItem: React.FC<Props> = ({task, onPress}) => {
           <Text type="title">{task.title}</Text>
           <BodyBottom>
             <Text style={{flex: 1}}>{formatDate(task.date, 'time')}</Text>
-            {task.done && (
-              <TaskStatusContainer>
-                <Text type="title-inverse" style={{fontSize: 12.5}}>
-                  Feita
-                </Text>
-              </TaskStatusContainer>
-            )}
+            {task.done && <TaskStatus />}
           </BodyBottom>
         </View>
 
