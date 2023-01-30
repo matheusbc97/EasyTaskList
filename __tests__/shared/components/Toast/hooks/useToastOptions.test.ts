@@ -1,5 +1,6 @@
 import useToastOptions, {
   showToast,
+  useToastOptionsInitialState,
 } from '@/shared/components/Toast/hooks/useToastOptions';
 import {ShowToastOptions} from '@/shared/components/Toast/types/ShowToastOptions';
 import {act, renderHook} from '@testing-library/react-native';
@@ -27,11 +28,11 @@ jest.mock('@/shared/components/Toast/toastEventListener', () => {
 });
 
 describe('useToastOptions hook', () => {
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it('Should be visible', async () => {
+  it('isVisible should be true', async () => {
     const {result} = renderHook(() => useToastOptions());
 
     expect(mockedToastEventListener).toHaveBeenCalledTimes(1);
@@ -41,5 +42,48 @@ describe('useToastOptions hook', () => {
     });
 
     expect(result.current.toastOptions.isVisible).toBe(true);
+  });
+
+  it('Should reset options', async () => {
+    const {result} = renderHook(() => useToastOptions());
+
+    expect(mockedToastEventListener).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      showToast({text: 'test'});
+    });
+
+    expect(result.current.toastOptions.isVisible).toBe(true);
+
+    act(() => {
+      result.current.resetOptions();
+    });
+
+    expect(result.current.toastOptions).toBe(useToastOptionsInitialState);
+    expect(result.current._timeoutRef.current).toBe(null);
+  });
+
+  it('Should have timeout', async () => {
+    const {result} = renderHook(() => useToastOptions());
+
+    expect(mockedToastEventListener).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      showToast({text: 'test', remain: false});
+    });
+
+    expect(result.current._timeoutRef.current).toBeTruthy();
+  });
+
+  it('Should not have timeout', async () => {
+    const {result} = renderHook(() => useToastOptions());
+
+    expect(mockedToastEventListener).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      showToast({text: 'test', remain: true});
+    });
+
+    expect(result.current._timeoutRef.current).toBe(null);
   });
 });

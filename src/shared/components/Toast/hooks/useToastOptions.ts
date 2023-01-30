@@ -1,35 +1,43 @@
-import {useState, useRef, useCallback, useLayoutEffect} from 'react';
+import {useState, useRef, useCallback, useEffect} from 'react';
 
 import {ShowToastOptions, ToastOptions} from '../types/ShowToastOptions';
 import {toastEventListener, showToast} from '../toastEventListener';
 
 export {showToast};
 
-const initialState: ToastOptions = {
+export const useToastOptionsInitialState: ToastOptions = {
   isVisible: false,
   text: '',
   type: 'normal',
 };
 
 export default function useToastOptions() {
-  const [toastOptions, setToastOptions] = useState<ToastOptions>(initialState);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [toastOptions, setToastOptions] = useState<ToastOptions>(
+    useToastOptionsInitialState,
+  );
+  const _timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  console.log('_timeoutRef', _timeoutRef.current);
 
   const clearTimeoutIfExists = useCallback(() => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
+    if (_timeoutRef.current) {
+      clearTimeout(_timeoutRef.current);
+      _timeoutRef.current = null;
     }
   }, []);
 
-  useLayoutEffect(() => {
+  const resetOptions = useCallback(() => {
+    clearTimeoutIfExists();
+    setToastOptions(useToastOptionsInitialState);
+  }, [clearTimeoutIfExists]);
+
+  useEffect(() => {
     const emitter = toastEventListener((data: ShowToastOptions) => {
       clearTimeoutIfExists();
 
-      const timeout = data.remain
-        ? null
-        : setTimeout(() => setToastOptions(initialState), 4000);
+      if (!data.remain) {
+        _timeoutRef.current = setTimeout(resetOptions, 4000);
+      }
 
-      timeoutRef.current = timeout;
       setToastOptions({
         ...data,
         isVisible: true,
@@ -39,13 +47,7 @@ export default function useToastOptions() {
     return () => {
       emitter.remove();
     };
-  }, [clearTimeoutIfExists]);
+  }, [resetOptions, clearTimeoutIfExists]);
 
-  const resetOptions = () => {
-    clearTimeoutIfExists();
-    setToastOptions(initialState);
-    toastOptions.buttonOnPress && toastOptions.buttonOnPress();
-  };
-
-  return {toastOptions, resetOptions};
+  return {toastOptions, resetOptions, _timeoutRef};
 }

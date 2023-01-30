@@ -5,12 +5,10 @@ export interface ToastOptions {
   text: string;
   isVisible: boolean;
   buttonLabel?: string;
-  buttonOnPress?(): void;
 }
 
 export interface ShowToastOptions
   extends Omit<ToastOptions, 'isVisible' | 'idTimeout'> {
   remain?: boolean;
   buttonLabel?: string;
-  buttonOnPress?(): void;
 }

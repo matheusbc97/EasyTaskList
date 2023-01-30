@@ -2,6 +2,7 @@ import {Toast} from '@/shared/components';
 import {render, waitFor} from '@testing-library/react-native';
 import {TEST_IDS} from '@/shared/constants/testIds';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {ToastOptions} from '@/shared/components/Toast/types/ShowToastOptions';
 
 jest.mock(
   'react-native-safe-area-context',
@@ -28,6 +29,14 @@ jest.mock('@/shared/components/Toast/hooks/useToastOptions', () => {
 
 describe('Toast Component', () => {
   it('Should render a Toast', () => {
+    mockedUseToastOptions.mockReturnValue({
+      toastOptions: {
+        isVisible: true,
+        text: 'test',
+      },
+      resetOptions: jest.fn(),
+    });
+
     render(
       <SafeAreaProvider>
         <Toast />
@@ -55,5 +64,25 @@ describe('Toast Component', () => {
     const element = await findByTestId(TEST_IDS.TOAST);
 
     await waitFor(() => expect(element).toBeVisible());
+  });
+
+  it('Should not show the toast', async () => {
+    mockedUseToastOptions.mockReturnValue({
+      toastOptions: {
+        isVisible: false,
+        text: 'test',
+      } as ToastOptions,
+      resetOptions: jest.fn(),
+    });
+
+    const {queryByTestId} = render(
+      <SafeAreaProvider>
+        <Toast />
+      </SafeAreaProvider>,
+    );
+
+    const element = queryByTestId(TEST_IDS.TOAST);
+
+    expect(element).toBe(null);
   });
 });

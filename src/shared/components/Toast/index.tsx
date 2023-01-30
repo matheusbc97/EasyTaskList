@@ -8,17 +8,13 @@ import useToastOptions from './hooks/useToastOptions';
 
 export {showToast};
 
-const _getToastColor = (type: ToastType) => {
-  switch (type) {
-    case 'alert':
-      return '#ffa000';
-    case 'danger':
-      return '#f44336';
-    case 'success':
-      return '#00c853';
-    default:
-      return '#333';
-  }
+type ToastDictionary = {[key in ToastType]: string};
+
+const TOAST_COLORS: ToastDictionary = {
+  alert: '#ffa000',
+  danger: '#f44336',
+  success: '#00c853',
+  normal: '#333',
 };
 
 const Toast = () => {
@@ -38,9 +34,8 @@ const Toast = () => {
         },
       }}
       style={{
-        backgroundColor: _getToastColor(
-          toastOptions.type ? toastOptions.type : 'normal',
-        ),
+        backgroundColor:
+          TOAST_COLORS[toastOptions.type ? toastOptions.type : 'normal'],
       }}
       visible={true}
       onDismiss={() => {}}
