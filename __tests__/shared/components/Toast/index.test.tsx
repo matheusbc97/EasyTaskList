@@ -1,12 +1,7 @@
 import {Toast} from '@/shared/components';
-import {act, render, waitFor} from '@testing-library/react-native';
+import {render, waitFor} from '@testing-library/react-native';
 import {TEST_IDS} from '@/shared/constants/testIds';
-import {showToast} from '@/shared/components/Toast';
-import {ShowToastOptions} from '@/shared/components/Toast/types/ShowToastOptions';
-import ReactTestRenderer from 'react-test-renderer';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-
-import useToastOptions from '@/shared/components/Toast/hooks/useToastOptions';
 
 jest.mock(
   'react-native-safe-area-context',
@@ -30,29 +25,6 @@ jest.mock('@/shared/components/Toast/hooks/useToastOptions', () => {
 
   return mockedUseToastOptions;
 });
-
-/*
-let mockedToastEventListener: jest.Mock<any, any>;
-let mockedShowToast: jest.Mock<any, any>;
-let mockListenerFunction: Function;
-
-type ToastListener = (data: ShowToastOptions) => void;
-
-jest.mock('@/shared/components/Toast/toastEventListener', () => {
-  mockedToastEventListener = jest.fn((listener: ToastListener) => {
-    mockListenerFunction = listener;
-    return {remove: () => {}};
-  });
-
-  mockedShowToast = jest.fn((data: ShowToastOptions) => {
-    mockListenerFunction?.(data);
-  });
-
-  return {
-    toastEventListener: mockedToastEventListener,
-    showToast: mockedShowToast,
-  };
-});*/
 
 describe('Toast Component', () => {
   it('Should render a Toast', () => {

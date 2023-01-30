@@ -17,7 +17,7 @@ const ThemeBox: React.FC<ThemeBoxProps> = ({theme, onPress, testID}) => {
   const appTheme = themes[theme];
 
   return (
-    <Button testID={testID} onPress={() => onPress && onPress(appTheme)}>
+    <Button testID={testID} onPress={() => onPress?.(appTheme)}>
       <View style={styles.container}>
         <View
           testID={TEST_IDS.THEME_BOX_VIEW_PRIMARY_COLOR}

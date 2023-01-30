@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
 
 import {ThemeBox} from '@/shared/components';
 import {TEST_IDS} from '@/shared/constants/testIds';
@@ -12,7 +12,7 @@ describe('ThemeBox Component', () => {
     render(<ThemeBox theme={themeName} />);
   });
 
-  it('Should have text "Testing"', async () => {
+  it('Should have the right colors', async () => {
     const themeName = Object.keys(themes)[0] as AppThemeName;
 
     const theme = themes[themeName];
@@ -34,5 +34,21 @@ describe('ThemeBox Component', () => {
     expect(secondaryColorView).toHaveStyle({
       backgroundColor: theme.secondaryColor,
     });
+  });
+
+  it('Should fire prop onPress', async () => {
+    const themeName = Object.keys(themes)[0] as AppThemeName;
+
+    const onPress = jest.fn();
+
+    const {findByTestId} = render(
+      <ThemeBox theme={themeName} onPress={onPress} />,
+    );
+
+    const element = await findByTestId(TEST_IDS.BUTTON_BASE);
+
+    fireEvent.press(element);
+
+    expect(onPress).toHaveBeenCalledTimes(1);
   });
 });
