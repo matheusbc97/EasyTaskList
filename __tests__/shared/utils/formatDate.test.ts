@@ -7,6 +7,10 @@ describe('formatDate Util', () => {
     const dateFormatted = formatDate(date, 'date');
 
     expect(dateFormatted).toBe('01/05/2023');
+
+    const dateFormattedDefault = formatDate(date);
+
+    expect(dateFormattedDefault).toBe('01/05/2023');
   });
 
   it('Should format time as 04:10h', () => {
@@ -31,5 +35,11 @@ describe('formatDate Util', () => {
     const dateFormatted = formatDate(date, 'dateOfMonth');
 
     expect(dateFormatted).toBe('01 mai');
+  });
+
+  it('Should return empty when date is undefined', () => {
+    const dateFormatted = formatDate(undefined);
+
+    expect(dateFormatted).toBe('');
   });
 });
