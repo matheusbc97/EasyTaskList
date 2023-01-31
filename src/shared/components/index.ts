@@ -16,7 +16,6 @@ import Header from './Header';
 import OutlineButton, {OutlineButtonProps} from './buttons/OutlineButton';
 import AnimatedBackground from './containers/AnimatedBackground';
 import Toast from './Toast';
-import FullScreenLoader from './loadings/FullScreenLoader';
 import CategoryListItem from './list-items/CategoryListItem';
 import FloatingActionButton from './buttons/FloatingActionButton';
 import BackButton from './buttons/BackButton';
@@ -68,7 +67,6 @@ export {
   OutlineButton,
   AnimatedBackground,
   Toast,
-  FullScreenLoader,
   CategoryListItem,
   FloatingActionButton,
   BackButton,
