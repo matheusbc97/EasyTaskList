@@ -1,6 +1,5 @@
 //import {Toast} from 'native-base';
 
-import {fullScreenLoader} from '@/shared/components/loadings/FullScreenLoader';
 import {showToast} from '@/shared/components/Toast';
 
 const getErrorMessage = (code: string) => {
@@ -40,7 +39,6 @@ const getErrorMessage = (code: string) => {
  * @param {Object} error Objeto de retorno de uma requisição
  */
 export function handleErrorMessage(error: any) {
-  fullScreenLoader.hideLoader();
   console.log('error', error);
   console.log('Message', error.message);
   console.log('code', error.code);
