@@ -1,3 +1,4 @@
+import {TEST_IDS} from '@/shared/constants/testIds';
 import {expect} from 'detox';
 import * as themes from '../src/assets/themes';
 
@@ -44,7 +45,7 @@ describe('Create User', () => {
   });
 
   it('should choose avatar', async () => {
-    const avatarId = `AvatarGridAvatar${randomIntFromInterval(0, 7)}`;
+    const avatarId = TEST_IDS.AVATAR_GRID_AVATAR(randomIntFromInterval(0, 7));
     await element(by.id(avatarId)).tap();
   });
 

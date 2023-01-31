@@ -1,3 +1,5 @@
+import {AppThemeName} from '../models';
+
 export const TEST_IDS = {
   CREATE_NEW_USER_BUTTON: 'CreateNewUserButton',
   CHOOSE_NAME_ADVANCE_BUTTON: 'ChooseNameAdvanceButton',
@@ -9,8 +11,7 @@ export const TEST_IDS = {
   WELCOME_SCREEN_WRAPPER: 'WelcomeScreenWrapper',
   NEW_PASSWORD_INPUT: 'NewPasswordInput',
   TEXT_BASE: 'text-base',
-  THEME_BOX_BLUE_GREEN: 'ThemeBox-BLUE_GREEN',
-  THEME_BOX_BLUE_RED: 'ThemeBox-BLUE_RED',
+  THEME_BOX: (key: AppThemeName) => `ThemeBox-${key}`,
   FONT_AWESOME_ICON_5: 'FontAwesomeIcon5',
   NAVIGATE_BUTTON_TITLE: 'NavigateButton-title',
   TEXT_BUTTON_ICON: 'TextButtonIcon',
@@ -50,4 +51,5 @@ export const TEST_IDS = {
   TEST_INPUT_CONTAINER_VIEW: 'TestInputContainerView',
   ENHANCED_INPUT_CONTAINER: 'EnhancedInputContainer',
   ENHANCED_INPUT_ERROR: 'EnhancedInputError',
+  AVATAR_GRID_AVATAR: (index: number) => `AvatarGridAvatar${index}`,
 };

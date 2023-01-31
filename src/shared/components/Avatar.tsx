@@ -15,7 +15,7 @@ import {
 } from '../../assets/images';
 import {TEST_IDS} from '../constants/testIds';
 
-const avatarSources = [
+export const avatarSources = [
   AVATAR,
   AVATAR_2,
   AVATAR_3,

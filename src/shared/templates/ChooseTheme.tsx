@@ -26,12 +26,12 @@ function ChooseTheme({onThemePress, style}: ChooseThemeProps) {
           justifyContent: 'space-between',
         }}>
         <ThemeBox
-          testID={TEST_IDS.THEME_BOX_BLUE_GREEN}
+          testID={TEST_IDS.THEME_BOX('BLUE_GREEN')}
           theme="BLUE_GREEN"
           onPress={onThemePress}
         />
         <ThemeBox
-          testID={TEST_IDS.THEME_BOX_BLUE_RED}
+          testID={TEST_IDS.THEME_BOX('BLUE_RED')}
           theme="BLUE_RED"
           onPress={onThemePress}
         />
