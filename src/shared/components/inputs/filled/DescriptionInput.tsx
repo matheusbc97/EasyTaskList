@@ -1,5 +1,5 @@
 import React from 'react';
-import TextInput, {AppTextInputProps} from '../UnformInput';
+import TextInput, {AppTextInputProps} from '../EnhancedInput';
 import {useTranslation} from '@/shared/hooks';
 
 export default function DescriptionInput({

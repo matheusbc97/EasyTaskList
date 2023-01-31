@@ -1,5 +1,5 @@
 import React from 'react';
-import UnformInput, {AppTextInputProps} from '../UnformInput';
+import UnformInput, {AppTextInputProps} from '../EnhancedInput';
 import {useTranslation} from '@/shared/hooks';
 import {TEST_IDS} from '@/shared/constants/testIds';
 

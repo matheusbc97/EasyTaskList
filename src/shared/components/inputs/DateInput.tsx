@@ -5,7 +5,7 @@ import {useTranslation} from '@/shared/hooks';
 import formatDate from '@/shared/utils/formatDate';
 import {FormControl} from '@/shared/models';
 
-import TextInput from './UnformInput';
+import TextInput from './EnhancedInput';
 
 interface DateInputProps {
   control: FormControl;

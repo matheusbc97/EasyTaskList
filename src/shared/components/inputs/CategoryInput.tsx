@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/core';
 import {useTranslation} from '@/shared/hooks';
 import {Category, FormControl} from '@/shared/models';
 
-import TextInput from './UnformInput';
+import TextInput from './EnhancedInput';
 
 interface Props {
   onCategoryChange: (category: Category) => void;

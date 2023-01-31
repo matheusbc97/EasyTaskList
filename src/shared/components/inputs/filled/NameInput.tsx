@@ -2,7 +2,7 @@ import React from 'react';
 import {useTranslation} from '@/shared/hooks';
 import {TEST_IDS} from '@/shared/constants/testIds';
 
-import TextInput, {AppTextInputProps} from '../UnformInput';
+import TextInput, {AppTextInputProps} from '../EnhancedInput';
 
 export default function NameInput({
   label = '',

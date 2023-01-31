@@ -3,7 +3,7 @@ import ScreenWrapper from './containers/ScreenWrapper';
 import Text, {TextProps} from './Text';
 import Shadow from './Shadow';
 import TextInput from './inputs/TextInput';
-import UnformInput from './inputs/UnformInput';
+import UnformInput from './inputs/EnhancedInput';
 import EmptyListText from './EmptyListText';
 import FlatListWithFetchIndicator, {
   FlatListWithFetchIndicatorProps,

@@ -3,15 +3,16 @@ import {View, TextInputProps, StyleSheet, ViewStyle} from 'react-native';
 import {Controller} from 'react-hook-form';
 
 import {FormControl} from '@/shared/models';
+import {validateField} from '@/shared/utils/validations';
 
 import TextInput from './TextInput';
 import Text from '../Text';
-import {validateField} from '@/shared/utils/validations';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 export interface AppTextInputProps extends TextInputProps {
   label?: string;
   containerStyle?: ViewStyle;
-  mask?(value: string, oldValue: string): string;
+  mask?(value: string): string;
   disabled?: boolean;
   mode?: 'flat' | 'outlined';
   button?: boolean;
@@ -25,22 +26,11 @@ export interface UnformInputProps extends AppTextInputProps {
   name: string;
 }
 
-const FloatingLabelInput = (
-  {
-    label = '',
-    containerStyle,
-    style,
-    name,
-    mask,
-    button = false,
-    onPress,
-    defaultValue = '',
-    control,
-    ...rest
-  }: UnformInputProps,
+const EnhancedInput = (
+  {containerStyle, name, mask, control, ...rest}: UnformInputProps,
   ref: any,
 ) => {
-  const inputElementRef = useRef<any>({value: defaultValue});
+  const inputElementRef = useRef<any>(null);
 
   useImperativeHandle(
     ref,
@@ -53,7 +43,9 @@ const FloatingLabelInput = (
   );
 
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View
+      testID={TEST_IDS.ENHANCED_INPUT_CONTAINER}
+      style={[styles.container, containerStyle]}>
       <Controller
         control={control}
         rules={{
@@ -63,15 +55,11 @@ const FloatingLabelInput = (
         render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
           <>
             <TextInput
-              onPress={onPress}
-              button={button}
-              label={label}
               error={Boolean(error?.type)}
               onBlur={onBlur}
               onChangeText={onChange}
-              value={mask ? mask(value, '') : value}
+              value={mask ? mask(value) : value}
               {...rest}
-              style={style}
             />
             <View style={styles.errorWrapper}>
               {Boolean(error) && (
@@ -86,7 +74,7 @@ const FloatingLabelInput = (
   );
 };
 
-export default forwardRef(FloatingLabelInput);
+export default forwardRef(EnhancedInput);
 
 const styles = StyleSheet.create({
   container: {
