@@ -49,7 +49,7 @@ const EnhancedInput = (
       <Controller
         control={control}
         rules={{
-          required: false,
+          required: true,
           validate: value => validateField(name, value),
         }}
         render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
@@ -63,7 +63,11 @@ const EnhancedInput = (
             />
             <View style={styles.errorWrapper}>
               {Boolean(error) && (
-                <Text style={styles.error}>{error?.message}</Text>
+                <Text
+                  testID={TEST_IDS.ENHANCED_INPUT_ERROR}
+                  style={styles.error}>
+                  {error?.message}
+                </Text>
               )}
             </View>
           </>

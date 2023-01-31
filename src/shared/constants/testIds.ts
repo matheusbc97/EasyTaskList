@@ -49,4 +49,5 @@ export const TEST_IDS = {
   TEXT_INPUT_ICON: 'TextInputIcon',
   TEST_INPUT_CONTAINER_VIEW: 'TestInputContainerView',
   ENHANCED_INPUT_CONTAINER: 'EnhancedInputContainer',
+  ENHANCED_INPUT_ERROR: 'EnhancedInputError',
 };

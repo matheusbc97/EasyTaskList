@@ -1,4 +1,3 @@
-import {TextInput} from '@/shared/components';
 import {
   act,
   fireEvent,
@@ -73,10 +72,10 @@ describe('EnhancedInput Component', () => {
   });
 
   it('Value should be default value', async () => {
-    const textDefaultValue = 'test';
+    const formKey = 'test';
 
     const defaultValues = {
-      test: textDefaultValue,
+      [formKey]: 'testing',
     };
 
     const {result} = renderHook(() =>
@@ -93,9 +92,9 @@ describe('EnhancedInput Component', () => {
       />,
     );
 
-    const value = result.current.getValues(textDefaultValue);
+    const value = result.current.getValues(formKey);
 
-    expect(value).toBe(textDefaultValue);
+    expect(value).toBe(defaultValues.test);
 
     const element = await findByTestId(TEST_IDS.TEXT_INPUT_BASE);
 
@@ -121,5 +120,38 @@ describe('EnhancedInput Component', () => {
     const element = await findByTestId(TEST_IDS.ENHANCED_INPUT_CONTAINER);
 
     expect(element).toHaveStyle(containerStyle);
+  });
+
+  it('Should show error', async () => {
+    const formKey = 'test';
+
+    const defaultValues = {
+      [formKey]: '',
+    };
+
+    const {result} = renderHook(() =>
+      useForm({
+        defaultValues,
+      }),
+    );
+
+    const {findByTestId} = render(
+      <EnhancedInput
+        name="test"
+        control={result.current.control}
+        label="Testing"
+      />,
+    );
+
+    act(() => {
+      result.current.setError(formKey, {
+        type: 'required',
+        message: 'This is required',
+      });
+    });
+
+    const element = await findByTestId(TEST_IDS.ENHANCED_INPUT_ERROR);
+
+    expect(element).toBeVisible();
   });
 });
