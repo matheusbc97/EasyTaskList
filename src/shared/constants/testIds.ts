@@ -44,4 +44,8 @@ export const TEST_IDS = {
   FORM_CONTAINER: 'FormContainer',
   SCREEN_WRAPPER: 'ScreenWrapper',
   TASK_STATUS: 'TaskStatus',
+  TEXT_INPUT_BASE: 'TextInputBase',
+  TEXT_INPUT_LABEL: 'TextInputLabel',
+  TEXT_INPUT_ICON: 'TextInputIcon',
+  TEST_INPUT_CONTAINER_VIEW: 'TestInputContainerView',
 };

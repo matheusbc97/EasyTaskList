@@ -17,11 +17,11 @@ import {
   View,
   Platform,
 } from 'react-native';
-import {useSelector} from 'react-redux';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-import {selectAppTheme} from '../../../store/configs';
 import Button from '../buttons/Button';
+import {useAppTheme} from '@/shared/hooks';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 const AnimatedFontAwesomeIcon =
   Animated.createAnimatedComponent(FontAwesomeIcon);
@@ -34,6 +34,9 @@ interface TextInputProps extends RNTextInputProps {
   onPress?(): void;
   inputRef?: any;
 }
+
+export const textInputErrorColor = '#d50000';
+export const textInputNoErrorColor = '#57d491';
 
 const TextInput = (
   {
@@ -51,7 +54,7 @@ const TextInput = (
   }: TextInputProps,
   ref: any,
 ) => {
-  const appTheme = useSelector(selectAppTheme);
+  const appTheme = useAppTheme();
   const [labelLeftOffset, setLabelLeftOffset] = useState(0);
 
   const defaultValue = useRef(value).current;
@@ -79,7 +82,11 @@ const TextInput = (
 
   const borderColor = isFocused.interpolate({
     inputRange: [0, 1, 2],
-    outputRange: ['#57d491', appTheme.primaryColor, '#d50000'],
+    outputRange: [
+      textInputErrorColor,
+      appTheme.primaryColor,
+      textInputNoErrorColor,
+    ],
   });
 
   const scale = labelIsOnTop.interpolate({
@@ -123,7 +130,9 @@ const TextInput = (
 
   return (
     <Button disabled={!button} onPress={onPress}>
-      <Animated.View style={[styles.container, {borderColor}]}>
+      <Animated.View
+        testID={TEST_IDS.TEST_INPUT_CONTAINER_VIEW}
+        style={[styles.container, {borderColor}]}>
         <Animated.View
           style={[
             styles.textContainer,
@@ -133,6 +142,7 @@ const TextInput = (
             },
           ]}>
           <Animated.Text
+            testID={TEST_IDS.TEXT_INPUT_LABEL}
             onLayout={(event: any) => {
               var {width} = event.nativeEvent.layout;
               if (labelLeftOffset === 0) {
@@ -152,6 +162,7 @@ const TextInput = (
         </Animated.View>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <RNTextInput
+            testID={TEST_IDS.TEXT_INPUT_BASE}
             pointerEvents={button ? 'none' : 'auto'}
             editable={!button}
             defaultValue={defaultValue}
@@ -184,6 +195,7 @@ const TextInput = (
           />
           {button && (
             <AnimatedFontAwesomeIcon
+              testID={TEST_IDS.TEXT_INPUT_ICON}
               name="search"
               size={20}
               style={{paddingHorizontal: 15, color: borderColor}}

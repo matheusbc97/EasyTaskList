@@ -16,7 +16,7 @@ jest.mock('@react-navigation/native', () => {
 });
 
 describe('Header Component', () => {
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 

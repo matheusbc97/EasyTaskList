@@ -5,6 +5,10 @@ import {TEST_IDS} from '@/shared/constants/testIds';
 jest.mock('@/shared/hooks/data/useAppTheme');
 
 describe('EmptyListText Component', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('Should render an EmptyListText', () => {
     render(<EmptyListText text="Testing" />);
   });

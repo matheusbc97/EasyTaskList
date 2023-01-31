@@ -3,8 +3,12 @@ import {render} from '@testing-library/react-native';
 import {TEST_IDS} from '@/shared/constants/testIds';
 import {TextStyle} from 'react-native';
 
-describe('Separator Component', () => {
-  it('Should render a Separator', () => {
+describe('Shadow Component', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('Should render a Shadow', () => {
     render(<Shadow />);
   });
 
