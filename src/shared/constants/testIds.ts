@@ -56,4 +56,10 @@ export const TEST_IDS = {
     'ChooseCategoryColorModalCancelButton',
   CATEGORY_COLOR_BOX_BUTTON: (index: number) =>
     `CategoryColorBoxButton-${index}`,
+  CHOOSE_CATEGORY_ICON_MODAL_CONTAINER: 'ChooseCategoryIconModalContainer',
+  CHOOSE_CATEGORY_ICON_MODAL_CANCEL_BUTTON:
+    'ChooseCategoryIconModalCancelButton',
+  CHOOSE_CATEGORY_ICON_MODAL_ICON_BUTTON: (index: number) =>
+    `ChooseCategoryIconModalIconButton-${index}`,
+  CHOOSE_CATEGORY_COLOR_MODAL_CONTAINER: 'ChooseCategoryColorModalContainer',
 };

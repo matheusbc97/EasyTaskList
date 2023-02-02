@@ -21,6 +21,38 @@ describe('ChooseCategoryColorModal Component', () => {
     );
   });
 
+  it('Should be visible', async () => {
+    const {findByTestId} = render(
+      <ChooseCategoryColorModal
+        isVisible={true}
+        onBackButtonPress={() => {}}
+        onColorPress={() => {}}
+      />,
+    );
+
+    const element = await findByTestId(
+      TEST_IDS.CHOOSE_CATEGORY_COLOR_MODAL_CONTAINER,
+    );
+
+    expect(element).toBeVisible();
+  });
+
+  it('Should not be visible', () => {
+    const {queryByTestId} = render(
+      <ChooseCategoryColorModal
+        isVisible={false}
+        onBackButtonPress={() => {}}
+        onColorPress={() => {}}
+      />,
+    );
+
+    const element = queryByTestId(
+      TEST_IDS.CHOOSE_CATEGORY_COLOR_MODAL_CONTAINER,
+    );
+
+    expect(element).toBe(null);
+  });
+
   it('Should fire onBackButtonPress', async () => {
     const onBackButtonPress = jest.fn();
 

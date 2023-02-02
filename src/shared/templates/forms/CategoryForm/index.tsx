@@ -95,7 +95,7 @@ function CategoryForm(
               {translation('SELECT_COLOR')}
             </Text>
           </SelectColorOrIconButton>
-          <SelectColorOrIconButton onPress={colorModalMethods.open}>
+          <SelectColorOrIconButton onPress={iconModalMethods.open}>
             <SelectIconContainer>
               {iconIndex !== -1 && (
                 <FontAwesome5Icon

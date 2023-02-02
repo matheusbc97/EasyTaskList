@@ -30,7 +30,7 @@ const ChooseCategoryColorModal: React.FC<Props> = ({
 
   return (
     <Modal isVisible={isVisible} onBackButtonPress={onBackButtonPress}>
-      <Container>
+      <Container testID={TEST_IDS.CHOOSE_CATEGORY_COLOR_MODAL_CONTAINER}>
         <Text
           type="title-big"
           primaryColor

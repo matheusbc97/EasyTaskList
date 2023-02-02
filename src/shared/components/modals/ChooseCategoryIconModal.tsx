@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import Modal from 'react-native-modal';
@@ -7,6 +7,8 @@ import categoryIconNames from '@/assets/categoryIconNames';
 import {Text, Button} from '@/shared/components';
 
 import {useTranslation} from '@/shared/hooks';
+import {FlatList, View} from 'react-native';
+import {TEST_IDS} from '@/shared/constants/testIds';
 
 const Title = styled(Text)`
   align-self: center;
@@ -26,12 +28,6 @@ const IconButton = styled(Button)`
   align-items: center;
 `;
 
-const Row = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 5px 0 5px;
-`;
-
 interface Props {
   isVisible: boolean;
   onIconPress(iconIndex: number): void;
@@ -45,41 +41,29 @@ const ChooseCategoryIconModal: React.FC<Props> = ({
 }) => {
   const {translation} = useTranslation();
 
-  const getIcons = useCallback(() => {
-    const components: any[] = [];
-
-    for (let index = 0; index < categoryIconNames.length; index += 5) {
-      const subComponents: any[] = [];
-
-      for (let j = 0; j < 5; j++) {
-        if (index + j < categoryIconNames.length) {
-          const categoryName = categoryIconNames[index + j];
-          subComponents.push(
-            <IconButton
-              key={categoryName}
-              onPress={() => {
-                onIconPress(index + j);
-              }}>
-              <FontAwesomeIcon name={categoryName} size={25} />
-            </IconButton>,
-          );
-        }
-      }
-
-      components.push(<Row key={`icon-row-${index}`}>{subComponents}</Row>);
-    }
-
-    return components;
-  }, [onIconPress]);
-
   return (
     <Modal isVisible={isVisible} onBackButtonPress={onBackButtonPress}>
-      <Container>
+      <Container testID={TEST_IDS.CHOOSE_CATEGORY_ICON_MODAL_CONTAINER}>
         <Title type="title-big" primaryColor>
           {translation('SELECT_ICON')}
         </Title>
-        {getIcons()}
-        <Button onPress={onBackButtonPress}>
+        <FlatList
+          numColumns={5}
+          data={categoryIconNames}
+          renderItem={({item: categoryIconName, index}) => (
+            <View style={{flex: 0.2, alignItems: 'center'}}>
+              <IconButton
+                testID={TEST_IDS.CHOOSE_CATEGORY_ICON_MODAL_ICON_BUTTON(index)}
+                key={categoryIconName}
+                onPress={() => onIconPress(index)}>
+                <FontAwesomeIcon name={categoryIconName} size={25} />
+              </IconButton>
+            </View>
+          )}
+        />
+        <Button
+          testID={TEST_IDS.CHOOSE_CATEGORY_ICON_MODAL_CANCEL_BUTTON}
+          onPress={onBackButtonPress}>
           <Text
             type="title-big"
             secondaryColor
