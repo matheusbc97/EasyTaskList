@@ -1,7 +1,6 @@
 import ChooseTheme from '@/shared/templates/ChooseTheme';
 import {fireEvent, render} from '@testing-library/react-native';
 import {TEST_IDS} from '@/shared/constants/testIds';
-import {avatarSources} from '@/shared/components/Avatar';
 import * as themes from '@/assets/themes';
 import {AppThemeName} from '@/shared/models';
 

@@ -49,6 +49,7 @@ import EditButton from './buttons/filled/text-buttons/EditButton';
 import DeleteButton from './buttons/filled/text-buttons/DeleteButton';
 import Timer, {TimerHandles} from './Timer';
 export {default as CategoryColorBox} from './CategoryColorBox';
+import ChooseCategoryColorModal from './modals/ChooseCategoryColorModal';
 
 export {
   Avatar,
@@ -100,6 +101,7 @@ export {
   DeleteButton,
   Timer,
   TimerHandles,
+  ChooseCategoryColorModal,
 };
 
 export type {TextProps, FlatListWithFetchIndicatorProps, OutlineButtonProps};

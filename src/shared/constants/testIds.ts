@@ -52,4 +52,8 @@ export const TEST_IDS = {
   ENHANCED_INPUT_CONTAINER: 'EnhancedInputContainer',
   ENHANCED_INPUT_ERROR: 'EnhancedInputError',
   AVATAR_GRID_AVATAR: (index: number) => `AvatarGridAvatar${index}`,
+  CHOOSE_CATEGORY_COLOR_MODAL_CANCEL_BUTTON:
+    'ChooseCategoryColorModalCancelButton',
+  CATEGORY_COLOR_BOX_BUTTON: (index: number) =>
+    `CategoryColorBoxButton-${index}`,
 };

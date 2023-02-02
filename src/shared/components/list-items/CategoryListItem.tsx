@@ -47,7 +47,6 @@ const CategoryListItem: React.FC<Props> = ({
           categoryColors[category.colorIndex].color2,
         ]}
         style={{
-          //backgroundColor: '#34cbb6',
           justifyContent: 'center',
           alignItems: 'center',
           height: '100%',
