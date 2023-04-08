@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
-import ErrorPage from './pages/ErrorPage';
+import React from 'react';
+import ErrorPage from './pages/shared/ErrorPage';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
