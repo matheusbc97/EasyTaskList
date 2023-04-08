@@ -6,6 +6,8 @@ import {RouteProp} from '@react-navigation/native';
 import {ScreenWrapper, Text, NavigateButton} from '@/shared/components';
 import {AuthenticatedStackParams} from '@/navigation/types';
 import {useTranslation} from '@/shared/hooks';
+import {useDispatch} from 'react-redux';
+import {setIsLogged} from '@/store/configs';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'BottomNavigation'>;
@@ -14,6 +16,7 @@ interface Props {
 
 export default function MorePage({navigation}: Props) {
   const {translation} = useTranslation();
+  const dispatch = useDispatch();
 
   return (
     <ScreenWrapper>
@@ -60,6 +63,12 @@ export default function MorePage({navigation}: Props) {
         iconName="info-circle"
         type="FontAwesome5"
         onPress={() => navigation.navigate('About')}
+      />
+      <NavigateButton
+        title={translation('LOG_OUT')}
+        iconName="sign-out"
+        type="FontAwesome"
+        onPress={() => dispatch(setIsLogged(false))}
       />
     </ScreenWrapper>
   );
