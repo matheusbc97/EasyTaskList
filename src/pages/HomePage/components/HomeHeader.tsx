@@ -3,18 +3,15 @@ import {View} from 'react-native';
 
 import {Avatar, Text} from '@/shared/components';
 import {useFormatDate, useTranslation} from '@/shared/hooks';
-import {User} from '@/shared/models';
 
 import styles from '../styles';
 import {TEST_IDS} from '@/shared/constants/testIds';
+import useGetUser from '@/shared/hooks/data/useGetUser';
 
-interface HomeHeaderProps {
-  user: User | null;
-}
-
-const HomeHeader: React.FC<HomeHeaderProps> = ({user}) => {
+const HomeHeader: React.FC = () => {
   const formatDate = useFormatDate();
   const {translation} = useTranslation();
+  const user = useGetUser();
 
   if (!user) {
     return null;

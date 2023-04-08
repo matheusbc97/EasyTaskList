@@ -1,31 +1,12 @@
 import React from 'react';
-import {View, FlatList} from 'react-native';
-import {StackNavigationProp} from '@react-navigation/stack';
+import {FlatList} from 'react-native';
 
-import {
-  ScreenWrapper,
-  CreateNewTaskButton,
-  Section,
-  Separator,
-} from '@/shared/components';
-import {useTranslation} from '@/shared/hooks';
-import {AuthenticatedStackParams} from '@/navigation/types';
-import useGetUser from '@/shared/hooks/data/useGetUser';
-import TasksList from '@/shared/templates/lists/TaskList';
+import {ScreenWrapper} from '@/shared/components';
 
-import CategoriesList from './templates/CategoriesList';
 import HomeHeader from './components/HomeHeader';
-import {useQueryCategories} from '../../shared/hooks/data/useGetCategories';
-import {useTaskNotDone} from '@/shared/hooks';
-
-type TaskListNavigationProp = StackNavigationProp<
-  AuthenticatedStackParams,
-  'BottomNavigation'
->;
-
-interface Props {
-  navigation: TaskListNavigationProp;
-}
+import TasksListSection from './components/TasksListSection';
+import CategoryListSection from './components/CategoryListSection';
+import HomeFooter from './components/HomeFooter';
 
 // eslint-disable-next-line no-shadow
 enum HomeItemEnum {
@@ -40,19 +21,7 @@ const HomeListData = [
   HomeItemEnum.TASK_LIST,
 ];
 
-function HomePage({navigation}: Props) {
-  const {translation} = useTranslation();
-
-  const user = useGetUser();
-  const {categories, hasError, isLoading} = useQueryCategories();
-
-  const {
-    tasksNotDone,
-    hasError: hasTasksError,
-    isLoading: isTasksLoading,
-    refetchTasksNotDone,
-  } = useTaskNotDone();
-
+function HomePage() {
   return (
     <ScreenWrapper>
       <FlatList
@@ -61,44 +30,15 @@ function HomePage({navigation}: Props) {
         renderItem={({item}) => {
           switch (item) {
             case HomeItemEnum.HEADER:
-              return <HomeHeader user={user} />;
+              return <HomeHeader />;
             case HomeItemEnum.CATEGORIES_LIST:
-              return (
-                <Section
-                  title={translation('CATEGORIES')}
-                  contentStyle={{height: 143}}>
-                  <CategoriesList
-                    lsCategories={categories}
-                    lsCategoriesFetchState={{hasError, isLoading}}
-                    onCategoryPress={category =>
-                      navigation.navigate('CategoryDetails', {category})
-                    }
-                  />
-                </Section>
-              );
+              return <CategoryListSection />;
             case HomeItemEnum.TASK_LIST:
-              return (
-                <Section title={translation('TASKS_NOT_DONE')}>
-                  <TasksList
-                    onRefresh={refetchTasksNotDone}
-                    tasks={tasksNotDone}
-                    isLoading={isTasksLoading}
-                    hasError={hasTasksError}
-                    onTaskPress={task =>
-                      navigation.navigate('TaskDetails', {task})
-                    }
-                  />
-                </Section>
-              );
-            default:
-              return null;
+              return <TasksListSection />;
           }
         }}
       />
-      <Separator style={{marginTop: 5}} />
-      <View style={{paddingVertical: 5, paddingHorizontal: 20}}>
-        <CreateNewTaskButton />
-      </View>
+      <HomeFooter />
     </ScreenWrapper>
   );
 }
