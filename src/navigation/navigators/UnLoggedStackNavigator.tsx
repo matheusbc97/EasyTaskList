@@ -4,8 +4,8 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 
-import WelcomePage from '@/pages/unauthenticated/WelcomePage';
-import ChooseUserConfigurationsPage from '@/pages/unauthenticated/ChooseUserConfigurationsPage';
+import WelcomePage from '@/modules/unauthenticated/unauthenticated/WelcomePage';
+import ChooseUserConfigurationsPage from '@/modules/unauthenticated/unauthenticated/ChooseUserConfigurationsPage';
 
 type UnauthenticatedStackParams = {
   Home: undefined;

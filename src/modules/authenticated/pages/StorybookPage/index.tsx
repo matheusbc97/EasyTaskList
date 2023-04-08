@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {View} from 'react-native';
 
 const Teste = () => {
-  const StorybookUIRoot = require('../../../../storybook').default;
+  const StorybookUIRoot = require('../../../../../storybook').default;
 
   return <StorybookUIRoot />;
 };

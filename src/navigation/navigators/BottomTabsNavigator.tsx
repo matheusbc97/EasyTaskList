@@ -5,10 +5,10 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import {BottomNavigatorStackParams} from '../types';
 //import {selectAppTheme} from '../store/configs';
 
-import HomePage from '@/pages/authenticated/HomePage';
-import TaskListPage from '@/pages/authenticated/TaskListPage';
-import MorePage from '@/pages/authenticated/MorePage';
-import CategoryListPage from '@/pages/authenticated/CategoryListPage';
+import HomePage from '@/modules/authenticated/pages/HomePage';
+import TaskListPage from '@/modules/authenticated/pages/TaskListPage';
+import MorePage from '@/modules/authenticated/pages/MorePage';
+import CategoryListPage from '@/modules/authenticated/pages/CategoryListPage';
 
 import BottomTabs from '../components/BottomTabs';
 

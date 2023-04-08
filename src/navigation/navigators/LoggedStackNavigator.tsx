@@ -2,23 +2,23 @@ import React from 'react';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
-import CategorySearchPage from '@/pages/authenticated/CategorySearchPage';
-import CategoryDetailsPage from '@/pages/authenticated/CategoryDetailsPage';
-import ChangeNameFormPage from '@/pages/authenticated/ChangeNameFormPage';
-import ChangeThemeFormPage from '@/pages/authenticated/ChangeThemeFormPage';
-import ChangeAvatarPage from '@/pages/authenticated/ChangeAvatarPage';
-import AboutPage from '@/pages/authenticated/AboutPage';
-import CreateTaskFormPage from '@/pages/authenticated/CreateTaskFormPage';
-import UpdateTaskFormPage from '@/pages/authenticated/UpdateTaskFormPage';
-import CreateCategoryForm from '@/pages/authenticated/CreateCategoryFormPage';
-import UpdateCategoryFormPage from '@/pages/authenticated/UpdateCategoryFormPage';
-import TaskDetails from '@/pages/authenticated/TaskDetailsPage';
+import CategorySearchPage from '@/modules/authenticated/pages/CategorySearchPage';
+import CategoryDetailsPage from '@/modules/authenticated/pages/CategoryDetailsPage';
+import ChangeNameFormPage from '@/modules/authenticated/pages/ChangeNameFormPage';
+import ChangeThemeFormPage from '@/modules/authenticated/pages/ChangeThemeFormPage';
+import ChangeAvatarPage from '@/modules/authenticated/pages/ChangeAvatarPage';
+import AboutPage from '@/modules/authenticated/pages/AboutPage';
+import CreateTaskFormPage from '@/modules/authenticated/pages/CreateTaskFormPage';
+import UpdateTaskFormPage from '@/modules/authenticated/pages/UpdateTaskFormPage';
+import CreateCategoryForm from '@/modules/authenticated/pages/CreateCategoryFormPage';
+import UpdateCategoryFormPage from '@/modules/authenticated/pages/UpdateCategoryFormPage';
+import TaskDetails from '@/modules/authenticated/pages/TaskDetailsPage';
 
 import {AuthenticatedStackParams} from '../types';
 import {BottomTabsNavigator} from './BottomTabsNavigator';
-import TimerPage from '@/pages/authenticated/TimerPage';
-import StopwatchPage from '@/pages/authenticated/StopwatchPage';
-import StorybookPage from '@/pages/authenticated/StorybookPage';
+import TimerPage from '@/modules/authenticated/pages/TimerPage';
+import StopwatchPage from '@/modules/authenticated/pages/StopwatchPage';
+import StorybookPage from '@/modules/authenticated/pages/StorybookPage';
 
 const AuthenticatedStack = createStackNavigator<AuthenticatedStackParams>();
 
