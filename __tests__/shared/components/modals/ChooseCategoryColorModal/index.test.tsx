@@ -1,6 +1,6 @@
-import {ChooseCategoryColorModal} from '@/shared/components';
+import {ChooseCategoryColorModal} from '@/modules/shared/components';
 import {fireEvent, render} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import categoryColors from '@/assets/categoryColors';
 
 jest.mock('@/shared/hooks/data/useAppTheme');

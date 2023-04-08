@@ -5,10 +5,10 @@ import {
   RoundedButton,
   Text,
   FormScreenWrapper,
-} from '@/shared/components';
-import {AppTheme} from '@/shared/models';
-import {useTranslation, useAppTheme} from '@/shared/hooks';
-import ChooseTheme from '@/shared/templates/ChooseTheme';
+} from '@/modules/shared/components';
+import {AppTheme} from '@/modules/shared/models';
+import {useTranslation, useAppTheme} from '@/modules/shared/hooks';
+import ChooseTheme from '@/modules/shared/templates/ChooseTheme';
 
 import useHandleSaveTheme from './hooks/useHandleSaveTheme';
 

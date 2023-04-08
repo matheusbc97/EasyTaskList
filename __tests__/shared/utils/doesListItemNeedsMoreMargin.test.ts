@@ -1,4 +1,4 @@
-import {doesListItemNeedsMoreMargin} from '@/shared/utils/doesListItemNeedsMoreMargin';
+import {doesListItemNeedsMoreMargin} from '@/modules/shared/utils/doesListItemNeedsMoreMargin';
 
 describe('doesListItemNeedsMoreMargin Util', () => {
   it('if its not last item and array has remainder should return false', () => {

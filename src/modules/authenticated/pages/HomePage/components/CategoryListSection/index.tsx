@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {Section} from '@/shared/components';
-import {useQueryCategories, useTranslation} from '@/shared/hooks';
+import {Section} from '@/modules/shared/components';
+import {useQueryCategories, useTranslation} from '@/modules/shared/hooks';
 import CategoriesList from './components/CategoriesList';
-import {AuthenticateStackNavigationProp} from '@/shared/types/AuthenticateStackPageProps';
+import {AuthenticateStackNavigationProp} from '@/modules/shared/types/AuthenticateStackPageProps';
 import {useNavigation} from '@react-navigation/native';
 
 function CategoryListSection() {

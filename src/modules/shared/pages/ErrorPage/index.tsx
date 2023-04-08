@@ -1,4 +1,4 @@
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import {SafeAreaView, Text, Button, View} from 'react-native';
 
 interface ErrorPageProps {

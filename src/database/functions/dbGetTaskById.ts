@@ -1,5 +1,5 @@
 import {database} from '@/database/config';
-import {Task} from '@/shared/models';
+import {Task} from '@/modules/shared/models';
 
 import {TABLE_KEYS} from '../constants/tableKeys';
 import TaskModel from '../models/TaskModel';

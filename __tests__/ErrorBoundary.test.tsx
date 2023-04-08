@@ -3,7 +3,7 @@ import React from 'react';
 import {fireEvent, render} from '@testing-library/react-native';
 
 import ErrorBoundary from '@/ErrorBoundary';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import {View} from 'react-native';
 
 describe('ErrorBoundary', () => {

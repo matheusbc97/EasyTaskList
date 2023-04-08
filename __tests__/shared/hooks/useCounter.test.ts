@@ -1,4 +1,4 @@
-import {useCounter} from '@/shared/hooks';
+import {useCounter} from '@/modules/shared/hooks';
 import {act, renderHook} from '@testing-library/react-native';
 
 describe('useCounter Hook', () => {

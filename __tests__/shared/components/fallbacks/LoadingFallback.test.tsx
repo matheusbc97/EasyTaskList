@@ -2,8 +2,8 @@ import React from 'react';
 import {Text} from 'react-native';
 import {render} from '@testing-library/react-native';
 
-import {LoadingFallback} from '@/shared/components';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {LoadingFallback} from '@/modules/shared/components';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 
 describe('LoadingFallbackComponent Component', () => {
   it('Should render a LoadingFallbackComponent', () => {

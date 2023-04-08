@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Button} from '@/shared/components';
+import {Button} from '@/modules/shared/components';
 
 export const CategoryContainer = styled.View`
   flex-direction: row;

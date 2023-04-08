@@ -1,4 +1,4 @@
-import {useFormatDate} from '@/shared/hooks';
+import {useFormatDate} from '@/modules/shared/hooks';
 import {renderHook} from '@testing-library/react-native';
 
 const date = new Date(2023, 4, 1, 4, 10, 10); // 2023-05-01T04:10:10

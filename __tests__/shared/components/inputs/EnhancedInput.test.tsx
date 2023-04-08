@@ -4,9 +4,9 @@ import {
   render,
   renderHook,
 } from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import {ViewStyle} from 'react-native';
-import EnhancedInput from '@/shared/components/inputs/EnhancedInput';
+import EnhancedInput from '@/modules/shared/components/inputs/EnhancedInput';
 import {useForm} from 'react-hook-form';
 
 jest.mock('@/shared/hooks/data/useAppTheme');

@@ -1,8 +1,8 @@
-import {Toast} from '@/shared/components';
+import {Toast} from '@/modules/shared/components';
 import {render, waitFor} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {ToastOptions} from '@/shared/components/Toast/types/ShowToastOptions';
+import {ToastOptions} from '@/modules/shared/components/Toast/types/ShowToastOptions';
 
 jest.mock(
   'react-native-safe-area-context',

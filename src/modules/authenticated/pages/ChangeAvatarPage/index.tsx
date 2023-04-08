@@ -10,13 +10,13 @@ import {
   Text,
   Center,
   FormContainer,
-} from '@/shared/components';
-import AvatarList from '@/shared/templates/AvatarGrid';
-import {showToast} from '@/shared/components/Toast';
-import {useTranslation} from '@/shared/hooks';
+} from '@/modules/shared/components';
+import AvatarList from '@/modules/shared/templates/AvatarGrid';
+import {showToast} from '@/modules/shared/components/Toast';
+import {useTranslation} from '@/modules/shared/hooks';
 import {setUserAvatar} from '@/store/account/user';
 import {RootState} from '@/store/index';
-import {AuthenticatedStackParams} from '@/navigation/types';
+import {AuthenticatedStackParams} from '@/modules/core/navigation/types';
 
 import {Header, AvatarListContainer} from './styles';
 

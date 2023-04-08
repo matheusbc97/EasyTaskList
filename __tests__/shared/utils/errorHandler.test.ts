@@ -1,4 +1,4 @@
-import {handleErrorMessage} from '@/shared/utils/errorHandler';
+import {handleErrorMessage} from '@/modules/shared/utils/errorHandler';
 
 let mockedShowToast: jest.Mock<any, any>;
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import {View} from 'react-native';
 
-import {Avatar, Text} from '@/shared/components';
-import {useFormatDate, useTranslation} from '@/shared/hooks';
+import {Avatar, Text} from '@/modules/shared/components';
+import {useFormatDate, useTranslation} from '@/modules/shared/hooks';
 
 import styles from '../styles';
-import {TEST_IDS} from '@/shared/constants/testIds';
-import useGetUser from '@/shared/hooks/data/useGetUser';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
+import useGetUser from '@/modules/shared/hooks/data/useGetUser';
 
 const HomeHeader: React.FC = () => {
   const formatDate = useFormatDate();

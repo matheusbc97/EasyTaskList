@@ -1,7 +1,7 @@
 import {TextStyle} from 'react-native';
 import {render} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
-import {AnimatedBackgroundContent} from '@/shared/components';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
+import {AnimatedBackgroundContent} from '@/modules/shared/components';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 

@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
-import {CategoryColorBox} from '@/shared/components';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
+import {CategoryColorBox} from '@/modules/shared/components';
 
 describe('CategoryColorBox Component', () => {
   it('Should render an CategoryColorBox', () => {

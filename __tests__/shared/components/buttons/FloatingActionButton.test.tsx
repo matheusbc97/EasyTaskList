@@ -1,7 +1,7 @@
 import React from 'react';
-import {FloatingActionButton} from '@/shared/components';
+import {FloatingActionButton} from '@/modules/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 

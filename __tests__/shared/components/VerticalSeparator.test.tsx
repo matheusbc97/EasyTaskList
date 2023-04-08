@@ -1,8 +1,8 @@
 import {TextStyle} from 'react-native';
 
 import {render} from '@testing-library/react-native';
-import {VerticalSeparator} from '@/shared/components';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {VerticalSeparator} from '@/modules/shared/components';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 
 describe('VerticalSeparator Component', () => {
   it('Should render a VerticalSeparator', () => {

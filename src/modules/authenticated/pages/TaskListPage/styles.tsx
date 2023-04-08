@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {shadowStyledComponents} from '@/shared/styles';
+import {shadowStyledComponents} from '@/modules/shared/styles';
 
 interface HeaderProps {
   backgroundColor: string;

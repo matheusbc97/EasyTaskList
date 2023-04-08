@@ -1,7 +1,7 @@
 import React from 'react';
-import {Avatar} from '@/shared/components';
+import {Avatar} from '@/modules/shared/components';
 import {render} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 
 describe('Avatar Component', () => {
   it('Should render an Avatar', () => {

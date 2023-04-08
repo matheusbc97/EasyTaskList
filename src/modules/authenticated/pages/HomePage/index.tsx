@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList} from 'react-native';
 
-import {ScreenWrapper} from '@/shared/components';
+import {ScreenWrapper} from '@/modules/shared/components';
 
 import HomeHeader from './components/HomeHeader';
 import TasksListSection from './components/TasksListSection';

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {shadowStyledComponents} from '@/shared/styles';
+import {shadowStyledComponents} from '@/modules/shared/styles';
 
 export const Content = styled.View`
   margin: 10px 10px;

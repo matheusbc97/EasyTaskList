@@ -1,6 +1,6 @@
 import {fireEvent, render} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
-import CategoryColorBoxButton from '@/shared/components/modals/ChooseCategoryColorModal/components/CategoryColorBoxButton';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
+import CategoryColorBoxButton from '@/modules/shared/components/modals/ChooseCategoryColorModal/components/CategoryColorBoxButton';
 import categoryColors from '@/assets/categoryColors';
 
 describe('CategoryColorBoxButton Component', () => {

@@ -1,10 +1,10 @@
 import React from 'react';
-import {Section} from '@/shared/components';
-import {useTranslation} from '@/shared/hooks';
-import TasksList from '@/shared/templates/lists/TaskList';
+import {Section} from '@/modules/shared/components';
+import {useTranslation} from '@/modules/shared/hooks';
+import TasksList from '@/modules/shared/templates/lists/TaskList';
 
-import {useTaskNotDone} from '@/shared/hooks';
-import {AuthenticateStackNavigationProp} from '@/shared/types/AuthenticateStackPageProps';
+import {useTaskNotDone} from '@/modules/shared/hooks';
+import {AuthenticateStackNavigationProp} from '@/modules/shared/types/AuthenticateStackPageProps';
 import {useNavigation} from '@react-navigation/native';
 
 function TasksListSection() {

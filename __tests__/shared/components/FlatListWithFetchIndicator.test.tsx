@@ -1,9 +1,9 @@
 import {
   FlatListWithFetchIndicator,
   FlatListWithFetchIndicatorProps,
-} from '@/shared/components';
+} from '@/modules/shared/components';
 import {act, render} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import {View} from 'react-native';
 
 jest.mock('@/shared/hooks/data/useAppTheme');

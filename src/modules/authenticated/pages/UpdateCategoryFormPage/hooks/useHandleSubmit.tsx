@@ -1,8 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 
-import {FormObject} from '@/shared/templates/forms/CategoryForm';
+import {FormObject} from '@/modules/shared/templates/forms/CategoryForm';
 import {dbUpdateCategory} from '@/database';
-import {QUERY_KEYS} from '@/shared/constants/queryKeys';
+import {QUERY_KEYS} from '@/modules/shared/constants/queryKeys';
 import {useQueryClient, useMutation} from 'react-query';
 
 const useHandleSubmit = (categoryId: string) => {

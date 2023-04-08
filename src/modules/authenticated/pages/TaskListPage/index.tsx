@@ -7,12 +7,12 @@ import {
   ScreenWrapper,
   CreateNewTaskButton,
   Separator,
-} from '@/shared/components';
+} from '@/modules/shared/components';
 import {selectAppTheme} from '@/store/configs';
-import {AuthenticatedStackParams} from '@/navigation/types';
-import {useTasks} from '@/shared/hooks';
-import {useTranslation} from '@/shared/hooks';
-import TaskList from '@/shared/templates/lists/TaskList';
+import {AuthenticatedStackParams} from '@/modules/core/navigation/types';
+import {useTasks} from '@/modules/shared/hooks';
+import {useTranslation} from '@/modules/shared/hooks';
+import TaskList from '@/modules/shared/templates/lists/TaskList';
 
 import {Header, Body, Footer} from './styles';
 

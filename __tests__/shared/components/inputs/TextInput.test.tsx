@@ -1,6 +1,6 @@
-import {TextInput} from '@/shared/components';
+import {TextInput} from '@/modules/shared/components';
 import {fireEvent, render} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import {ViewStyle} from 'react-native';
 
 jest.mock('@/shared/hooks/data/useAppTheme');

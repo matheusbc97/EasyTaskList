@@ -15,7 +15,7 @@ import {
   Section,
   EditButton,
   DeleteButton,
-} from '@/shared/components';
+} from '@/modules/shared/components';
 import categoryIconNames from '@/assets/categoryIconNames';
 import {
   useTranslation,
@@ -23,12 +23,12 @@ import {
   useFormatDate,
   useUpdateTask,
   useDeleteTask,
-} from '@/shared/hooks';
-import {AuthenticatedStackParams} from '@/navigation/types';
-import {QUERY_KEYS} from '@/shared/constants/queryKeys';
+} from '@/modules/shared/hooks';
+import {AuthenticatedStackParams} from '@/modules/core/navigation/types';
+import {QUERY_KEYS} from '@/modules/shared/constants/queryKeys';
 import {useQuery} from 'react-query';
 import {dbGetTaskById} from '@/database/functions/dbGetTaskById';
-import {Task} from '@/shared/models';
+import {Task} from '@/modules/shared/models';
 
 import {
   CategoryContainer,

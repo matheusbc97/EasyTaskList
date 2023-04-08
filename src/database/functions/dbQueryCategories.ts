@@ -1,6 +1,6 @@
 import {database} from '@/database/config';
 import CategoryModel from '@/database/models/CategoryModel';
-import {Category} from '@/shared/models';
+import {Category} from '@/modules/shared/models';
 
 export async function dbQueryCategories() {
   const categoriesCollection = await database

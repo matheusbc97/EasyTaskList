@@ -1,4 +1,4 @@
-import {Center} from '@/shared/components';
+import {Center} from '@/modules/shared/components';
 import {render} from '@testing-library/react-native';
 
 jest.mock('@/shared/hooks/data/useAppTheme');

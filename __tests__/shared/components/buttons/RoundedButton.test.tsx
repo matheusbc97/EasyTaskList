@@ -1,8 +1,8 @@
 import React from 'react';
-import {RoundedButton} from '@/shared/components';
+import {RoundedButton} from '@/modules/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
-import {useAppThemeReturnMock} from '@/shared/hooks/data/__mocks__/useAppTheme';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {useAppThemeReturnMock} from '@/modules/shared/hooks/data/__mocks__/useAppTheme';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 

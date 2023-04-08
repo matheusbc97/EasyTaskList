@@ -1,7 +1,7 @@
-import AvatarGrid from '@/shared/templates/AvatarGrid';
+import AvatarGrid from '@/modules/shared/templates/AvatarGrid';
 import {fireEvent, render} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
-import {avatarSources} from '@/shared/components/Avatar';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
+import {avatarSources} from '@/modules/shared/components/Avatar';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 

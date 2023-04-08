@@ -1,9 +1,9 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
 
-import {useTranslation} from '@/shared/hooks';
-import {Text, BackButton, FormScreenWrapper} from '@/shared/components';
-import {PRIVACY_POLICE} from '@/shared/constants/privacyPolice';
+import {useTranslation} from '@/modules/shared/hooks';
+import {Text, BackButton, FormScreenWrapper} from '@/modules/shared/components';
+import {PRIVACY_POLICE} from '@/modules/shared/constants/privacyPolice';
 
 function PrivacyPolicyPage() {
   const {translation} = useTranslation();

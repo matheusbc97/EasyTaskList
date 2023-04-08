@@ -2,9 +2,9 @@ import {useRef, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {PickerIOS} from '@react-native-picker/picker';
 
-import {Header, RoundedButton, Timer, TimerHandles} from '@/shared/components';
-import {useTranslation} from '@/shared/hooks';
-import {AuthenticateStackPageProps} from '@/shared/types/AuthenticateStackPageProps';
+import {Header, RoundedButton, Timer, TimerHandles} from '@/modules/shared/components';
+import {useTranslation} from '@/modules/shared/hooks';
+import {AuthenticateStackPageProps} from '@/modules/shared/types/AuthenticateStackPageProps';
 
 const pickerItems = Array.from({length: 60}, (_, index) => {
   const value = index + 1;

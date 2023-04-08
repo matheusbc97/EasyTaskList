@@ -3,7 +3,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {AuthenticatedStackParams} from '@/navigation/types';
+import {AuthenticatedStackParams} from '@/modules/core/navigation/types';
 import {
   AnimatedBackground,
   BackButton,
@@ -11,12 +11,12 @@ import {
   RoundedSaveButton,
   Center,
   FormContainer,
-} from '@/shared/components';
-import {useTranslation} from '@/shared/hooks';
+} from '@/modules/shared/components';
+import {useTranslation} from '@/modules/shared/hooks';
 import {selectUserName, setUserName} from '@/store/account/user';
-import {showToast} from '@/shared/components/Toast';
-import NameForm from '@/shared/templates/forms/NameForm';
-import {FormHandles} from '@/shared/models';
+import {showToast} from '@/modules/shared/components/Toast';
+import NameForm from '@/modules/shared/templates/forms/NameForm';
+import {FormHandles} from '@/modules/shared/models';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'ChangeNameForm'>;

@@ -1,4 +1,4 @@
-import formatDate from '@/shared/utils/formatDate';
+import formatDate from '@/modules/shared/utils/formatDate';
 
 const date = new Date(2023, 4, 1, 4, 10, 10); // 2023-05-01T04:10:10
 

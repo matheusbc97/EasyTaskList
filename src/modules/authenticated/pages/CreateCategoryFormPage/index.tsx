@@ -4,11 +4,11 @@ import {
   Header,
   RoundedSaveButton,
   FormScreenWrapper,
-} from '@/shared/components';
-import {useTranslation, useCreateCategory} from '@/shared/hooks';
+} from '@/modules/shared/components';
+import {useTranslation, useCreateCategory} from '@/modules/shared/hooks';
 import CategoryForm, {
   CategoryFormHandles,
-} from '@/shared/templates/forms/CategoryForm';
+} from '@/modules/shared/templates/forms/CategoryForm';
 
 import {Props} from './types';
 

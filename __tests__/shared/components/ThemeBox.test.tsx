@@ -1,9 +1,9 @@
 import {fireEvent, render} from '@testing-library/react-native';
 
-import {ThemeBox} from '@/shared/components';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {ThemeBox} from '@/modules/shared/components';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import * as themes from '@/assets/themes';
-import {AppThemeName} from '@/shared/models';
+import {AppThemeName} from '@/modules/shared/models';
 
 describe('ThemeBox Component', () => {
   it('Should render an ThemeBox', () => {

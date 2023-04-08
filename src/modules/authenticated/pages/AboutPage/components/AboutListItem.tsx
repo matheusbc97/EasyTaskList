@@ -1,8 +1,8 @@
 import React, {memo} from 'react';
 import styled from 'styled-components/native';
 
-import {Text} from '@/shared/components';
-import {AboutItem} from '@/shared/models';
+import {Text} from '@/modules/shared/components';
+import {AboutItem} from '@/modules/shared/models';
 
 const Container = styled.View`
   padding: 10px;

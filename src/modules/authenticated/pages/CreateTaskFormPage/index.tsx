@@ -4,10 +4,10 @@ import {
   Header,
   RoundedSaveButton,
   FormScreenWrapper,
-} from '@/shared/components';
-import {useTranslation} from '@/shared/hooks';
-import TaskFormTemplate from '@/shared/templates/forms/TaskForm';
-import {FormHandles} from '@/shared/models';
+} from '@/modules/shared/components';
+import {useTranslation} from '@/modules/shared/hooks';
+import TaskFormTemplate from '@/modules/shared/templates/forms/TaskForm';
+import {FormHandles} from '@/modules/shared/models';
 
 import useHandleSubmit from './hooks/useHandleSubmit';
 import {Props} from './types';

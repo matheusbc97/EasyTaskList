@@ -1,5 +1,5 @@
 import {database} from '@/database/config';
-import {User} from '@/shared/models';
+import {User} from '@/modules/shared/models';
 import {Q} from '@nozbe/watermelondb';
 
 import {TABLE_KEYS} from '../constants/tableKeys';

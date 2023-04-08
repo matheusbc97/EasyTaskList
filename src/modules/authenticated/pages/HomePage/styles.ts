@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {shadow} from '@/shared/styles';
+import {shadow} from '@/modules/shared/styles';
 
 export default StyleSheet.create({
   header: {

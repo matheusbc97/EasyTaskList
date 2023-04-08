@@ -6,11 +6,11 @@ import {
   ScreenWrapper,
   CategoryListItem,
   FloatingActionButton,
-} from '@/shared/components';
-import {AuthenticatedStackParams} from '@/navigation/types';
+} from '@/modules/shared/components';
+import {AuthenticatedStackParams} from '@/modules/core/navigation/types';
 
-import {useQueryCategories} from '../../../../shared/hooks/data/useGetCategories';
-import {doesListItemNeedsMoreMargin} from '@/shared/utils/doesListItemNeedsMoreMargin';
+import {useQueryCategories} from '../../../shared/hooks/data/useGetCategories';
+import {doesListItemNeedsMoreMargin} from '@/modules/shared/utils/doesListItemNeedsMoreMargin';
 
 type CategoryListNavigationProp = StackNavigationProp<
   AuthenticatedStackParams,

@@ -1,4 +1,4 @@
-import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
+import getDateByDateAndTime from '@/modules/shared/utils/getDateByDateAndTime';
 
 let mockedShowToast: jest.Mock<any, any>;
 

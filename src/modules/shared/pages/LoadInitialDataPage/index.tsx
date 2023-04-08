@@ -1,5 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {LoadingIndicator} from '@/shared/components';
+import {LoadingIndicator} from '@/modules/shared/components';
 import {dbGetUser} from '@/database/functions/dbGetUser';
 import {useDispatch} from 'react-redux';
 import {setIsLogged} from '@/store/configs';

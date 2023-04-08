@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button} from '@/shared/components';
+import {Button} from '@/modules/shared/components';
 import {render, fireEvent} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 
 describe('Button Component', () => {
   it('Should render a button', () => {

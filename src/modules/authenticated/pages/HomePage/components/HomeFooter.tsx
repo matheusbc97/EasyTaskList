@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 
-import {CreateNewTaskButton, Separator} from '@/shared/components';
+import {CreateNewTaskButton, Separator} from '@/modules/shared/components';
 
 function HomeFooter() {
   return (

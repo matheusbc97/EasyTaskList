@@ -1,8 +1,8 @@
 import React from 'react';
-import {BackButton} from '@/shared/components';
+import {BackButton} from '@/modules/shared/components';
 
 import {render, fireEvent} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 
 const mockedGoBack = jest.fn();
 

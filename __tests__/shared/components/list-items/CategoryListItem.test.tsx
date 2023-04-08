@@ -1,6 +1,6 @@
-import {CategoryListItem} from '@/shared/components';
-import {TEST_IDS} from '@/shared/constants/testIds';
-import {Category} from '@/shared/models';
+import {CategoryListItem} from '@/modules/shared/components';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
+import {Category} from '@/modules/shared/models';
 import {fireEvent, render} from '@testing-library/react-native';
 import {TextStyle} from 'react-native';
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import {ErrorFallback} from '@/shared/components';
+import {ErrorFallback} from '@/modules/shared/components';
 import {render} from '@testing-library/react-native';
 import {Text} from 'react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 
 describe('ErrorFallbackComponent Component', () => {
   it('Should render a ErrorFallbackComponent', () => {

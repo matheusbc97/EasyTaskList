@@ -8,15 +8,15 @@ import {
   Header,
   OutlineButton,
   Separator,
-} from '@/shared/components';
-import {AuthenticatedStackParams} from '@/navigation/types';
+} from '@/modules/shared/components';
+import {AuthenticatedStackParams} from '@/modules/core/navigation/types';
 
-import TaskList from '@/shared/templates/lists/TaskList';
+import TaskList from '@/modules/shared/templates/lists/TaskList';
 
-import {useTranslation} from '@/shared/hooks';
+import {useTranslation} from '@/modules/shared/hooks';
 
 import {Content} from './styles';
-import {useTasks} from '@/shared/hooks';
+import {useTasks} from '@/modules/shared/hooks';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategoryDetails'>;

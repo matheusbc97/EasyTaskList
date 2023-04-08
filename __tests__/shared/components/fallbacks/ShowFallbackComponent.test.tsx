@@ -1,5 +1,5 @@
 import React from 'react';
-import {ShowFallbackComponent} from '@/shared/components';
+import {ShowFallbackComponent} from '@/modules/shared/components';
 import {render} from '@testing-library/react-native';
 import {Text} from 'react-native';
 

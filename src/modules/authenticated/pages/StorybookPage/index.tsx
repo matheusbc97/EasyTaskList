@@ -1,4 +1,4 @@
-import {AuthenticateStackPageProps} from '@/shared/types/AuthenticateStackPageProps';
+import {AuthenticateStackPageProps} from '@/modules/shared/types/AuthenticateStackPageProps';
 import {useEffect, useState} from 'react';
 import {View} from 'react-native';
 

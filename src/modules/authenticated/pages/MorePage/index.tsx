@@ -3,9 +3,9 @@ import {View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 
-import {ScreenWrapper, Text, NavigateButton} from '@/shared/components';
-import {AuthenticatedStackParams} from '@/navigation/types';
-import {useTranslation} from '@/shared/hooks';
+import {ScreenWrapper, Text, NavigateButton} from '@/modules/shared/components';
+import {AuthenticatedStackParams} from '@/modules/core/navigation/types';
+import {useTranslation} from '@/modules/shared/hooks';
 import {useDispatch} from 'react-redux';
 import {setIsLogged} from '@/store/configs';
 

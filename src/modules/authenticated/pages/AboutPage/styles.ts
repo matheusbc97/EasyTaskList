@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Shadow} from '@/shared/components';
+import {Shadow} from '@/modules/shared/components';
 
 export const Content = styled(Shadow)`
   margin: 10px 10px;

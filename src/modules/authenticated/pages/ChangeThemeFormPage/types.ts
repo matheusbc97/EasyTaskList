@@ -1,7 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 
-import {AuthenticatedStackParams} from '@/navigation/types';
+import {AuthenticatedStackParams} from '@/modules/core/navigation/types';
 
 type ChangeThemeFormNavigation = StackNavigationProp<
   AuthenticatedStackParams,

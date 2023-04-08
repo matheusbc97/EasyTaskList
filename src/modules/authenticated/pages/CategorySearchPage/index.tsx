@@ -3,19 +3,19 @@ import {TextInput} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 
-import {AuthenticatedStackParams} from '@/navigation/types';
+import {AuthenticatedStackParams} from '@/modules/core/navigation/types';
 import {
   ScreenWrapper,
   Header,
   Section,
   CreateNewCategoryButton,
   Separator,
-} from '@/shared/components';
-import {Category} from '@/shared/models';
+} from '@/modules/shared/components';
+import {Category} from '@/modules/shared/models';
 
 import CategorySearchListItem from './components/CategorySearchListItem';
 import {SearchInput, SearchList} from './styles';
-import {useQueryCategories} from '../../../../shared/hooks/data/useGetCategories';
+import {useQueryCategories} from '../../../shared/hooks/data/useGetCategories';
 
 interface Props {
   navigation: StackNavigationProp<AuthenticatedStackParams, 'CategorySearch'>;

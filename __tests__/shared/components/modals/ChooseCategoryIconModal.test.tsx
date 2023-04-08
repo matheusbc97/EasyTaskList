@@ -1,6 +1,6 @@
-import {ChooseCategoryIconModal} from '@/shared/components';
+import {ChooseCategoryIconModal} from '@/modules/shared/components';
 import {fireEvent, render} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import categoryIconNames from '@/assets/categoryIconNames';
 
 jest.mock('@/shared/hooks/data/useAppTheme');

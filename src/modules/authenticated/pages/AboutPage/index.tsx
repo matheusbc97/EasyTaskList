@@ -2,9 +2,9 @@ import React from 'react';
 import {FlatList} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {ScreenWrapper, Header} from '@/shared/components';
-import {AuthenticatedStackParams} from '@/navigation/types';
-import {ABOUT} from '@/shared/constants/about';
+import {ScreenWrapper, Header} from '@/modules/shared/components';
+import {AuthenticatedStackParams} from '@/modules/core/navigation/types';
+import {ABOUT} from '@/modules/shared/constants/about';
 
 import AboutListItem from './components/AboutListItem';
 import {Content} from './styles';

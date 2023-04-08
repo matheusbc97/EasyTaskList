@@ -1,6 +1,6 @@
-import {TaskListItem} from '@/shared/components';
-import {TEST_IDS} from '@/shared/constants/testIds';
-import {Task} from '@/shared/models';
+import {TaskListItem} from '@/modules/shared/components';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
+import {Task} from '@/modules/shared/models';
 import {fireEvent, render} from '@testing-library/react-native';
 
 jest.mock('@/shared/hooks/data/useAppTheme');

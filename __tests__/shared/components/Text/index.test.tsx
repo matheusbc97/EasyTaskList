@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text} from '@/shared/components';
+import {Text} from '@/modules/shared/components';
 import {render} from '@testing-library/react-native';
-import {useAppThemeReturnMock} from '@/shared/hooks/data/__mocks__/useAppTheme';
-import {getTextStyle} from '@/shared/components/Text/utils/getTextStyle';
-import {TEXT_TYPES} from '@/shared/components/Text/constants/textTypes';
+import {useAppThemeReturnMock} from '@/modules/shared/hooks/data/__mocks__/useAppTheme';
+import {getTextStyle} from '@/modules/shared/components/Text/utils/getTextStyle';
+import {TEXT_TYPES} from '@/modules/shared/components/Text/constants/textTypes';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 

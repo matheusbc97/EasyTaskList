@@ -4,16 +4,16 @@ import {
   Header,
   RoundedSaveButton,
   FormScreenWrapper,
-} from '@/shared/components';
-import {useTranslation, useUpdateTask} from '@/shared/hooks';
+} from '@/modules/shared/components';
+import {useTranslation, useUpdateTask} from '@/modules/shared/hooks';
 import TaskFormTemplate, {
   TaskFormHandles,
-} from '@/shared/templates/forms/TaskForm';
+} from '@/modules/shared/templates/forms/TaskForm';
 
 import getInitialData from './utils/getInitialData';
-import {FormObject} from '@/shared/templates/forms/TaskForm';
+import {FormObject} from '@/modules/shared/templates/forms/TaskForm';
 import {Props} from './types';
-import getDateByDateAndTime from '@/shared/utils/getDateByDateAndTime';
+import getDateByDateAndTime from '@/modules/shared/utils/getDateByDateAndTime';
 
 function UpdateTaskFormPage({route, navigation}: Props) {
   const {task} = route.params;

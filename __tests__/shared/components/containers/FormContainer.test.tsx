@@ -1,5 +1,5 @@
-import {FormContainer} from '@/shared/components';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {FormContainer} from '@/modules/shared/components';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import {render} from '@testing-library/react-native';
 import {TextStyle, View} from 'react-native';
 

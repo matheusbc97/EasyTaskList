@@ -1,7 +1,7 @@
 import {fireEvent, render} from '@testing-library/react-native';
 
-import {Header} from '@/shared/components';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {Header} from '@/modules/shared/components';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 

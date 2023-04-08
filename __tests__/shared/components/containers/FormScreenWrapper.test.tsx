@@ -1,5 +1,5 @@
-import {FormScreenWrapper} from '@/shared/components';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {FormScreenWrapper} from '@/modules/shared/components';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import {render, waitFor} from '@testing-library/react-native';
 import {TextStyle, View} from 'react-native';
 

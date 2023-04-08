@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '../index';
-import {AppTheme} from '@/shared/models';
+import {AppTheme} from '@/modules/shared/models';
 import {BLUE_GREEN} from '@/assets/themes';
 
 const initialTheme = BLUE_GREEN;

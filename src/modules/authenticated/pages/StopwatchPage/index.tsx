@@ -1,8 +1,8 @@
 import {SafeAreaView, View} from 'react-native';
 
-import {Header, RoundedButton, Text} from '@/shared/components';
-import {useTranslation, useTimer} from '@/shared/hooks';
-import {AuthenticateStackPageProps} from '@/shared/types/AuthenticateStackPageProps';
+import {Header, RoundedButton, Text} from '@/modules/shared/components';
+import {useTranslation, useTimer} from '@/modules/shared/hooks';
+import {AuthenticateStackPageProps} from '@/modules/shared/types/AuthenticateStackPageProps';
 
 export default function StopwatchPage({
   navigation,

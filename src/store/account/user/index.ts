@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {User, AppThemeName} from '@/shared/models';
+import {User, AppThemeName} from '@/modules/shared/models';
 import {selectUser, selectUserName} from './selectors';
 
 type State = User;

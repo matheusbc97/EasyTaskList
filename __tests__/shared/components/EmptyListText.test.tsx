@@ -1,6 +1,6 @@
-import {EmptyListText} from '@/shared/components';
+import {EmptyListText} from '@/modules/shared/components';
 import {render} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 

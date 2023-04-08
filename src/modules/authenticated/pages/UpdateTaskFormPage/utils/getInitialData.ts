@@ -1,5 +1,5 @@
-import {Task} from '@/shared/models';
-import {FormObject} from '@/shared/templates/forms/TaskForm';
+import {Task} from '@/modules/shared/models';
+import {FormObject} from '@/modules/shared/templates/forms/TaskForm';
 
 const getInitialData = (task: Task) => {
   const _initialData: FormObject = {

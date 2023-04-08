@@ -3,9 +3,9 @@ import React from 'react';
 import {
   FlatListWithFetchIndicator,
   CategoryListItem,
-} from '@/shared/components';
-import {useTranslation} from '@/shared/hooks';
-import {Category, FetchState} from '@/shared/models';
+} from '@/modules/shared/components';
+import {useTranslation} from '@/modules/shared/hooks';
+import {Category, FetchState} from '@/modules/shared/models';
 
 interface CategoriesListProps {
   lsCategories: Category[];

@@ -1,5 +1,5 @@
-import {useAppThemeReturnMock} from '@/shared/hooks/data/__mocks__/useAppTheme';
-import {getTextStyle} from '@/shared/components/Text/utils/getTextStyle';
+import {useAppThemeReturnMock} from '@/modules/shared/hooks/data/__mocks__/useAppTheme';
+import {getTextStyle} from '@/modules/shared/components/Text/utils/getTextStyle';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 

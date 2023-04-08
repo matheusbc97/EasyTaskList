@@ -6,16 +6,16 @@ import {
   FormContainer,
   Header,
   RoundedSaveButton,
-} from '@/shared/components';
-import {useTranslation} from '@/shared/hooks';
+} from '@/modules/shared/components';
+import {useTranslation} from '@/modules/shared/hooks';
 import CategoryForm, {
   FormObject,
   CategoryFormHandles,
-} from '@/shared/templates/forms/CategoryForm';
+} from '@/modules/shared/templates/forms/CategoryForm';
 
 import {Props} from './types';
 import useHandleSubmit from './hooks/useHandleSubmit';
-import {Category} from '@/shared/models';
+import {Category} from '@/modules/shared/models';
 
 const getInitialData = (category: Category) => {
   const initialData: FormObject = {

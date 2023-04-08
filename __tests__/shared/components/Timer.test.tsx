@@ -1,7 +1,7 @@
 import {render} from '@testing-library/react-native';
 
-import {TEST_IDS} from '@/shared/constants/testIds';
-import {Timer, TimerHandles} from '@/shared/components';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
+import {Timer, TimerHandles} from '@/modules/shared/components';
 import {createRef} from 'react';
 
 const minutes = 12;

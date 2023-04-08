@@ -1,8 +1,8 @@
-import ChooseTheme from '@/shared/templates/ChooseTheme';
+import ChooseTheme from '@/modules/shared/templates/ChooseTheme';
 import {fireEvent, render} from '@testing-library/react-native';
-import {TEST_IDS} from '@/shared/constants/testIds';
+import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import * as themes from '@/assets/themes';
-import {AppThemeName} from '@/shared/models';
+import {AppThemeName} from '@/modules/shared/models';
 
 jest.mock('@/shared/hooks/data/useAppTheme');
 
