@@ -4,7 +4,6 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import {ScreenWrapper, AnimatedBackground} from '@/modules/shared/components';
 import {selectAppTheme} from '@/store/configs';
-import {setUserName, setUserAvatar} from '@/store/account/user';
 
 import ChooseTheme from './sub-pages/ChooseTheme';
 import ChoosePhotoOrAvatar from './sub-pages/ChoosePhotoOrAvatar';
@@ -12,8 +11,10 @@ import ChooseName from './sub-pages/ChooseName';
 import SaveUserConfiguration from './sub-pages/SaveUserConfiguration';
 
 import styles from './styles';
+import {setUserPreppingAvatar, setUserPreppingName} from './store/userPrepping';
+import {UserPreppingProvider, useUserPreppingDispatch} from './store';
 
-const subScreems = [
+const subScreens = [
   'ChooseTheme',
   'ChooseName',
   'ChoosePhotoOrAvatar',
@@ -29,7 +30,7 @@ const ChooseUserConfigurationsPage: React.FC = () => {
     outputRange: ['0deg', '720deg'],
   });
 
-  const dispatch = useDispatch();
+  const dispatch = useUserPreppingDispatch();
 
   const piDividedBy2 = useMemo(() => Math.PI / 2, []);
 
@@ -82,7 +83,7 @@ const ChooseUserConfigurationsPage: React.FC = () => {
   };
 
   const getSubScreen = () => {
-    switch (subScreems[screenShownState.index]) {
+    switch (subScreens[screenShownState.index]) {
       case 'ChooseTheme':
         return <ChooseTheme onAdvancePress={() => advanceForNextScreen()} />;
       case 'ChooseName':
@@ -91,7 +92,7 @@ const ChooseUserConfigurationsPage: React.FC = () => {
             onBackPress={() => advanceForNextScreen(true)}
             onAdvancePress={name => {
               advanceForNextScreen();
-              dispatch(setUserName(name));
+              dispatch(setUserPreppingName(name));
             }}
             showBackButton={!screenShownState.heightAnimation}
           />
@@ -100,7 +101,7 @@ const ChooseUserConfigurationsPage: React.FC = () => {
         return (
           <ChoosePhotoOrAvatar
             onAvatarPress={avatar => {
-              dispatch(setUserAvatar(avatar));
+              dispatch(setUserPreppingAvatar(avatar));
               heightAnimation();
             }}
             onBackPress={() => advanceForNextScreen(true)}
@@ -173,4 +174,12 @@ const ChooseUserConfigurationsPage: React.FC = () => {
   );
 };
 
-export default ChooseUserConfigurationsPage;
+function ChooseUserConfigurationsPageWithProvider() {
+  return (
+    <UserPreppingProvider>
+      <ChooseUserConfigurationsPage />
+    </UserPreppingProvider>
+  );
+}
+
+export default ChooseUserConfigurationsPageWithProvider;

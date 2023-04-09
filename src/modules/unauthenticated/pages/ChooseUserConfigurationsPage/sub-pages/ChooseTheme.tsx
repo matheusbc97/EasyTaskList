@@ -3,13 +3,13 @@ import {View, StyleSheet} from 'react-native';
 import {useDispatch} from 'react-redux';
 
 import {setAppTheme} from '@/store/configs';
-import {setUserTheme} from '@/store/account/user';
 import {Text, RoundedButton} from '@/modules/shared/components';
 import * as appThemes from '@/assets/themes';
 import {AppTheme, AppThemeName} from '@/modules/shared/models';
 import {useTranslation} from '@/modules/shared/hooks';
 import ChooseTheme from '@/modules/shared/templates/ChooseTheme';
 import {TEST_IDS} from '@/modules/shared/constants/testIds';
+import {setUserPreppingTheme} from '../store/userPrepping';
 
 interface Props {
   onAdvancePress(theme: AppThemeName): void;
@@ -29,7 +29,7 @@ const ChooseThemeSubPage: React.FC<Props> = ({
   const handleThemeChoose = (theme: AppTheme) => {
     setAppThemeState(theme);
     dispatch(setAppTheme(theme));
-    dispatch(setUserTheme(theme.name));
+    dispatch(setUserPreppingTheme(theme.name));
   };
 
   return (

@@ -1,13 +1,13 @@
 import React, {useRef} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {useSelector} from 'react-redux';
 
 import {RoundedButton, Text, BackButton} from '@/modules/shared/components';
-import {selectUserName} from '@/store/account/user';
 import {useTranslation} from '@/modules/shared/hooks';
 import NameForm from '@/modules/shared/templates/forms/NameForm';
 import {TEST_IDS} from '@/modules/shared/constants/testIds';
 import {FormHandles} from '@/modules/shared/models';
+
+import {useUserPreppingSelector} from '../store';
 
 interface Props {
   onAdvancePress(name: string): void;
@@ -21,7 +21,7 @@ const ChooseName: React.FC<Props> = ({
   showBackButton = true,
 }) => {
   const {translation} = useTranslation();
-  const userName = useSelector(selectUserName);
+  const userName = useUserPreppingSelector(userPrepping => userPrepping.name);
   const formRef = useRef<FormHandles>(null);
 
   return (

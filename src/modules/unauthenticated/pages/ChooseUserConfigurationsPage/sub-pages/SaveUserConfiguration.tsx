@@ -13,24 +13,24 @@ import {useTranslation} from '@/modules/shared/hooks';
 import {dbCreateUser} from '@/database';
 import {handleErrorMessage} from '@/modules/shared/utils/errorHandler';
 import {TEST_IDS} from '@/modules/shared/constants/testIds';
+import {useUserPreppingSelector} from '../store';
 
 interface Props {
   onChangePress(index: number): void;
 }
 
 const SaveUserConfiguration: React.FC<Props> = ({onChangePress}) => {
-  const user = useGetUser();
+  const user = useUserPreppingSelector(_user => _user);
   const setUserLogged = useSetUserLogged();
 
   const {translation} = useTranslation();
 
   const handleFinishRegistrationPress = async () => {
-    console.log('te');
     try {
       await dbCreateUser({
-        avatar: user?.avatar,
-        name: user?.name,
-        theme: user?.theme,
+        avatar: user?.avatar!,
+        name: user?.name!,
+        theme: user?.theme!,
       });
       setUserLogged(true);
     } catch (error) {

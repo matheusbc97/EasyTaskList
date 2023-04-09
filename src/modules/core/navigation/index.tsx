@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 import {selectIsLogged} from '@/store/configs';
 
 import LoggedStackNavigator from '../../authenticated/navigators/LoggedStackNavigator';
-import UnLoggedStackNavigator from './navigators/UnLoggedStackNavigator';
+import UnLoggedStackNavigator from '../../unauthenticated/navigation/UnLoggedStackNavigator';
 import LoadInitialDataPage from '@/modules/shared/pages/LoadInitialDataPage';
 
 const AppNavigator = () => {
